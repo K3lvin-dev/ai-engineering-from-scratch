@@ -1,0 +1,78 @@
+{
+  "lesson": "05-eagle3-speculative-decoding",
+  "title": "EAGLE-3 Speculative Decoding in Production",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Why does speculative decoding exploit a gap that exists in plain decode?",
+      "options": [
+        "Decode is compute-bound, so adding more compute is free",
+        "Decode is memory-bound, so the GPU is mostly idle waiting on HBM reads of weights",
+        "Decode requires more network bandwidth than prefill",
+        "Decode does not benefit from batching"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "What does the acceptance rate alpha measure?",
+      "options": [
+        "Fraction of GPU memory used during decode",
+        "Fraction of draft-proposed tokens accepted by the target model",
+        "Latency overhead of the draft model",
+        "Cache hit rate of the KV cache"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "What changes in EAGLE-3 compared to EAGLE-2 that pushes alpha to roughly 0.6-0.8 on general chat?",
+      "options": [
+        "It uses a full-sized draft model of the same family",
+        "The draft head is trained on multiple target layers rather than just the last layer",
+        "It removes the verify step entirely",
+        "It runs on CPU instead of GPU"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Below roughly what alpha does the lesson say speculative decoding becomes net negative at high concurrency on most 2026 hardware?",
+      "options": [
+        "0.05",
+        "0.55",
+        "0.85",
+        "0.95"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Which metric should you watch most closely after flipping EAGLE-3 on, even if mean ITL drops?",
+      "options": [
+        "Mean E2E latency",
+        "P99 ITL, because rejected-draft two-passes can serialize under full batch",
+        "Cold-start time",
+        "GPU memory utilization"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Why is speculative decoding opt-in (not default) in vLLM 2026 per the lesson?",
+      "options": [
+        "It is incompatible with PagedAttention",
+        "Acceptance rate depends on workload, and turning it on without measuring alpha is a production anti-pattern",
+        "It only works on Blackwell GPUs",
+        "It requires a separate license"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
