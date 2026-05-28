@@ -1837,8 +1837,8 @@
       function fetchLesson(path) {
         var lang = window.AIFSLang ? window.AIFSLang.getLang() : 'en';
         var docFile = lang === 'pt-br' ? 'pt-br.md' : 'en.md';
-        var rawUrl = 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/main/' + path + '/docs/' + docFile;
-        var quizUrl = 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/main/' + path + '/quiz.json';
+        var rawUrl = '../' + path + '/docs/' + docFile;
+        var quizUrl = '../' + path + '/quiz.json';
 
         fetch(rawUrl)
           .then(function (res) {
