@@ -1629,6 +1629,7 @@
   <script src="progress.js?v=20260525a"></script>
   <script src="header.js?v=20260525a"></script>
   <script src="cmdpalette.js?v=20260525a" defer></script>
+  <script src="content-translations.js?v=20260529"></script>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
     mermaid.initialize({
@@ -1851,6 +1852,7 @@
       function buildSidebar() {
         var sidebar = document.getElementById('lessonSidebar');
         if (!sidebar || typeof PHASES === 'undefined') return;
+        var lang = window.AIFSLang ? window.AIFSLang.getLang() : 'en';
 
         var html = '';
 
@@ -1863,20 +1865,20 @@
             var pp = PHASES[prevPhaseIdx];
             var ppSlug = extractPhaseSlug(pp, prevPhaseIdx);
             var ppFirstLesson = pp.lessons[0] ? extractLessonSlug(pp.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Phase ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
+            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Phase ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(translateContentName(pp.name, lang)) + '</a>';
           }
           if (nextPhaseIdx >= 0) {
             var np = PHASES[nextPhaseIdx];
             var npSlug = extractPhaseSlug(np, nextPhaseIdx);
             var npFirstLesson = np.lessons[0] ? extractLessonSlug(np.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Phase ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
+            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Phase ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(translateContentName(np.name, lang)) + ' &rarr;</a>';
           }
           html += '</div>';
         }
 
         if (currentPhaseIndex >= 0) {
           var phase = PHASES[currentPhaseIndex];
-          html += '<div class="sidebar-phase-header">Phase ' + String(phase.id).padStart(2, '0') + ' · ' + escapeHtml(phase.name) + '</div>';
+          html += '<div class="sidebar-phase-header">Phase ' + String(phase.id).padStart(2, '0') + ' · ' + escapeHtml(translateContentName(phase.name, lang)) + '</div>';
           for (var k = 0; k < phase.lessons.length; k++) {
             var les = phase.lessons[k];
             var lesSlug = extractLessonSlug(les, k);
@@ -1889,7 +1891,7 @@
               html += '<span class="sidebar-lesson-link disabled">';
             }
             html += '<span class="sidebar-lesson-dot ' + les.status + '"></span>';
-            html += escapeHtml(les.name);
+            html += escapeHtml(translateContentName(les.name, lang));
             html += lesReadable ? '</a>' : '</span>';
           }
         }
@@ -2889,6 +2891,7 @@
 
       function addBottomNav(html) {
         if (currentLessonIndex < 0) return html;
+        var lang = window.AIFSLang ? window.AIFSLang.getLang() : 'en';
 
         var prev = null;
         for (var pi = currentLessonIndex - 1; pi >= 0; pi--) {
@@ -2903,7 +2906,7 @@
         if (prev) {
           nav += '<a class="lesson-nav-btn prev" href="lesson.html?path=' + prev.path + '">';
           nav += '<span class="nav-label">&larr; ' + (window.AIFSLang ? AIFSLang.t('Previous') : 'Previous') + '</span>';
-          nav += '<span class="nav-title">' + escapeHtml(prev.lessonName) + '</span>';
+          nav += '<span class="nav-title">' + escapeHtml(translateContentName(prev.lessonName, lang)) + '</span>';
           nav += '</a>';
         } else {
           nav += '<div></div>';
@@ -2911,7 +2914,7 @@
         if (next) {
           nav += '<a class="lesson-nav-btn next" href="lesson.html?path=' + next.path + '">';
           nav += '<span class="nav-label">' + (window.AIFSLang ? AIFSLang.t('Next') : 'Next') + ' &rarr;</span>';
-          nav += '<span class="nav-title">' + escapeHtml(next.lessonName) + '</span>';
+          nav += '<span class="nav-title">' + escapeHtml(translateContentName(next.lessonName, lang)) + '</span>';
           nav += '</a>';
         }
         nav += '</div>';
@@ -3207,6 +3210,7 @@
 
       function renderLearningPathPanel(container) {
         if (currentLessonIndex < 0 || typeof PHASES === 'undefined') return;
+        var lang = window.AIFSLang ? window.AIFSLang.getLang() : 'en';
 
         var panel = document.createElement('div');
         panel.className = 'ai-panel';
@@ -3225,7 +3229,7 @@
         }
 
         var html = '<div class="ai-panel-header"><div class="ai-panel-icon">P</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('Learning Path') : 'Learning Path') + '</div></div>';
-        html += '<div class="ai-panel-subtitle">Phase ' + String(phase.id).padStart(2, '0') + ': ' + escapeHtml(phase.name) + '</div>';
+        html += '<div class="ai-panel-subtitle">Phase ' + String(phase.id).padStart(2, '0') + ': ' + escapeHtml(translateContentName(phase.name, lang)) + '</div>';
 
         // Window: 2 before current + current + 2 after, cap at 5 visible.
         var windowSize = 5;
@@ -3258,7 +3262,7 @@
             html += '<span class="timeline-item ' + cls + ' disabled" title="' + escapeAttr(item.flat.lessonName) + '">';
           }
           html += '<div class="timeline-dot"></div>';
-          html += '<div class="timeline-label">' + escapeHtml(item.flat.lessonName) + '</div>';
+          html += '<div class="timeline-label">' + escapeHtml(translateContentName(item.flat.lessonName, lang)) + '</div>';
           html += item.flat.isReadable ? '</a>' : '</span>';
         });
         if (hiddenAfter > 0) {
@@ -3276,7 +3280,7 @@
 
         if (completedCount >= totalCount && phaseIdx < PHASES.length - 1) {
           var nextPhase = PHASES[phaseIdx + 1];
-          html += '<div class="phase-complete-callout visible">' + (window.AIFSLang ? AIFSLang.t('Ready for Phase') : 'Ready for Phase') + ' ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(nextPhase.name) + '</div>';
+          html += '<div class="phase-complete-callout visible">' + (window.AIFSLang ? AIFSLang.t('Ready for Phase') : 'Ready for Phase') + ' ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(translateContentName(nextPhase.name, lang)) + '</div>';
         }
 
         panel.innerHTML = html;
