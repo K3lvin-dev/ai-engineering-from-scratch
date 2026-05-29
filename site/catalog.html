@@ -301,6 +301,7 @@
   <script src="progress.js?v=20260525a"></script>
   <script src="header.js?v=20260525a"></script>
   <script src="cmdpalette.js?v=20260525a" defer></script>
+  <script src="content-translations.js?v=20260529"></script>
   <script>
     (function () {
       var root = document.documentElement;
@@ -337,11 +338,13 @@
         var allRows = [];
         var phaseSelect = document.getElementById('catalogPhase');
 
+        var lang = window.AIFSLang ? AIFSLang.getLang() : 'en';
+
         for (var i = 0; i < PHASES.length; i++) {
           var p = PHASES[i];
           var opt = document.createElement('option');
           opt.value = String(p.id);
-          opt.textContent = String(p.id).padStart(2, '0') + ' - ' + p.name;
+          opt.textContent = String(p.id).padStart(2, '0') + ' - ' + translateContentName(p.name, lang);
           phaseSelect.appendChild(opt);
 
           for (var j = 0; j < p.lessons.length; j++) {
@@ -372,6 +375,7 @@
         }
 
         function render() {
+          var lang = window.AIFSLang ? AIFSLang.getLang() : 'en';
           var query = (searchInput.value || '').toLowerCase().trim();
           var phaseFilter = phaseSelect.value;
           var statusFilter = statusSelect.value;
@@ -424,9 +428,9 @@
             html += '<tr>';
             html += '<td><span class="catalog-phase-label">' + String(r.phase).padStart(2, '0') + '</span></td>';
             if (r.url) {
-              html += '<td><a href="' + r.url + '" target="_blank" rel="noopener">' + escapeHtml(r.name) + '</a></td>';
+              html += '<td><a href="' + r.url + '" target="_blank" rel="noopener">' + escapeHtml(translateContentName(r.name, lang)) + '</a></td>';
             } else {
-              html += '<td>' + escapeHtml(r.name) + '</td>';
+              html += '<td>' + escapeHtml(translateContentName(r.name, lang)) + '</td>';
             }
             html += '<td>' + escapeHtml(r.type) + '</td>';
             html += '<td><span class="catalog-lang">' + escapeHtml(r.lang) + '</span></td>';

@@ -472,6 +472,7 @@
   <script src="progress.js?v=20260525a"></script>
   <script src="header.js?v=20260525a"></script>
   <script src="cmdpalette.js?v=20260525a" defer></script>
+  <script src="content-translations.js?v=20260529"></script>
   <script>
   (function () {
     /* ===================================================
@@ -802,7 +803,7 @@
         }));
 
         /* Label content */
-        var lines = splitName(phase.name);
+        var lines = splitName(translateContentName(phase.name, window.AIFSLang ? AIFSLang.getLang() : 'en'));
         var stats = lessonStats(phase);
 
         if (lines.length === 1) {
@@ -941,7 +942,7 @@
         prereqHtml = '<ul class="detail-prereq-list">';
         for (var i = 0; i < directPrereqs.length; i++) {
           var ppid = directPrereqs[i];
-          var pn   = PHASE_MAP[ppid] ? PHASE_MAP[ppid].name : 'Phase ' + ppid;
+          var pn   = PHASE_MAP[ppid] ? translateContentName(PHASE_MAP[ppid].name, window.AIFSLang ? AIFSLang.getLang() : 'en') : 'Phase ' + ppid;
           prereqHtml += '<li data-goto="' + ppid + '" tabindex="0" role="button" aria-label="Go to Phase ' + ppid + ': ' + escapeHtml(pn) + '"><span class="li-num">' + String(ppid).padStart(2, '0') + '</span> ' + escapeHtml(pn) + '</li>';
         }
         prereqHtml += '</ul>';
@@ -956,7 +957,7 @@
         unlockHtml = '<ul class="detail-unlock-list">';
         for (var i = 0; i < childIds.length; i++) {
           var cid = childIds[i];
-          var cn  = PHASE_MAP[cid] ? PHASE_MAP[cid].name : 'Phase ' + cid;
+          var cn  = PHASE_MAP[cid] ? translateContentName(PHASE_MAP[cid].name, window.AIFSLang ? AIFSLang.getLang() : 'en') : 'Phase ' + cid;
           unlockHtml += '<li data-goto="' + cid + '" tabindex="0" role="button" aria-label="Go to Phase ' + cid + ': ' + escapeHtml(cn) + '"><span class="li-num">' + String(cid).padStart(2, '0') + '</span> ' + escapeHtml(cn) + '</li>';
         }
         unlockHtml += '</ul>';
@@ -988,7 +989,7 @@
           '<span class="detail-phase-num">Phase ' + String(id).padStart(2, '0') + '</span>' +
           '<span class="detail-status ' + phase.status + '">' + phase.status.replace('-', ' ') + '</span>' +
         '</div>' +
-        '<div class="detail-title">' + escapeHtml(phase.name) + '</div>' +
+        '<div class="detail-title">' + escapeHtml(translateContentName(phase.name, window.AIFSLang ? AIFSLang.getLang() : 'en')) + '</div>' +
         '<div class="detail-desc">' + escapeHtml(phase.desc) + '</div>' +
         '<div class="detail-stats">' +
           '<strong>' + stats.done + '</strong> of <strong>' + stats.total + '</strong> lessons complete' +
