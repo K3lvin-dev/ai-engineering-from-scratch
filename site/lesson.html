@@ -1618,7 +1618,7 @@
       <div class="lesson-content" id="lessonContent">
         <div class="lesson-loading" id="lessonLoading">
           <div class="spinner"></div>
-          <div class="lesson-loading-text">Loading lesson...</div>
+          <div class="lesson-loading-text" id="lessonLoadingText">Loading lesson...</div>
         </div>
       </div>
     </main>
@@ -1650,6 +1650,94 @@
   </script>
   <script>
     (function () {
+      /* Quiz content translations */
+      var QUIZ_TRANSLATIONS = {
+        'en': {
+          'math': [
+            { q: 'What does a dot product measure between two vectors?', opts: ['Their sum', 'How aligned they are', 'Their cross product', 'The distance between them'], answer: 1, explain: 'The dot product measures the similarity or alignment between two vectors. When it is zero, the vectors are orthogonal.' },
+            { q: 'What does the gradient of a function point toward?', opts: ['The minimum', 'The steepest ascent', 'The nearest saddle point', 'A random direction'], answer: 1, explain: 'The gradient always points in the direction of steepest increase. Gradient descent moves opposite to the gradient to find minima.' },
+            { q: 'A matrix with shape (3, 5) multiplied by (5, 2) produces what shape?', opts: ['(3, 2)', '(5, 5)', '(3, 5)', '(2, 3)'], answer: 0, explain: 'Matrix multiplication: (m, n) x (n, p) = (m, p). So (3, 5) x (5, 2) = (3, 2).' }
+          ],
+          'ml': [
+            { q: 'What is the purpose of a loss function in machine learning?', opts: ['To generate data', 'To measure how wrong predictions are', 'To select features', 'To split data'], answer: 1, explain: 'A loss function quantifies the difference between predicted and actual values. The optimizer minimizes this value during training.' },
+            { q: 'Why do we split data into train and test sets?', opts: ['To save memory', 'To evaluate generalization on unseen data', 'To make training faster', 'To reduce the dataset size'], answer: 1, explain: 'The test set acts as unseen data, revealing whether the model memorized training data or learned generalizable patterns.' },
+            { q: 'What does overfitting mean?', opts: ['The model is too simple', 'The model memorizes training data but fails on new data', 'The model trains too slowly', 'The loss is too low'], answer: 1, explain: 'Overfitting occurs when a model performs well on training data but poorly on new data because it learned noise rather than signal.' }
+          ],
+          'deep-learning': [
+            { q: 'What does backpropagation compute?', opts: ['Forward predictions', 'The gradient of the loss with respect to each weight', 'The learning rate', 'New training data'], answer: 1, explain: 'Backpropagation uses the chain rule to compute how much each weight contributed to the error, then adjusts weights accordingly.' },
+            { q: 'Why do neural networks need non-linear activation functions?', opts: ['To speed up training', 'Without them, stacking layers is equivalent to a single linear layer', 'To reduce memory usage', 'To normalize outputs'], answer: 1, explain: 'Without non-linearities, any composition of linear layers collapses to a single linear transformation. Activations like ReLU let the network learn complex patterns.' },
+            { q: 'What does the learning rate control?', opts: ['How many epochs to train', 'The size of each weight update step', 'The number of layers', 'The batch size'], answer: 1, explain: 'The learning rate scales the gradient update. Too large causes divergence, too small causes slow or stuck training.' }
+          ],
+          'llm': [
+            { q: 'What does self-attention allow a transformer to do?', opts: ['Process tokens in order', 'Weight the importance of every token relative to every other token', 'Reduce vocabulary size', 'Compress the model'], answer: 1, explain: 'Self-attention computes pairwise relevance scores across all positions, allowing the model to relate distant tokens without recurrence.' },
+            { q: 'Why do LLMs use tokenizers instead of raw characters?', opts: ['Characters are too large', 'Tokens compress frequent patterns into single units, reducing sequence length', 'Tokenizers are faster to train', 'Characters cannot be embedded'], answer: 1, explain: 'Subword tokenizers like BPE balance vocabulary size against sequence length, making common words single tokens while handling rare words as pieces.' },
+            { q: 'What is the key difference between pre-training and fine-tuning?', opts: ['Pre-training uses labeled data', 'Pre-training learns general language; fine-tuning adapts to a specific task', 'Fine-tuning uses more data', 'There is no difference'], answer: 1, explain: 'Pre-training learns language patterns from massive unlabeled text. Fine-tuning takes that foundation and specializes it on smaller, task-specific data.' }
+          ],
+          'rag': [
+            { q: 'What is the core idea behind RAG?', opts: ['Training a larger model', 'Retrieving relevant context before generating a response', 'Using more GPUs', 'Reducing model size'], answer: 1, explain: 'RAG (Retrieval-Augmented Generation) grounds LLM responses in retrieved documents, reducing hallucination and enabling knowledge updates without retraining.' },
+            { q: 'What do embedding models produce?', opts: ['Text summaries', 'Dense vector representations of text', 'Token counts', 'Grammar corrections'], answer: 1, explain: 'Embedding models map text into fixed-dimensional vectors where semantic similarity corresponds to geometric proximity.' },
+            { q: 'Why use cosine similarity for comparing embeddings?', opts: ['It is the only metric', 'It measures angular similarity regardless of vector magnitude', 'It is faster than dot product', 'It works with integers only'], answer: 1, explain: 'Cosine similarity normalizes for magnitude, focusing on direction. Two texts about the same topic will have high cosine similarity regardless of length.' }
+          ],
+          'agent': [
+            { q: 'What distinguishes an AI agent from a simple chatbot?', opts: ['Agents are faster', 'Agents can take actions and use tools autonomously', 'Agents use bigger models', 'There is no difference'], answer: 1, explain: 'Agents have a loop: observe, decide, act. They can call tools, read files, search the web, and chain multiple steps to complete complex tasks.' },
+            { q: 'What is MCP (Model Context Protocol)?', opts: ['A model training format', 'A standardized protocol for connecting AI models to tools and data sources', 'A compression algorithm', 'A testing framework'], answer: 1, explain: 'MCP provides a universal interface between AI assistants and external tools/data, replacing one-off integrations with a standard protocol.' },
+            { q: 'Why is tool-use important for LLMs?', opts: ['It reduces cost', 'It lets LLMs access real-time information and take actions beyond text generation', 'It makes responses shorter', 'It removes hallucinations entirely'], answer: 1, explain: 'Tools extend LLMs beyond their training data cutoff, enabling real-time lookups, calculations, code execution, and interaction with external systems.' }
+          ],
+          'eval': [
+            { q: 'Why are evals critical for production AI systems?', opts: ['To save money', 'To measure performance objectively before and after changes', 'To make the model bigger', 'Evals are optional'], answer: 1, explain: 'Evals are the tests of AI engineering. Without them, you cannot know if a change improved or regressed quality. They should run on every code change.' },
+            { q: 'What does "alignment" mean in AI safety?', opts: ['Aligning text on screen', 'Ensuring AI systems act according to human intentions and values', 'Making models faster', 'Using the same training data'], answer: 1, explain: 'Alignment ensures that as AI systems become more capable, they remain helpful, honest, and harmless, acting in accordance with human goals.' },
+            { q: 'What is a guardrail in the context of deployed LLMs?', opts: ['A physical barrier', 'A check that prevents harmful, off-topic, or policy-violating outputs', 'A backup model', 'A caching layer'], answer: 1, explain: 'Guardrails filter inputs and outputs at runtime, catching toxicity, prompt injection, PII leaks, and other risks before they reach the user.' }
+          ],
+          'default': [
+            { q: 'What does "from scratch" mean in this course?', opts: ['Using no computer', 'Building each concept by implementing it yourself, not just reading theory', 'Starting from assembly language', 'Only using pen and paper'], answer: 1, explain: 'This course follows a Build-Use-Ship methodology: first understand by building it, then apply it, then ship it as a real artifact.' },
+            { q: 'Why does this course combine math, ML, and engineering?', opts: ['To make it longer', 'Because real AI engineering requires all three to build production systems', 'Math is just for fun', 'Engineering is optional'], answer: 1, explain: 'Production AI systems require mathematical foundations (for understanding), ML knowledge (for modeling), and engineering skills (for deployment and reliability).' },
+            { q: 'What is the "Ship" step in the Build-Use-Ship framework?', opts: ['Mailing physical goods', 'Creating a reusable artifact like a prompt, skill, or tool from what you learned', 'Publishing a paper', 'Deleting your code'], answer: 2, explain: 'The Ship step turns your learning into something tangible: a prompt, skill file, MCP tool, or CLI utility that others (or future you) can use immediately.' }
+          ]
+        },
+        'pt-br': {
+          'math': [
+            { q: 'O que o produto escalar mede entre dois vetores?', opts: ['Sua soma', 'O quao alinhados eles estao', 'Seu produto vetorial', 'A distancia entre eles'], answer: 1, explain: 'O produto escalar mede a semelhanca ou alinhamento entre dois vetores. Quando e zero, os vetores sao ortogonais.' },
+            { q: 'Para onde aponta o gradiente de uma funcao?', opts: ['O minimo', 'A subida mais ingreme', 'O ponto de sela mais proximo', 'Uma direcao aleatoria'], answer: 1, explain: 'O gradiente sempre aponta na direcao de maior aumento. O gradiente descendente move na direcao oposta ao gradiente para encontrar minimos.' },
+            { q: 'Uma matriz com formato (3, 5) multiplicada por (5, 2) produz qual formato?', opts: ['(3, 2)', '(5, 5)', '(3, 5)', '(2, 3)'], answer: 0, explain: 'Multiplicacao de matrizes: (m, n) x (n, p) = (m, p). Entao (3, 5) x (5, 2) = (3, 2).' }
+          ],
+          'ml': [
+            { q: 'Qual e o objetivo de uma funcao de perda no aprendizado de maquina?', opts: ['Gerar dados', 'Medir quao erradas estao as previsoes', 'Selecionar caracteristicas', 'Dividir dados'], answer: 1, explain: 'Uma funcao de perda quantifica a diferenca entre valores previstos e reais. O otimizador minimiza esse valor durante o treinamento.' },
+            { q: 'Por que dividimos dados em conjuntos de treino e teste?', opts: ['Para economizar memoria', 'Para avaliar a generalizacao em dados nao vistos', 'Para tornar o treinamento mais rapido', 'Para reduzir o tamanho do conjunto de dados'], answer: 1, explain: 'O conjunto de teste funciona como dados nao vistos, revelando se o modelo memorizou os dados de treino ou aprendeu padroes generalizaveis.' },
+            { q: 'O que significa overfitting?', opts: ['O modelo e muito simples', 'O modelo memoriza dados de treino mas falha em dados novos', 'O modelo treina muito lentamente', 'A perda e muito baixa'], answer: 1, explain: 'Overfitting ocorre quando um modelo funciona bem nos dados de treino mas mal em dados novos porque aprendeu ruido em vez de sinal.' }
+          ],
+          'deep-learning': [
+            { q: 'O que a retropropagacao calcula?', opts: ['Previsoes para frente', 'O gradiente da perda em relacao a cada peso', 'A taxa de aprendizado', 'Novos dados de treino'], answer: 1, explain: 'A retropropagacao usa a regra da cadeia para calcular quanto cada peso contribuiu para o erro, e entao ajusta os pesos de acordo.' },
+            { q: 'Por que redes neurais precisam de funcoes de ativacao nao lineares?', opts: ['Para acelerar o treinamento', 'Sem elas, empilhar camadas equivale a uma unica camada linear', 'Para reduzir uso de memoria', 'Para normalizar as saidas'], answer: 1, explain: 'Sem nao linearidades, qualquer composicao de camadas lineares colapsa em uma unica transformacao linear. Ativacoes como ReLU permitem que a rede aprenda padroes complexos.' },
+            { q: 'O que a taxa de aprendizado controla?', opts: ['Quantas epocas treinar', 'O tamanho de cada passo de atualizacao de peso', 'O numero de camadas', 'O tamanho do lote'], answer: 1, explain: 'A taxa de aprendizado escala a atualizacao do gradiente. Muito grande causa divergencia, muito pequena causa treinamento lento ou travado.' }
+          ],
+          'llm': [
+            { q: 'O que a auto-atencao permite a um transformer fazer?', opts: ['Processar tokens em ordem', 'Pesar a importancia de cada token em relacao a todos os outros', 'Reduzir o tamanho do vocabulario', 'Comprimir o modelo'], answer: 1, explain: 'A auto-atencao calcula escores de relevancia entre pares em todas as posicoes, permitindo que o modelo relacione tokens distantes sem recorrencia.' },
+            { q: 'Por que LLMs usam tokenizadores em vez de caracteres brutos?', opts: ['Caracteres sao grandes demais', 'Tokens comprimem padroes frequentes em unidades unicas, reduzindo o comprimento da sequencia', 'Tokenizadores sao mais rapidos de treinar', 'Caracteres nao podem ser incorporados'], answer: 1, explain: 'Tokenizadores de subpalavras como BPE equilibram o tamanho do vocabulario com o comprimento da sequencia, tornando palavras comuns tokens unicos enquanto tratam palavras raras como partes.' },
+            { q: 'Qual e a diferenca chave entre pre-treinamento e ajuste fino?', opts: ['Pre-treinamento usa dados rotulados', 'Pre-treinamento aprende linguagem geral; ajuste fino adapta a uma tarefa especifica', 'Ajuste fino usa mais dados', 'Nao ha diferenca'], answer: 1, explain: 'Pre-treinamento aprende padroes de linguagem de texto massivo nao rotulado. Ajuste fino pega essa base e a especializa em dados menores e especificos da tarefa.' }
+          ],
+          'rag': [
+            { q: 'Qual e a ideia central por tras do RAG?', opts: ['Treinar um modelo maior', 'Recuperar contexto relevante antes de gerar uma resposta', 'Usar mais GPUs', 'Reduzir o tamanho do modelo'], answer: 1, explain: 'RAG (Generacao Augmentada por Recuperacao) ancora as respostas de LLMs em documentos recuperados, reduzindo alucinacoes e permitindo atualizacoes de conhecimento sem retreinamento.' },
+            { q: 'O que modelos de embedding produzem?', opts: ['Resumos de texto', 'Representacoes vetoriais densas de texto', 'Contagens de tokens', 'Correcoes gramaticais'], answer: 1, explain: 'Modelos de embedding mapeiam texto em vetores de dimensao fixa onde a semelhanca semantica corresponde a proximidade geometrica.' },
+            { q: 'Por que usar similaridade cosseno para comparar embeddings?', opts: ['E a unica metrica', 'Mede similaridade angular independente da magnitude do vetor', 'E mais rapida que produto escalar', 'Funciona apenas com inteiros'], answer: 1, explain: 'A similaridade cosseno normaliza pela magnitude, focando na direcao. Dois textos sobre o mesmo topico terao alta similaridade cosseno independentemente do comprimento.' }
+          ],
+          'agent': [
+            { q: 'O que distingue um agente de IA de um chatbot simples?', opts: ['Agentes sao mais rapidos', 'Agentes podem tomar acoes e usar ferramentas autonomamente', 'Agentes usam modelos maiores', 'Nao ha diferenca'], answer: 1, explain: 'Agentes tem um loop: observar, decidir, agir. Podem chamar ferramentas, ler arquivos, buscar na web e encadear varios passos para completar tarefas complexas.' },
+            { q: 'O que e MCP (Model Context Protocol)?', opts: ['Um formato de treinamento de modelos', 'Um protocolo padrao para conectar modelos de IA a ferramentas e fontes de dados', 'Um algoritmo de compressao', 'Um framework de testes'], answer: 1, explain: 'MCP fornece uma interface universal entre assistentes de IA e ferramentas/dados externos, substituindo integracoes avulsas por um protocolo padrao.' },
+            { q: 'Por que o uso de ferramentas e importante para LLMs?', opts: ['Reduz custo', 'Permite a LLMs acessar informacoes em tempo real e tomar acoes alem da geracao de texto', 'Torna respostas mais curtas', 'Remove alucinacoes completamente'], answer: 1, explain: 'Ferramentas estendem LLMs alem do corte de dados de treinamento, permitindo consultas em tempo real, calculos, execucao de codigo e interacao com sistemas externos.' }
+          ],
+          'eval': [
+            { q: 'Por que avaliacoes sao criticas para sistemas de IA em producao?', opts: ['Para economizar dinheiro', 'Para medir desempenho objetivamente antes e depois de mudancas', 'Para tornar o modelo maior', 'Avaliacoes sao opcionais'], answer: 1, explain: 'Avaliacoes sao os testes da engenharia de IA. Sem elas, voce nao pode saber se uma mudanca melhorou ou piorou a qualidade. Devem ser executadas em cada mudanca de codigo.' },
+            { q: 'O que "alinhamento" significa em seguranca de IA?', opts: ['Alinhar texto na tela', 'Garantir que sistemas de IA ajam de acordo com intencoes e valores humanos', 'Tornar modelos mais rapidos', 'Usar os mesmos dados de treinamento'], answer: 1, explain: 'Alinhamento garante que, conforme sistemas de IA se tornam mais capazes, permanecam uteis, honestos e inofensivos, agindo de acordo com metas humanas.' },
+            { q: 'O que e uma barreira no contexto de LLMs implantados?', opts: ['Uma barreira fisica', 'Uma verificacao que previne saidas nocivas, fora de tema ou que violam politicas', 'Um modelo de backup', 'Uma camada de cache'], answer: 1, explain: 'Barreiras filtram entradas e saidas em tempo de execucao, capturando toxicidade, injecao de prompts, vazamentos de dados pessoais e outros riscos antes de chegar ao usuario.' }
+          ],
+          'default': [
+            { q: 'O que "do zero" significa neste curso?', opts: ['Nao usar nenhum computador', 'Construir cada conceito implementando voce mesmo, nao apenas lendo teoria', 'Comecar da linguagem de montagem', 'Usar apenas papel e caneta'], answer: 1, explain: 'Este curso segue uma metodologia Construir-Usar-Entregar: primeiro entender construindo, depois aplicar, depois entregar como um artefato real.' },
+            { q: 'Por que este curso combina matematica, ML e engenharia?', opts: ['Para tornar mais longo', 'Porque engenharia de IA real requer os tres para construir sistemas de producao', 'Matematica e so por diversao', 'Engenharia e opcional'], answer: 1, explain: 'Sistemas de IA em producao requerem fundamentos matematicos (para entendimento), conhecimento de ML (para modelagem) e habilidades de engenharia (para implantacao e confiabilidade).' },
+            { q: 'Qual e o passo "Entregar" na framework Construir-Usar-Entregar?', opts: ['Enviar bens fisicos', 'Criar um artefato reutilizavel como um prompt, skill ou ferramenta do que voce aprendeu', 'Publicar um artigo', 'Deletar seu codigo'], answer: 2, explain: 'O passo Entregar transforma seu aprendizado em algo tangivel: um prompt, arquivo de skill, ferramenta MCP ou utilitario de CLI que outros (ou voce no futuro) podem usar imediatamente.' }
+          ]
+        }
+      };
+
       var root = document.documentElement;
       var stored = localStorage.getItem('theme');
       if (stored) {
@@ -1660,6 +1748,10 @@
         root.setAttribute('data-theme', 'light');
       }
       updateThemeIcon();
+
+      /* Translate static HTML elements */
+      var loadingText = document.getElementById('lessonLoadingText');
+      if (loadingText && window.AIFSLang) loadingText.textContent = AIFSLang.t('Loading lesson...');
 
       function updateThemeIcon() {
         var icon = document.getElementById('themeIcon');
@@ -1684,7 +1776,7 @@
       var lessonPath = params.get('path');
 
       if (!lessonPath) {
-        showError('No lesson path specified', 'Add ?path=phases/01-math-foundations/01-linear-algebra-intuition to the URL.');
+        showError(AIFSLang.t('No lesson path specified'), AIFSLang.t('Add a ?path= parameter to the URL.'));
         return;
       }
 
@@ -1850,7 +1942,7 @@
               renderLesson(md);
             } catch (err) {
               console.error('renderLesson failed', err);
-              showError('Render error', 'Loaded the lesson markdown but failed to render it. Details in the browser console.');
+              showError(AIFSLang.t('Render error'), AIFSLang.t('Loaded the lesson markdown but failed to render it. Details in the browser console.'));
               return;
             }
             fetch(quizUrl)
@@ -1863,13 +1955,13 @@
               });
           })
           .catch(function () {
-            showError('Lesson not found', 'Could not fetch the lesson at <code>' + escapeHtml(path) + '</code>. It may not have been written yet.');
+            showError(AIFSLang.t('Lesson not found'), AIFSLang.t('Could not fetch the lesson at') + ' <code>' + escapeHtml(path) + '</code>. ' + AIFSLang.t('It may not have been written yet.'));
           });
       }
 
       function showError(title, msg) {
         var el = document.getElementById('lessonContent');
-        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">Back to Home</a></div>';
+        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">' + (window.AIFSLang ? AIFSLang.t('Back to Home') : 'Back to Home') + '</a></div>';
       }
 
       function renderLesson(md) {
@@ -1944,8 +2036,8 @@
           return candidate;
         }
 
-        var html = '<div class="toc-header">On this page</div>';
-        html += '<nav aria-label="On this page"><ul class="toc-nav">';
+        var html = '<div class="toc-header">' + (window.AIFSLang ? AIFSLang.t('On this page') : 'On this page') + '</div>';
+        html += '<nav aria-label="' + (window.AIFSLang ? AIFSLang.t('On this page') : 'On this page') + '"><ul class="toc-nav">';
         for (var i = 0; i < headings.length; i++) {
           var heading = headings[i];
           var level = heading.tagName.toLowerCase();
@@ -2190,7 +2282,7 @@
                 out += '<div class="mermaid-container">';
                 out += '<div class="mermaid-block" data-mermaid-index="' + mermaidBlocks + '">';
                 out += '<div class="mermaid-toolbar">';
-                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">Expand</button>';
+                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">' + (typeof AIFSLang !== 'undefined' ? AIFSLang.t('Expand') : 'Expand') + '</button>';
                 out += '</div>';
                 out += '<pre class="mermaid mermaid-source" id="mermaid-' + mermaidBlocks + '">' + escapeHtml(raw) + '</pre>';
                 out += '<div class="mermaid-render" id="mermaid-render-' + mermaidBlocks + '"></div>';
@@ -2269,7 +2361,7 @@
                   break;
                 }
               }
-              out += '<div class="learning-objectives"><div class="learning-objectives-title">&#127919; Learning Objectives</div><ul>';
+              out += '<div class="learning-objectives"><div class="learning-objectives-title">&#127919; ' + (window.AIFSLang ? AIFSLang.t('Learning Objectives') : 'Learning Objectives') + '</div><ul>';
               for (var oi = 0; oi < objItems.length; oi++) {
                 out += '<li>' + inlineFormat(objItems[oi]) + '</li>';
               }
@@ -2281,7 +2373,7 @@
               out += flushLabChallenge();
               inLabChallenge = true;
               out += '<div class="lab-challenge">';
-              out += '<h2 id="' + slug2 + '">&#128171; Lab Challenge</h2>';
+              out += '<h2 id="' + slug2 + '">&#128171; ' + (window.AIFSLang ? AIFSLang.t('Lab Challenge') : 'Lab Challenge') + '</h2>';
               continue;
             }
             out += flushLabChallenge();
@@ -2385,7 +2477,7 @@
       function renderCodeBlock(code, lang) {
         var highlighted = highlightSyntax(escapeHtml(code), lang);
         var langLabel = lang ? '<span class="code-lang">' + escapeHtml(lang) + '</span>' : '';
-        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">Copy</button><code>' + highlighted + '</code></pre>';
+        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">' + (window.AIFSLang ? AIFSLang.t('Copy') : 'Copy') + '</button><code>' + highlighted + '</code></pre>';
       }
 
       function highlightSyntax(code, lang) {
@@ -2433,8 +2525,8 @@
           btn.addEventListener('click', function () {
             var code = btn.getAttribute('data-code');
             navigator.clipboard.writeText(code).then(function () {
-              btn.textContent = 'Copied!';
-              setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+              btn.textContent = (window.AIFSLang ? AIFSLang.t('Copied!') : 'Copied!');
+              setTimeout(function () { btn.textContent = (window.AIFSLang ? AIFSLang.t('Copy') : 'Copy'); }, 1500);
             });
           });
         });
@@ -2489,7 +2581,7 @@
           var target = document.getElementById('mermaid-render-' + idx);
           if (!target) return;
           var def = pre.textContent;
-          target.innerHTML = '<div class="panel-loading">Rendering diagram...</div>';
+          target.innerHTML = '<div class="panel-loading">' + (window.AIFSLang ? AIFSLang.t('Rendering diagram...') : 'Rendering diagram...') + '</div>';
 
           var token = ++mermaidRenderSeq;
           target._mermaidRenderToken = token;
@@ -2499,7 +2591,7 @@
             target.innerHTML = result.svg;
           }).catch(function () {
             if (target._mermaidRenderToken !== token) return;
-            target.innerHTML = '<p style="color:var(--text-muted);font-style:italic;">Diagram could not be rendered.</p>';
+            target.innerHTML = '<p style="color:var(--text-muted);font-style:italic;">' + (window.AIFSLang ? AIFSLang.t('Diagram could not be rendered.') : 'Diagram could not be rendered.') + '</p>';
           });
         });
       }
@@ -2579,7 +2671,7 @@
         lastMermaidTrigger = triggerEl || document.activeElement;
         openMermaidIndex = idx;
 
-        if (title) title.textContent = 'Diagram';
+        if (title) title.textContent = window.AIFSLang ? AIFSLang.t('Diagram') : 'Diagram';
 
         overlay.classList.add('open');
         overlay.setAttribute('aria-hidden', 'false');
@@ -2602,7 +2694,7 @@
         if (!pre) return;
         var def = pre.textContent;
 
-        center.innerHTML = '<div class="panel-loading">Rendering diagram...</div>';
+        center.innerHTML = '<div class="panel-loading">' + (window.AIFSLang ? AIFSLang.t('Rendering diagram...') : 'Rendering diagram...') + '</div>';
         var token = ++mermaidRenderSeq;
         center._mermaidRenderToken = token;
 
@@ -2611,7 +2703,7 @@
           center.innerHTML = result.svg;
         }).catch(function () {
           if (center._mermaidRenderToken !== token) return;
-          center.innerHTML = '<p style="color:var(--text-muted);font-style:italic;">Diagram could not be rendered.</p>';
+          center.innerHTML = '<p style="color:var(--text-muted);font-style:italic;">' + (window.AIFSLang ? AIFSLang.t('Diagram could not be rendered.') : 'Diagram could not be rendered.') + '</p>';
         });
       }
 
@@ -2641,12 +2733,13 @@
         var buildH2 = article.querySelector('#build-it, #build');
         var keyTermsH2 = article.querySelector('#key-terms');
 
-        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', 'Pre-Lesson Check');
-        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', 'Mid-Lesson Check');
-        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', 'Post-Lesson Quiz');
+        var _t = window.AIFSLang ? AIFSLang.t.bind(AIFSLang) : function(k){return k;};
+        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', _t('Pre-Lesson Check'));
+        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', _t('Mid-Lesson Check'));
+        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', _t('Post-Lesson Quiz'));
 
         if (!preQuizHtml && !checkQuizHtml && !postQuizHtml) {
-          var allHtml = buildQuizHtml(questions, 'all', 'Quiz');
+          var allHtml = buildQuizHtml(questions, 'all', _t('Quiz'));
           if (allHtml && keyTermsH2) {
             keyTermsH2.insertAdjacentHTML('beforebegin', allHtml);
           } else if (allHtml) {
@@ -2764,7 +2857,7 @@
         }
         var scoreEl = section.querySelector('.quiz-score');
         if (scoreEl) {
-          scoreEl.textContent = correctCount + '/' + allQs.length + ' correct';
+          scoreEl.textContent = correctCount + '/' + allQs.length + ' ' + (window.AIFSLang ? AIFSLang.t('correct') : 'correct');
           scoreEl.style.display = 'block';
         }
       }
@@ -2809,7 +2902,7 @@
         var nav = '<div class="lesson-nav-bottom">';
         if (prev) {
           nav += '<a class="lesson-nav-btn prev" href="lesson.html?path=' + prev.path + '">';
-          nav += '<span class="nav-label">&larr; Previous</span>';
+          nav += '<span class="nav-label">&larr; ' + (window.AIFSLang ? AIFSLang.t('Previous') : 'Previous') + '</span>';
           nav += '<span class="nav-title">' + escapeHtml(prev.lessonName) + '</span>';
           nav += '</a>';
         } else {
@@ -2817,7 +2910,7 @@
         }
         if (next) {
           nav += '<a class="lesson-nav-btn next" href="lesson.html?path=' + next.path + '">';
-          nav += '<span class="nav-label">Next &rarr;</span>';
+          nav += '<span class="nav-label">' + (window.AIFSLang ? AIFSLang.t('Next') : 'Next') + ' &rarr;</span>';
           nav += '<span class="nav-title">' + escapeHtml(next.lessonName) + '</span>';
           nav += '</a>';
         }
@@ -2895,13 +2988,13 @@
       function renderOutputsPanel(container) {
         var panel = document.createElement('div');
         panel.className = 'ai-panel';
-        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">O</div><div class="ai-panel-title">What This Lesson Ships</div></div><div class="ai-panel-subtitle">Prompts, skills, and artifacts you can use right now</div><div id="outputsContent" class="panel-loading">Loading outputs...</div>';
+        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">O</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('What This Lesson Ships') : 'What This Lesson Ships') + '</div></div><div class="ai-panel-subtitle">' + (window.AIFSLang ? AIFSLang.t('Prompts, skills, and artifacts you can use right now') : 'Prompts, skills, and artifacts you can use right now') + '</div><div id="outputsContent" class="panel-loading">' + (window.AIFSLang ? AIFSLang.t('Loading outputs...') : 'Loading outputs...') + '</div>';
         container.appendChild(panel);
 
         ghApiFetch(lessonPath + '/outputs', function (err, data) {
           var el = document.getElementById('outputsContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">' + (window.AIFSLang ? AIFSLang.t('View lesson on GitHub') : 'View lesson on GitHub') + '</a></div>';
             return;
           }
 
@@ -2909,11 +3002,11 @@
           data.forEach(function (file, idx) {
             var type = classifyOutput(file.name);
             var badgeClass = type;
-            var badgeText = type === 'prompt' ? 'Prompt' : type === 'skill' ? 'Skill' : 'Output';
+            var badgeText = type === 'prompt' ? (window.AIFSLang ? AIFSLang.t('Prompt') : 'Prompt') : type === 'skill' ? (window.AIFSLang ? AIFSLang.t('Skill') : 'Skill') : (window.AIFSLang ? AIFSLang.t('Output') : 'Output');
             var installId = 'install-hint-' + idx;
             var installHint = '';
             if (type === 'prompt') {
-              installHint = 'Paste into Claude, Cursor, Codex, OpenClaw, Hermes, or any agent that reads prompts';
+              installHint = window.AIFSLang ? AIFSLang.t('Paste into Claude, Cursor, Codex, OpenClaw, Hermes, or any agent that reads prompts') : 'Paste into Claude, Cursor, Codex, OpenClaw, Hermes, or any agent that reads prompts';
             } else if (type === 'skill') {
               var skillName = file.name.replace(/\.md$/, '').replace(/^skill-/, '');
               installHint = 'npx skills add rohitg00/ai-engineering-from-scratch --skill ' + skillName;
@@ -2922,11 +3015,11 @@
             html += '<div class="output-card">';
             html += '<div class="output-badge ' + badgeClass + '">' + badgeText + '</div>';
             html += '<div class="output-card-name">' + escapeHtml(file.name) + '</div>';
-            html += '<div class="output-desc" id="desc-' + idx + '">Loading description...</div>';
+            html += '<div class="output-desc" id="desc-' + idx + '">' + (window.AIFSLang ? AIFSLang.t('Loading description...') : 'Loading description...') + '</div>';
             html += '<div class="output-actions">';
-            html += '<a class="output-btn" href="' + file.html_url + '" target="_blank" rel="noopener">View on GitHub</a>';
+            html += '<a class="output-btn" href="' + file.html_url + '" target="_blank" rel="noopener">' + (window.AIFSLang ? AIFSLang.t('View on GitHub') : 'View on GitHub') + '</a>';
             if (installHint) {
-              html += '<button class="output-btn" onclick="var h=document.getElementById(\'' + installId + '\');h.classList.toggle(\'visible\')">Install</button>';
+              html += '<button class="output-btn" onclick="var h=document.getElementById(\'' + installId + '\');h.classList.toggle(\'visible\')">' + (window.AIFSLang ? AIFSLang.t('Install') : 'Install') + '</button>';
             }
             html += '</div>';
             if (installHint) {
@@ -2953,13 +3046,13 @@
       function renderCodePanel(container) {
         var panel = document.createElement('div');
         panel.className = 'ai-panel';
-        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">C</div><div class="ai-panel-title">Run the Code</div></div><div class="ai-panel-subtitle">Executable files from this lesson</div><div id="codeContent" class="panel-loading">Loading code files...</div>';
+        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">C</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('Run the Code') : 'Run the Code') + '</div></div><div class="ai-panel-subtitle">' + (window.AIFSLang ? AIFSLang.t('Executable files from this lesson') : 'Executable files from this lesson') + '</div><div id="codeContent" class="panel-loading">' + (window.AIFSLang ? AIFSLang.t('Loading code files...') : 'Loading code files...') + '</div>';
         container.appendChild(panel);
 
         ghApiFetch(lessonPath + '/code', function (err, data) {
           var el = document.getElementById('codeContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">' + (window.AIFSLang ? AIFSLang.t('View lesson on GitHub') : 'View lesson on GitHub') + '</a></div>';
             return;
           }
 
@@ -2973,8 +3066,8 @@
             html += '<div class="code-card-size">' + formatSize(file.size) + '</div>';
             html += '<div class="code-card-run">' + escapeHtml(runCmd) + '</div>';
             html += '<div class="code-card-actions">';
-            html += '<a class="code-card-btn" href="' + file.html_url + '" target="_blank" rel="noopener">View on GitHub</a>';
-            html += '<button class="code-card-btn code-card-copy" data-command="' + escapeAttr(runCmd) + '">Copy command</button>';
+            html += '<a class="code-card-btn" href="' + file.html_url + '" target="_blank" rel="noopener">' + (window.AIFSLang ? AIFSLang.t('View on GitHub') : 'View on GitHub') + '</a>';
+            html += '<button class="code-card-btn code-card-copy" data-command="' + escapeAttr(runCmd) + '">' + (window.AIFSLang ? AIFSLang.t('Copy command') : 'Copy command') + '</button>';
             html += '</div>';
             html += '</div>';
           });
@@ -2984,8 +3077,8 @@
             btn.addEventListener('click', function () {
               var command = btn.getAttribute('data-command');
               navigator.clipboard.writeText(command).then(function () {
-                btn.textContent = 'Copied!';
-                setTimeout(function () { btn.textContent = 'Copy command'; }, 1500);
+                btn.textContent = window.AIFSLang ? AIFSLang.t('Copied!') : 'Copied!';
+                setTimeout(function () { btn.textContent = window.AIFSLang ? AIFSLang.t('Copy command') : 'Copy command'; }, 1500);
               });
             });
           });
@@ -2994,70 +3087,38 @@
 
       function getQuizQuestions() {
         var pathLower = (lessonPath || '').toLowerCase();
-        var lessonName = '';
-        if (currentLessonIndex >= 0) lessonName = flatLessons[currentLessonIndex].lessonName;
+        var lang = (window.AIFSLang && AIFSLang.getLang()) || 'en';
+        var quizLang = QUIZ_TRANSLATIONS[lang] || QUIZ_TRANSLATIONS['en'];
 
         if (pathLower.indexOf('math') >= 0 || pathLower.indexOf('linear-algebra') >= 0 || pathLower.indexOf('calculus') >= 0) {
-          return [
-            { q: 'What does a dot product measure between two vectors?', opts: ['Their sum', 'How aligned they are', 'Their cross product', 'The distance between them'], answer: 1, explain: 'The dot product measures the similarity or alignment between two vectors. When it is zero, the vectors are orthogonal.' },
-            { q: 'What does the gradient of a function point toward?', opts: ['The minimum', 'The steepest ascent', 'The nearest saddle point', 'A random direction'], answer: 1, explain: 'The gradient always points in the direction of steepest increase. Gradient descent moves opposite to the gradient to find minima.' },
-            { q: 'A matrix with shape (3, 5) multiplied by (5, 2) produces what shape?', opts: ['(3, 2)', '(5, 5)', '(3, 5)', '(2, 3)'], answer: 0, explain: 'Matrix multiplication: (m, n) x (n, p) = (m, p). So (3, 5) x (5, 2) = (3, 2).' }
-          ];
+          return quizLang['math'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('ml') >= 0 || pathLower.indexOf('regression') >= 0 || pathLower.indexOf('classification') >= 0 || pathLower.indexOf('supervised') >= 0) {
-          return [
-            { q: 'What is the purpose of a loss function in machine learning?', opts: ['To generate data', 'To measure how wrong predictions are', 'To select features', 'To split data'], answer: 1, explain: 'A loss function quantifies the difference between predicted and actual values. The optimizer minimizes this value during training.' },
-            { q: 'Why do we split data into train and test sets?', opts: ['To save memory', 'To evaluate generalization on unseen data', 'To make training faster', 'To reduce the dataset size'], answer: 1, explain: 'The test set acts as unseen data, revealing whether the model memorized training data or learned generalizable patterns.' },
-            { q: 'What does overfitting mean?', opts: ['The model is too simple', 'The model memorizes training data but fails on new data', 'The model trains too slowly', 'The loss is too low'], answer: 1, explain: 'Overfitting occurs when a model performs well on training data but poorly on new data because it learned noise rather than signal.' }
-          ];
+          return quizLang['ml'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('deep-learning') >= 0 || pathLower.indexOf('neural') >= 0 || pathLower.indexOf('backprop') >= 0 || pathLower.indexOf('activation') >= 0) {
-          return [
-            { q: 'What does backpropagation compute?', opts: ['Forward predictions', 'The gradient of the loss with respect to each weight', 'The learning rate', 'New training data'], answer: 1, explain: 'Backpropagation uses the chain rule to compute how much each weight contributed to the error, then adjusts weights accordingly.' },
-            { q: 'Why do neural networks need non-linear activation functions?', opts: ['To speed up training', 'Without them, stacking layers is equivalent to a single linear layer', 'To reduce memory usage', 'To normalize outputs'], answer: 1, explain: 'Without non-linearities, any composition of linear layers collapses to a single linear transformation. Activations like ReLU let the network learn complex patterns.' },
-            { q: 'What does the learning rate control?', opts: ['How many epochs to train', 'The size of each weight update step', 'The number of layers', 'The batch size'], answer: 1, explain: 'The learning rate scales the gradient update. Too large causes divergence, too small causes slow or stuck training.' }
-          ];
+          return quizLang['deep-learning'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('llm') >= 0 || pathLower.indexOf('transformer') >= 0 || pathLower.indexOf('attention') >= 0 || pathLower.indexOf('tokeniz') >= 0 || pathLower.indexOf('fine-tun') >= 0) {
-          return [
-            { q: 'What does self-attention allow a transformer to do?', opts: ['Process tokens in order', 'Weight the importance of every token relative to every other token', 'Reduce vocabulary size', 'Compress the model'], answer: 1, explain: 'Self-attention computes pairwise relevance scores across all positions, allowing the model to relate distant tokens without recurrence.' },
-            { q: 'Why do LLMs use tokenizers instead of raw characters?', opts: ['Characters are too large', 'Tokens compress frequent patterns into single units, reducing sequence length', 'Tokenizers are faster to train', 'Characters cannot be embedded'], answer: 1, explain: 'Subword tokenizers like BPE balance vocabulary size against sequence length, making common words single tokens while handling rare words as pieces.' },
-            { q: 'What is the key difference between pre-training and fine-tuning?', opts: ['Pre-training uses labeled data', 'Pre-training learns general language; fine-tuning adapts to a specific task', 'Fine-tuning uses more data', 'There is no difference'], answer: 1, explain: 'Pre-training learns language patterns from massive unlabeled text. Fine-tuning takes that foundation and specializes it on smaller, task-specific data.' }
-          ];
+          return quizLang['llm'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('rag') >= 0 || pathLower.indexOf('retrieval') >= 0 || pathLower.indexOf('embed') >= 0 || pathLower.indexOf('vector') >= 0) {
-          return [
-            { q: 'What is the core idea behind RAG?', opts: ['Training a larger model', 'Retrieving relevant context before generating a response', 'Using more GPUs', 'Reducing model size'], answer: 1, explain: 'RAG (Retrieval-Augmented Generation) grounds LLM responses in retrieved documents, reducing hallucination and enabling knowledge updates without retraining.' },
-            { q: 'What do embedding models produce?', opts: ['Text summaries', 'Dense vector representations of text', 'Token counts', 'Grammar corrections'], answer: 1, explain: 'Embedding models map text into fixed-dimensional vectors where semantic similarity corresponds to geometric proximity.' },
-            { q: 'Why use cosine similarity for comparing embeddings?', opts: ['It is the only metric', 'It measures angular similarity regardless of vector magnitude', 'It is faster than dot product', 'It works with integers only'], answer: 1, explain: 'Cosine similarity normalizes for magnitude, focusing on direction. Two texts about the same topic will have high cosine similarity regardless of length.' }
-          ];
+          return quizLang['rag'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('agent') >= 0 || pathLower.indexOf('tool') >= 0 || pathLower.indexOf('mcp') >= 0) {
-          return [
-            { q: 'What distinguishes an AI agent from a simple chatbot?', opts: ['Agents are faster', 'Agents can take actions and use tools autonomously', 'Agents use bigger models', 'There is no difference'], answer: 1, explain: 'Agents have a loop: observe, decide, act. They can call tools, read files, search the web, and chain multiple steps to complete complex tasks.' },
-            { q: 'What is MCP (Model Context Protocol)?', opts: ['A model training format', 'A standardized protocol for connecting AI models to tools and data sources', 'A compression algorithm', 'A testing framework'], answer: 1, explain: 'MCP provides a universal interface between AI assistants and external tools/data, replacing one-off integrations with a standard protocol.' },
-            { q: 'Why is tool-use important for LLMs?', opts: ['It reduces cost', 'It lets LLMs access real-time information and take actions beyond text generation', 'It makes responses shorter', 'It removes hallucinations entirely'], answer: 1, explain: 'Tools extend LLMs beyond their training data cutoff, enabling real-time lookups, calculations, code execution, and interaction with external systems.' }
-          ];
+          return quizLang['agent'] || quizLang['default'];
         }
 
         if (pathLower.indexOf('eval') >= 0 || pathLower.indexOf('safety') >= 0 || pathLower.indexOf('alignment') >= 0 || pathLower.indexOf('deploy') >= 0) {
-          return [
-            { q: 'Why are evals critical for production AI systems?', opts: ['To save money', 'To measure performance objectively before and after changes', 'To make the model bigger', 'Evals are optional'], answer: 1, explain: 'Evals are the tests of AI engineering. Without them, you cannot know if a change improved or regressed quality. They should run on every code change.' },
-            { q: 'What does "alignment" mean in AI safety?', opts: ['Aligning text on screen', 'Ensuring AI systems act according to human intentions and values', 'Making models faster', 'Using the same training data'], answer: 1, explain: 'Alignment ensures that as AI systems become more capable, they remain helpful, honest, and harmless, acting in accordance with human goals.' },
-            { q: 'What is a guardrail in the context of deployed LLMs?', opts: ['A physical barrier', 'A check that prevents harmful, off-topic, or policy-violating outputs', 'A backup model', 'A caching layer'], answer: 1, explain: 'Guardrails filter inputs and outputs at runtime, catching toxicity, prompt injection, PII leaks, and other risks before they reach the user.' }
-          ];
+          return quizLang['eval'] || quizLang['default'];
         }
 
-        return [
-          { q: 'What does "from scratch" mean in this course?', opts: ['Using no computer', 'Building each concept by implementing it yourself, not just reading theory', 'Starting from assembly language', 'Only using pen and paper'], answer: 1, explain: 'This course follows a Build-Use-Ship methodology: first understand by building it, then apply it, then ship it as a real artifact.' },
-          { q: 'Why does this course combine math, ML, and engineering?', opts: ['To make it longer', 'Because real AI engineering requires all three to build production systems', 'Math is just for fun', 'Engineering is optional'], answer: 1, explain: 'Production AI systems require mathematical foundations (for understanding), ML knowledge (for modeling), and engineering skills (for deployment and reliability).' },
-          { q: 'What is the "Ship" step in the Build-Use-Ship framework?', opts: ['Mailing physical goods', 'Creating a reusable artifact like a prompt, skill, or tool from what you learned', 'Publishing a paper', 'Deleting your code'], answer: 2, explain: 'The Ship step turns your learning into something tangible: a prompt, skill file, MCP tool, or CLI utility that others (or future you) can use immediately.' }
-        ];
+        return quizLang['default'];
       }
 
       function renderQuizPanel(container) {
@@ -3071,14 +3132,14 @@
           phase = fl.phaseSlug || '';
         }
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">Q</div><div class="ai-panel-title">Test Your Understanding</div></div>';
-        html += '<div class="ai-panel-subtitle">Did you get it?</div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">Q</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('Test Your Understanding') : 'Test Your Understanding') + '</div></div>';
+        html += '<div class="ai-panel-subtitle">' + (window.AIFSLang ? AIFSLang.t('Did you get it?') : 'Did you get it?') + '</div>';
         html += '<div class="quiz-container" id="quizContainer">';
 
         var letters = ['A', 'B', 'C', 'D'];
         questions.forEach(function (q, qi) {
           html += '<div class="quiz-question" id="quiz-q-' + qi + '">';
-          html += '<div class="quiz-question-num">Question ' + (qi + 1) + ' of ' + questions.length + '</div>';
+          html += '<div class="quiz-question-num">' + (window.AIFSLang ? AIFSLang.t('Question') : 'Question') + ' ' + (qi + 1) + ' ' + (window.AIFSLang ? AIFSLang.t('of') : 'of') + ' ' + questions.length + '</div>';
           html += '<div class="quiz-question-text">' + escapeHtml(q.q) + '</div>';
           html += '<div class="quiz-options">';
           q.opts.forEach(function (opt, oi) {
@@ -3092,8 +3153,8 @@
           html += '</div>';
         });
 
-        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">Complete all questions to see your score</div></div>';
-        html += '<div class="quiz-deeper">Want a deeper quiz? Run <code>/check-understanding ' + escapeHtml(phase) + '</code> in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed</div>';
+        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">' + (window.AIFSLang ? AIFSLang.t('Complete all questions to see your score') : 'Complete all questions to see your score') + '</div></div>';
+        html += '<div class="quiz-deeper">' + (window.AIFSLang ? AIFSLang.t('Want a deeper quiz? Run') : 'Want a deeper quiz? Run') + ' <code>/check-understanding ' + escapeHtml(phase) + '</code> ' + (window.AIFSLang ? AIFSLang.t('in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed') : 'in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed') + '</div>';
         html += '</div>';
 
         panel.innerHTML = html;
@@ -3137,8 +3198,8 @@
           if (scoreEl && scoreNum) {
             scoreNum.textContent = window._quizCorrect + '/' + questions.length;
             scoreEl.querySelector('.quiz-score-label').textContent =
-              window._quizCorrect === questions.length ? 'Perfect score!' :
-              window._quizCorrect >= 2 ? 'Great work!' : 'Keep studying!';
+              window._quizCorrect === questions.length ? (window.AIFSLang ? AIFSLang.t('Perfect score!') : 'Perfect score!') :
+              window._quizCorrect >= 2 ? (window.AIFSLang ? AIFSLang.t('Great work!') : 'Great work!') : (window.AIFSLang ? AIFSLang.t('Keep studying!') : 'Keep studying!');
             scoreEl.classList.add('visible');
           }
         }
@@ -3163,7 +3224,7 @@
           }
         }
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">P</div><div class="ai-panel-title">Learning Path</div></div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">P</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('Learning Path') : 'Learning Path') + '</div></div>';
         html += '<div class="ai-panel-subtitle">Phase ' + String(phase.id).padStart(2, '0') + ': ' + escapeHtml(phase.name) + '</div>';
 
         // Window: 2 before current + current + 2 after, cap at 5 visible.
@@ -3211,11 +3272,11 @@
         var pct = Math.round((completedCount / totalCount) * 100);
 
         html += '<div class="phase-progress-bar"><div class="phase-progress-fill" style="width:' + pct + '%"></div></div>';
-        html += '<div class="phase-progress-text">You\'ve completed ' + completedCount + ' of ' + totalCount + ' lessons in this phase</div>';
+        html += '<div class="phase-progress-text">' + (window.AIFSLang ? AIFSLang.t('You have completed') : 'You have completed') + ' ' + completedCount + ' ' + (window.AIFSLang ? AIFSLang.t('of') : 'of') + ' ' + totalCount + ' ' + (window.AIFSLang ? AIFSLang.t('lessons in this phase') : 'lessons in this phase') + '</div>';
 
         if (completedCount >= totalCount && phaseIdx < PHASES.length - 1) {
           var nextPhase = PHASES[phaseIdx + 1];
-          html += '<div class="phase-complete-callout visible">Ready for Phase ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(nextPhase.name) + '</div>';
+          html += '<div class="phase-complete-callout visible">' + (window.AIFSLang ? AIFSLang.t('Ready for Phase') : 'Ready for Phase') + ' ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(nextPhase.name) + '</div>';
         }
 
         panel.innerHTML = html;
@@ -3236,22 +3297,22 @@
         var phaseIdx = current.phaseIndex;
         var phase = PHASES[phaseIdx];
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">N</div><div class="ai-panel-title">Continue Learning</div></div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">N</div><div class="ai-panel-title">' + (window.AIFSLang ? AIFSLang.t('Continue Learning') : 'Continue Learning') + '</div></div>';
         html += '<div class="continue-panel">';
 
         if (!next || !next.path) {
-          html += '<div class="phase-finished">\u2705 You finished this phase!</div>';
+          html += '<div class="phase-finished">\u2705 ' + (window.AIFSLang ? AIFSLang.t('You finished this phase!') : 'You finished this phase!') + '</div>';
         }
 
         html += '<div class="continue-links">';
 
         var phaseSlug = extractPhaseSlug(phase, phaseIdx);
         var firstLesson = phase.lessons[0] ? extractLessonSlug(phase.lessons[0], 0) : '';
-        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Browse all Phase ' + String(phase.id).padStart(2, '0') + ' lessons</a>';
-        html += '<a class="continue-link" href="catalog.html">Full course catalog</a>';
+        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">' + (window.AIFSLang ? AIFSLang.t('Browse all Phase') : 'Browse all Phase') + ' ' + String(phase.id).padStart(2, '0') + ' ' + (window.AIFSLang ? AIFSLang.t('lessons') : 'lessons') + '</a>';
+        html += '<a class="continue-link" href="catalog.html">' + (window.AIFSLang ? AIFSLang.t('Full course catalog') : 'Full course catalog') + '</a>';
         html += '</div>';
 
-        html += '<div class="continue-callout">Run <code>/find-your-level</code> in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed for a personalized learning path</div>';
+        html += '<div class="continue-callout">' + (window.AIFSLang ? AIFSLang.t('Run') : 'Run') + ' <code>/find-your-level</code> ' + (window.AIFSLang ? AIFSLang.t('in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed for a personalized learning path') : 'in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed for a personalized learning path') + '</div>';
         html += '</div>';
 
         panel.innerHTML = html;
