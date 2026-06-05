@@ -55,7 +55,7 @@ Implicação prática: um modelo que marca 50% no SWE-bench pode marcar 35% no S
 - Testa raciocínio, multimodalidade, web, uso de tools.
 - Três níveis de dificuldade; Nível 3 requer longas cadeias de ferramentas cross-modality.
 
-GAIA é o que você roda pra medir "capacidade generalista". Não confunda com benchmarks eespecificaçãoíficos de código.
+GAIA é o que você roda pra medir "capacidade generalista". Não confunda com benchmarks específicos de código.
 
 ### AgentBench (Liu et al., ICLR 2024)
 

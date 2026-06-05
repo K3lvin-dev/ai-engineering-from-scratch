@@ -94,7 +94,7 @@ O runner é um wrapper fino que sobrevive a qualquer migração de framework por
 
 ## Entregue
 
-`outputs/skill-feedback-runner.md` gera um `run_with_feedback.py` eespecificaçãoífico pro projeto com o orçamento de truncamento correto, um writer de JSONL conectado ao workbench e um loader que o agente lê a cada turno.
+`outputs/skill-feedback-runner.md` gera um `run_with_feedback.py` específico pro projeto com o orçamento de truncamento correto, um writer de JSONL conectado ao workbench e um loader que o agente lê a cada turno.
 
 ## Exercícios
 
@@ -116,7 +116,7 @@ O runner é um wrapper fino que sobrevive a qualquer migração de framework por
 
 ## Leitura Complementar
 
-- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/)
+- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
 - [Anthropic, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 - [Guardrails AI x MLflow — deterministic safety, PII, quality validators](https://guardrailsai.com/blog/guardrails-mlflow) — padrões de redação como testes de regressão
 - [Aport.io, Best AI Agent Guardrails 2026: Pre-Action Authorization Compared](https://aport.io/blog/best-ai-agent-guardrails-2026-pre-action-authorization-compared/) — captura pré/pós-ferramenta

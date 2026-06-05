@@ -14,7 +14,7 @@
 - Implementar uma única camada densa de rede neural (`relu(W @ x + b)`) usando apenas a classe Matrix do zero
 - Explicar as regras de broadcasting e como a adição de bias funciona em frameworks de rede neural
 
-## O Problemo
+## O Problema
 
 Você quer construir uma rede neural. Você lê o código e vê isso:
 
@@ -72,7 +72,7 @@ Se você recebe erro de incompatibilidade de formato no PyTorch, é por isso.
 | Soma | Combina elemento-a-elemento | Adicionar bias à saída |
 | Multiplicação por escalar | Escala cada elemento | taxa de aprendizado * gradientes |
 | Multiplicação de matrizes | Transforma vetores | forward pass da camada |
-| Transposta | Troca linhas e colunas | retropropagacao |
+| Transposta | Troca linhas e colunas | retropropagação |
 | Determinante | Resumo em um único número | Verificando invertibilidade |
 | Inversa | Desfaz uma transformação | Resolvendo sistemas lineares |
 | Identidade | Matriz que não faz nada | Inicialização, conexões residuais |
@@ -328,7 +328,7 @@ A classe Matrix construída aqui é a base para o mini framework de rede neural 
 | Vetor | "Uma seta" | Uma lista ordenada de números. Na IA: um ponto em espaço de alta dimensão. |
 | Matriz | "Uma tabela de números" | Uma transformação linear. Mapeia vetores de um espaço para outro. |
 | Multiplicação de matrizes | "Só multiplicar os números" | Produtos escalares entre cada linha da primeira matriz e cada coluna da segunda. Ordem importa. |
-| Transposta | "Inverter" | Trocar linhas e colunas. Transforma uma matriz m x n em n x m. Crítica na retropropagacao. |
+| Transposta | "Inverter" | Trocar linhas e colunas. Transforma uma matriz m x n em n x m. Crítica na retropropagação. |
 | Determinante | "Algum número da matriz" | Mede quanto a matriz escala a área (2D) ou volume (3D). Zero significa que a transformação esmaga uma dimensão. |
 | Inversa | "Desfazer a matriz" | A matriz que reverte a transformação. Só existe quando o determinante não é zero. |
 | Matriz identidade | "A matriz chata" | Equivalente a multiplicar por 1. Usada em conexões residuais (ResNets). |
@@ -339,4 +339,4 @@ A classe Matrix construída aqui é a base para o mini framework de rede neural 
 
 - [3Blue1Brown: Essência de Álgebra Linear](https://www.3blue1brown.com/topics/linear-algebra) — intuição visual para cada operação coberta aqui
 - [Documentação do NumPy sobre broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) — as regras exatas que o NumPy segue
-- [Revisão de Álgebra Linear do Stanford CS229](http://cs229.stanford.edu/section/cs229-linalg.pdf) — referência concisa para álgebra linear eespecificaçãoífica de ML
+- [Revisão de Álgebra Linear do Stanford CS229](http://cs229.stanford.edu/section/cs229-linalg.pdf) — referência concisa para álgebra linear específica de ML

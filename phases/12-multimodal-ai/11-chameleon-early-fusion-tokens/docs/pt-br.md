@@ -14,7 +14,7 @@
 - Nomear os truques de estabilidade de treinamento do Chameleon: QK-Norm, posicionamento de dropout, ordenação de LayerNorm.
 - Comparar Chameleon vs abordagem Q-Former do BLIP-2 e descrever quando cada uma é a escolha certa.
 
-## O Problemo
+## O Problema
 
 VLMs baseados em adapter (LLaVA, BLIP-2, Qwen-VL) tratam texto e imagem como duas coisas diferentes. Um token de texto passa por `embed(text_token)`; uma imagem passa por `visual_encoder(image) → projector → ... pseudo_tokens`. O modelo tem dois caminhos de entrada que se fundem no meio.
 
@@ -111,7 +111,7 @@ O código intencionalmente mantém o transformer minúsculo (bigramas) pra você
 
 ## Implemente
 
-Esta aula produz `outputs/skill-tokenizer-vs-adapter-picker.md`. Dada uma eespecificaçãoificação de produto (só compreensão vs compreensão + geração, qualidade de imagem requerida, orçamento de custo), escolhe entre família Chameleon (fusão precoce) e família LLaVA (fusão tardia) e justifica com regras de bolso quantitativas.
+Esta aula produz `outputs/skill-tokenizer-vs-adapter-picker.md`. Dada uma especificação de produto (só compreensão vs compreensão + geração, qualidade de imagem requerida, orçamento de custo), escolhe entre família Chameleon (fusão precoce) e família LLaVA (fusão tardia) e justifica com regras de bolso quantitativas.
 
 ## Exercícios
 

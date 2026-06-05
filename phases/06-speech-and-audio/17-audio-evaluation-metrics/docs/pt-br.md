@@ -49,7 +49,7 @@ Cada tarefa de áudio tem múltiplas métricas, cada uma medindo um eixo diferen
 
 **TTFA (time-to-first-audio).** Latência de relógio. Kokoro-82M: ~100 ms; F5-TTS: ~1 s.
 
-### Eespecificaçãoífico de clonagem de voz
+### Especificaçãoífico de clonagem de voz
 
 **SECS + MOS + CER** como trio. Clonagem com SECS alto mas MOS baixo significa timbre certo mas voz antinatural; o oposto significa voz natural mas locutor errado.
 

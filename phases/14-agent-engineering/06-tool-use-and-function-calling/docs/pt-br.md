@@ -79,7 +79,7 @@ Regra de engenharia: trate IDs de correlação como peças que aguentam o peso. 
 
 ### Sandboxing
 
-Execução de ferramenta é a fronteira de sandbox. Veja Aula 09 pra detalhes. Versão curta: toda ferramenta deve eespecificaçãoificar superfície de leitura/escrita, acesso à rede, timeout, limite de memória. Genérico `run_shell(cmd)` é uma bandeira vermelha; eespecificaçãoífico `git_status()` é mais seguro.
+Execução de ferramenta é a fronteira de sandbox. Veja Aula 09 pra detalhes. Versão curta: toda ferramenta deve especificaçãoificar superfície de leitura/escrita, acesso à rede, timeout, limite de memória. Genérico `run_shell(cmd)` é uma bandeira vermelha; específico `git_status()` é mais seguro.
 
 ## Construa
 

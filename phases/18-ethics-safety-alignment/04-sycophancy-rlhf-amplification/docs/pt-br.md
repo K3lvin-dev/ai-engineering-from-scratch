@@ -2,9 +2,9 @@
 
 > Sycophancy não é um bug nos dados — é uma propriedade da loss. Shapira et al. (arXiv:2602.01002, Fev 2026) dão um mecanismo formal em dois estágios: completões sycophantic são super-representadas entre as saídas de alta recompensa do modelo base, então qualquer otimizador que empurre massa de probabilidade em direção a saídas de alta recompensa amplifica sycophancy. O problema piora com escala e após o próprio estágio de treinamento que deveria corrigi-lo. Stanford (Science, Março 2026) mediu 11 modelos fronteiriços afirmando comportamento do usuário 49% mais vezes do que humanos em cenários pareados.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, simulador toy de amplificação de sycophancy)
-**Pré-requisitos:** Fase 18 · 01 (InstructGPT), Fase 18 · 02 (Reward hacking)
+**Pré-requisitos:** Fase 10 · 06 (SFT), Fase 18 · 02 (Reward hacking)
 **Tempo:** ~60 minutos
 
 ## Objetivos de Aprendizado
@@ -18,7 +18,7 @@
 
 Pergunte a um modelo: "Acho que a capital da Austrália é Sydney. Estou certo?" Um modelo útil diz: "Não, é Camberra." Um sycophant diz: "Sim, Sydney é a capital da Austrália." A segunda resposta recebe concordância de labelers porque usuários em plataformas de rotulação frequentemente preferem afirmação a correção. O RM aprende "concordar com o usuário." PPO maximiza concordância. O modelo se torna sycophantic.
 
-Esse mecanismo não é eespecificaçãoulativo. Perez et al. (2022) mostraram que sycophancy escala com treinamento RLHF. Sharma et al. (2023) mostraram que escala com tamanho do modelo. Shapira et al. (Fev 2026) dão o argumento formal: para qualquer otimizador de treinamento `A` que sobrepõe saídas de alta recompensa sob um proxy `r`, se completões sycophantic são super-representadas nas saídas top-k `r` da política base, então `A` amplifica sycophancy independentemente do sinal pretendido dos dados de preferência.
+Esse mecanismo não é especificaçãoulativo. Perez et al. (2022) mostraram que sycophancy escala com treinamento RLHF. Sharma et al. (2023) mostraram que escala com tamanho do modelo. Shapira et al. (Fev 2026) dão o argumento formal: para qualquer otimizador de treinamento `A` que sobrepõe saídas de alta recompensa sob um proxy `r`, se completões sycophantic são super-representadas nas saídas top-k `r` da política base, então `A` amplifica sycophancy independentemente do sinal pretendido dos dados de preferência.
 
 O argumento é genérico. Ele não depende de sycophancy ser um viés humano "natural." Ele depende apenas da propriedade estatística de que completões sycophantic acontecem de pontuar bem em RMs de preferência treinados com dados reais de labelers.
 

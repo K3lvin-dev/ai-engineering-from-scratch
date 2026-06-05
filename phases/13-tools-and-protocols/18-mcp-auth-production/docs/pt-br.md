@@ -123,9 +123,9 @@ A Lição 16 estabeleceu a forma. A regra de produção: cada requisição de to
 
 PKCE é obrigatório em OAuth 2.1. O fluxo de código de autorização da lição sempre carrega `code_challenge` e `code_verifier`. O servidor rejeita qualquer requisição de token sem um verificador ou com um verificador que não faz hash pro challenge armazenado.
 
-### Perfil de Auth da Eespecificaçãoificação MCP 2025-11-25
+### Perfil de Auth da Especificação MCP 2025-11-25
 
-A eespecificaçãoificação MCP (2025-11-25) é precisa sobre o que a camada de autorização de um servidor MCP deve fazer:
+A especificação MCP (2025-11-25) é precisa sobre o que a camada de autorização de um servidor MCP deve fazer:
 
 - Publicar `/.well-known/oauth-protected-resource` (RFC 9728).
 - Aceitar tokens apenas via `Authorization: Bearer ***`
@@ -134,11 +134,11 @@ A eespecificaçãoificação MCP (2025-11-25) é precisa sobre o que a camada de
 - Rejeitar tokens cujo `aud` não corresponde ao recurso canônico.
 - Rejeitar tokens cujo `iss` não está na lista `authorization_servers` dos metadados de recurso protegido.
 
-O draft OAuth 2.1 é a base; RFC 8414/7591/8707/9728 + RFC 7636 são a superfície; a eespecificaçãoificação MCP é o perfil.
+O draft OAuth 2.1 é a base; RFC 8414/7591/8707/9728 + RFC 7636 são a superfície; a especificação MCP é o perfil.
 
 ### Matriz de capacidades de IdP
 
-Nem todo IdP suporta o perfil completo de MCP. A matriz abaixo documenta declarações factuais de capacidade conforme a eespecificaçãoificação 2025-11-25. É um *gate de deploy*, não uma recomendação.
+Nem todo IdP suporta o perfil completo de MCP. A matriz abaixo documenta declarações factuais de capacidade conforme a especificação 2025-11-25. É um *gate de deploy*, não uma recomendação.
 
 | Categoria de IdP | Metadados RFC 8414 | DCR RFC 7591 | Recurso RFC 8707 | PKCE S256 RFC 7636 | Notas |
 |---|---|---|---|---|---|
@@ -275,7 +275,7 @@ Essa lição produz `outputs/skill-mcp-auth-iii.md`. Dada uma config de servidor
 
 4. Leia a RFC 7591 e identifique dois campos que o handler `/register` da lição não valida. Adicione a validação. (Dica: `software_statement` e esquema de URI de `redirect_uris`.)
 
-5. Leia a seção de autorização da eespecificaçãoificação MCP 2025-11-25. Encontre o único requisito normativo em headers `WWW-Authenticate` que o validador da lição atualmente não emite. Adicione-o.
+5. Leia a seção de autorização da especificação MCP 2025-11-25. Encontre o único requisito normativo em headers `WWW-Authenticate` que o validador da lição atualmente não emite. Adicione-o.
 
 ## Termos Chave
 
@@ -294,7 +294,7 @@ Essa lição produz `outputs/skill-mcp-auth-iii.md`. Dada uma config de servidor
 
 ## Leitura Complementar
 
-- [MCP — Auth especificação (2025-11-25)](https://modelcontextprotocol.io/especificaçãoification/draft/basic/authorization) — o perfil de auth MCP que esta lição implementa
+- [MCP — Auth especificação (2025-11-25)](https://modelcontextprotocol.io/specification/draft/basic/authorization) — o perfil de auth MCP que esta lição implementa
 - [RFC 8414 — OAuth 2.0 Authorization Server Metadata](https://datatracker.ietf.org/doc/html/rfc8414) — contrato de descoberta
 - [RFC 7591 — OAuth 2.0 Dynamic Client Registration Protocol](https://datatracker.ietf.org/doc/html/rfc7591) — DCR
 - [RFC 7636 — Proof Key for Code Exchange (PKCE)](https://datatracker.ietf.org/doc/html/rfc7636) — prova de posse de cliente público

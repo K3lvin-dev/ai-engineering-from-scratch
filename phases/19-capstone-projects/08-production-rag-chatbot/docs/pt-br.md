@@ -80,7 +80,7 @@ avaliação:
 
 5. **Guardrails.** Llama Guard 4 na entrada; trilhas NeMo Guardrails bloqueiam questões fora de domínio ou tópicos proibidos pela política; Presidio limpa PII acidental na saída; pós-filtro de aplicação de citações.
 
-6. **Conjunto dourado.** 200 pares Q/A rotulados por um eespecificaçãoialista do domínio com (resposta, citações). Pontue o agente em correspondência exata de citação, corretude da resposta, fidelidade (RAGAS).
+6. **Conjunto dourado.** 200 pares Q/A rotulados por um especialista do domínio com (resposta, citações). Pontue o agente em correspondência exata de citação, corretude da resposta, fidelidade (RAGAS).
 
 7. **Red team.** 50 prompts adversários: jailbreaks (PAIR, TAP), tentativas de exfiltração de PII, fora de domínio, vazamentos cross-jurisdição. Pontue com pass/falha e severidade.
 
@@ -135,7 +135,7 @@ resposta:
 |------|------------------------|------------------------|
 | Prompt caching | "Sistema + contexto em cache" | Recurso Claude/OpenAI: tokens de prefixo em cache descontados 60-90% no hit |
 | RAGAS | "Avaliador RAG" | Pontuação automatizada de fidelidade, relevância da resposta, precisão do contexto |
-| Conjunto dourado | "Avaliação rotulada" | 200+ Q/A rotulados por eespecificaçãoialista com citações; o ground truth |
+| Conjunto dourado | "Avaliação rotulada" | 200+ Q/A rotulados por especialista com citações; o ground truth |
 | Tag de jurisdição | "Label de conformidade" | Escopo GDPR/HIPAA/SOC2 anexado aos chunks; aplicado por filtro de recuperação |
 | Fidelidade de citação | "Taxa de resposta fundamentada" | Fração de afirmações sustentadas por trechos de fonte recuperáveis |
 | Drift | "Decaimento de qualidade de recuperação" | Variação semanal no nDCG ou pontuação de citação; limiar de alerta 5% |

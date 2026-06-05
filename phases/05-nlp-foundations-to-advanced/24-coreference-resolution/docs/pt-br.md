@@ -111,7 +111,7 @@ A stack de 2026:
 |-----------|------|
 | Inglês, documento único | `en_coreference_web_trf` (spaCy-experimental) ou coref neural do AllenNLP |
 | Multilíngue | SpanBERT / XLM-R treinado em OntoNotes ou Multilingual CoNLL |
-| Coref de evento cross-documento | Modelos de ponta a ponta eespecificaçãoializados (SOTA 2025–26) |
+| Coref de evento cross-documento | Modelos de ponta a ponta especializados (SOTA 2025–26) |
 | Baseline rápida com LLM | GPT-4o / Claude com prompt de coref de saída estruturada |
 | Sistemas de diálogo em produção | Fallback baseado em regras + primário neural + revisão manual pra slots críticos |
 

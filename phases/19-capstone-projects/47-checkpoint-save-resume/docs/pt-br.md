@@ -60,7 +60,7 @@ Duas regras. Primeiro, o arquivo temporario vive no mesmo diretorio que o alvo p
 
 ### Checkpoints em shards
 
-Quando o modelo fica grande o payload de arquivo unico fica grande demais para carregar rapido, grande demais para inespecificaçãoionar, e doloroso demais quando uma rede compartilhada engasga no meio da leitura. A solucao e dividir o estado do parametro em shards e escrever um indice pequeno que os liga.
+Quando o modelo fica grande o payload de arquivo unico fica grande demais para carregar rapido, grande demais para especificar, e doloroso demais quando uma rede compartilhada engasga no meio da leitura. A solucao e dividir o estado do parametro em shards e escrever um indice pequeno que os liga.
 
 ```mermaid
 flowchart LR

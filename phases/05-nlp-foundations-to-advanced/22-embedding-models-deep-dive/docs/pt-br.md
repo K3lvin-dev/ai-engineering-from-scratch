@@ -29,7 +29,7 @@ Essa lição lista os tradeoffs pra você escolher com base em evidências, não
 
 **Embeddings sparse.** Estilo SPLADE. Um transformer prevê um peso pra cada token do vocabulário, depois zera a maioria. Resultado é um vetor esparsa de tamanho |vocab|. Captura correspondência lexical (como BM25) mas com pesos de termo aprendidos. Forte em consultas com muitas palavras-chave.
 
-**Multi-vector (interação tardia).** ColBERTv2, Jina-ColBERT. Um vetor por token. Pontuação com MaxSim: pra cada token da consulta, encontre o token do documento mais similar, some as pontuações. Mais caro pra armazenar e pontuar, mas vence em consultas longas e corpora de domínio eespecificaçãoífico.
+**Multi-vector (interação tardia).** ColBERTv2, Jina-ColBERT. Um vetor por token. Pontuação com MaxSim: pra cada token da consulta, encontre o token do documento mais similar, some as pontuações. Mais caro pra armazenar e pontuar, mas vence em consultas longas e corpora de domínio específico.
 
 **BGE-M3: os três de uma vez.** Modelo único produz representações densa, sparse e multi-vector simultaneamente. Cada uma pode ser consultada independentemente; pontuações se fundem via soma ponderada. O padrão de 2026 quando você quer flexibilidade de um checkpoint.
 
@@ -153,7 +153,7 @@ A stack de 2026:
 | Armazenamento restrito | Matryoshka truncado + quantização int8 |
 | Consultas com muitas palavras-chave | Adicione SPLADE sparse, fusão RRF com denso |
 
-Padrão de 2026: comece com BGE-M3 ou text-3-large, avalie no seu domínio com MTEB, troque se um modelo de domínio eespecificaçãoífico superar por mais de 3 pontos.
+Padrão de 2026: comece com BGE-M3 ou text-3-large, avalie no seu domínio com MTEB, troque se um modelo de domínio específico superar por mais de 3 pontos.
 
 ## Entregar
 

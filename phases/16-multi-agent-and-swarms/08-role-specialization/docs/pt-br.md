@@ -1,4 +1,4 @@
-# Eespecificaçãoialização de Papéis — Planejador, Crítico, Executor, Verificador
+# Especificaçãoialização de Papéis — Planejador, Crítico, Executor, Verificador
 
 > A decomposição multi-agent mais comum em 2026: um agente planeja, um executa, um critica ou verifica. MetaGPT (arXiv:2308.00352) formaliza isso como SOPs codificados em prompts de papel — Gerente de Produto, Arquiteto, Gerente de Projeto, Engenheiro, Engenheiro QA — seguindo `Code = SOP(Team)`. ChatDev (arXiv:2307.07924) encadeia designer, programador, reviewer, tester através de uma "chat chain" com "comunicative dehallucination" (agents explicitamente pedem detalhes faltantes). O verificador é estrutural: Cemri et al. (MAST, arXiv:2503.13657) mostram que toda falha multi-agent pode ser rastreada até verificação faltante ou quebrada. PwC reportou ganho de 7× em acurácia (10% → 70%) de loops de validação estruturados no CrewAI.
 
@@ -41,9 +41,9 @@ Cada papel tem um schema de entrada/saída rigoroso. O prompt de papel diz o que
 
 ### A comunicative dehallucination do ChatDev
 
-ChatDev adiciona um movimento-chave: quando um executor precisa de um detalhe eespecificaçãoífico que não estava no plano, ele pede explicitamente pro designer antes de continuar. Isso previne a falha clássica de LLM de inventar o detalhe de forma plausível.
+ChatDev adiciona um movimento-chave: quando um executor precisa de um detalhe específico que não estava no plano, ele pede explicitamente pro designer antes de continuar. Isso previne a falha clássica de LLM de inventar o detalhe de forma plausível.
 
-Implementação: o prompt de papel inclui "quando você precisa de informação eespecificaçãoífica que não foi dada, pergunte pro papel relevante por nome antes de produzir saída."
+Implementação: o prompt de papel inclui "quando você precisa de informação específica que não foi dada, pergunte pro papel relevante por nome antes de produzir saída."
 
 ### Por que o verificador é o mais importante
 
@@ -64,10 +64,10 @@ Todo papel no seu sistema é um LLM e toda saída de papel é "parece bom pra mi
 
 ### Mapeamentos de framework
 
-- **CrewAI** — `Agent(role, goal, backstory)` é a superfície de eespecificaçãoialização de livro didático.
-- **LangGraph** — nós podem ter prompts eespecificaçãoializados; arestas forçam o pipeline.
-- **AutoGen** — ConversableAgents com nomes de uma palavra em papéis eespecificaçãoíficos num GroupChat.
-- **OpenAI Agents SDK** — ferramentas de handoff entre Agents eespecificaçãoializados por papel.
+- **CrewAI** — `Agent(role, goal, backstory)` é a superfície de especialização de livro didático.
+- **LangGraph** — nós podem ter prompts especializados; arestas forçam o pipeline.
+- **AutoGen** — ConversableAgents com nomes de uma palavra em papéis específicos num GroupChat.
+- **OpenAI Agents SDK** — ferramentas de handoff entre Agents especializados por papel.
 
 ## Construa
 
@@ -78,7 +78,7 @@ Todo papel no seu sistema é um LLM e toda saída de papel é "parece bom pra mi
 - **Crítico** (simulado por LLM) sinaliza problemas óbvios.
 - **Verificador** roda o código gerado num sandbox (`exec`) contra um caso de teste.
 
-Demo roda duas vezes: uma onde o executor produz código correto (crítico + verificador passam os dois), uma onde o executor produz código fora da eespecificaçãoificação (crítico perde o bug porque parece plausível, verificador pega porque o teste falha).
+Demo roda duas vezes: uma onde o executor produz código correto (crítico + verificador passam os dois), uma onde o executor produz código fora da especificação (crítico perde o bug porque parece plausível, verificador pega porque o teste falha).
 
 Execute:
 
@@ -96,7 +96,7 @@ Checklist:
 
 - **Pelo menos um verificador determinístico.** Nunca full-LLM.
 - **Schema de E/S explícito por papel.** O planejador retorna uma especificação, não prosa; o executor lê esse schema.
-- **Comunicative dehallucination.** Executor deve pedir ao planejador quando info falta; nunca inventar.
+- **Communicative dehallucination.** Executor deve pedir ao planejador quando info falta; nunca inventar.
 - **Ordem crítico/verificador.** Rode crítico primeiro (barato, pega problemas de design), verificador depois (lento, pega bugs).
 - **Orçamento de loop.** Máx 2 rodadas de revisão crítico-executor antes de escalar pra humano.
 
@@ -112,9 +112,9 @@ Checklist:
 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |-------|----------------------|--------------------------|
-| Eespecificaçãoialização de papéis | "Agents diferentes, trabalhos diferentes" | System prompts distintos calibrados pros papéis planejador/executor/crítico/verificador. |
+| Especificaçãoialização de papéis | "Agents diferentes, trabalhos diferentes" | System prompts distintos calibrados pros papéis planejador/executor/crítico/verificador. |
 | Padrão SOP | "Procedimento operacional padrão codificado" | Enquadramento do MetaGPT: schemas de E/S rigorosos por papel transformam um time num pipeline. |
-| Comunicative dehallucination | "Pergunte antes de inventar" | Padrão ChatDev: executor pede ao planejador quando um detalhe falta ao invés de inventar um. |
+| Communicative dehallucination | "Pergunte antes de inventar" | Padrão ChatDev: executor pede ao planejador quando um detalhe falta ao invés de inventar um. |
 | Crítico | "Reviewer LLM" | Revisor subjetivo e opinativo. Pega problemas de gosto. Pode ser enganado por prosa plausível. |
 | Verificador | "Verificação determinística" | Pass/fal baseado em código. Runner de testes, verificador de tipos, validador de schema. Não pode ser enganado. |
 | Lacuna de verificação | "Ninguém checou" | 21.3% das falhas MAST. Resposta entregue sem verificação que teria pego o bug. |
@@ -126,4 +126,4 @@ Checklist:
 - [Hong et al. — MetaGPT: Meta Programming for Multi-Agent Collaboration](https://arxiv.org/abs/2308.00352) — o paper de referência de SOP-como-prompt-de-papel
 - [Qian et al. — Communicative Agents for Software Development (ChatDev)](https://arxiv.org/abs/2307.07924) — chat chain + comunicative dehallucination
 - [Cemri et al. — Why Do Multi-Agent LLM Systems Fail?](https://arxiv.org/abs/2503.13657) — taxonomia MAST; lacunas de verificação são 21.3% das falhas
-- [Docs do CrewAI — Agent roles](https://docs.crewai.com/en/introduction) — superfície de eespecificaçãoificação de papéis em produção
+- [Docs do CrewAI — Agent roles](https://docs.crewai.com/en/introduction) — superfície de especificação de papéis em produção

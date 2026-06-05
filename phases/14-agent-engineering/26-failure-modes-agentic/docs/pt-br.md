@@ -9,7 +9,7 @@
 
 ## Objetivos de Aprendizado
 
-- Nomear as três categorias de falha do MASFT e pelo menos quatro modos eespecificaçãoíficos em cada uma.
+- Nomear as três categorias de falha do MASFT e pelo menos quatro modos específicos em cada uma.
 - Explicar por que falhas agênticas amplificam modos de falha de IA existentes (viés, alucinação).
 - Descrever os cinco modos recorrentes da indústria e suas mitigações.
 - Implementar um detector em stdlib que etiqueta traces de agentes com rótulos de modo de falha.
@@ -93,7 +93,7 @@ Saída: rótulos por trace + distribuição agregada, uma reprodução barata do
 
 - **Phoenix** pra clustering de deriva em produção (Aula 24).
 - **Langfuse** pra replay de sessão + anotação.
-- **Custom** pra assinaturas eespecificaçãoíficas de domínio que sua plataforma de observabilidade não detecta.
+- **Custom** pra assinaturas específicas de domínio que sua plataforma de observabilidade não detecta.
 
 ## Entregue
 

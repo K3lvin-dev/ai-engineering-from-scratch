@@ -130,7 +130,7 @@ A stack de 2026:
 | Inglês geral + Wikipedia | BLINK ou REL |
 | Cross-lingual, KB = Wikipedia | mGENRE |
 | Amigável a LLM, poucas menções/dia | Faça prompting de Claude/GPT-4 com lista de candidatos + JSON restrito |
-| KB de domínio eespecificaçãoífico (médico, jurídico) | BERT customizado com retrieval awareness da KB + fine-tuning em conjunto AIDA de domínio |
+| KB de domínio específico (médico, jurídico) | BERT customizado com retrieval awareness da KB + fine-tuning em conjunto AIDA de domínio |
 | Latência extremamente baixa | Só prior por correspondência exata (baseline Milne-Witten) |
 | SOTA em pesquisa | GENRE / ExtEnD / LLM-EL generativo |
 

@@ -1,9 +1,9 @@
 # Estudos de Caso e o State-of-the-Art de 2026
 
-> Três referências de grau de produção pra estudar de ponta a ponta, cada uma ilustrando uma fatia diferente de engenharia multi-agente. **O sistema Research da Anthropic** (orchestrator-worker, 15x tokens, +90.2% sobre agente único Opus 4, deploys rainbow) é o caso canônico de supervisor. **MetaGPT / ChatDev** (eespecificaçãoialização de papéis via SOPs pra engenharia de software; a "comunicative dehallucination" do ChatDev; extensão MacNet pra >1000 agentes via DAGs, arXiv:2406.07155) é o caso canônico de decomposição de papéis. **OpenClaw / Moltbook** (originalmente Clawdbot por Peter Steinberger, novembro 2025; renomeado duas vezes; 247k stars no GitHub até março 2026; agentes locais de loop ReAct; Moltbook como rede social só-de-agents com ~2.3M contas de agente em dias de lançamento, adquirida por Meta em 2026-03-10) ilustra o que acontece em escala populacional: atividade econômica emergente, riscos de prompt-injection, regulação de nível estatal (China restringiu OpenClaw em computadores governamentais, março 2026). **Paisagem de frameworks abril 2026:** LangGraph e CrewAI lideram produção; AG2 é a continuação comunitária do AutoGen; Microsoft AutoGen está em modo manutenção (mesclado no Microsoft Agent Framework, RC fev 2026); OpenAI Agents SDK é o sucessor produtivo do Swarm; Google ADK (abril 2025) é o entrante nativo em A2A. Todo framework maior agora entrega suporte a MCP; a maioria entrega A2A. Esta aula lê cada caso de ponta a ponta e destila os padrões comuns pra você escolher a referência certa pro seu próximo sistema de produção.
+> Três referências de grau de produção pra estudar de ponta a ponta, cada uma ilustrando uma fatia diferente de engenharia multi-agente. **O sistema Research da Anthropic** (orchestrator-worker, 15x tokens, +90.2% sobre agente único Opus 4, deploys rainbow) é o caso canônico de supervisor. **MetaGPT / ChatDev** (especialização de papéis via SOPs pra engenharia de software; a "comunicative dehallucination" do ChatDev; extensão MacNet pra >1000 agentes via DAGs, arXiv:2406.07155) é o caso canônico de decomposição de papéis. **OpenClaw / Moltbook** (originalmente Clawdbot por Peter Steinberger, novembro 2025; renomeado duas vezes; 247k stars no GitHub até março 2026; agentes locais de loop ReAct; Moltbook como rede social só-de-agents com ~2.3M contas de agente em dias de lançamento, adquirida por Meta em 2026-03-10) ilustra o que acontece em escala populacional: atividade econômica emergente, riscos de prompt-injection, regulação de nível estatal (China restringiu OpenClaw em computadores governamentais, março 2026). **Paisagem de frameworks abril 2026:** LangGraph e CrewAI lideram produção; AG2 é a continuação comunitária do AutoGen; Microsoft AutoGen está em modo manutenção (mesclado no Microsoft Agent Framework, RC fev 2026); OpenAI Agents SDK é o sucessor produtivo do Swarm; Google ADK (abril 2025) é o entrante nativo em A2A. Todo framework maior agora entrega suporte a MCP; a maioria entrega A2A. Esta aula lê cada caso de ponta a ponta e destila os padrões comuns pra você escolher a referência certa pro seu próximo sistema de produção.
 
 **Tipo:** Aprender (capstone)
-**Idiomas:** —
+**Linguagens:** —
 **Pré-requisitos:** toda a Fase 16 (Aulas 01-24)
 **Tempo:** ~90 minutos
 
@@ -37,20 +37,20 @@ Esse é o caso de referência pra topologia supervisor-worker (Fase 16 · 05) em
 
 O caso de decomposição de papéis por SOPs em produção. Cubra arXiv:2308.00352 (MetaGPT) e arXiv:2307.07924 (ChatDev).
 
-MetaGPT codifica SOPs de engenharia de software como prompts de papel: Product Manager, Architect, Project Manager, Engineer, QA Engineer. O enquadramento do artigo: `Code = SOP(Team)`. Cada papel tem um prompt estreito e eespecificaçãoializado; handoffs entre papéis carregam artefatos estruturados (docs PRD, docs de arquitetura, código).
+MetaGPT codifica SOPs de engenharia de software como prompts de papel: Product Manager, Architect, Project Manager, Engineer, QA Engineer. O enquadramento do artigo: `Code = SOP(Team)`. Cada papel tem um prompt estreito e especializado; handoffs entre papéis carregam artefatos estruturados (docs PRD, docs de arquitetura, código).
 
-Contribuição do ChatDev: **comunicative dehallucination**. Agents pedem eespecificaçãoificações antes de responder — um agente designer pergunta ao programador qual linguagem é pretendida antes de esboçar a UI, ao invés de adivinhar. O artigo reporta isso reduz alucinação em pipelines multi-agente mensuravelmente.
+Contribuição do ChatDev: **comunicative dehallucination**. Agents pedem especificaçãoificações antes de responder — um agente designer pergunta ao programador qual linguagem é pretendida antes de esboçar a UI, ao invés de adivinhar. O artigo reporta isso reduz alucinação em pipelines multi-agente mensuravelmente.
 
-MacNet (arXiv:2406.07155) estende o ChatDev pra **>1000 agentes via DAGs**. Cada nó do DAG é uma eespecificaçãoialização de papel; arestas codificam contratos de handoff. A escala é possível porque routing é explícito e computável offline.
+MacNet (arXiv:2406.07155) estende o ChatDev pra **>1000 agentes via DAGs**. Cada nó do DAG é uma especialização de papel; arestas codificam contratos de handoff. A escala é possível porque routing é explícito e computável offline.
 
 Lições de design:
 
 1. **Estrutura importa mais que tamanho.** Um time de SOP de 5 papéis apertado supera um grupo não-estruturado de 50 agents.
 2. **Contratos de handoff por escrito.** Artefatos passados entre papéis seguem um schema.
-3. **Comunicative dehallucination** é um padrão barato e de suporte.
+3. **Communicative dehallucination** é um padrão barato e de suporte.
 4. **DAGs escalam mais que chat.** Quando o fluxo é conocível, codifique-o.
 
-Esse é o caso de referência pra eespecificaçãoialização de papéis (Fase 16 · 08) e topologia estruturada (Fase 16 · 15).
+Esse é o caso de referência pra especialização de papéis (Fase 16 · 08) e topologia estruturada (Fase 16 · 15).
 
 ### Ecossistema OpenClaw / Moltbook
 
@@ -139,7 +139,7 @@ Regras de início pra multi-agente em produção em 2026:
 1. Leia o post do sistema Research da Anthropic de ponta a ponta. Identifique três decisões de design que mudariam se você substituísse o Opus 4 por um modelo menor (ex: Haiku 4).
 2. Leia MetaGPT Seções 3-4 (arXiv:2308.00352). Codifique um SOP do seu próprio domínio (não software) como prompts de papel. Quantos papéis o SOP implica?
 3. Leia ChatDev (arXiv:2307.07924). Identifique o mecanismo de "comunicative dehallucination." Implemente num dos seus sistemas multi-agente existentes.
-4. Leia sobre OpenClaw e Moltbook. Escolha um modo de falha eespecificaçãoífico que emergiu em escala populacional que não apareceria num sistema de 5 agents. Como você projetaria contra isso?
+4. Leia sobre OpenClaw e Moltbook. Escolha um modo de falha específico que emergiu em escala populacional que não apareceria num sistema de 5 agents. Como você projetaria contra isso?
 5. Escolha seu projeto multi-agente atual. Qual dos três estudos de caso é a referência mais próxima? Quais decisões de design daquele estudo você AINDA NÃO adotou? Escreva uma que você vai adotar neste trimestre.
 
 ## Termos-chave
@@ -153,7 +153,7 @@ Regras de início pra multi-agente em produção em 2026:
 | OpenClaw | "Agents locais de loop ReAct" | Projeto do Steinberger; 247k stars até março 2026. |
 | Moltbook | "Rede social só-de-agents" | 2.3M contas de agent; adquirida por Meta março 2026. |
 | Deploy rainbow | "Múltiplas versões concorrentes" | Mantenha versões antigas de runtime vivas pra agentes de execução longa em andamento. |
-| Comunicative dehallucination | "Pergunte antes de responder" | Agents pedem eespecificaçãoificações dos peers ao invés de adivinhar. |
+| Communicative dehallucination | "Pergunte antes de responder" | Agents pedem especificaçãoificações dos peers ao invés de adivinhar. |
 | WMAC 2026 | "O workshop da AAAI" | Ponto focal comunitário de abril 2026 pra coordenação multi-agente. |
 
 ## Leitura Adicional

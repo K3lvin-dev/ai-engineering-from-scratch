@@ -84,7 +84,7 @@ graph RL
     L1 -- "dL/dz1 = dL/da1 * sigmoid'(z1)" --> I["Entrada"]
 ```
 
-Em cada camada, o gradiente é multiplicado pela derivada da sigmoid. A derivada da sigmoid é a * (1 - a), que chega no máximo em 0.25 (quando a = 0.5). Três camadas fundo, o gradiente já foi multiplicado por no máximo 0.25^3 = 0.0156. Dez camadas: 0.25^10 = 0.000001.
+Em cada camada, o gradiente é multiplicado pela derivada da sigmoid. A derivada da sigmoid é a * (1 - a), que chega no máximo em 0.25 (quando a = 0.5). Três camadas de profundidade, o gradiente já foi multiplicado por no máximo 0.25^3 = 0.0156. Dez camadas: 0.25^10 = 0.000001.
 
 ### Gradientes Desvanecentes
 
@@ -453,7 +453,7 @@ Esta aula produz:
 | Grafo computacional | "A estrutura da rede" | Um grafo acíclico direcionado onde nós são operações e arestas carregam valores (frente) e gradientes (trás) |
 | Regra da cadeia | "Multiplicar as derivadas" | Se y = f(g(x)), então dy/dx = f'(g(x)) * g'(x) — a base matemática da retropropagação |
 | Gradiente | "A direção da subida mais íngreme" | A derivada parcial da perda em relação a um parâmetro — diz como mudar esse parâmetro pra reduzir a perda |
-| Gradiente desvanecente | "Redes profundas não aprendem" | Gradientees diminuem exponencialmente à medida que propagam por camadas com ativações saturantes como sigmoid |
+| Gradiente desvanecente | "Redes profundas não aprendem" | Gradientes diminuem exponencialmente à medida que propagam por camadas com ativações saturantes como sigmoid |
 | Passo direto | "Rodar a rede" | Computar a saída das entradas aplicando sequencialmente as operações de cada camada e armazenando valores intermediários |
 | Passo reverso | "Computar gradientes" | Percorrer o grafo computacional ao contrário, acumulando gradientes em cada nó usando a regra da cadeia |
 | Taxa de aprendizado | "Como rápido aprende" | Um escalar que controla o tamanho do passo ao atualizar pesos: w_new = w_old - lr * gradiente |

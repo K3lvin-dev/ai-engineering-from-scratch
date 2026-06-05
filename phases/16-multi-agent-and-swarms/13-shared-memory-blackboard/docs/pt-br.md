@@ -19,7 +19,7 @@ Isso é envenenamento de memória. É a segunda família de falhas mais document
 
 ### As duas topologias principais
 
-**Pool de mensagens completo.** Cada agente lê cada mensagem. AutoGen GroupChat e MetaGPT usam isso. Simples, transparente, inespecificaçãoionável, mas não escala além de ~10 agentes porque o contexto de cada agente se enche do trabalho dos outros.
+**Pool de mensagens completo.** Cada agente lê cada mensagem. AutoGen GroupChat e MetaGPT usam isso. Simples, transparente, inspecionável, mas não escala além de ~10 agentes porque o contexto de cada agente se enche do trabalho dos outros.
 
 ```
 agent-A ──write──▶ ┌────────────────┐ ◀──read── agent-D
@@ -72,11 +72,11 @@ O problema não é o estado compartilhado em si — é estado compartilhado **se
 
 ### Precedente de blackboard (Hayes-Roth, 1985)
 
-O padrão blackboard precede agentes LLM em quatro décadas. Hayes-Roth (1985, "A Blackboard Architecture for Control") descreveu Knowledge Sources eespecificaçãoializadas que observam um blackboard global, contribuem soluções parciais, e disparam outras sources. O blackboard de 2026 (CA-MCP, Matrix) é o mesmo padrão com agentes LLM como Knowledge Sources e blobs JSON como soluções parciais. A literatura antiga tem soluções documentadas pra contenção de escritas, controle oportunístico e consistência que sistemas modernos redescobrem.
+O padrão blackboard precede agentes LLM em quatro décadas. Hayes-Roth (1985, "A Blackboard Architecture for Control") descreveu Knowledge Sources especializadas que observam um blackboard global, contribuem soluções parciais, e disparam outras sources. O blackboard de 2026 (CA-MCP, Matrix) é o mesmo padrão com agentes LLM como Knowledge Sources e blobs JSON como soluções parciais. A literatura antiga tem soluções documentadas pra contenção de escritas, controle oportunístico e consistência que sistemas modernos redescobrem.
 
 ### Projeção vs visão completa
 
-Um blackboard puro dá a cada subscriber a mesma projeção (limitada por tópico). Um design mais agressivo é **projeção por agent**: cada agente recebe uma visão customizada pro seu papel. Os state reducers do LangGraph são a implementação canônica de 2026 — a função reducer dobra o estado global num slice eespecificaçãoífico pro papel.
+Um blackboard puro dá a cada subscriber a mesma projeção (limitada por tópico). Um design mais agressivo é **projeção por agent**: cada agente recebe uma visão customizada pro seu papel. Os state reducers do LangGraph são a implementação canônica de 2026 — a função reducer dobra o estado global num slice específico pro papel.
 
 A projeção por agente escala mais, mas precisa de schema. Sem um, você reconstrói projeção ad-hoc no prompt de cada agent.
 
@@ -154,7 +154,7 @@ Para qualquer design de memória compartilhada:
 | Append-only | "Sem atualizações in-place" | Correções são novas entradas que substituem. Preserva trilha de auditoria. |
 | Verificador não-escritável | "Auditor independente" | Agent read-only que refaz buscas de fontes e sinaliza inconsistências. |
 | Projeção | "Visão escopada" | Visão por agente computada do estado global. Os reducers do LangGraph são o caso canônico. |
-| Knowledge Source | "Agent eespecificaçãoialista" | Termo de Hayes-Roth de 1985 pra um participante do blackboard. |
+| Knowledge Source | "Agent especialista" | Termo de Hayes-Roth de 1985 pra um participante do blackboard. |
 
 ## Leitura Complementar
 

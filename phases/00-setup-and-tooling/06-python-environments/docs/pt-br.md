@@ -21,7 +21,7 @@ Você instala PyTorch 2.4 para um projeto de fine-tuning. Na semana seguinte, um
 Isso é o inferno das dependências. Acontece o tempo todo em trabalho de IA/ML porque:
 
 - PyTorch, JAX e TensorFlow cada um envia seus próprios bindings de CUDA
-- Bibliotecas de modelos fixam versões eespecificaçãoíficas de frameworks
+- Bibliotecas de modelos fixam versões específicas de frameworks
 - Um `pip install` global sobrescreve o que estava lá antes
 - Builds do CUDA 11.8 não funcionam com drivers CUDA 12.x (e vice-versa)
 
@@ -93,7 +93,7 @@ Mais lento que `uv`, mas funciona em qualquer lugar que Python esteja instalado.
 
 Conda gerencia dependências não-Python como toolkits CUDA, cuDNN e bibliotecas C. Use quando:
 
-- Você precisa de uma versão eespecificaçãoífica do toolkit CUDA sem instalar no sistema inteiro
+- Você precisa de uma versão específica do toolkit CUDA sem instalar no sistema inteiro
 - Está num cluster compartilhado onde não pode instalar pacotes do sistema
 - As instruções de instalação de uma biblioteca dizem "use conda"
 
@@ -110,7 +110,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvi
 
 Uma regra: se você usa conda pra um ambiente, use conda pra todos os pacotes naquele ambiente. Misturar `pip install` num ambiente conda causa conflitos de dependência difíceis de debugar.
 
-## Uso Neste Curso: Estratégia por Fase
+### Uso Neste Curso: Estratégia por Fase
 
 ```
 ai-engineering-from-scratch/
@@ -125,6 +125,50 @@ ai-engineering-from-scratch/
 │   └── 11-llm-apis/
 │       └── .venv/            <-- SDKs de API, sem torch necessário
 ```
+
+## Fundamentos do pyproject.toml
+
+Todo projeto Python deveria ter um `pyproject.toml`. Ele substitui `setup.py`, `setup.cfg` e `requirements.txt` num único arquivo.
+
+```toml
+[project]
+name = "ai-engineering-from-scratch"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "jupyter>=1.0",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.3", "torchvision>=0.18"]
+llm = ["anthropic>=0.39", "openai>=1.50"]
+```
+
+Depois instale:
+
+```bash
+uv pip install -e ".[torch]"    # base + PyTorch
+uv pip install -e ".[llm]"     # base + SDKs LLM
+uv pip install -e ".[torch,llm]" # tudo
+```
+
+## Lockfiles
+
+Um lockfile fixa cada dependência (incluindo as transitivas) em versões exatas. Isso garante reproduzibilidade: qualquer um que instale a partir do lockfile obtém exatamente os mesmos pacotes.
+
+```bash
+# uv gera uv.lock automaticamente ao usar uv add
+uv add numpy
+
+# abordagem pip-tools
+uv pip compile pyproject.toml -o requirements.lock
+uv pip install -r requirements.lock
+```
+
+Faça commit do lockfile no git. Quando alguém clonar o repositório, vai instalar a partir do lockfile e obter versões idênticas.
 
 ## Erros Comuns
 
@@ -187,3 +231,13 @@ bash phases/00-setup-and-tooling/06-python-environments/code/env_setup.sh
 2. Crie um segundo ambiente virtual, instale uma versão diferente de numpy nele e confirme que os dois ambientes estão isolados
 3. Escreva um `pyproject.toml` para um projeto que precisa tanto de PyTorch quanto do SDK Anthropic
 4. Instale propositalmente um pacote globalmente (sem ativar um venv), note onde ele vai, depois desinstale-o
+
+## Termos-Chave
+
+| Termo | O que dizem | O que realmente significa |
+|-------|-------------|--------------------------|
+| Ambiente virtual | "Um venv" | Um diretório isolado contendo um interpretador Python e pacotes, separado do Python do sistema |
+| Lockfile | "Dependências fixadas" | Um arquivo listando cada pacote e sua versão exata, garantindo instalações idênticas entre máquinas |
+| pyproject.toml | "O novo setup.py" | O arquivo de configuração padrão de projetos Python, substituindo setup.py/setup.cfg/requirements.txt |
+| Dependência transitiva | "Dependência de uma dependência" | Pacote B depende de C; se você instala A que depende de B, C é uma dependência transitiva de A |
+| Incompatibilidade CUDA | "Minha GPU não funciona" | PyTorch foi compilado para uma versão CUDA diferente da que seu driver de GPU suporta |

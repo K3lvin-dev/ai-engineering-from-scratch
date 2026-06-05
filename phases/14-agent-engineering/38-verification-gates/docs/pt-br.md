@@ -107,7 +107,7 @@ O gate é a borda decisiva no fluxo do workbench. Toda outra superfície fica a 
 
 ## Entregue
 
-`outputs/skill-verification-gate.md` conecta o gate num projeto eespecificaçãoífico: quais comandos de aceitação o alimentam, quais regras são de severidade bloqueante, quais escritas fora do escopo são toleradas, como o log de auditoria de override é armazenado.
+`outputs/skill-verification-gate.md` conecta o gate num projeto específico: quais comandos de aceitação o alimentam, quais regras são de severidade bloqueante, quais escritas fora do escopo são toleradas, como o log de auditoria de override é armazenado.
 
 ## Exercícios
 

@@ -40,13 +40,13 @@ flowchart LR
 | Arquivos tocados nesta sessão | Traces de raciocínio a nível de token |
 | Premissas que o agente fez | "O usuário parecia frustrado" |
 | Bloqueios abertos | Completions amostradas |
-| Próxima ação | IDs de modelo eespecificaçãoíficos de vendor |
+| Próxima ação | IDs de modelo específicos de vendor |
 
 O teste é durabilidade: isso seria útil três meses a partir de agora num rerun de CI? Se sim, repo. Se não, telemetria.
 
 ### Estado com schema primeiro
 
-JSON Schema é o contrato. Sem ele, cada agente inventa novos campos, cada reviewer aprende uma nova forma, e cada script de CI tem que tratar versões passadas como caso eespecificaçãoial. Com ele, uma escrita ruim é uma escrita recusada.
+JSON Schema é o contrato. Sem ele, cada agente inventa novos campos, cada reviewer aprende uma nova forma, e cada script de CI tem que tratar versões passadas como caso especial. Com ele, uma escrita ruim é uma escrita recusada.
 
 O schema cobre:
 
@@ -105,7 +105,7 @@ Em produção:
 
 ## Entregue
 
-`outputs/skill-state-schema.md` gera um par de JSON Schemas eespecificaçãoífico do projeto (estado + board), um `StateManager` Python conectado a escritas atômicas, e um scaffold de migração pra que o próximo bump de schema não quebre o workbench.
+`outputs/skill-state-schema.md` gera um par de JSON Schemas específico do projeto (estado + board), um `StateManager` Python conectado a escritas atômicas, e um scaffold de migração pra que o próximo bump de schema não quebre o workbench.
 
 ## Exercícios
 
@@ -127,7 +127,7 @@ Em produção:
 
 ## Leitura Complementar
 
-- [JSON Schema especificaçãoification](https://json-schema.org/especificaçãoification.html)
+- [JSON Schema especificaçãoification](https://json-schema.org/specification.html)
 - [LangGraph checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence/)
 - [Letta memory blocks](https://docs.letta.com/concepts/memory)
 - [Fast.io, AI Agent State Checkpointing: A Practical Guide](https://fast.io/resources/ai-agent-state-checkpointing/) — checkpointing com schema primeiro e idempotência

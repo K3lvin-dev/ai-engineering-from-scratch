@@ -7,7 +7,7 @@
 **Pré-requisitos:** Fase 19 · 25 (verification gates), Fase 19 · 26 (sandbox), Fase 19 · 27 (eval harness), Fase 19 · 28 (observabilidade), Fase 14 · 38 (verification gates), Fase 14 · 41 (workbench para repos reais), Fase 14 · 42 (capstone de workbench de agent)
 **Tempo:** ~90 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Compor a cadeia de gates, sandbox, eval harness e construtor de spans em um único loop de agent.
 - Implementar uma política determinística que usa read_file, run_tests e write_file para corrigir um bug fixture.

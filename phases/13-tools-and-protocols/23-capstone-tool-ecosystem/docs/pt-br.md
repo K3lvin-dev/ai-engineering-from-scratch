@@ -20,7 +20,7 @@
 Disponibilize o sistema "pesquisa e relatório":
 
 - Usuário pergunta: "summarize the three most-cited 2026 arXiv papers on agente protocols."
-- Sistema: pesquise arXiv via MCP; delegue resumo de papers pra um agente escritor eespecificaçãoializado via A2A; agregue resultados; renderize um relatório interativo como recurso MCP Apps `ui://`; registre cada passo no OTel.
+- Sistema: pesquise arXiv via MCP; delegue resumo de papers pra um agente escritor especializado via A2A; agregue resultados; renderize um relatório interativo como recurso MCP Apps `ui://`; registre cada passo no OTel.
 
 Todas as primitivas da Fase 13 aparecem. Isso não é um brinquedo — sistemas de assistente de pesquisa em produção lançados em 2026 pela Anthropic (o produto Claude Research), OpenAI (GPTs com Apps SDK) e terceiros têm exatamente essa forma.
 
@@ -147,12 +147,12 @@ Essa lição produz `outputs/skill-ecosystem-blueprint.md`. Dada uma necessidade
 | Fronteira de opacidade | "Chamada A2A esconde internos" | Raciocínio do sub-agente invisível pro orquestrador |
 | Stack de três camadas | "AGENTS.md + SKILL.md + MCP" | Contexto do projeto + workflow + ferramentas |
 | Defesa em profundidade | "Múltiplas camadas de segurança" | Hashes ancorados, OAuth, RBAC, Regra de Dois, log de auditoria |
-| Matriz de conformidade com especificação | "O que disponibilizamos que a eespecificaçãoificação exige" | Checklist mapeando entregáveis pra requisitos 2025-11-25 |
+| Matriz de conformidade com especificação | "O que disponibilizamos que a especificação exige" | Checklist mapeando entregáveis pra requisitos 2025-11-25 |
 
 ## Leitura Complementar
 
-- [MCP — Specification 2025-11-25](https://modelcontextprotocol.io/especificaçãoification/2025-11-25) — referência consolidada
+- [MCP — Specification 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) — referência consolidada
 - [MCP blog — 2026 roadmap](https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) — pra onde o protocolo vai
 - [a2a-protocol.org](https://a2a-protocol.org/latest/) — referência A2A v1.0
-- [OpenTelemetry — GenAI semconv](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — convenções canônicas de rastreamento
+- [OpenTelemetry — GenAI semconv](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — convenções canônicas de rastreamento
 - [Anthropic — Claude Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) — padrões de runtime de agente em produção

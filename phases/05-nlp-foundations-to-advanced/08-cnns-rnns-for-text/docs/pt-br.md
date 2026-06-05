@@ -21,7 +21,7 @@ Essa lição constrói ambas, depois nomeia a falha que motivou attention.
 
 ## O Conceito
 
-**TextCNN** (Kim, 2014). Tokens são embedados. Uma convolução 1D de largura `k` desliza um filtro sobre `k`-gramas consecutivos de embeddings, produzindo um funcionalidade map. Max-pooling global sobre esse mapa escolhe a ativação mais forte. Concatena saídas de max-pool de várias larguras de filtro. Alimenta uma cabeça de classificação.
+**TextCNN** (Kim, 2014). Tokens são embutidos. Uma convolução 1D de largura `k` desliza um filtro sobre `k`-gramas consecutivos de embeddings, produzindo um mapa de características. Max-pooling global sobre esse mapa escolhe a ativação mais forte. Concatena saídas de max-pool de várias larguras de filtro. Alimenta uma cabeça de classificação.
 
 Por que funciona. Um filtro é um n-grama aprendível. Max-pooling é invariante de posição, então "not good" ativa a mesma funcionalidade no início ou no meio de uma resenha. Três larguras de filtro com 100 filtros cada dão 300 detectores de n-grama aprendidos. Treino é paralelo; sem dependência sequencial.
 
@@ -109,7 +109,7 @@ Três problemas persistiram mesmo com LSTMs.
 
 1. **Gargalo sequencial.** Treinar uma RNN numa sequência de comprimento 1000 requer 1000 passos sequenciais forward/backward. Não paraleliza no tempo.
 2. **Vetor de contexto de tamanho fixo em setups encoder-decoder.** O decoder vê apenas o último estado oculto do encoder, comprimido sobre toda a entrada. Entradas longas perdem detalhe. Lição 09 cobre isso diretamente.
-3. **Teto de acurácia em dependências distantes.** LSTMs superam RNNs simples mas ainda lutam pra propagar informação eespecificaçãoífica por 200+ passos.
+3. **Teto de acurácia em dependências distantes.** LSTMs superam RNNs simples mas ainda lutam pra propagar informação específica por 200+ passos.
 
 Attention resolveu tudo. Transformers eliminaram recorrência. Lição 10 é a virada.
 

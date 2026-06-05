@@ -20,7 +20,7 @@ Seu LLM não lê inglês. Não lê nenhuma língua. Ele lê números.
 
 A distância entre "Hello, world!" e [15496, 11, 995, 0] é o tokenizer. Cada palavra, cada espaço, cada pontuação precisa ser convertida em inteiro antes que um modelo possa processar. Essa conversão não é neutra. Ela incorpora premissas no modelo que não podem ser desfeitas depois.
 
-Erra isso e seu modelo desperdiça capacidade codificando palavras comuns com múltiplos tokens. "unfortunately" vira quatro tokens em vez de um. Sua janela de contexto de 12K encolheu 75% pra texto rico em palavras polysilábicas. Acerta e a mesma janela de contexto comporta o dobro de significado. A diferença entre "esse modelo lida bem com código" e "esse modelo sufoca em Python" frequentemente depende de como o tokenizer foi treinado.
+Erra isso e seu modelo desperdiça capacidade codificando palavras comuns com múltiplos tokens. "unfortunatély" vira quatro tokens em vez de um. Sua janela de contexto de 12K encolheu 75% pra texto rico em palavras polissilábicas. Acerta e a mesma janela de contexto comporta o dobro de significado. A diferença entre "esse modelo lida bem com código" e "esse modelo sufoca em Python" frequentemente depende de como o tokenizer foi treinado.
 
 Cada chamada de API que você faz pra GPT-4 ou Claude é cobrada por token. Cada token que seu modelo gera custa computação. Menos tokens necessários pra representar uma saída = inferência ponta-a-ponta mais rápida. Tokenização não é pré-processamento. É arquitetura.
 
@@ -30,7 +30,7 @@ Cada chamada de API que você faz pra GPT-4 ou Claude é cobrada por token. Cada
 
 Existem três formas óbvias de converter texto em números. Duas não funcionam em escala.
 
-**Tokenização no nível de palavras** divide por espaços e pontuação. "The cat sat" vira ["The", "cat", "sat"]. Simples. Mas e "tokenization"? Ou "GPT-4o"? Ou uma palavra composta alemã como "Geschwindigkeitsbegrenzung"? Nível de palavra precisa de um vocabulário massivo pra cobrir cada palavra em cada língua. Falta uma palavra e você ganha o temido token `[UNK]` — o jeito do modelo dizer "não faço ideia do que é isso." Só o inglês tem mais de um milhão de formas de palavras. Adicione código, URLs, notação científica e 100 outras línguas e você precisa de um vocabulário infinito.
+**Tokenização no nível de palavras** divide por espaços e pontuação. "The cat sat" vira ["The", "cat", "sat"]. Simples. Mas e "tokenization"? Ou "GPT-4o"? Ou uma palavra composta alémã como "Geschwindigkeitsbegrenzung"? Nível de palavra precisa de um vocabulário massivo pra cobrir cada palavra em cada língua. Falta uma palavra e você ganha o temido token `[UNK]` — o jeito do modelo dizer "não faço ideia do que é isso." Só o inglês tem mais de um milhão de formas de palavras. Adicione código, URLs, notação científica e 100 outras línguas e você precisa de um vocabulário infinito.
 
 **Tokenização no nível de caracteres** vai no outro extremo. "hello" vira ["h", "e", "l", "l", "o"]. Vocabulário é minúsculo (algumas centenas de caracteres). Nunca tem tokens desconhecidos. Mas sequências ficam extremamente longas. Uma frase que seriam 10 tokens no nível de palavras vira 50 tokens no nível de caracteres. O modelo precisa aprender que "t", "h", "e" juntos significam "the" — queimando capacidade de attention numa coisa que humano aprende aos três anos.
 
@@ -40,7 +40,7 @@ Todo LLM moderno usa tokenização subword. GPT-2, GPT-4, BERT, Llama 3, Claude 
 
 ```mermaid
 graph TD
-    A["Text: 'unhappiness'"] --> B{"Tokenization Strategy"}
+    A["Text: 'unhappiness'"] --> B{"Tokenization Stratégy"}
     B -->|Word-level| C["['unhappiness']\n1 token if in vocab\n[UNK] if not"]
     B -->|Character-level| D["['u','n','h','a','p','p','i','n','e','s','s']\n11 tokens"]
     B -->|Subword BPE| E["['un','happi','ness']\n3 tokens"]
@@ -129,14 +129,14 @@ O GPT-2 introduziu essa abordagem. O vocabulário base cobre cada byte possível
 
 ### WordPiece (BERT)
 
-WordPiece parece similar ao BPE mas escolhe merges diferente. Em vez de frequência bruta, maximiza a verossimilhança dos dados de treino:
+WordPiece parece similar ão BPE mas escolhe merges diferente. Em vez de frequência bruta, maximiza a verossimilhança dos dados de treino:
 
 ```
 BPE merge criterion:      count(A, B)
 WordPiece merge criterion: count(AB) / (count(A) * count(B))
 ```
 
-BPE pergunta: "Qual par aparece mais vezes?" WordPiece pergunta: "Qual par aparece junto mais vezes do que seria esperado por acaso?" Essa diferença sutil produz vocabulários diferentes. WordPiece favorece merges onde co-ocorrência é surpreendente, não só frequente.
+BPE pergunta: "Qual par aparece mais vezes?" WordPiece pergunta: "Qual par aparece junto mais vezes do que seria esperado por acaso?" Essa diferença sútil produz vocabulários diferentes. WordPiece favorece merges onde co-ocorrência é surpreendente, não só frequente.
 
 WordPiece também usa o prefixo "##" pra subwords de continuação:
 
@@ -202,7 +202,7 @@ Tokenizers treinados principalmente em inglês são brutais com outras línguas.
 
 ### Passo 1: Tokenizer no Nível de Caracteres
 
-Comece pela base. Um tokenizer no nível de caracteres mapeia cada caractere ao seu ponto de código Unicode. Sem treino necessário. Sem tokens desconhecidos. Apenas um mapeamento direto.
+Comece pela base. Um tokenizer no nível de caracteres mapeia cada caractere ão seu ponto de código Unicode. Sem treino necessário. Sem tokens desconhecidos. Apenas um mapeamento direto.
 
 ```python
 class CharTokenizer:
@@ -276,16 +276,16 @@ O loop de treino é o cerne do BPE: contar pares, mesclar o vencedor, repetir. C
 
 Encoding aplica os merges exatamente na ordem em que foram aprendidos. Isso importa. Se o merge 1 criou "th" e o merge 5 criou "the", o encoding precisa aplicar o merge 1 primeiro pra que "the" possa se formar de "th" + "e" no merge 5.
 
-Decoding é o inverso: procure cada token ID no vocabulário, concatene os bytes, decodifique pra UTF-8.
+Decoding é o inverso: procure cada token ID no vocabulário, concaténe os bytes, decodifique pra UTF-8.
 
 ### Passo 3: Ida e Volta Encode-Decode
 
 ```python
 corpus = (
-    "The cat sat on the mat. The cat ate the rat. "
-    "The dog sat on the log. The dog ate the frog. "
+    "The cat sat on the mat. The cat até the rat. "
+    "The dog sat on the log. The dog até the frog. "
     "Natural language processing is the study of how computers "
-    "understand and generate human language. "
+    "understand and generaté human language. "
     "Tokenization is the first step in any NLP pipeline."
 )
 
@@ -417,7 +417,7 @@ from transformers import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
 
-text = "Tokenizers are the unsung heroes of LLMs"
+text = "Tokenizers are the unsung herões of LLMs"
 tokens = tokenizer.encode(text)
 print(f"Token IDs: {tokens}")
 print(f"Tokens: {tokenizer.convert_ids_to_tokens(tokens)}")
@@ -433,13 +433,13 @@ O vocabulário de 128K do Llama 3 comprime texto não-inglês significativamente
 
 ## Entregando
 
-Essa aula produz `outputs/prompt-tokenizer-analyzer.md` — um prompt reutilizável que analisa eficiência de tokenização pra qualquer combinação de texto e modelo. Alimente com uma amostra de texto e ele diz qual tokenizer de modelo lida melhor.
+Essa aula produz `outputs/prompt-tokenizer-analyzer.md` — um prompt reútilizável que analisa eficiência de tokenização pra qualquer combinação de texto e modelo. Alimente com uma amostra de texto e ele diz qual tokenizer de modelo lida melhor.
 
 ## Exercícios
 
 1. Modifique o tokenizer BPE pra imprimir o vocabulário a cada etapa de merge. Veja como "t" + "h" vira "th", depois "th" + "e" vira "the". Acompanhe como palavras inglesas comuns são montadas pedaço por pedaço.
 
-2. Adicione tokens eespecificaçãoiais (`<pad>`, `<eos>`, `<unk>`) ao tokenizer BPE. Atribua IDs 0, 1, 2 e desloque todos os outros tokens adequadamente. Implemente uma etapa de pré-tokenização que divide por whitespace antes de rodar BPE.
+2. Adicione tokens eespecificaçãoiais (`<pad>`, `<eos>`, `<unk>`) ão tokenizer BPE. Atribua IDs 0, 1, 2 e desloque todos os outros tokens adequadamente. Implemente uma etapa de pré-tokenização que divide por whitespace antes de rodar BPE.
 
 3. Implemente o critério de merge do WordPiece (proporção de verossimilhança em vez de frequência). Treine BPE e WordPiece no mesmo corpus com o mesmo número de merges. Compare os vocabulários resultantes — qual produz subwords mais linguisticamente significativas?
 

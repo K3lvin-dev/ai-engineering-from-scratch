@@ -54,7 +54,7 @@ A tendência de 2024-2026: flow matching está vencendo para música (inferênci
 || Udio v1.5 | Músicas completas | Não divulgado | ~30s por música ||
 || MusicGen 3.3B | Música | Token-AR sobre Encodec 32kHz | Tempo real ||
 || AudioCraft 2 | Música + SFX | Flow matching | ~5s para clip de 5s ||
-|| Riffusion v2 | Música | Difusão de eespecificaçãotrograma | ~10s ||
+|| Riffusion v2 | Música | Difusão de espectrograma | ~10s ||
 
 ## Construa
 
@@ -120,8 +120,8 @@ Salve `outputs/skill-audio-brief.md`. A skill recebe um briefing de áudio (tare
 || Paralelo atrasado | "Codebooks deslocados" | Emitir K streams de tokens com offsets escalonados para reduzir tamanho da sequência. ||
 || Flow matching | "A vitória de 2024 para áudio" | Alternativa de caminho mais reto à difusão; amostragem mais rápida. ||
 || Voice prompt | "Amostra de 3 segundos" | Embedding de locutor ou prefixo de token que direciona a voz clonada. ||
-|| Mel especificaçãotrogram | "O visual" | Eespecificaçãotrograma perceptual de magnitude logarítmica; usado por muitos sistemas TTS. ||
-|| Vocoder | "Mel para onda" | Componente neural que converte mel especificaçãotrograms de volta para áudio. |
+|| Mel espectrogram | "O visual" | Espectrograma perceptual de magnitude logarítmica; usado por muitos sistemas TTS. ||
+|| Vocoder | "Mel para onda" | Componente neural que converte mel espectrograms de volta para áudio. |
 
 ## Nota de produção: áudio é um problema de streaming
 

@@ -3,7 +3,7 @@
 > O primeiro capstone do Track B. Um modelo de linguagem pré-treinado é uma pilha de blocos de self-attention terminando em uma cabeça de previsão de token. Quando você quer spam vs ham, a cabeça está errada mas o corpo está na maioria certo. Esta lição arranca a cabeça, cola uma camada linear de duas classes na representação pooled e treina o classificador de duas formas diferentes: apenas a camada final, e fine-tuning completo. A avaliação é precisão, recall e F1 em um split reservado. Você aprende o que cada estratégia te compra e o que custa.
 
 **Tipo:** Construção
-**Idiomas:** Python (torch, numpy)
+**Linguagens:** Python (torch, numpy)
 **Pré-requisitos:** Lições 30-37 da Fase 19 (trilha NLP LLM: tokenizador, tabela de embedding, bloco de attention, corpo do transformer, loop de pré-treinamento, checkpointing, geração, perplexidade)
 **Tempo:** ~90 minutos
 
@@ -52,7 +52,7 @@ No fine-tuning completo, você permite que os gradientes fluiam por toda a pilha
 Um classificador precisa de um vetor por sequência, não de um vetor por token. Três escolhas comuns:
 
 - **Mean pool**: média dos hidden states pela sequência, ponderada pela máscara de attention.
-- **CLS pool**: prepend um token eespecificaçãoial e use apenas sua saída. É o que o BERT faz.
+- **CLS pool**: prepend um token especial e use apenas sua saída. É o que o BERT faz.
 - **Last-token pool**: use o último token não-padding. É o que classificadores GPT-fazem.
 
 Esta lição usa mean pooling com ponderação explícita por máscara de attention. É o mais simples, dá um sinal estável entre comprimentos de sequência e não requer pré-treinamento de um token CLS.

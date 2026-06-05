@@ -48,14 +48,14 @@ out = model.generate(
     length_penalty=1.0,
     max_new_tokens=64,
 )
-print(tok.batch_decode(out, skip_especificaçãoial_tokens=True)[0])
+print(tok.batch_decode(out, skip_special_tokens=True)[0])
 ```
 
 ```text
 Les chats courent.
 ```
 
-Três coisas importam aqui. `src_lang` diz ao tokenizer qual escrita e segmentação aplicar. `forced_bos_token_id` diz ao decoder qual idioma gerar. Ambos são truques eespecificaçãoíficos do NLLB; mBART e M2M-100 usam suas próprias convenções e não são intercambiáveis.
+Três coisas importam aqui. `src_lang` diz ao tokenizer qual escrita e segmentação aplicar. `forced_bos_token_id` diz ao decoder qual idioma gerar. Ambos são truques específicos do NLLB; mBART e M2M-100 usam suas próprias convenções e não são intercambiáveis.
 
 ### Passo 2: BLEU e chrF
 
@@ -143,7 +143,7 @@ Stack de produção de 2026 pra MT:
 | Latência crítica lado do browser | Marian quantizado em ONNX (~50 MB) |
 | Qualidade máxima, disposto a pagar | GPT-4 / Claude / Gemini com prompts de tradução |
 
-LLMs agora superam modelos eespecificaçãoializados de MT em vários pares de idiomas em 2026, particularmente em conteúdo idiomático e contexto longo. O tradeoff é custo por token e latência. Escolha um LLM quando comprimento de contexto, consistência estilística ou adaptação de domínio via prompting importa mais que throughput.
+LLMs agora superam modelos especializados de MT em vários pares de idiomas em 2026, particularmente em conteúdo idiomático e contexto longo. O tradeoff é custo por token e latência. Escolha um LLM quando comprimento de contexto, consistência estilística ou adaptação de domínio via prompting importa mais que throughput.
 
 ## Entregando
 
@@ -183,7 +183,7 @@ Refuse to ship a translation without a language-ID check on output. Refuse to ev
 | chrF | F-score de caractere | F-score no nível de caractere. Mais sensível pra idiomas ricos morfologicamente. |
 | NMT | MT neural | Transformer encoder-decoder treinado em texto paralelo. O padrão pós-2017. |
 | NLLB | No Language Left Behind | Família de modelos MT de 200 idiomas da Meta. |
-| Decodificação restrita | Saída controlada | Força tokens ou n-gramas eespecificaçãoíficos a aparecerem/não aparecerem na saída. |
+| Decodificação restrita | Saída controlada | Força tokens ou n-gramas específicos a aparecerem/não aparecerem na saída. |
 | Alucinação | Conteúdo inventado | Saída do modelo que não é suportada pela fonte. |
 
 ## Leitura Complementar

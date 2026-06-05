@@ -32,6 +32,16 @@ graph TD
 
 O kernel é um processo Python rodando em background. Quando você executa uma célula, ela manda o código pro kernel, que executa e devolve o resultado. Todas as células compartilham o mesmo kernel, então variáveis persistem entre células.
 
+```mermaid
+graph LR
+    A[Interface do Notebook] <--> B[Kernel\nProcesso Python]
+    B --> C[Mantém variáveis na memória]
+    B --> D[Roda células na ordem que você clicar]
+    B --> E[Morre quando você reinicia]
+```
+
+Essa parte de "na ordem que você clicar" é tanto o superpoder quanto o tiro no pé.
+
 ## Construa
 
 ### Passo 1: Escolha sua interface
@@ -94,7 +104,7 @@ Output: `(0.0032, 0.9987)`
 
 ### Passo 4: Magic commands
 
-Esses não são Python. São comandos eespecificaçãoíficos do Jupyter que começam com `%` (magic de linha) ou `%%` (magic de célula).
+Esses não são Python. São comandos específicos do Jupyter que começam com `%` (magic de linha) ou `%%` (magic de célula).
 
 **Meça o tempo do seu código:**
 
@@ -185,8 +195,42 @@ Diferenças do Colab pro Jupyter local:
 
 A regra: **explorar em notebooks, entregar em scripts**.
 
+Um fluxo de trabalho comum em IA:
+1. Explore dados num notebook
+2. Prototipe seu modelo no notebook
+3. Quando funcionar, mova o código para arquivos `.py`
+4. Importe esses arquivos `.py` de volta ao notebook para mais experimentos
+
+### Armadilhas comuns
+
+**Execução fora de ordem.** Você roda a célula 5, depois a 2, depois a 7. O notebook funciona na sua máquina mas quebra quando alguém roda de cima a baixo. Solução: Kernel > Restart & Run All antes de compartilhar.
+
+**Estado escondido.** Você deleta uma célula mas a variável que ela criou ainda está na memória. O notebook parece limpo mas depende de uma célula fantasma. Solução: Reinicie o kernel regularmente.
+
+**Vazamentos de memória.** Carregar um dataset de 4GB, treinar um modelo, carregar outro dataset. Nada é liberado. Solução: `del nome_variavel` e `gc.collect()`, ou reinicie o kernel.
+
+## Entregue
+
+Esta aula produz:
+- `outputs/prompt-notebook-helper.md` para debug de problemas com notebooks
+
 ## Exercícios
 
 1. Abra o JupyterLab, crie um notebook e use `%timeit` para comparar list comprehension vs numpy para criar um array de 100.000 números aleatórios
 2. Crie um notebook com células de markdown e código que carrega um CSV, exibe um dataframe e plota um gráfico. Depois rode Kernel > Restart & Run All para verificar que funciona de cima a baixo
 3. Pegue o código de `code/notebook_tips.py`, cole num notebook do Colab e rode com GPU gratuita
+
+## Termos-Chave
+
+| Termo | O que dizem | O que realmente significa |
+|-------|-------------|--------------------------|
+| Kernel | "A coisa que roda meu código" | Um processo Python separado que executa células e mantém variáveis na memória |
+| Célula | "Um bloco de código" | Uma unidade executável independente num notebook, podendo ser código ou markdown |
+| Magic command | "Truques do Jupyter" | Comandos especiais prefixados com `%` ou `%%` que controlam o ambiente do notebook |
+| `.ipynb` | "Arquivo de notebook" | Um arquivo JSON contendo células, outputs e metadados. Significa IPython Notebook |
+
+## Leitura Complementar
+
+- [Documentação do JupyterLab](https://jupyterlab.readthedocs.io/) para o conjunto completo de funcionalidades
+- [FAQ do Google Colab](https://research.google.com/colaboratory/faq.html) para limites e funcionalidades específicas do Colab
+- [28 Dicas de Jupyter Notebook](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/) para atalhos de power user

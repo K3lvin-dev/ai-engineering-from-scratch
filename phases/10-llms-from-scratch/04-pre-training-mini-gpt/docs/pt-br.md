@@ -1,6 +1,6 @@
 # Pré-Treinamento de um Mini GPT (124 Milhões de Parâmetros)
 
-> O GPT-2 Small tem 124 milhões de parâmetros. São 12 camadas transformer, 12 cabeças de atenção e embeddings de 768 dimensões. Voce pode treinar ele do zero em uma GPU em poucas horas. A maioria das pessoas nunca faz isso. Elas usam checkpoints pré-treinados. Mas se voce nunca treinou um voce mesmo, voce na verdade não entende o que acontece dentro do modelo no qual voce está construindo produtos.
+> O GPT-2 Small tem 124 milhões de parâmetros. São 12 camadas transformer, 12 cabeças de aténção e embeddings de 768 dimensões. Você pode treinar ele do zero em uma GPU em poucas horas. A maioria das pessoas nunca faz isso. Elas usam checkpoints pré-treinados. Mas se você nunca treinou um você mesmo, você na verdade não entende o que acontece dentro do modelo no qual você está construindo produtos.
 
 **Tipo:** Construir
 **Linguagens:** Python (com numpy)
@@ -16,15 +16,15 @@
 
 ## O Problema
 
-Voce sabe o que é um transformer. Voce leu os diagramas. Voce consegue citar "attention is all you need" e desenhar caixas rotuladas "Multi-Head Attention" em um quadro branco.
+Você sabe o que é um transformer. Você leu os diagramas. Você consegue citar "attention is all you need" e desenhar caixas rotuladas "Multi-Head Attention" em um quadro branco.
 
-Nada disso significa que voce entende o que acontece quando um modelo gera texto.
+Nada disso significa que você entende o que acontece quando um modelo gera texto.
 
-Existem 124.438.272 parâmetros no GPT-2 Small (com weight tying). Cada um deles foi definido rodando um loop de treinamento: forward pass, calcular perda, backward pass, atualizar pesos. Doze blocos transformer. Doze cabeças de atenção por bloco. Um espaço de embedding de 768 dimensões. Um vocabulário de 50.257 tokens. Toda vez que o modelo gera um token, todos os 124 milhões de parâmetros participam de uma cadeia de multiplicações matriciais que recebe uma sequência de IDs de tokens e produz uma distribuição de probabilidades sobre o próximo token.
+Existem 124.438.272 parâmetros no GPT-2 Small (com weight tying). Cada um deles foi definido rodando um loop de treinamento: forward pass, calcular perda, backward pass, atualizar pesos. Doze blocos transformer. Doze cabeças de aténção por bloco. Um espaço de embedding de 768 dimensões. Um vocabulário de 50.257 tokens. Toda vez que o modelo gera um token, todos os 124 milhões de parâmetros participam de uma cadeia de multiplicações matriciais que recebe uma sequência de IDs de tokens e produz uma distribuição de probabilidades sobre o próximo token.
 
-Se voce nunca construiu isso voce mesmo, voce está trabalhando com uma caixa preta. Voce pode usar a API. Voce pode fazer fine-tune. Mas quando algo dá errado -- quando o modelo alucina, quando ele se repete, quando ele se recusa a seguir instruções -- voce não tem um modelo mental pra entender *por quê*.
+Se você nunca construiu isso você mesmo, você está trabalhando com uma caixa preta. Você pode usar a API. Você pode fazer fine-tune. Mas quando algo dá errado -- quando o modelo alucina, quando ele se repete, quando ele se recusa a seguir instruções -- você não tem um modelo mental pra entender *por quê*.
 
-Essa lição constrói o GPT-2 Small do zero. Não em PyTorch. Em numpy. Cada multiplicação matricial é visível. Cada gradiente é calculado pelo seu código. Voce vai ver exatamente como 124 milhões de números conspiram pra prever a próxima palavra.
+Essa lição constrói o GPT-2 Small do zero. Não em PyTorch. Em numpy. Cada multiplicação matricial é visível. Cada gradiente é calculado pelo seu código. Você vai ver exatamente como 124 milhões de números conspiram pra prever a próxima palavra.
 
 ## O Conceito
 
@@ -82,15 +82,15 @@ Cada um dos 12 blocos segue o mesmo padrão. Arquitetura pre-norm (o GPT-2 usa p
 5. Rede Feed-Forward (MLP)
 6. Conexão residual (somar o input de volta)
 
-As conexões residuais são críticas. Sem elas, os gradientes desaparecem quando chegam ao bloco 1 durante o backpropagation. Com elas, os gradientes podem fluir diretamente da perda pra qualquer camada através do caminho "skip". É por isso que voce pode empilhar 12, 32 ou até 96 blocos (dizem que o GPT-4 usa 120).
+As conexões residuais são críticas. Sem elas, os gradientes desaparecem quando chegam ão bloco 1 durante o backpropagation. Com elas, os gradientes podem fluir diretamente da perda pra qualquer camada através do caminho "skip". É por isso que você pode empilhar 12, 32 ou até 96 blocos (dizem que o GPT-4 usa 120).
 
 ### Attention: O Mecanismo Central
 
-O self-attention permite que cada token olhe pra cada token anterior e decida quanto attend pra cada um. Aqui vai a matemática.
+O self-attention permite que cada token olhe pra cada token anterior e decida quanto attend pra cada um. Aqui vai a matémática.
 
 Para cada posição do token, calculam-se três vetores do input:
 - **Query (Q)**: "O que eu estou procurando?"
-- **Key (K)**: "O que eu contém?"
+- **Key (K)**: "O que eu contenho?"
 - **Value (V)**: "Que informação eu carrego?"
 
 ```
@@ -106,7 +106,7 @@ output = attention_weights @ V
 
 O causal mask é o que torna o GPT autoregressivo. A posição 5 pode attend às posições 0-5 mas não a 6, 7, 8 e assim por diante. Isso impede que o modelo "trapaceie" olhando tokens futuros durante o treinamento.
 
-**A multi-head attention** divide o espaço de 768 dimensões em 12 cabeças de 64 dimensões cada. Cada cabeça aprende um padrão de atenção diferente. Uma cabeça pode rastrear relações sintáticas (concordância sujeito-verbo). Outra pode rastrear similaridade semântica (sinônimos). Outra pode rastrear proximidade posicional (palavras próximas). As saídas de todas as 12 cabeças são concatenadas e projetadas de volta pra 768 dimensões.
+**A multi-head attention** divide o espaço de 768 dimensões em 12 cabeças de 64 dimensões cada. Cada cabeça aprende um padrão de aténção diferente. Uma cabeça pode rastrear relações sintáticas (concordância sujeito-verbo). Outra pode rastrear similaridade semântica (sinônimos). Outra pode rastrear proximidade posicional (palavras próximas). As saídas de todas as 12 cabeças são concaténadas e projetadas de volta pra 768 dimensões.
 
 ```mermaid
 graph LR
@@ -145,19 +145,19 @@ A divisão por sqrt(d_k) -- sqrt(64) = 8 -- é scaling. Sem ela, os produtos esc
 
 ### KV Cache: Por Que a Inferência É Rápida
 
-Durante o treinamento, voce processa a sequência inteira de uma vez. Durante a inferência, voce gera um token por vez. Sem otimização, gerar o token N requer recalcular a atenção pra todos os N-1 tokens anteriores. Isso é O(N^2) por token gerado, ou O(N^3) no total pra uma sequência de tamanho N.
+Durante o treinamento, você processa a sequência inteira de uma vez. Durante a inferência, você gera um token por vez. Sem otimização, gerar o token N requer recalcular a aténção pra todos os N-1 tokens anteriores. Isso é O(N^2) por token gerado, ou O(N^3) no total pra uma sequência de tamanho N.
 
-O KV Cache resolve isso. Após calcular K e V pra cada token, armazene-os. Quando gerar o token N+1, voce só precisa calcular Q pro novo token e olhar os K e V em cache de todos os tokens anteriores. Isso reduz o custo por token de O(N) pra O(1) pro cálculo de K e V. O cálculo do score de atenção ainda é O(N) porque voce attend a todas as posições anteriores, mas voce evita multiplicações matriciais redundantes no input.
+O KV Cache resolve isso. Após calcular K e V pra cada token, armazene-os. Quando gerar o token N+1, você só precisa calcular Q pro novo token e olhar os K e V em cache de todos os tokens anteriores. Isso reduz o custo por token de O(N) pra O(1) pro cálculo de K e V. O cálculo do score de aténção ainda é O(N) porque você attend a todas as posições anteriores, mas você evita multiplicações matriciais redundantes no input.
 
 Pra o GPT-2 com 12 camadas e 12 cabeças, o KV cache armazena 2 (K + V) x 12 camadas x 12 cabeças x 64 dims = 18.432 valores por token. Pra uma sequência de 1024 tokens, são cerca de 75MB em FP32. Pro Llama 3 405B com 128 camadas, o KV cache pra uma única sequência pode passar de 10GB. É por isso que inferência com contexto longo é limitada por memória.
 
 ### Prefill vs Decode: Duas Fases da Inferência
 
-Quando voce envia um prompt pra um LLM, a inferência acontece em duas fases distintas.
+Quando você envia um prompt pra um LLM, a inferência acontece em duas fases distintas.
 
-**Prefill** processa seu prompt inteiro em paralelo. Todos os tokens são conhecidos, então o modelo pode calcular a atenção pra todas as posições simultaneamente. Essa fase é compute-bound -- a GPU está fazendo multiplicações matriciais em throughput máximo. Pra um prompt de 1000 tokens num A100, o prefill leva cerca de 20-50ms.
+**Prefill** processa seu prompt inteiro em paralelo. Todos os tokens são conhecidos, então o modelo pode calcular a aténção pra todas as posições simultaneamente. Essa fase é compute-bound -- a GPU está fazendo multiplicações matriciais em throughput máximo. Pra um prompt de 1000 tokens num A100, o prefill leva cerca de 20-50ms.
 
-**Decode** gera tokens um por vez. Cada novo token depende de todos os tokens anteriores. Essa fase é memory-bound -- o gargalo é ler os pesos do modelo e o KV cache da memória da GPU, não a matemática matricial em si. Os cores de computação da GPU ficam maior parte do tempo ociosos esperando leituras de memória. Pro GPT-2, cada passo de decode leva mais ou menos o mesmo tempo independente de quantos FLOPs os matmuls requerem, porque a largura de banda de memória é a restrição.
+**Decode** gera tokens um por vez. Cada novo token depende de todos os tokens anteriores. Essa fase é memory-bound -- o gargalo é ler os pesos do modelo e o KV cache da memória da GPU, não a matémática matricial em si. Os cores de computação da GPU ficam maior parte do tempo ociosos esperando leituras de memória. Pro GPT-2, cada passo de decode leva mais ou menos o mesmo tempo independente de quantos FLOPs os matmuls requerem, porque a largura de banda de memória é a restrição.
 
 Essa distinção importa pra sistemas em produção. O throughput do prefill escala com o compute da GPU (mais FLOPS = prefill mais rápido). O throughput do decode escala com a largura de banda da memória (memória mais rápida = decode mais rápido). É por isso que o H100 da NVIDIA focou em melhorias de largura de banda de memória sobre o A100 -- isso acelera diretamente a geração de tokens.
 
@@ -173,10 +173,10 @@ graph LR
 
     subgraph Decode["Phase 2: Decode"]
         direction TB
-        D1["Generate token N"]
+        D1["Generaté token N"]
         D2["Read KV Cache\n(memory-bound)"]
         D3["Append to KV Cache"]
-        D4["Generate token N+1"]
+        D4["Generaté token N+1"]
         D1 --> D2 --> D3 --> D4
         D4 -.->|repeat| D1
     end
@@ -203,7 +203,7 @@ Um passo de treinamento:
 3. **Backward pass**: Calcula gradientes pra todos os 124M de parâmetros usando backpropagation.
 4. **Passo do otimizador**: Atualiza pesos. O GPT-2 usa Adam com warmup da taxa de aprendizado e cosine decay.
 
-O cronograma de taxa de aprendizado importa mais do que voce imagina. O GPT-2 faz warmup de 0 até a taxa de aprendizado máxima nos primeiros 2.000 passos, depois decresce seguindo uma curva cosseno. Começar com uma taxa de aprendizado alta faz o modelo divergir. Manter uma taxa alta constante causa oscilação no treinamento posterior. O padrão de warmup-then-decay é usado por todo grande LLM.
+O cronograma de taxa de aprendizado importa mais do que você imagina. O GPT-2 faz warmup de 0 até a taxa de aprendizado máxima nos primeiros 2.000 passos, depois decresce seguindo uma curva cosseno. Começar com uma taxa de aprendizado alta faz o modelo divergir. Manter uma taxa alta constante causa oscilação no treinamento posterior. O padrão de warmup-then-decay é usado por todo grande LLM.
 
 ### GPT-2 Small: Os Números
 
@@ -245,7 +245,7 @@ O desvio padrão de 0.02 pra inicialização vem do paper do GPT-2. Muito grande
 
 ### Passo 2: Self-Attention com Causal Mask
 
-Primeiro, a atenção de cabeça única. O causal mask define posições futuras como negativo infinito antes do softmax, garantindo que cada posição só possa attend a si mesma e a posições anteriores.
+Primeiro, a aténção de cabeça única. O causal mask define posições futuras como negativo infinito antes do softmax, garantindo que cada posição só possa attend a si mesma e a posições anteriores.
 
 ```python
 def attention(Q, K, V, mask=None):
@@ -262,7 +262,7 @@ A implementação do softmax subtrai o máximo antes de exponenciar. Sem isso, e
 
 ### Passo 3: Multi-Head Attention
 
-Divide o input de 768 dimensões em 12 cabeças de 64 dimensões cada. Cada cabeça calcula a atenção independentemente. Concatena os resultados e projeta de volta pra 768 dimensões.
+Divide o input de 768 dimensões em 12 cabeças de 64 dimensões cada. Cada cabeça calcula a aténção independentemente. Concaténa os resultados e projeta de volta pra 768 dimensões.
 
 ```python
 class MultiHeadAttention:
@@ -291,7 +291,7 @@ class MultiHeadAttention:
         return attn_out @ self.W_out
 ```
 
-A dança de reshape-transpose-reshape é a parte mais confusa da multi-head attention. Aqui vai o que acontece: o tensor (batch, seq_len, 768) vira (batch, seq_len, 12, 64), depois (batch, 12, seq_len, 64). Agora cada uma das 12 cabeças tem sua própria matriz (seq_len, 64) pra rodar a atenção. Depois da atenção, a gente reverte o processo: (batch, 12, seq_len, 64) vira (batch, seq_len, 12, 64) que vira (batch, seq_len, 768).
+A dança de reshape-transpose-reshape é a parte mais confusa da multi-head attention. Aqui vai o que acontece: o tensor (batch, seq_len, 768) vira (batch, seq_len, 12, 64), depois (batch, 12, seq_len, 64). Agora cada uma das 12 cabeças tem sua própria matriz (seq_len, 64) pra rodar a aténção. Depois da aténção, a gente reverte o processo: (batch, 12, seq_len, 64) vira (batch, seq_len, 12, 64) que vira (batch, seq_len, 768).
 
 ### Passo 4: Bloco Transformer
 
@@ -336,7 +336,7 @@ class TransformerBlock:
         return x
 ```
 
-A rede feedforward expande o input de 768 dimensões pra 3.072 dimensões (4x), aplica uma não-linearidade, e projeta de volta pra 768. Esse padrão de expansão-contração dá ao modelo uma representação interna "mais larga" pra trabalhar em cada posição. O GPT-2 usa ativação GELU, mas aqui usamos ReLU por simplicidade -- a diferença é mínima pra entender a arquitetura.
+A rede feedforward expande o input de 768 dimensões pra 3.072 dimensões (4x), aplica uma não-linearidade, e projeta de volta pra 768. Esse padrão de expansão-contração dá ão modelo uma representação interna "mais larga" pra trabalhar em cada posição. O GPT-2 usa ativação GELU, mas aqui usamos ReLU por simplicidade -- a diferença é mínima pra entender a arquitetura.
 
 ### Passo 5: Modelo GPT Completo
 
@@ -382,11 +382,11 @@ class MiniGPT:
         return total
 ```
 
-Note o weight tying: `logits = x @ self.embedding.token_embed.T`. A projeção de saída reutiliza a matriz de embedding de token (transposta). Isso não é só um truque pra economizar parâmetros. Significa que o modelo usa o mesmo espaço vetorial pra entender tokens (embeddings) e pra prevê-los (saída).
+Note o weight tying: `logits = x @ self.embedding.token_embed.T`. A projeção de saída reútiliza a matriz de embedding de token (transposta). Isso não é só um truque pra economizar parâmetros. Significa que o modelo usa o mesmo espaço vetorial pra entender tokens (embeddings) e pra prevê-los (saída).
 
 ### Passo 6: Loop de Treinamento
 
-Pra um treinamento real de 124M de parâmetros, voce precisaria de uma GPU e PyTorch. Esse loop de treinamento demonstra as mecânicas num modelo pequeno que roda em numpy puro. Usamos um modelo minúsculo (4 camadas, 4 cabeças, 128 dims) pra tornar viável.
+Pra um treinamento real de 124M de parâmetros, você precisaria de uma GPU e PyTorch. Esse loop de treinamento demonstra as mecânicas num modelo pequeno que roda em numpy puro. Usamos um modelo minúsculo (4 camadas, 4 cabeças, 128 dims) pra tornar viável.
 
 ```python
 def cross_entropy_loss(logits, targets):
@@ -434,14 +434,14 @@ def train_mini_gpt(text, vocab_size=256, embed_dim=128, num_heads=4,
 
 A perda começa perto de ln(vocab_size) -- pra um vocabulário de 256 tokens em nível de byte, é ln(256) = 5.55. Um modelo aleatório atribui probabilidade igual pra cada token. Conforme o treinamento avança, a perda cai porque o modelo aprende a prever padrões comuns: "th" depois de "t", espaço depois de um ponto, e assim por diante.
 
-Em produção, voce usaria o otimizador Adam com gradient accumulation, warmup da taxa de aprendizado e gradient clipping. O loop forward-loss-backward-update é idêntico. O otimizador é mais sofisticado.
+Em produção, você usaria o otimizador Adam com gradient accumulation, warmup da taxa de aprendizado e gradient clipping. O loop forward-loss-backward-updaté é idêntico. O otimizador é mais sofisticado.
 
 ### Passo 7: Geração de Texto
 
 A geração usa o modelo treinado pra prever um token por vez. Cada previsão é amostrada da distribuição de saída (ou pega gananciosamente como o argmax).
 
 ```python
-def generate(model, prompt_tokens, max_new_tokens=100, temperature=0.8):
+def generaté(model, prompt_tokens, max_new_tokens=100, temperature=0.8):
     tokens = list(prompt_tokens)
     seq_len = model.embedding.pos_embed.shape[0]
 
@@ -462,7 +462,7 @@ def generate(model, prompt_tokens, max_new_tokens=100, temperature=0.8):
 
 A temperatura controla a aleatoriedade. Temperatura 1.0 usa a distribuição bruta. Temperatura 0.5 a agudiza (mais determinista -- o modelo escolhe seus top picks mais vezes). Temperatura 1.5 a aplaina (mais aleatório -- tokens de baixa probabilidade ganham uma chance maior). Temperatura 0.0 é decoding ganancioso (sempre escolher o token de maior probabilidade).
 
-A janela `tokens[-seq_len:]` é necessária porque o modelo tem um tamanho máximo de contexto (1024 pro GPT-2). Uma vez que voce excede isso, voce precisa descartar os tokens mais antigos. Essa é a "janela de contexto" que todo mundo fala.
+A janela `tokens[-seq_len:]` é necessária porque o modelo tem um tamanho máximo de contexto (1024 pro GPT-2). Uma vez que você excede isso, você precisa descartar os tokens mais antigos. Essa é a "janela de contexto" que todo mundo fala.
 
 ## Usar
 
@@ -479,49 +479,49 @@ Residual connections enable gradient flow through deep networks.
 Layer normalization stabilizes training by normalizing activations.
 Position embeddings give the model information about token ordering.
 The causal mask ensures autoregressive generation during training.
-Pre-training on large text corpora teaches the model general language understanding.
+Pré-training on large text corpora teaches the model general language understanding.
 Fine-tuning adapts the pre-trained model to especificaçãoific downstream tasks."""
 
 model = train_mini_gpt(corpus, num_steps=200)
 
 prompt = list("The transformer".encode("utf-8"))
-output_tokens = generate(model, prompt, max_new_tokens=100, temperature=0.8)
-generated_text = bytes(output_tokens).decode("utf-8", errors="replace")
-print(f"\nGenerated: {generated_text}")
+output_tokens = generaté(model, prompt, max_new_tokens=100, temperature=0.8)
+generatéd_text = bytes(output_tokens).decode("utf-8", errors="replace")
+print(f"\nGeneratéd: {generatéd_text}")
 ```
 
-Num corpus pequeno com um modelo pequeno, o texto gerado vai ser semicoerente no máximo. Ele vai aprender alguns padrões em nível de byte do texto de treinamento mas não consegue generalizar da forma como o GPT-2 faz com 40GB de dados de treinamento e a arquitetura completa de 124M de parâmetros. O ponto não é a qualidade da saída. O ponto é que voce pode rastrear cada passo: lookup de embedding, cálculo de atenção, transformação feedforward, projeção de logits, softmax e amostragem. Cada operação é visível.
+Num corpus pequeno com um modelo pequeno, o texto gerado vai ser semicoerente no máximo. Ele vai aprender alguns padrões em nível de byte do texto de treinamento mas não consegue generalizar da forma como o GPT-2 faz com 40GB de dados de treinamento e a arquitetura completa de 124M de parâmetros. O ponto não é a qualidade da saída. O ponto é que você pode rastrear cada passo: lookup de embedding, cálculo de aténção, transformação feedforward, projeção de logits, softmax e amostragem. Cada operação é visível.
 
 ## Publicar
 
-Essa lição produz `outputs/prompt-gpt-architecture-analyzer.md` -- um prompt que analisa as escolhas de arquitetura em qualquer modelo do estilo GPT. Alimente ele com um model card ou relatório técnico e ele descompõe a alocação de parâmetros, o design de atenção e decisões de scaling.
+Essa lição produz `outputs/prompt-gpt-architecture-analyzer.md` -- um prompt que analisa as escolhas de arquitetura em qualquer modelo do estilo GPT. Alimente ele com um model card ou relatório técnico e ele descompõe a alocação de parâmetros, o design de aténção e decisões de scaling.
 
 ## Exercícios
 
-1. Modifique o modelo pra usar 24 camadas e 16 cabeças ao invés de 12/12. Conte os parâmetros. Como duplicar a profundidade se compara a duplicar a largura (dimensão do embedding)?
+1. Modifique o modelo pra usar 24 camadas e 16 cabeças ão invés de 12/12. Conte os parâmetros. Como duplicar a profundidade se compara a duplicar a largura (dimensão do embedding)?
 
 2. Implemente a função de ativação GELU (GELU(x) = x * 0.5 * (1 + erf(x / sqrt(2)))) e substitua o ReLU na rede feedforward. Rode o treinamento por 500 passos com cada ativação e compare a perda final.
 
-3. Adicione um KV cache na função de geração. Armazene os tensores K e V de cada camada após o primeiro forward pass e reutilize-os pra tokens subsequentes. Meça a aceleração: gere 200 tokens com e sem o cache e compare o tempo de parede.
+3. Adicione um KV cache na função de geração. Armazene os tensores K e V de cada camada após o primeiro forward pass e reútilize-os pra tokens subsequentes. Meça a aceleração: gere 200 tokens com e sem o cache e compare o tempo de parede.
 
 4. Implemente top-k sampling (só considerar os k tokens de maior probabilidade) e top-p sampling (nucleus sampling: considerar o menor conjunto de tokens cuja probabilidade cumulativa excede p). Compare a qualidade da saída na temperatura 0.8 com top-k=50 vs top-p=0.95.
 
-5. Construa um gráfico de curva de perda de treinamento. Treine o modelo por 1000 passos e plote perda vs passo. Identifique as três fases: queda inicial rápida (aprendendo bytes comuns), fase intermediária mais lenta (aprendendo padrões de byte) e platô (overfitting no corpus pequeno). A forma dessa curva é a mesma tanto se voce estiver treinando um modelo de 128 dims quanto o GPT-4.
+5. Construa um gráfico de curva de perda de treinamento. Treine o modelo por 1000 passos e plote perda vs passo. Identifique as três fases: queda inicial rápida (aprendendo bytes comuns), fase intermediária mais lenta (aprendendo padrões de byte) e platô (overfitting no corpus pequeno). A forma dessa curva é a mesma tanto se você estiver treinando um modelo de 128 dims quanto o GPT-4.
 
 ## Termos Principais
 
 | Termo | O que a gente diz | O que realmente significa |
 |------|----------------|----------------------|
 | Autoregressive | "Ele gera uma palavra por vez" | Cada token de saída é condicionado em todos os tokens anteriores -- o modelo prevê P(token_n \| token_0, ..., token_{n-1}) |
-| Causal mask | "Ele não enxerga o futuro" | Uma matriz triangular superior de valores negativo infinito que impede atenção a posições futuras durante o treinamento |
-| Multi-head attention | "Múltiplos padrões de atenção" | Dividir Q, K, V em cabeças paralelas (ex.: 12 cabeças de 64 dims cada pro GPT-2) pra que cada cabeça aprenda tipos de relação diferentes |
+| Causal mask | "Ele não enxerga o futuro" | Uma matriz triangular superior de valores negativo infinito que impede aténção a posições futuras durante o treinamento |
+| Multi-head attention | "Múltiplos padrões de aténção" | Dividir Q, K, V em cabeças paralelas (ex.: 12 cabeças de 64 dims cada pro GPT-2) pra que cada cabeça aprenda tipos de relação diferentes |
 | KV Cache | "Cache pra velocidade" | Armazenar tensores Key e Value computados de tokens anteriores pra evitar computação redundante durante geração autoregressiva |
 | Prefill | "Processando o prompt" | A primeira fase de inferência onde todos os tokens do prompt são processados em paralelo -- compute-bound no FLOPS da GPU |
 | Decode | "Gerando tokens" | A segunda fase de inferência onde tokens são gerados um por vez -- memory-bound na largura de banda da GPU |
 | Weight tying | "Compartilhando embeddings" | Usar a matriz de entrada de embeddings de token e a camada de projeção de saída -- economiza 38M de parâmetros no GPT-2 |
 | Conexão residual | "Skip connection" | Somar o input diretamente à saída de uma subcamada (x + sublayer(x)) -- habilita fluxo de gradiente em redes profundas |
 | Layer normalization | "Normalizando ativações" | Normalizar na dimensão de features pra média 0 e variância 1, com parâmetros de escala e viés aprendíveis |
-| Perda de entropia cruzada | "O quanto as previsões estão erradas" | -log(probabilidade atribuída ao token correto seguinte), média sobre todas as posições -- o objetivo padrão de treinamento de LLM |
+| Perda de entropia cruzada | "O quanto as previsões estão erradas" | -log(probabilidade atribuída ão token correto seguinte), média sobre todas as posições -- o objetivo padrão de treinamento de LLM |
 
 ## Leitura Complementar
 

@@ -31,10 +31,10 @@ O loop de quatro passos é o invariante por baixo de tudo isso. O resto da Fase 
 O host declara cada ferramenta com três campos.
 
 - **Nome.** Um identificador estável e legível por máquina. `get_weather`, não "coisa de clima".
-- **Descrição.** Um parágrafo de texto natural em resumo. "Usar quando o usuário pergunta sobre condições atuais para uma cidade eespecificaçãoífica. Não usar para dados históricos."
+- **Descrição.** Um parágrafo de texto natural em resumo. "Usar quando o usuário pergunta sobre condições atuais para uma cidade específica. Não usar para dados históricos."
 - **Schema de entrada.** Um objeto JSON Schema (draft 2020-12) descrevendo os argumentos da ferramenta.
 
-O modelo recebe a lista. Provedores modernos serializam essas declarações no system prompt usando um template eespecificaçãoífico do provedor, então você como caller só lida com a forma estruturada.
+O modelo recebe a lista. Provedores modernos serializam essas declarações no system prompt usando um template específico do provedor, então você como caller só lida com a forma estruturada.
 
 ### Passo dois: decidir
 
@@ -44,7 +44,7 @@ Dada a mensagem do usuário e as ferramentas disponíveis, o modelo escolhe um d
 2. **Chamar uma ou mais ferramentas.** Emitir objetos de chamada estruturados. Com `parallel_tool_calls: true` (padrão no OpenAI e Gemini, opt-in no Anthropic) o modelo pode emitir múltiplas chamadas num turno.
 3. **Recusar.** Outputs estruturados em modo strict podem produzir um bloco `refusal` tipado em vez de uma chamada.
 
-O payload de uma chamada de ferramenta tem três campos estáveis: um `id` de chamada, um `name` de ferramenta e um objeto JSON de `arguments`. O id existe pra que o host possa correlacionar o resultado posterior com a chamada eespecificaçãoífica, o que importa quando chamadas paralelas voltam fora de ordem.
+O payload de uma chamada de ferramenta tem três campos estáveis: um `id` de chamada, um `name` de ferramenta e um objeto JSON de `arguments`. O id existe pra que o host possa correlacionar o resultado posterior com a chamada específica, o que importa quando chamadas paralelas voltam fora de ordem.
 
 ### Passo três: executar
 
@@ -60,7 +60,7 @@ O host anexa o resultado da ferramenta à conversa (como uma mensagem de role `t
 
 Ferramentas vêm em dois tipos que importam pra segurança.
 
-- **Puras.** Somente leitura, determinísticas, sem efeitos colaterais. `get_weather`, `search_docs`, `get_current_time`. Seguras pra chamar de forma eespecificaçãoulativa.
+- **Puras.** Somente leitura, determinísticas, sem efeitos colaterais. `get_weather`, `search_docs`, `get_current_time`. Seguras pra chamar de forma especulativa.
 - **Consequentes.** Mutam estado, gastam dinheiro, mexem com dados do usuário. `send_email`, `delete_file`, `execute_trade`. Precisam ser controladas.
 
 A "Regra dos Dois" de 2026 da Meta pra segurança de agentes diz que um único turno pode combinar no máximo dois de: input não confiável, dados sensíveis, ação consequente. A interface de ferramentas é onde você aplica essa regra — rejeitando chamadas, exigindo confirmação do usuário ou escalando escopos. Veja Fase 13 · 15 pro capítulo completo de segurança e Fase 14 · 09 pras políticas de permissão de nível de agente.
@@ -124,7 +124,7 @@ Esta aula produz `outputs/skill-tool-interface-reviewer.md`. Dada uma definiçã
 
 3. Classifique cada ferramenta no harness como pura ou consequente. Adicione uma flag `consequential: true` nos registros do registry que precisam, e mude o loop pra imprimir uma linha "confirmaria com o usuário" sempre que uma ferramenta consequente for escolhida. Essa é a forma do gate de confirmação que todo host de produção precisa.
 
-4. Desenhe o loop de quatro passos no papel com a tabela de colunas de provedor preenchida pro seu cliente favorito (Claude Desktop, Cursor, ChatGPT ou uma stack custom). Faça referência cruzada com a variante eespecificaçãoífica do MCP na Fase 13 · 06.
+4. Desenhe o loop de quatro passos no papel com a tabela de colunas de provedor preenchida pro seu cliente favorito (Claude Desktop, Cursor, ChatGPT ou uma stack custom). Faça referência cruzada com a variante específica do MCP na Fase 13 · 06.
 
 5. Leia o guia de function calling da OpenAI de ponta a ponta. Identifique o único campo que está no request mas não no loop de quatro passos apresentado aqui. Explique o que ele acrescenta e por que é conveniente em vez de essencial.
 
@@ -148,5 +148,5 @@ Esta aula produz `outputs/skill-tool-interface-reviewer.md`. Dada uma definiçã
 - [OpenAI — Function calling guide](https://platform.openai.com/docs/guides/function-calling) — referência canônica pra declarações de ferramentas no estilo OpenAI
 - [Anthropic — Tool use overview](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview) — formato de blocos `tool_use` / `tool_result` do Claude
 - [Google — Gemini function calling](https://ai.google.dev/gemini-api/docs/function-calling) — `functionDeclarations` e semântica de chamadas paralelas no Gemini
-- [Model Context Protocol — Specification 2025-11-25](https://modelcontextprotocol.io/especificaçãoification/2025-11-25) — a generalização da interface de ferramentas independente de provedor
+- [Model Context Protocol — Specification 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) — a generalização da interface de ferramentas independente de provedor
 - [JSON Schema — 2020-12 release notes](https://json-schema.org/draft/2020-12/release-notes) — o dialeto de schema que toda API moderna de ferramentas fala

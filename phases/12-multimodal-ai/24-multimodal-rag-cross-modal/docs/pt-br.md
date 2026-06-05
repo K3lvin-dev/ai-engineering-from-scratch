@@ -47,7 +47,7 @@ Fusão por score (a mais barata). Cada modalidade tem seu próprio recuperador, 
 
 Fusão baseada em attention. Concatena todos os itens recuperados, deixa uma rede pequena de attention ponderar. Precisa de treinamento.
 
-Fusão MoE. Rede de gating roteia para experts eespecificaçãoíficos por modalidade. Diferentes tipos de consulta roteiam diferente — uma questão visual pondera imagens mais.
+Fusão MoE. Rede de gating roteia para experts específicos por modalidade. Diferentes tipos de consulta roteiam diferente — uma questão visual pondera imagens mais.
 
 Padrão em produção: fusão com score com leve viés para a modalidade dominante da consulta. Atualize para MoE se A/B mostrar ganhos claros no seu domínio.
 
@@ -107,9 +107,9 @@ Avaliação cross-modal ainda é imatura. Substitutos comuns:
 - Recall@k por modalidade.
 - Acurácia do top-k fundido.
 - Satisfação de ponta a ponta avaliada por humanos.
-- Eespecificaçãoífica de tarefa (reservas completadas, compras realizadas).
+- Especificaçãoífica de tarefa (reservas completadas, compras realizadas).
 
-Nenhum benchmark padrão cobre todas as modalidades. A maioria dos artigos avalia em tarefas eespecificaçãoíficas de domínio.
+Nenhum benchmark padrão cobre todas as modalidades. A maioria dos artigos avalia em tarefas específicas de domínio.
 
 ## Use
 
@@ -122,7 +122,7 @@ Nenhum benchmark padrão cobre todas as modalidades. A maioria dos artigos avali
 
 ## Entregue
 
-Esta aula produz `outputs/skill-multimodal-rag-designer.md`. Dada uma eespecificaçãoificação de produto com fluxo de consulta multimodal, projeta recuperadores, fusão, gerador e avaliação.
+Esta aula produz `outputs/skill-multimodal-rag-designer.md`. Dada uma especificação de produto com fluxo de consulta multimodal, projeta recuperadores, fusão, gerador e avaliação.
 
 ## Exercícios
 
@@ -132,7 +132,7 @@ Esta aula produz `outputs/skill-multimodal-rag-designer.md`. Dada uma eespecific
 
 3. Leia a taxonomia de Abootorabi et al. (Seção 3). Quais são os três subproblemas canônicos e como mapeiam pro seu produto escolhido?
 
-4. Projete uma eespecificaçãoificação de avaliação para um RAG multimodal de planejador de viagem. Que métricas cobrem recall de imagem, recall de áudio, e correção composta?
+4. Projete uma especificação de avaliação para um RAG multimodal de planejador de viagem. Que métricas cobrem recall de imagem, recall de áudio, e correção composta?
 
 5. RAG agentic multi-hop tem um imposto de latência por round-trip. Em que dificuldade de consulta o ganho de acurácia justifica a latência?
 

@@ -141,4 +141,4 @@ A skill entregável fica em `outputs/skill-terminal-coding-agent.md`. Dado um ca
 - [OpenCode](https://opencode.ai) — suporte aberto, 112k stars
 - [Ranking do SWE-bench Pro](https://www.swebench.com) — a avaliação que este capstone visa
 - [Roadmap MCP 2026](https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/) — StreamableHTTP, metadados de capacidades
-- [Convenções semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — esquema de spans para chamadas de ferramentas e uso de tokens
+- [Convenções semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — esquema de spans para chamadas de ferramentas e uso de tokens

@@ -9,9 +9,9 @@
 
 ## Problema
 
-O cenário de protocolos de agente de 2026 é corrido: MCP pra tools, A2A pra agents, ACP pra auditoria corporativa, ANP pra confiança descentralizada, NLIP pra conteúdo em linguagem natural, além de CA-MCP e duas dúzias de propostas de pesquisa. Cada eespecificaçãoificação se apresenta como fundamental.
+O cenário de protocolos de agente de 2026 é corrido: MCP pra tools, A2A pra agents, ACP pra auditoria corporativa, ANP pra confiança descentralizada, NLIP pra conteúdo em linguagem natural, além de CA-MCP e duas dúzias de propostas de pesquisa. Cada especificação se apresenta como fundamental.
 
-A leitura honesta é que a maioria deles está redescobrindo uma árvore de decisão muito eespecificaçãoífica de vinte anos atrás. A teoria de atos de fala de Austin (1962) e Searle (1969) nos deu "enunciados são ações." KQML (1993) transformou isso num protocolo de comunicação. FIPA-ACL (ratificado em 2000) produziu a padronização de referência: vinte performativas, linguagens de conteúdo SL0/SL1, protocolos de interação pra contract-net e subscribe-notify. JADE e JACK foram as plataformas de referência Java. O esforço desapareceu por volta de 2010 porque o overhead de ontologia era pesado e a web estava vencendo.
+A leitura honesta é que a maioria deles está redescobrindo uma árvore de decisão muito específica de vinte anos atrás. A teoria de atos de fala de Austin (1962) e Searle (1969) nos deu "enunciados são ações." KQML (1993) transformou isso num protocolo de comunicação. FIPA-ACL (ratificado em 2000) produziu a padronização de referência: vinte performativas, linguagens de conteúdo SL0/SL1, protocolos de interação pra contract-net e subscribe-notify. JADE e JACK foram as plataformas de referência Java. O esforço desapareceu por volta de 2010 porque o overhead de ontologia era pesado e a web estava vencendo.
 
 Quando você olha o `tools/call` do MCP, o ciclo de vida de tarefas do A2A, ou o armazenamento de contexto compartilhado do CA-MCP, você está olhando uma versão mais leve e nativa de JSON dos decisões do FIPA. Conhecer a herança te diz duas coisas: quais "inovações" novas são na verdade reinvenções, e quais modos de falha antigos os novos protocolos vão redescobrir.
 
@@ -92,17 +92,17 @@ Compare um `request` do FIPA com um `tools/call` do MCP:
 
 Mesmo envelope, sintaxe diferente. Ambos carregam: quem, pra quem, intenção, payload, id de correlação. Nenhum é uma revolução sobre o outro — são tradeoffs diferentes no mesmo design.
 
-O survey de 2025 de Liu et al. ("A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, ANP", arXiv:2505.02279) torna essa linhagem explícita: MCP corresponde a atos de fala de uso de tools, A2A a atos de fala entre pares, ACP a atos de fala de trilha de auditoria, ANP a extensões de identidade descentralizada. As novas especificaçãos são descendentes do ACL com sintaxe JSON e semântica mais solta.
+O survey de 2025 de Liu et al. ("A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, ANP", arXiv:2505.02279) torna essa linhagem explícita: MCP corresponde a atos de fala de uso de tools, A2A a atos de fala entre pares, ACP a atos de fala de trilha de auditoria, ANP a extensões de identidade descentralizada. As novas especificações são descendentes do ACL com sintaxe JSON e semântica mais solta.
 
 ### O tradeoff, dito de forma simples
 
-**O que o FIPA te dava e as especificaçãos modernas abandonam:**
+**O que o FIPA te dava e as especificações modernas abandonam:**
 
 - Semântica formal — você pode provar que `inform` implica que o remetente acredita no conteúdo.
 - Um catálogo canônico de performativas — você não precisa re-debatir "devemos ter um `cancel`?".
 - Décadas de padrões de protocolo de interação — contract-net, subscribe-notify, propose-accept — com propriedades de correção conhecidas.
 
-**O que as especificaçãos modernas te dão e o FIPA não dava:**
+**O que as especificações modernas te dão e o FIPA não dava:**
 
 - Payloads nativos de JSON compatíveis com toda ferramenta moderna.
 - Conteúdo em linguagem natural que LLMs podem interpretar sem uma ontologia codificada à mão.
@@ -131,7 +131,7 @@ Mitigações sem ir full ontologia:
 - Artefatos tipados (A2A) — rejeita modalidade errada.
 - Performática explícita no envelope — torna a intenção inequívoca mesmo quando o conteúdo é linguagem natural.
 
-### As especificaçãos de 2026, mapeadas pra herança de atos de fala
+### As especificações de 2026, mapeadas pra herança de atos de fala
 
 | Spec moderna | Análogo FIPA | O que mantém | O que abandona |
 |---|---|---|---|
@@ -180,7 +180,7 @@ Documente essas cinco perguntas pra qualquer novo protocolo antes de levá-lo pr
 
 1. Execute `code/main.py`. Observe o round-trip de codificação. Identifique qual performática do FIPA corresponde a `tools/call`, `resources/read` e criação de tarefa A2A.
 2. Estenda a demo de contract-net com uma performática `cancel` que permite ao gerente retirar a tarefa no meio da licitação. Qual caso de falha o `cancel` resolve que retries sozinhos não resolvem?
-3. Leia a Estrutura de Mensagens FIPA ACL (http://www.fipa.org/especificaçãos/fipa00037/) seções 4.1–4.3. Escolha uma performática não coberta nesta lição e descreva seu análogo JSON-RPC moderno.
+3. Leia a Estrutura de Mensagens FIPA ACL (http://www.fipa.org/especificações/fipa00037/) seções 4.1–4.3. Escolha uma performática não coberta nesta lição e descreva seu análogo JSON-RPC moderno.
 4. Leia Liu et al., arXiv:2505.02279. Pra cada um de MCP, A2A, ACP, ANP, liste as famílias de performáticas FIPA que mantêm e abandonam.
 5. Projet um JSON-Schema mínimo para o campo `content` de uma performática `request` no seu próprio sistema. O que esse schema te dá que puro linguagem natural não dá, e quanto custa?
 
@@ -200,8 +200,8 @@ Documente essas cinco perguntas pra qualquer novo protocolo antes de levá-lo pr
 
 ## Leitura Complementar
 
-- [Liu et al. — A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, ANP](https://arxiv.org/html/2505.02279v1) — o survey canônico de 2025 conectando especificaçãos modernas à herança do FIPA
-- [Eespecificaçãoificação de Estrutura de Mensagens FIPA ACL (fipa00037)](http://www.fipa.org/especificaçãos/fipa00037/) — o formato de envelope ratificado em 2000
-- [Eespecificaçãoificação da Biblioteca de Atos Comunicativos FIPA (fipa00037)](http://www.fipa.org/especificaçãos/fipa00037/) — o catálogo completo de performativas
-- [Eespecificaçãoificação MCP 2025-11-25](https://modelcontextprotocol.io/especificaçãoification/2025-11-25) — o equivalente moderno de uso de ferramentas pra `request`/`consulta-ref`
-- [Eespecificaçãoificação A2A](https://a2a-protocol.org/latest/especificaçãoification/) — o equivalente moderno de agent-para-pair pra contract-net e subscribe-notify
+- [Liu et al. — A Survey of Agent Interoperability Protocols: MCP, ACP, A2A, ANP](https://arxiv.org/html/2505.02279v1) — o survey canônico de 2025 conectando especificações modernas à herança do FIPA
+- [Especificação de Estrutura de Mensagens FIPA ACL (fipa00037)](http://www.fipa.org/especificações/fipa00037/) — o formato de envelope ratificado em 2000
+- [Especificação da Biblioteca de Atos Comunicativos FIPA (fipa00037)](http://www.fipa.org/especificações/fipa00037/) — o catálogo completo de performativas
+- [Especificação MCP 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) — o equivalente moderno de uso de ferramentas pra `request`/`consulta-ref`
+- [Especificação A2A](https://a2a-protocol.org/latest/specification/) — o equivalente moderno de agent-para-pair pra contract-net e subscribe-notify

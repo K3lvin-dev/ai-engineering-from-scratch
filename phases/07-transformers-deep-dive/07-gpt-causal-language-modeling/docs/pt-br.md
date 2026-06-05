@@ -62,9 +62,9 @@ Depois do treinamento, escolhas de amostragem importam mais que as pessoas pensa
 | Top-k | Amostra só dos top-k tokens | Mata caudas de baixa probabilidade |
 | Top-p (núcleo) | Amostra do menor conjunto com prob cumulativa ≥ p | Padrão pós-2020; se adapta à forma da distribuição |
 | Min-p | Mantém tokens com `p > min_p * max_p` | Pós-2024; melhor que top-p pra rejeitar caudas longas |
-| Decodificação eespecificaçãoulativa | Modelo rascunho propõe N tokens, modelo grande verifica | Redução de latência de 2–3× na mesma qualidade |
+| Decodificação especulativa | Modelo rascunho propõe N tokens, modelo grande verifica | Redução de latência de 2–3× na mesma qualidade |
 
-Em 2026, min-p + temperatura 0,7 é um padrão razoável pra modelos de pesos abertos. Decodificação eespecificaçãoulativa é requisito básico em qualquer stack de inferência de produção.
+Em 2026, min-p + temperatura 0,7 é um padrão razoável pra modelos de pesos abertos. Decodificação especulativa é requisito básico em qualquer stack de inferência de produção.
 
 ### O que fez a "receita GPT" funcionar
 
@@ -122,7 +122,7 @@ out = model.generate(
 print(tok.decode(out[0]))
 ```
 
-Por baixo dos panos, `generate()` roda o forward pass, puxa os logits da última posição, amostra o próximo token, anexa e repete. Toda stack de inferência de LLM de produção (vLLM, TensorRT-LLM, llama.cpp, Ollama, MLX) implementa o mesmo loop com muita otimização — prefill em batch, batch contínuo, paginação de KV cache, decodificação eespecificaçãoulativa.
+Por baixo dos panos, `generate()` roda o forward pass, puxa os logits da última posição, amostra o próximo token, anexa e repete. Toda stack de inferência de LLM de produção (vLLM, TensorRT-LLM, llama.cpp, Ollama, MLX) implementa o mesmo loop com muita otimização — prefill em batch, batch contínuo, paginação de KV cache, decodificação especulativa.
 
 **GPT vs BERT, uma linha cada:** GPT prevê `P(x_t | x_{<t})`. BERT prevê `P(x_masked | x_unmasked)`. A perda determina se o modelo pode gerar.
 
@@ -134,7 +134,7 @@ Veja `outputs/skill-sampling-tuner.md`. A skill escolhe parâmetros de amostrage
 
 1. **Fácil.** Rode `code/main.py` e verifique que a matriz de attention causal é triangular inferior depois do softmax. Checagem rápida: linha 3 deve ter pesos só nas colunas 0–3.
 2. **Médio.** Implemente beam search com largura 4. Compare perplexidade de beam-4 vs guloso em 10 prompts curtos. Beam sempre ganha? (Dica: geralmente pra tradução, não pra chat aberto.)
-3. **Difícil.** Implemente decodificação eespecificaçãoulativa: use um tiny modelo de 2 camadas como rascunho e um de 6 camadas como verificador. Meça aceleração em tempo real em 100 completões de comprimento 64. Confirme que saídas combinam com o guloso do verificador.
+3. **Difícil.** Implemente decodificação especulativa: use um tiny modelo de 2 camadas como rascunho e um de 6 camadas como verificador. Meça aceleração em tempo real em 100 completões de comprimento 64. Confirme que saídas combinam com o guloso do verificador.
 
 ## Termos-Chave
 
@@ -147,7 +147,7 @@ Veja `outputs/skill-sampling-tuner.md`. A skill escolhe parâmetros de amostrage
 | Temperatura | "Controle de criatividade" | Divide logits por T; T→0 = guloso, T→∞ = uniforme. |
 | Top-p | "Amostragem de núcleo" | Trunca distribuição pro menor conjunto somando ≥p; amostra do que sobra. |
 | Min-p | "Melhor que top-p" | Mantém tokens onde `p ≥ min_p × max_p`; adapta corte à agudeza da distribuição. |
-| Decodificação eespecificaçãoulativa | "Rascunho + verificação" | Modelo rascunho barato propõe tokens; modelo grande verifica k em uma passada. |
+| Decodificação especulativa | "Rascunho + verificação" | Modelo rascunho barato propõe tokens; modelo grande verifica k em uma passada. |
 | Teacher forcing | "Truque de treinamento" | Durante treinamento, alimenta o token anterior verdadeiro, não a previsão do modelo. Padrão pra todo LM seq2seq. |
 
 ## Leituras Complementares
@@ -155,5 +155,5 @@ Veja `outputs/skill-sampling-tuner.md`. A skill escolhe parâmetros de amostrage
 - [Radford et al. (2018). Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf) — GPT-1.
 - [Radford et al. (2019). Language Models are Unsupervised Multitask Learners](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) — GPT-2.
 - [Brown et al. (2020). Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) — GPT-3 e aprendizado em contexto.
-- [Leviathan, Kalman, Matias (2023). Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192) — paper de decodificação eespecificaçãoulativa.
+- [Leviathan, Kalman, Matias (2023). Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192) — paper de decodificação especulativa.
 - [HuggingFace `modeling_llama.py`](https://github.com/huggingface/transformers/blob/main/src/transformers/models/llama/modeling_llama.py) — código canônico de referência de causal-LM.

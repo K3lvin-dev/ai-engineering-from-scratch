@@ -57,7 +57,7 @@ Execução remota de código via injeção de prompt na superfície de sugestão
 
 ### Calibração de severidade
 
-Padrão entre as três: fornecedores inicialmente classificaram EchoLeak como baixo (apenas divulgação de informação). Aim Labs demonstrou exfiltração de códigos MFA; a classificação escala para 9.3. A lição: vulnerabilidades eespecificaçãoíficas de IA são difíceis de classificar sem exploit demonstrado; defensores devem exigir prova-conceito abrangente.
+Padrão entre as três: fornecedores inicialmente classificaram EchoLeak como baixo (apenas divulgação de informação). Aim Labs demonstrou exfiltração de códigos MFA; a classificação escala para 9.3. A lição: vulnerabilidades específicas de IA são difíceis de classificar sem exploit demonstrado; defensores devem exigir prova-conceito abrangente.
 
 ### Posições da NIST e OWASP
 
@@ -86,7 +86,7 @@ Esta lição produz `outputs/skill-cve-review.md`. Dado um implantação de IA e
 
 4. A correção do CamoLeak do Microsoft desabilitou renderização de imagens completamente. Proponha uma correção parcial que preserve renderização de imagens apenas para fontes confiáveis. Identifique a suposição de autenticação que isso requer.
 
-5. Divulgação responsável para vulnerabilidades de IA está evoluindo. Esboçe um protocolo de divulgação que inclua evidências eespecificaçãoíficas de IA (reprodutividade, escopo de versão de modelo, resistência a injeção de prompt).
+5. Divulgação responsável para vulnerabilidades de IA está evoluindo. Esboçe um protocolo de divulgação que inclua evidências específicas de IA (reprodutividade, escopo de versão de modelo, resistência a injeção de prompt).
 
 ## Termos-Chave
 

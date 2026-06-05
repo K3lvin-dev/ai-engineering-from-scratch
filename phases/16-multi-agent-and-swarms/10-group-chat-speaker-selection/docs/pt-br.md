@@ -79,7 +79,7 @@ Em fevereiro de 2026, a Microsoft anunciou que o AutoGen entraria em modo de man
 - **Determinismo estrito.** O selecionador por LLM pode ser inconsistente. Mesmo prompt, rodadas diferentes, próximos oradores diferentes.
 - **Cascata de sycophancy.** Agents se curvam a quem falou com mais confiança. Use contraprompt explícito.
 - **Inchaço de contexto.** Cada agente lê cada mensagem; depois de 10 turnos o contexto é enorme. Use projeções (Lição 15) para limitar visões.
-- **Oradores quentes.** Um agente domina a conversa porque o selecionador favorece suas eespecificaçãoialidades. Introduza equilíbrio de oradores como funcionalidade do selecionador.
+- **Oradores quentes.** Um agente domina a conversa porque o selecionador favorece suas especialidades. Introduza equilíbrio de oradores como funcionalidade do selecionador.
 
 ### Group chat vs supervisor
 
@@ -104,7 +104,7 @@ python3 code/main.py
 
 ## Use
 
-`outputs/skill-groupchat-selector.md` configura um selecionador de GroupChat para uma tarefa dada — round-robin vs selecionado por LLM vs custom, e quais inputs do selecionador usar (mensagens recentes, eespecificaçãoialidades dos agents, contagem de turnos).
+`outputs/skill-groupchat-selector.md` configura um selecionador de GroupChat para uma tarefa dada — round-robin vs selecionado por LLM vs custom, e quais inputs do selecionador usar (mensagens recentes, especialidades dos agents, contagem de turnos).
 
 ## Deploy
 
@@ -135,7 +135,7 @@ Checklist:
 | Termination token | "A palavra de 'parar'" | String sentinela (geralmente `TERMINATE`) que encerra o chat. |
 | Hot speaker | "Um agente domina" | Modo de falha onde o selecionador fica escolhendo o mesmo agent. |
 | Context bloat | "Pool cresce sem limite" | Cada agente lê cada mensagem anterior; contexto cresce com turnos. |
-| Projection | "Visão escopada" | Visão eespecificaçãoífica por papel no pool compartilhado para prevenir inchaço de contexto.
+| Projection | "Visão escopada" | Visão específica por papel no pool compartilhado para prevenir inchaço de contexto.
 
 ## Leitura Complementar
 

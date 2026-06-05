@@ -2,9 +2,9 @@
 
 > Rafailov et al. (2023) mostraram que o ótimo do RLHF tem uma forma fechada em termos dos dados de preferência, então você pode pular o reward model explícito e otimizar a política diretamente. Essa visão gerou uma família — IPO, KTO, SimPO, ORPO, BPO — cada uma corrigindo um modo de falha do DPO. Em 2026, algoritmos de alinhamento direto rodam mais execuções de pós-treinamento fronteiriço do que PPO. Mas a curva de otimização excessiva da Lição 2 ainda se aplica: DAAs não escapam do Goodhart, eles só mudam onde ele morde.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, comparador de loss de preferência de seis variantes)
-**Pré-requisitos:** Fase 18 · 01 (InstructGPT), Fase 18 · 02 (Reward hacking), Fase 10 · 08 (DPO básico)
+**Pré-requisitos:** Fase 10 · 06 (SFT), Fase 18 · 02 (Reward hacking), Fase 10 · 08 (DPO básico)
 **Tempo:** ~75 minutos
 
 ## Objetivos de Aprendizado
@@ -67,7 +67,7 @@ A margem é limitada por `1/(2 beta)`. Força de preferência e gap de recompens
 
 ### KTO (Ethayarajh et al., 2024)
 
-Kahneman-Tversky Optimization descarta a estrutura par a par inteiramente. Dada uma única saída rotulada e um sinal binário "desejável" ou "indesejável", ela mapeia para uma utilidade de proespecificaçãot theory:
+Kahneman-Tversky Optimization descarta a estrutura par a par inteiramente. Dada uma única saída rotulada e um sinal binário "desejável" ou "indesejável", ela mapeia para uma utilidade de prospect theory:
 
 ```
 v(x, y) = sigma(beta * log(pi(y|x) / pi_ref(y|x)) - z_ref)
@@ -147,7 +147,7 @@ Essa lição produz `outputs/skill-preference-loss-selector.md`. Dadas estatíst
 | DPO | "RLHF sem reward model" | Loss derivada do ótimo RLHF em forma fechada; apenas parâmetros da política |
 | Recompensa implícita | "a razão logarítmica" | `beta * log(pi(y|x) / pi_ref(y|x))` — a recompensa implícita pelo DPO |
 | IPO | "DPO limitado" | Substitui log-sigmoid por identidade; gap de recompensa implícita limitado por `1/(2 beta)` |
-| KTO | "DPO não pareado" | Utilidade de proespecificaçãot theory sobre rótulos individuais com aversão à perda |
+| KTO | "DPO não pareado" | Utilidade de prospect theory sobre rótulos individuais com aversão à perda |
 | SimPO | "DPO sem referência" | Log-likelihood normalizada por comprimento + margem; sem política referência |
 | ORPO | "DPO de estágio único" | NLL + termo de preferência odds-ratio; treina do modelo base em uma passagem |
 | BPO | "DPO preservador da escolhida" | DPO mais uma penalidade para diminuir a log-prob absoluta da resposta escolhida |

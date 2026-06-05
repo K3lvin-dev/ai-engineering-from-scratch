@@ -3,7 +3,7 @@
 > Um bloco é a unidade de todo decoder LLM moderno. Normalização de camada, attention multi-head, residual, MLP, residual. A variante pre-LN treina de forma estável sem warmup. A variante post-LN é o que o artigo original publicou. Esta lição constrói ambas, lado a lado, e mostra qual sobrevive a uma pilha de 12 camadas com taxas de aprendizado comuns.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições 30 a 33 da Fase 19 (tokenizador, embeddings, matemática de attention, dataloader batched)
 **Tempo:** ~90 minutos
 

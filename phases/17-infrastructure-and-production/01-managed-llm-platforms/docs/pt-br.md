@@ -28,7 +28,7 @@ Esta aula mapeia as três apostas, o gap de latência, o gap de FinOps e o risco
 
 **AWS Bedrock** — o marketplace. Claude (Anthropic), Llama (Meta), Titan (primeira-party da AWS), Stability (imagem), Cohere (embeddings), Mistral, mais sub-catalogos de imagem e embedding. Uma API, uma superfície de IAM, uma exportação do CloudWatch. A aposta do Bedrock é que clientes querem opção mais do que um único modelo.
 
-**Azure OpenAI** — a parceria exclusiva. Você ganha GPT-4 / 4o / 5 / série o, DALL·E, Whisper e fine-tuning de modelos OpenAI em datacenters Azure. Nenhum modelo que não seja da OpenAI no catálogo "Azure OpenAI Service" — esses vão para o Azure AI Foundry (produto separado). A aposta da Azure é que a OpenAI continua sendo a fronteira e os clientes querem controles empresariais nessa relação eespecificaçãoífica.
+**Azure OpenAI** — a parceria exclusiva. Você ganha GPT-4 / 4o / 5 / série o, DALL·E, Whisper e fine-tuning de modelos OpenAI em datacenters Azure. Nenhum modelo que não seja da OpenAI no catálogo "Azure OpenAI Service" — esses vão para o Azure AI Foundry (produto separado). A aposta da Azure é que a OpenAI continua sendo a fronteira e os clientes querem controles empresariais nessa relação específica.
 
 **Vertex AI** — Gemini primeiro, tudo o resto em segundo. Gemini 1.5 / 2.0 / 2.5 Flash e Pro, mais Model Garden (terceiros). A aposta do Vertex é multimodal de contexto longo — o contexto de 1M de tokens do Gemini é o diferencial.
 
@@ -92,7 +92,7 @@ Esta aula produz `outputs/skill-managed-platform-picker.md`. Dado um perfil de w
 
 1. Execute `code/main.py`. Em que utilização sustentada a PTU do Azure vence sob demanda para um modelo de classe 70B? Calcule o break-even e compare com a faixa divulgada de 40-60%.
 2. Seu produto precisa de Claude 3.7 Sonnet e GPT-4o. Projete um deployment de dois provedores — qual vai para qual hiperscaler, qual gateway fica na frente, qual é a política de failover?
-3. Um cliente regulamentado em saúde precisa de BAAs, residência de dados em US-East e TTFT P99 abaixo de 100ms. Escolha uma plataforma e justifique com três funcionalidades eespecificaçãoíficas.
+3. Um cliente regulamentado em saúde precisa de BAAs, residência de dados em US-East e TTFT P99 abaixo de 100ms. Escolha uma plataforma e justifique com três funcionalidades específicas.
 4. Você descobre que sua conta do Bedrock subiu 4x este mês sem mudança de tráfego. Sem Application Inference Profiles, como você encontraria o culpado? Com profiles, quanto tempo levaria?
 5. Leia as páginas de preços do Azure OpenAI e do Bedrock. Para um workload de Claude de 100M tokens/mês, qual é mais barato — API direta da Anthropic, Bedrock sob demanda ou Bedrock Provisioned Throughput?
 

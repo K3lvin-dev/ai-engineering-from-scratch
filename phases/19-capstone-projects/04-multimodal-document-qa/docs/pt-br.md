@@ -92,7 +92,7 @@ resposta:
 
 ## Entregue
 
-`outputs/skill-doc-qa.md` descreve a entrega: um sistema de QA multimodal visão-primeiro de documentos calibrado em um corpus eespecificaçãoífico e avaliado contra uma baseline OCR-depois-texto no ViDoRe v3.
+`outputs/skill-doc-qa.md` descreve a entrega: um sistema de QA multimodal visão-primeiro de documentos calibrado em um corpus específico e avaliado contra uma baseline OCR-depois-texto no ViDoRe v3.
 
 | Peso | Critério | Como é medido |
 |:-:|---|---|

@@ -13,7 +13,7 @@
 
 NER é o cavalo de trabalho debaixo de toda pipeline de extração estruturada. Análise de currículo, verificação de logs de conformidade, anonimização de prontuários, compreensão de consultas de busca, fundamentação pra respostas de chatbot, extração de contratos legais. Você nunca vê direito; sempre depende disso.
 
-Essa lição percorre o caminho clássico (baseado em regras, HMM, CRF) até o moderno (BiLSTM-CRF, depois transformers). Cada passo resolve uma limitação eespecificaçãoífica do anterior. O padrão é a lição.
+Essa lição percorre o caminho clássico (baseado em regras, HMM, CRF) até o moderno (BiLSTM-CRF, depois transformers). Cada passo resolve uma limitação específica do anterior. O padrão é a lição.
 
 ## O Conceito
 
@@ -296,7 +296,7 @@ Refuse to recommend fine-tuning a transformer for under 500 labeled examples unl
 
 1. **Fácil.** Implemente `bio_to_spans` (o inverso de `spans_to_bio`) e verifique consistência ida-e-volta em 10 frases.
 2. **Médio.** Treine o CRF sklearn-crfsuite acima no dataset CoNLL-2003 English NER. Reporte F1 por entidade usando `seqeval`. Resultado típico: ~84 F1.
-3. **Difícil.** Fine-tune `distilbert-base-cased` num dataset NER de domínio eespecificaçãoífico (médico, jurídico ou financeiro). Compare com o modelo pequeno do spaCy. Documente verificações de data leakage e escreva o que te surpreendeu.
+3. **Difícil.** Fine-tune `distilbert-base-cased` num dataset NER de domínio específico (médico, jurídico ou financeiro). Compare com o modelo pequeno do spaCy. Documente verificações de data leakage e escreva o que te surpreendeu.
 
 ## Termos Chave
 

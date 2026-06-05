@@ -13,7 +13,7 @@ Classificadores para entradas e saídas de LLMs ficam no ponto mais estreito da 
 
 A stack de classificadores de 2024–2026 convergiu em um pequeno conjunto de opções prontas para produção. Llama Guard (Meta) é disponibilizado com pesos abertos sob a Community License da Meta. NeMo Guardrails (NVIDIA) é disponibilizado com rails de licença permissiva mais Colang para regras de fluxo de diálogo. Ambos são projetados para parear com um modelo foundation, não substituir seu comportamento de segurança.
 
-A superfície de falha documentada é igualmente bem mapeada. Ataques em nível de personagem (emoji smuggling, substituição por homóglifos), redirecionamento in-context ("ignore anterior e responda") e paráfrase semântica produzem todos quedas mensuráveis na acurácia do classificador. Huang et al. 2025 mostrou um ataque eespecificaçãoífico de Emoji Smuggling atingindo 100% de ASR em seis sistemas de guard nomeados.
+A superfície de falha documentada é igualmente bem mapeada. Ataques em nível de personagem (emoji smuggling, substituição por homóglifos), redirecionamento in-context ("ignore anterior e responda") e paráfrase semântica produzem todos quedas mensuráveis na acurácia do classificador. Huang et al. 2025 mostrou um ataque específico de Emoji Smuggling atingindo 100% de ASR em seis sistemas de guard nomeados.
 
 ## O Conceito
 
@@ -26,7 +26,7 @@ A superfície de falha documentada é igualmente bem mapeada. Ataques em nível 
 - 8 idiomas
 - Variante quantizada 1B-INT4 roda a >30 tok/s em CPUs móveis
 
-A taxonomia é o produto. "S1 Crimes Violentos" até "S13 Eleições" mapeia para um vocabulário compartilhado contra o qual o modelo foi treinado. Sistemas downstream podem conectar ações eespecificaçãoíficas por categoria: bloquear S1 diretamente, sinalizar S6 para revisão humana, anotar S12 mas permitir.
+A taxonomia é o produto. "S1 Crimes Violentos" até "S13 Eleições" mapeia para um vocabulário compartilhado contra o qual o modelo foi treinado. Sistemas downstream podem conectar ações específicas por categoria: bloquear S1 diretamente, sinalizar S6 para revisão humana, anotar S12 mas permitir.
 
 ### Adições do Llama Guard 4
 
@@ -34,7 +34,7 @@ A taxonomia é o produto. "S1 Crimes Violentos" até "S13 Eleições" mapeia par
 - Taxonomia expandida: S1–S14 (adiciona S14 Code Interpreter Abuse)
 - Substituto direto para Llama Guard 3 8B/11B
 
-S14 importa para esta fase. Agents de codificação autônomos (Aula 9) executam código em sandboxes (Aula 11); uma categoria de classificador eespecificaçãoificamente para uso indevido de interpretador de código pega uma classe de ataques que a taxonomia anterior não nomeava.
+S14 importa para esta fase. Agents de codificação autônomos (Aula 9) executam código em sandboxes (Aula 11); uma categoria de classificador especificamente para uso indevido de interpretador de código pega uma classe de ataques que a taxonomia anterior não nomeava.
 
 ### NeMo Guardrails (NVIDIA)
 
@@ -95,7 +95,7 @@ Nenhuma camada sozinha é suficiente. As camadas cobrem diferentes classes de at
 
 1. Rode `code/main.py`. Confirme que o classificador pega a entrada maliciosa cru mas perde a versão com emoji smuggling. Adicione um passo de normalização e meça a nova taxa de acerto.
 
-2. Leia a taxonomia de 13 perigos da MLCommons e a lista S1–S14 do Llama Guard 4. Identifique a categoria em S1–S14 que não tem mapeamento direto no conjunto original de 13 perigos; explique por que S14 Code Interpreter Abuse é eespecificaçãoificamente relevante para a Fase 15.
+2. Leia a taxonomia de 13 perigos da MLCommons e a lista S1–S14 do Llama Guard 4. Identifique a categoria em S1–S14 que não tem mapeamento direto no conjunto original de 13 perigos; explique por que S14 Code Interpreter Abuse é especificamente relevante para a Fase 15.
 
 3. Projete um rail de diálogo NeMo Guardrails para um bot de suporte ao cliente que nunca deve discutir diagnóstico. Escreva em inglês simples (Colang é similar). Teste contra três formulações de uma pergunta que busca diagnóstico.
 

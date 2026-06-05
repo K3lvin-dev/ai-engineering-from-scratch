@@ -14,7 +14,7 @@
 - Estender pra um loop LATS MCTS de exemplo com select / expand / simulate / backpropagate.
 - Decidir quando busca vale o multiplicador de tokens (Game of 24, geração de código) e quando uma trajectory única é suficiente (pergunta simples e resposta).
 
-## O Problemo
+## O Problema
 
 Chain-of-thought é um caminho linear. Se a primeira etapa é errada, toda etapa subsequente trabalha numa premissa ruim. No Game of 24 (usar quatro dígitos com + − × ÷ pra fazer 24), GPT-4 CoT atinge 4% de acurácia. O modelo escolhe a sub-expressão errada cedo e não consegue se recuperar.
 
@@ -69,7 +69,7 @@ Se sua tarefa tem uma resposta certa e um avaliador barulhento, busca frequentem
 
 ### Posicionamento em 2026
 
-A maioria dos agentes de produção não roda LATS. Eles rodam ReAct com verificação ancorada em ferramenta (CRITIC, Aula 05). Busca aparece em nichos eespecificaçãoializados:
+A maioria dos agentes de produção não roda LATS. Eles rodam ReAct com verificação ancorada em ferramenta (CRITIC, Aula 05). Busca aparece em nichos especializados:
 
 - Agents de código que rodam testes como função valor (estilo HumanEval).
 - Agents de pesquisa profunda que exploram múltiplos caminhos de consulta.

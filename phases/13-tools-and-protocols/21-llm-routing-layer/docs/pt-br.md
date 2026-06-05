@@ -84,7 +84,7 @@ Cada requisição carrega `provider`, `model`, `input_tokens`, `output_tokens`. 
 
 ### MCP mais roteamento
 
-Um gateway pode rotear tanto chamadas de LLM quanto requisições de sampling MCP. Quando uma requisição de sampling tem modelPreferences preferindo um modelo eespecificaçãoífico, o gateway traduz pro backend certo. É onde a Fase 13 · 17 (gateway MCP) e o gateway de roteamento desta lição às vezes se fundem num único serviço.
+Um gateway pode rotear tanto chamadas de LLM quanto requisições de sampling MCP. Quando uma requisição de sampling tem modelPreferences preferindo um modelo específico, o gateway traduz pro backend certo. É onde a Fase 13 · 17 (gateway MCP) e o gateway de roteamento desta lição às vezes se fundem num único serviço.
 
 ### Estratégias de roteamento
 

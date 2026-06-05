@@ -48,7 +48,7 @@ Usar quando {condição}. Não usar pra {casos-parecidos-mas-errados}.
 Exemplo:
 
 ```
-Usar quando o usuário pergunta sobre condições atuais para uma cidade eespecificaçãoífica.
+Usar quando o usuário pergunta sobre condições atuais para uma cidade específica.
 Não usar pra clima histórico ou previsões de vários dias.
 ```
 

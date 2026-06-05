@@ -12,7 +12,7 @@
 - Identificar os alvos de performance do Agno e quando eles importam.
 - Nomear os três primitivos do Mastra — Agents, Tools, Workflows — e os server adapters suportados.
 - Explicar por que um backend FastAPI stateless com escopo de sessão é o caminho recomendado de produção pro Agno.
-- Escolher entre Agno e Mastra pra uma stack eespecificaçãoífica (Python-first vs TypeScript-first).
+- Escolher entre Agno e Mastra pra uma stack específica (Python-first vs TypeScript-first).
 
 ## O Problema
 
@@ -100,7 +100,7 @@ Dois traces estruturalmente diferentes mas funcionalmente equivalentes.
 | Mastra | "Agentes TypeScript no Vercel AI SDK" | Agents + Tools + Workflows + Model Router |
 | Unified Model Router | "Acesso multi-provider" | Cliente único pra 3.300+ modelos em 94 providers |
 | Composite storage | "Múltiplos backends" | Memória/workflows/observabilidade cada um num store diferente |
-| Mastra Studio | "Debugger local" | Interface localhost:4111 pra introespecificaçãoção de agentes |
+| Mastra Studio | "Debugger local" | Interface localhost:4111 pra introspection de agentes |
 | Source-available | "Não é OSS" | Licença permite leitura do fonte mas restringe uso comercial |
 
 ## Leitura Complementar

@@ -39,7 +39,7 @@ Uma tarefa, três usos em produção. É por isso que todo framework de avaliaç
 
 - **SNLI** (2015). 570k pares anotados por humanos, legendas de imagens como premissas. Domínio estreito.
 - **MultiNLI** (2017). 433k pares em 10 gêneros. O corpus de treino padrão em 2026.
-- **ANLI** (2019). NLI adversarial. Humanos escreveram exemplos projetados eespecificaçãoificamente pra quebrar modelos existentes. Mais difícil.
+- **ANLI** (2019). NLI adversarial. Humanos escreveram exemplos projetados especificamente pra quebrar modelos existentes. Mais difícil.
 - **DocNLI, ConTRoL** (2020–21). Premissas de tamanho documento. Testa inferência multi-hop e de longo alcance.
 
 **A arquitetura.** Um encoder transformer (BERT, RoBERTa, DeBERTa) lê `[CLS] premissa [SEP] hipótese [SEP]`. A representação `[CLS]` alimenta um softmax de 3 vias. Treine em MNLI, avalie em benchmarks de validação, obtenha 90%+ de acurácia em pares em distribuição.
@@ -106,7 +106,7 @@ Veja `code/main.py` pra um brinquedo com stdlib apenas: premissa e hipótese sã
 - **Heurística de sobreposição lexical.** A heurística de subsequência ("toda subsequência é implicada") passa no SNLI mas falha em HANS/ANLI. Use benchmarks adversariais.
 - **Degradação em tamanho de documento.** Modelos NLI de frase única caem 20+ F1 com premissas de tamanho documento. Use modelos treinados em DocNLI pra contexto longo.
 - **Sensibilidade a template zero-shot.** "This example is about {label}" vs "{label}" vs "The topic is {label}" pode variar a acurácia em 10+ pontos. Ajuste o template.
-- **Incompatibilidade de domínio.** MNLI treina em inglês geral. Textos jurídicos, médicos e científicos precisam de modelos NLI de domínio eespecificaçãoífico (ex: SciNLI, MedNLI).
+- **Incompatibilidade de domínio.** MNLI treina em inglês geral. Textos jurídicos, médicos e científicos precisam de modelos NLI de domínio específico (ex: SciNLI, MedNLI).
 
 ## Usar
 

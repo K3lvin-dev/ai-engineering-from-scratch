@@ -61,7 +61,7 @@ PATTERNS = [
 ]
 ```
 
-Veja `code/main.py` pro extrator de brinquedo completo. Padrões Hearst ainda são usados em pipelines de domínio eespecificaçãoífico porque são debugáveis.
+Veja `code/main.py` pro extrator de brinquedo completo. Padrões Hearst ainda são usados em pipelines de domínio específico porque são debugáveis.
 
 ### Passo 2: classificação de relações supervisionada
 
@@ -74,7 +74,7 @@ model = AutoModelForSequenceClassification.from_pretrained("Babelscape/rebel-lar
 text = "Tim Cook was born in Alabama. He later became CEO of Apple."
 encoded = tok(text, return_tensors="pt", truncation=True)
 output = model.generate(**encoded, max_length=200)
-triples = tok.batch_decode(output, skip_especificaçãoial_tokens=False)
+triples = tok.batch_decode(output, skip_special_tokens=False)
 ```
 
 REBEL é um extrator de relações seq2seq: texto entra, triplos saem, já em IDs de propriedade da Wikidata. Fine-tuned em dados de supervisão distante. Baseline padrão de pesos abertos.
@@ -152,7 +152,7 @@ A stack de 2026:
 | Situação | Escolha |
 |-----------|------|
 | Produção rápida, domínio geral | REBEL ou LlamaPred com canonicização Wikidata |
-| Domínio eespecificaçãoífico (biomed, jurídico) | Fine-tuning de domínio estilo SciREX + ontologia customizada |
+| Domínio específico (biomed, jurídico) | Fine-tuning de domínio estilo SciREX + ontologia customizada |
 | Via prompting de LLM, saída auditada | Pipeline AEVS: ancorar → extrair → verificar → suplementar |
 | IE de notícias em alto volume | Híbrido baseado em padrões + supervisionado |
 | Construindo KG do zero | Open IE + passagem de canonicização manual |

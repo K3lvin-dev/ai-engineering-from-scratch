@@ -34,7 +34,7 @@ Esse é todo o espaço de design. Cada framework escolhe padrões pra cada eixo;
 | AutoGen v0.4 / AG2 | `ConversableAgent` | selecionador de falante no GroupChat | message pool | função seletora (LLM ou round-robin) |
 | CrewAI | `Agent(role, goal, backstory)` | `Process.Sequential / Hierarchical` | Saídas de tarefas encadeadas | LLM gerente ou ordem estática |
 | LangGraph | função de nó | aresta de grafo + condição | `StateGraph` reducer | o grafo, determinístico |
-| Microsoft Agent Framework | agente + padrões de orquestração | eespecificaçãoífico por padrão | thread / contexto | eespecificaçãoífico por padrão |
+| Microsoft Agent Framework | agente + padrões de orquestração | específico por padrão | thread / contexto | específico por padrão |
 | Google ADK | agente + card A2A | tarefa A2A | artefatos A2A | host decide |
 
 Diferenças superficiais parecem enormes. Por baixo: as mesmas quatro alavancas.
@@ -53,7 +53,7 @@ Essas três perguntas respondem 80% de qual framework se encaixa num dado proble
 
 Toda primitiva exceto estado compartilhada é stateless. Agent é uma função de (prompt, tools). Handoff é uma chamada de função. Orquestrador é um agendador. **A única coisa com estado no sistema é o estado compartilhado.** É onde moram todos os bugs interessantes: envenenamento de memória (Lição 15), ordenação de mensagens, versionamento, contenção de escrita.
 
-Frameworks que escondem o estado compartilhado (Swarm) empurram o problema pro chamador. Frames que o centralizam (checkpoint LangGraph, pool AutoGen) o tornam inespecificaçãoionável mas transferem o custo de coordenação pra implementação do estado compartilhado.
+Frameworks que escondem o estado compartilhado (Swarm) empurram o problema pro chamador. Frames que o centralizam (checkpoint LangGraph, pool AutoGen) o tornam inspecionável mas transferem o custo de coordenação pra implementação do estado compartilhado.
 
 ### Anatomia de uma primitiva individual
 
@@ -160,7 +160,7 @@ Fixe o mapeamento na sua doc de arquitetura. Quando um novo membro do time entra
 | Orquestrador | "Coordenador" | Quem decide quem roda a seguir. Grafo estático, selecionador LLM, orientado a handoff, ou orientado a fila. |
 | Primitiva | "Abstração" | Um dos quatro eixos que todo framework parametriza. Não é funcionalidade de framework. |
 | Message pool | "Histórico de chat compartilhado" | Estado compartilhado de histórico completo. Fácil de raciocinar, escala mal. |
-| Estado projetado | "Visão escopada" | Visão eespecificaçãoífica por papel no estado compartilhado. Escala, exige design de schema. |
+| Estado projetado | "Visão escopada" | Visão específica por papel no estado compartilhado. Escala, exige design de schema. |
 | Seleção de falante | "Quem fala a próximo" | Padrão de orquestrador onde uma função (geralmente um LLM) escolhe o próximo agente de um grupo. |
 
 ## Leitura Complementar

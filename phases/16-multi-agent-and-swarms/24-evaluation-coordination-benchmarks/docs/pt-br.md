@@ -3,7 +3,7 @@
 > Cinco benchmarks de 2025-2026 cobrem o espaço de avaliação multi-agente. **MultiAgentBench / MARBLE** (ACL 2025, arXiv:2503.01935) avalia topologias estrela/cadeia/árvore/grafo com KPIs de marco; **grafo é o melhor pra pesquisa**, planejamento cognitivo adiciona ~3% de conquista de marcos. **COMMA** avalia coordenação multimodal de informação assimétrica; modelos state-of-the-art incluindo GPT-4o lutam pra superar um baseline aleatório. **MedAgentBoard** (arXiv:2505.12371) cobre quatro categorias de tarefas médicas e frequentemente encontra que multi-agente não domina single-LLM. **AgentArch** (arXiv:2509.10769) faz benchmark de arquiteturas de agente enterprise combinando uso de ferramentas + memória + orquestração. **SWE-bench Pro** ([arXiv:2509.16941](https://arxiv.org/abs/2509.16941)) tem 1865 problemas em 41 repos cobrindo apps de negócio, serviços B2B e ferramentas de desenvolvedor; modelos frontier pontuam ~23% no Pro vs 70%+ no Verified — um reality check sobre contaminação. Claude Opus 4.7 (abril 2026) é reportado em **64.3%** no Pro com coordenação explícita de agent-teams (nenhuma fonte primária da Anthropic publicada ainda — trate como preliminar); Verdent (scaffold de agent) atinge **76.1% pass@1** no Verified ([relatório técnico Verdent](https://www.verdent.ai/blog/swe-bench-verified-technical-report)). **AAAI 2026 Bridge Program WMAC** (https://multiagents.org/2026/) é o ponto focal comunitário de 2026. Esta aula se baseia nas métricas do MARBLE, roda um sweep de topologia-vs-métrica e fixa a regra "passar no SWE-bench Verified não é evidência de generalização".
 
 **Tipo:** Aprender
-**Idiomas:** Python (stdlib)
+**Linguagens:** Python (stdlib)
 **Pré-requisitos:** Fase 16 · 15 (Topologia de Votação e Debate), Fase 16 · 23 (Modos de Falha)
 **Tempo:** ~75 minutos
 
@@ -41,7 +41,7 @@ Use quando: seu sistema tem coordenação multimodal ou de informação assimét
 
 arXiv:2505.12371. Quatro categorias de tarefas médicas: diagnóstico, planejamento de tratamento, geração de relatório, comunicação com paciente. Compara multi-agente vs single-LLM vs sistemas convencionais baseados em regras.
 
-Achado: multi-agente NÃO domina single-LLM na maioria das categorias. A vantagem multi-agente é estreita — decomposição de tarefa ajuda quando as subtarefas são claramente separáveis (diagnóstico + tratamento); prejudica quando o overhead de coordenação excede o ganho de eespecificaçãoialização (geração de relatório).
+Achado: multi-agente NÃO domina single-LLM na maioria das categorias. A vantagem multi-agente é estreita — decomposição de tarefa ajuda quando as subtarefas são claramente separáveis (diagnóstico + tratamento); prejudica quando o overhead de coordenação excede o ganho de especialização (geração de relatório).
 
 Use quando: seu domínio tem baselines single-LLM claros. Se a lição do MedAgentBoard se generaliza, muitos sistemas multi-agente propostos são super-engineered.
 
@@ -116,13 +116,13 @@ Disciplina de avaliação em produção:
 - **Inclua um baseline aleatório** em toda comparação. Se você não superar o aleatório por margem ampla numa tarefa de coordenação, a tarefa pode estar mal formulada.
 - **Reporte custo junto com acurácia.** Custo de token e tempo de parede. Equipes de ops precisam dos dois.
 - **Reconstrua o benchmark trimestralmente.** Distribuição de produção muda; benchmarks desatualizados enganam.
-- **Evite overfitting em benchmarks publicados.** Se seu time está otimizando eespecificaçãoificamente pra números do SWE-bench Pro, você vai regredir em produção.
+- **Evite overfitting em benchmarks publicados.** Se seu time está otimizando especificamente pra números do SWE-bench Pro, você vai regredir em produção.
 
 ## Exercícios
 
 1. Execute `code/main.py`. Identifique qual dos três sistemas simulados tem a melhor taxa de conquista-custo. Combina com o sistema de maior acurácia bruta?
 2. Leia MultiAgentBench (arXiv:2503.01935). Pro seu domínio de tarefa, decida qual das quatro topologias o MARBLE recomendaria. Justifique com os resultados do artigo.
-3. Leia o artigo SWE-bench Pro. O que eespecificaçãoificamente o torna resistente a contaminação? A mesma técnica poderia ser aplicada a outros benchmarks que você se importa?
+3. Leia o artigo SWE-bench Pro. O que especificamente o torna resistente a contaminação? A mesma técnica poderia ser aplicada a outros benchmarks que você se importa?
 4. Leia o achado do COMMA sobre coordenação multimodal. Projete uma tarefa simples de coordenação multimodal que você poderia adicionar ao seu benchmark interno. O que contaria como sinal útil?
 5. Aplique a checklist de alegações de benchmark ao resultado headline de um artigo multi-agente recente. Qual nota você daria à alegação?
 

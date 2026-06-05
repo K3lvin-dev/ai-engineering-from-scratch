@@ -116,6 +116,33 @@ L = -log(exp(sim(z_i, z_j) / tau) / sum(exp(sim(z_i, z_k) / tau)))
 
 Onde sim() é similaridade cosseno, z_i e z_j são o par positivo, a soma é sobre todos os negativos e tau (temperatura) controla o quão afiada é a distribuição.
 
+Números reais: batch size 256 significa 255 negativos por par positivo. Temperatura tau = 0.07 (padrão SimCLR). A perda parece uma softmax sobre similaridades — ela quer que a similaridade do par positivo seja a maior entre todas as 256 opções.
+
+**Triplet Loss:**
+
+Recebe três entradas: âncora, positivo (mesma classe), negativo (classe diferente).
+
+```
+L = max(0, d(âncora, positivo) - d(âncora, negativo) + margem)
+```
+
+A margem (tipicamente 0.2-1.0) força um gap mínimo entre distâncias positiva e negativa. Se o negativo já está distante o suficiente, a perda é zero — sem gradiente, sem atualização. Isso torna o treino eficiente mas requer mineração cuidadosa de tripletes (escolher negativos difíceis que estão perto da âncora).
+
+### Focal Loss
+
+Pra datasets desbalanceados. A entropia cruzada padrão trata todos os exemplos corretamente classificados igualmente. Focal loss reduz o peso de exemplos fáceis:
+
+```
+FL = -alpha * (1 - p_t)^gamma * log(p_t)
+```
+
+Onde p_t é a probabilidade prevista da classe verdadeira e gamma controla o foco. Com gamma = 0, isso é entropia cruzada padrão. Com gamma = 2 (o padrão):
+
+- Exemplo fácil (p_t = 0.9): peso = (0.1)^2 = 0.01. Efetivamente ignorado.
+- Exemplo difícil (p_t = 0.1): peso = (0.9)^2 = 0.81. Sinal de gradiente completo.
+
+Focal loss foi introduzida por Lin et al. pra detecção de objetos, onde 99% das regiões candidatas são fundo (negativos fáceis). Sem focal loss, o modelo se afoga em exemplos de fundo fáceis e nunca aprende a detectar objetos. Com ela, o modelo foca sua capacidade nos casos difíceis e ambíguos que importam.
+
 ### Árvore de Decisão de Funções de Perda
 
 ```mermaid
@@ -136,6 +163,20 @@ flowchart TD
     Emb -->|"Dados pareados"| CL["Usar Perda Contrastiva"]
     Emb -->|"Tripletes disponíveis"| TL["Usar Triplet Loss"]
     Emb -->|"Lote grande auto-supervisionado"| NCE["Usar InfoNCE"]
+```
+
+### Paisagem da Perda
+
+```mermaid
+graph LR
+    subgraph "Formato da Superfície de Perda"
+        MSE_S["MSE<br/>Parábola suave<br/>Mínimo único<br/>Fácil de otimizar"]
+        CE_S["Entropia Cruzada<br/>Íngreme perto de respostas erradas<br/>Plana perto de respostas certas<br/>Gradientes fortes onde precisa"]
+        CL_S["Contrastiva<br/>Muitos mínimos locais<br/>Depende da composição do lote<br/>Temperatura controla a nitidez"]
+    end
+    MSE_S -->|"Melhor pra"| Reg2["Regressão"]
+    CE_S -->|"Melhor pra"| Cls2["Classificação"]
+    CL_S -->|"Melhor pra"| Emb2["Aprendizado de representação"]
 ```
 
 ## Construa

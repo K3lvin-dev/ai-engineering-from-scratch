@@ -7,14 +7,14 @@
 **Pré-requisitos:** Fase 18 · 12 (PAIR), Fase 14 (engenharia de agentes)
 **Tempo:** ~75 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Definir indirect prompt injection e descrever três vetores de entrega comuns.
 - Explicar por que filtros de input do usuário falham completamente no IPI.
 - Descrever o enquadramento de "controle de fluxo de informação" como o paradigma de defesa em 2026.
 - Indicar o achado de Nasr et al. (outubro de 2025) sobre sucesso de ataque adaptativo contra defesas IPI publicadas.
 
-## O Problemo
+## O Problema
 
 Direct prompt injection requer que o atacante alcance o usuário ou seu prompt. IPI não requer nenhum dos dois: o atacante coloca um payload em qualquer conteúdo que o agente possa ler — uma página web, um email na caixa de entrada, um issue no GitHub, uma avaliação de produto. O agente o pega durante a operação normal e executa as instruções. O usuário é o mensageiro, não a intenção.
 
@@ -54,7 +54,7 @@ OWASP LLM Top 10 (2025) classifica prompt injection (direto + indireto) como LLM
 
 ### Onde isso se encaixa na Fase 18
 
-Lições 12-14 são jailbreaks centrados no modelo. Lição 15 é o ataque centrado no sistema que domina deployments de produção em 2026. Lição 16 cobre a ferramentagem defensiva. Lição 25 cobre a narrativa eespecificaçãoífica de CVEs.
+Lições 12-14 são jailbreaks centrados no modelo. Lição 15 é o ataque centrado no sistema que domina deployments de produção em 2026. Lição 16 cobre a ferramentagem defensiva. Lição 25 cobre a narrativa específica de CVEs.
 
 ## Use
 

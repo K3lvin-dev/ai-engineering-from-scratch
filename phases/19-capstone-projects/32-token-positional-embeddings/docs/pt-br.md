@@ -3,7 +3,7 @@
 > Ids são inteiros. O modelo quer vetores. Duas tabelas de consulta ficam entre eles, e a escolha da posicional molda o que o modelo consegue aprender.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições da Fase 04, lições de transformer da Fase 07, Lições 30 e 31 desta fase
 **Tempo:** ~90 minutos
 

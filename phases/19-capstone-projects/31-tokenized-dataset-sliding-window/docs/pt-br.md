@@ -3,7 +3,7 @@
 > Uma execução de pré-treinamento é uma função de ids de token para gradientes. Esta lição constrói a esteira que alimenta os ids.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições da Fase 04, lições de transformer da Fase 07, Lição 30 desta fase
 **Tempo:** ~90 minutos
 

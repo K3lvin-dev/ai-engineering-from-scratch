@@ -3,7 +3,7 @@
 > Modelos de áudio-linguagem de 2026 raciocinam sobre fala + som ambiental + música. Qwen2.5-Omni-7B combina com GPT-4o Audio no MMAU-Pro. Audio Flamingo Next supera Gemini 2.5 Pro no LongAudioBench. O gap entre open e closed essencialmente fechou — exceto em tarefas multi-áudio, onde todos estão perto do aleatório.
 
 **Tipo:** Aprender
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 04 (ASR), Fase 12 · 03 (Modelos Visão-Linguagem), Fase 7 · 10 (Audio Transformers)
 **Tempo:** ~45 minutos
 
@@ -100,7 +100,7 @@ messages = [{
 }]
 inputs = processor.apply_chat_template(messages, tokenize=True, return_tensors="pt")
 output = model.generate(**inputs, max_new_tokens=200)
-print(processor.decode(output[0], skip_especificaçãoial_tokens=True))
+print(processor.decode(output[0], skip_special_tokens=True))
 ```
 
 ### Passo 2: o padrão do projetor
@@ -145,7 +145,7 @@ Reporte por categoria (fala / som / música / multi-áudio) separadamente. Núme
 | Melhor open em áudio longo | Audio Flamingo Next |
 | Melhor closed | Gemini 2.5 Pro |
 | Agente voz-entrada / voz-saída | Qwen2.5-Omni ou GPT-4o Audio |
-| Raciocínio musical | Audio Flamingo 3 ou 2 (AF-CLAP eespecificaçãoializado em música) |
+| Raciocínio musical | Audio Flamingo 3 ou 2 (AF-CLAP especializado em música) |
 | Auditoria de call-center | Gemini 2.5 Pro via API, com RAG sobre seus docs de política |
 
 ## Armadilhas

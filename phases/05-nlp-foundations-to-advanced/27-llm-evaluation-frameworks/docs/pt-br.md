@@ -46,7 +46,7 @@ Por que falha silenciosamente:
 | Precisão do contexto | Dos chunks recuperados, qual fração era relevante? | LLM-julgador |
 | Recall do contexto | O retrieval retornou tudo que era necessário? | LLM-julgador contra resposta dourada |
 
-**G-Eval.** Defina um critério customizado: "Did the answer cite the correct source?" O framework expande automaticamente em passos de avaliação com chain-of-thought, depois pontua 0-1. Bom pra dimensões de qualidade de domínio eespecificaçãoífico que o RAGAS não cobre.
+**G-Eval.** Defina um critério customizado: "Did the answer cite the correct source?" O framework expande automaticamente em passos de avaliação com chain-of-thought, depois pontua 0-1. Bom pra dimensões de qualidade de domínio específico que o RAGAS não cobre.
 
 **Calibração.** Nunca confie na pontuação bruta do julgador até ter uma correlação com rótulos humanos. Rode 100 exemplos anotados manualmente. Plote julgador vs humano. Calcule Spearman rho. Se rho < 0.7, sua rúbrica de julgador precisa de trabalho.
 
@@ -167,7 +167,7 @@ Veja `code/main.py`. Aproximações com stdlib apenas de fidelidade (sobreposiç
 - **Sem calibração.** Um julgador com 0.3 de correlação com rótulos humanos é ruído. Exija uma rodada de calibração antes de disponibilizar.
 - **Auto-avaliação.** Usar o mesmo LLM pra gerar e julgar infla pontuações em 10-20%. Use uma família de modelo diferente pro julgador.
 - **Viés posicional em julgamento pareado.** Julgadores preferem a primeira opção apresentada. Sempre randomize a ordem e rode as duas.
-- **Agregação bruta esconde falhas.** Média de 0.85 frequentemente esconde 5% de falhas catastróficas. Sempre inespecificaçãoione o quantil inferior.
+- **Agregação bruta esconde falhas.** Média de 0.85 frequentemente esconde 5% de falhas catastróficas. Sempre inspecione o quantil inferior.
 - **Deterioração do dataset dourado.** Conjuntos de avaliação sem versionamento que derivaam quebram comparação longitudinal. Rotule o dataset a cada mudança.
 - **Custo de LLM.** Em escala, chamadas do julgador dominam o custo. Use o modelo mais barato que atinge o limiar de calibração. GPT-4o-mini, Claude Haiku, Mistral-small.
 

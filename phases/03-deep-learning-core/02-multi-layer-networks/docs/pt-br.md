@@ -20,7 +20,7 @@ Um único neurônio é um desenhador de retas. É isso. Uma reta reta nos seus d
 
 Em 1969, Minsky e Papert provaram que essa limitação era fatal: uma rede de uma camada não consegue aprender XOR. Não "tem dificuldade pra aprender" — matematicamente não consegue. A tabela-verdade do XOR coloca [0,1] e [1,0] de um lado, [0,0] e [1,1] do outro. Nenhuma reta separa eles.
 
-Isso matou o financiamento de redes neurais por mais de uma década. A solução era óbvia em retroespecificaçãoto: pare de usar uma camada. Empilhe neurônios em camadas. Deixe a primeira camada esculpir o espaço de entrada em novas features, e deixe a segunda camada combinar essas features em decisões que nenhuma reta poderia tomar.
+Isso matou o financiamento de redes neurais por mais de uma década. A solução era óbvia em retrospectiva: pare de usar uma camada. Empilhe neurônios em camadas. Deixe a primeira camada esculpir o espaço de entrada em novas features, e deixe a segunda camada combinar essas features em decisões que nenhuma reta poderia tomar.
 
 Esse empilhamento é a rede multicamada. Ela é a fundação de todo modelo de deep learning em produção hoje. O passo direto — dados fluindo da entrada pelas camadas ocultas até a saída — é a primeira coisa que você precisa construir antes que qualquer coisa funcione.
 
@@ -63,7 +63,7 @@ graph LR
 
 Essa é uma rede 2-3-1. Duas entradas, três neurônios ocultos, uma saída. Cada conexão carrega um peso. Cada neurônio (exceto entrada) carrega um viés.
 
-Cada camada produz um vetor de números chamado estado oculta. Para texto, estados ocultos aumentam a dimensionalidade — codificam uma palavra em 768 números pra capturar significado semântico. Para imagens, eles reduzem a dimensionalidade — comprimem milhões de pixels numa representação gerenciável. O estado oculta é onde o aprendizado mora.
+Cada camada produz um vetor de números chamado estado oculto. Para texto, estados ocultos aumentam a dimensionalidade — codificam uma palavra em 768 números pra capturar significado semântico. Para imagens, eles reduzem a dimensionalidade — comprimem milhões de pixels numa representação gerenciável. O estado oculto é onde o aprendizado mora.
 
 ### Neurônios e Ativações
 
@@ -124,9 +124,9 @@ A regra: a matriz de pesos W na camada k tem forma (neurônios_camada_k, neurôn
 
 Em 1989, George Cybenko provou algo notável: uma rede neural com uma camada oculta e neurônios suficientes pode aproximar qualquer função contínua com qualquer precisão desejada.
 
-Isso não significa que uma camada oculta é sempre a melhor. Significa que a arquitetura é teoricamente capaz. Na prática, redes mais profundas (mais camadas, menos neurônios por camada) aprendem as mesmas funções com muito menos parâmetros totais que redes rasas e largas. É por que o deep learning funciona.
+Isso não significa que uma camada oculta é sempre a melhor. Significa que a arquitetura é teoricamente capaz. Na prática, redes mais profundas (mais camadas, menos neurônios por camada) aprendem as mesmas funções com muito menos parâmetros totais que redes rasas e largas. É por isso que o deep learning funciona.
 
-A intuição: cada neurônio na camada oculta aprende um "bump" ou feature. Bump suficientes colocados nos locais certos podem aproximar qualquer curva suave. Mais neurônios, mais bumps, melhor aproximação.
+A intuição: cada neurônio na camada oculta aprende um "bump" ou feature. Bumps suficientes colocados nos locais certos podem aproximar qualquer curva suave. Mais neurônios, mais bumps, melhor aproximação.
 
 ```mermaid
 graph LR
@@ -218,7 +218,7 @@ Isso é o passo direto inteiro. Quatro linhas de lógica. Dados entram, passam p
 
 ### Passo 4: XOR com Pesos Ajustados Manualmente
 
-Na Aula 01, resolvemos XOR combinando perceptrons OR, NAND e AGORA. Agora fazemos a mesma coisa com nossas classes Layer e Network. Arquitetura 2-2-1: duas entradas, dois neurônios ocultos, uma saída.
+Na Aula 01, resolvemos XOR combinando perceptrons OR, NAND e AND. Agora fazemos a mesma coisa com nossas classes Layer e Network. Arquitetura 2-2-1: duas entradas, dois neurônios ocultos, uma saída.
 
 ```python
 hidden = Layer(

@@ -14,7 +14,7 @@
 - Projet uma escada de aplicação (rate → teto de gasto → kill switch) para um produto multi-tenant.
 - Escolher uma métrica unitária (custo por consulta resolvida / artefato) em vez de $/M tokens.
 
-## O Problemo
+## O Problema
 
 Sua fatura diz $40.000. Você não sabe:
 - Qual tenant gastou.

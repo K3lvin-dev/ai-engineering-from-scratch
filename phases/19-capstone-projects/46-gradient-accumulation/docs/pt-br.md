@@ -14,7 +14,7 @@
 - Pular a sincronizacao do optimiser ate o ultimo micro-batch (sync-no-ultimo-passo).
 - Ler uma curva de throughput versus batch efetivo e explicar o retorno decrescente.
 
-## O Problemo
+## O Problema
 
 Voce quer treinar com um batch efetivo de 512 porque a curva de loss e mais suave e o passo do optimiser faz mais sentido nessa escala. O acelerador na mesa segura 32 exemplos antes de ficar sem memoria. Dobrar o batch nao e opcao. Reduzir o modelo pela metade nao e opcao. O truque que o campo alcancou em 2017 e nunca parou de usar e rodar 16 backward passes, deixar os gradientes se acumularem dentro dos buffers de parametro, e so dar o passo do optimiser quando a contagem alcancar o alvo.
 

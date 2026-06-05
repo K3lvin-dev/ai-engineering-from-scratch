@@ -18,9 +18,11 @@
 
 Você tem dez aulas de blocos espalhados em arquivos separados. Uma classe `Value` aqui, um loop de treino lá, inicialização de pesos em outro arquivo, agendamentos de taxa em mais outro. Pra treinar uma rede, você copia e cola de cinco aulas diferentes e conecta na mão.
 
-Frameworks resolvem isso. PyTorch dá `nn.Module`, `nn.Sequential`, `optim.Adam`, `DataLoader` e um padrão de loop de treino que amarra tudo. TensorFlow dá `keras.Layer`, `keras.Sequential`, `keras.optimizers.Adam`. Não é magia. São padrões organizacionais que tornam possível definir, treinar e avaliar redes sem reinventar a infraestrutura toda vez.
+Isso é o que frameworks resolvem. PyTorch dá `nn.Module`, `nn.Sequential`, `optim.Adam`, `DataLoader` e um padrão de loop de treino que amarra tudo. TensorFlow dá `keras.Layer`, `keras.Sequential`, `keras.optimizers.Adam`. Não é magia. São padrões organizacionais que tornam possível definir, treinar e avaliar redes sem reinventar a infraestrutura toda vez.
 
-Você vai construir a mesma coisa em ~500 linhas de Python. Sem numpy. Sem dependências externas.
+Você vai construir a mesma coisa em ~500 linhas de Python. Sem numpy. Sem dependências externas. Um framework que pode definir qualquer rede feedforward, treinar com SGD ou Adam, dividir dados em lotes, aplicar dropout e batch normalization, usar qualquer ativação e agendar a taxa de aprendizado.
+
+Quando terminar, você vai entender exatamente o que acontece quando escreve `model = nn.Sequential(...)` no PyTorch. Você vai entender por que `model.train()` e `model.eval()` existem. Você vai entender por que `optimizer.zero_grad()` é uma chamada separada. Você vai entender tudo, porque construiu tudo.
 
 ## O Conceito
 
@@ -32,13 +34,60 @@ Cada camada no PyTorch herda de `nn.Module`. Um Module tem três responsabilidad
 2. **parameters()** — retornar todos os pesos treináveis
 3. **backward()** — computar gradientes (tratado por autograd no PyTorch, explícito no nosso)
 
+Uma camada Linear é um Module. Uma ativação ReLU é um Module. Uma camada dropout é um Module. Uma camada de batch normalization é um Module. Todos têm a mesma interface.
+
 ### Contêiner Sequential
 
-`nn.Sequential` encadeia Modules. Passo direto: alimenta dados pelo Module 1, depois 2, depois 3. Passo reverso: inverte a cadeia.
+`nn.Sequential` encadeia Modules. Passo direto: alimenta dados pelo Module 1, depois 2, depois 3. Passo reverso: inverte a cadeia. O contêiner em si é um Module — tem forward(), parameters() e backward(). Este é o padrão composto: uma sequência de Modules é ela própria um Module.
 
 ### Modo Treino vs Avaliação
 
-Dropout aleatoriamente zera neurônios durante treino mas passa tudo durante avaliação. Batch normalization usa estatísticas do lote durante treino mas médias móveis durante avaliação. `train()` e `eval()` alternam esse comportamento.
+Dropout aleatoriamente zera neurônios durante treino mas passa tudo durante avaliação. Batch normalization usa estatísticas do lote durante treino mas médias móveis durante avaliação. Os métodos `train()` e `eval()` alternam esse comportamento. Todo Module tem uma flag `training`.
+
+### Otimizador
+
+O otimizador atualiza parâmetros usando seus gradientes. SGD: `param -= lr * grad`. Adam: mantém estimativas de momentum e variância, depois atualiza. O otimizador não sabe sobre a arquitetura da rede — só vê uma lista plana de parâmetros e seus gradientes.
+
+### DataLoader
+
+Dividir em lotes importa por duas razões. Primeiro, você não consegue colocar o dataset inteiro na memória pra problemas grandes. Segundo, a descida de gradiente por mini-lotes fornece ruído que ajuda a escapar de mínimos locais. O DataLoader divide dados em lotes e opcionalmente embaralha entre épocas.
+
+### Arquitetura do Framework
+
+```mermaid
+graph TD
+    subgraph "Módulos"
+        Linear["Linear<br/>W*x + b"]
+        ReLU["ReLU<br/>max(0, x)"]
+        Sigmoid["Sigmoid<br/>1/(1+e^-x)"]
+        Dropout["Dropout<br/>máscara aleatória"]
+        BatchNorm["BatchNorm<br/>normalizar ativações"]
+    end
+
+    subgraph "Contêineres"
+        Sequential["Sequential<br/>encadeia módulos"]
+    end
+
+    subgraph "Funções de Perda"
+        MSE["MSELoss<br/>(pred - target)^2"]
+        BCE["BCELoss<br/>entropia cruzada binária"]
+    end
+
+    subgraph "Otimizadores"
+        SGD["SGD<br/>param -= lr * grad"]
+        Adam["Adam<br/>momentos adaptativos"]
+    end
+
+    subgraph "Dados"
+        DataLoader["DataLoader<br/>lotes + shuffle"]
+    end
+
+    Sequential --> |"contém"| Linear
+    Sequential --> |"contém"| ReLU
+    Sequential --> |"forward/backward"| MSE
+    SGD --> |"atualiza"| Sequential
+    DataLoader --> |"alimenta"| Sequential
+```
 
 ### Loop de Treino
 
@@ -61,9 +110,48 @@ sequenceDiagram
     end
 ```
 
+### Hierarquia de Module
+
+```mermaid
+classDiagram
+    class Module {
+        +forward(x)
+        +backward(grad)
+        +parameters()
+        +train()
+        +eval()
+    }
+
+    class Linear {
+        -weights
+        -biases
+        +forward(x)
+        +backward(grad)
+    }
+
+    class ReLU {
+        +forward(x)
+        +backward(grad)
+    }
+
+    class Sequential {
+        -modules[]
+        +forward(x)
+        +backward(grad)
+        +parameters()
+    }
+
+    Module <|-- Linear
+    Module <|-- ReLU
+    Module <|-- Sequential
+    Sequential *-- Module
+```
+
 ## Construa
 
 ### Passo 1: Classe Base Module
+
+A interface abstrata que toda camada implementa.
 
 ```python
 class Module:
@@ -87,6 +175,8 @@ class Module:
 ```
 
 ### Passo 2: Camada Linear
+
+O bloco fundamental. Armazena pesos e biases, computa Wx + b no forward, e gradientes de peso/entrada no backward.
 
 ```python
 import math
@@ -135,6 +225,8 @@ class Linear(Module):
 
 ### Passo 3: Módulos de Ativação
 
+ReLU, Sigmoid e Tanh como Modules. Cada um armazena em cache o que precisa pro backward.
+
 ```python
 class ReLU(Module):
     def __init__(self):
@@ -180,6 +272,8 @@ class Tanh(Module):
 
 ### Passo 4: Módulo Dropout
 
+Aleatoriamente zera elementos durante treino. Escala os elementos restantes por 1/(1-p) pra que os valores esperados permaneçam os mesmos. Não faz nada durante eval.
+
 ```python
 class Dropout(Module):
     def __init__(self, p=0.5):
@@ -200,6 +294,8 @@ class Dropout(Module):
 ```
 
 ### Passo 5: Módulo BatchNorm
+
+Normaliza ativações pra média zero e variância unitária por feature através do lote. Mantém estatísticas móveis pro modo eval.
 
 ```python
 class BatchNorm(Module):
@@ -279,6 +375,8 @@ class BatchNorm(Module):
 
 ### Passo 6: Contêiner Sequential
 
+Encadeia módulos. Forward vai da esquerda pra direita, backward vai da direita pra esquerda.
+
 ```python
 class Sequential(Module):
     def __init__(self, *modules):
@@ -313,6 +411,8 @@ class Sequential(Module):
 ```
 
 ### Passo 7: Funções de Perda
+
+MSE e Entropia Cruzada Binária. Cada uma retorna o valor da perda e fornece um backward() que retorna o gradiente.
 
 ```python
 class MSELoss:
@@ -352,6 +452,8 @@ class BCELoss:
 ```
 
 ### Passo 8: Otimizadores SGD e Adam
+
+Ambos recebem uma lista de parâmetros e atualizam pesos usando gradientes.
 
 ```python
 class SGD:
@@ -400,6 +502,7 @@ class Adam:
             v_hat = self.v[idx] / (1 - self.beta2 ** self.t)
 
             update = self.lr * m_hat / (math.sqrt(v_hat) + self.eps)
+
             if j is not None:
                 container[i][j] -= update
             else:
@@ -415,6 +518,8 @@ class Adam:
 
 ### Passo 9: DataLoader
 
+Divide dados em lotes, opcionalmente embaralha a cada época.
+
 ```python
 class DataLoader:
     def __init__(self, data, batch_size=32, shuffle=True):
@@ -426,9 +531,9 @@ class DataLoader:
         indices = list(range(len(self.data)))
         if self.shuffle:
             random.shuffle(indices)
-        for i in range(0, len(indices), self.batch_size):
-            batch_indices = indices[i:i + self.batch_size]
-            batch = [self.data[j] for j in batch_indices]
+        for start in range(0, len(indices), self.batch_size):
+            batch_indices = indices[start:start + self.batch_size]
+            batch = [self.data[i] for i in batch_indices]
             inputs = [item[0] for item in batch]
             targets = [item[1] for item in batch]
             yield inputs, targets
@@ -437,77 +542,166 @@ class DataLoader:
         return (len(self.data) + self.batch_size - 1) // self.batch_size
 ```
 
-### Passo 10: Loop de Treino Completo
+### Passo 10: Treine uma Rede de 4 Camadas na Classificação de Círculo
+
+Conecte tudo. Defina um modelo, escolha uma perda, escolha um otimizador, execute o loop de treino.
 
 ```python
-import random
-import math
-
-random.seed(42)
-
-def make_circle_data(n=200):
+def make_circle_data(n=500, seed=42):
+    random.seed(seed)
     data = []
     for _ in range(n):
         x = random.uniform(-2, 2)
         y = random.uniform(-2, 2)
-        label = [1.0] if x * x + y * y < 1.5 else [0.0]
-        data.append(([x, y], label))
+        label = 1.0 if x * x + y * y < 1.5 else 0.0
+        data.append(([x, y], [label]))
     return data
 
-train_data = make_circle_data(200)
-test_data = make_circle_data(100)
 
-model = Sequential(
-    Linear(2, 16),
-    ReLU(),
-    Dropout(0.1),
-    Linear(16, 8),
-    ReLU(),
-    Linear(8, 1),
-    Sigmoid(),
-)
+def train():
+    random.seed(42)
 
-criterion = BCELoss()
-optimizer = Adam(model.parameters(), lr=0.01)
-loader = DataLoader(train_data, batch_size=32, shuffle=True)
+    model = Sequential(
+        Linear(2, 16),
+        ReLU(),
+        Linear(16, 16),
+        ReLU(),
+        Linear(16, 8),
+        ReLU(),
+        Linear(8, 1),
+        Sigmoid(),
+    )
 
-for epoch in range(200):
-    total_loss = 0.0
-    correct = 0
+    criterion = BCELoss()
+    optimizer = Adam(model.parameters(), lr=0.01)
+
+    data = make_circle_data(500)
+    split = int(len(data) * 0.8)
+    train_data = data[:split]
+    test_data = data[split:]
+
+    loader = DataLoader(train_data, batch_size=16, shuffle=True)
+
     model.train()
-    for inputs_batch, targets_batch in loader:
-        optimizer.zero_grad()
-        batch_loss = 0.0
-        for x, y in zip(inputs_batch, targets_batch):
-            pred = model.forward(x)
-            loss = criterion(pred, y)
-            batch_loss += loss
-        batch_loss.backward()
-        optimizer.step()
-        total_loss += batch_loss.loss
+
+    for epoch in range(100):
+        total_loss = 0
+        total_correct = 0
+        total_samples = 0
+
+        for batch_inputs, batch_targets in loader:
+            batch_loss = 0
+            for x, t in zip(batch_inputs, batch_targets):
+                pred = model.forward(x)
+                loss = criterion(pred, t)
+                batch_loss += loss
+
+                optimizer.zero_grad()
+                grad = criterion.backward()
+                model.backward(grad)
+                optimizer.step()
+
+                predicted_class = 1.0 if pred[0] >= 0.5 else 0.0
+                if predicted_class == t[0]:
+                    total_correct += 1
+                total_samples += 1
+
+            total_loss += batch_loss
+
+        avg_loss = total_loss / total_samples
+        accuracy = total_correct / total_samples * 100
+
+        if epoch % 10 == 0 or epoch == 99:
+            print(f"Epoch {epoch:3d} | Loss: {avg_loss:.6f} | Train Accuracy: {accuracy:.1f}%")
 
     model.eval()
-    test_correct = 0
-    for x, y in test_data:
+    correct = 0
+    for x, t in test_data:
         pred = model.forward(x)
-        predicted = 1 if pred[0] >= 0.5 else 0
-        if predicted == y[0]:
-            test_correct += 1
+        predicted_class = 1.0 if pred[0] >= 0.5 else 0.0
+        if predicted_class == t[0]:
+            correct += 1
+    test_accuracy = correct / len(test_data) * 100
+    print(f"\nTest Accuracy: {test_accuracy:.1f}% ({correct}/{len(test_data)})")
 
-    if epoch % 25 == 0 or epoch == 199:
-        train_acc = correct / len(train_data) * 100 if correct > 0 else 0
-        test_acc = test_correct / len(test_data) * 100
-        print(f"Epoch {epoch:3d}: loss={total_loss:.4f}, test_acc={test_acc:.1f}%")
+    return model, test_accuracy
 ```
+
+## Use
+
+Aqui está o equivalente PyTorch do que você acabou de construir:
+
+```python
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
+
+model = nn.Sequential(
+    nn.Linear(2, 16),
+    nn.ReLU(),
+    nn.Linear(16, 16),
+    nn.ReLU(),
+    nn.Linear(16, 8),
+    nn.ReLU(),
+    nn.Linear(8, 1),
+    nn.Sigmoid(),
+)
+
+criterion = nn.BCELoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+for epoch in range(100):
+    model.train()
+    for inputs, targets in dataloader:
+        optimizer.zero_grad()
+        predictions = model(inputs)
+        loss = criterion(predictions, targets)
+        loss.backward()
+        optimizer.step()
+
+    model.eval()
+    with torch.no_grad():
+        test_predictions = model(test_inputs)
+```
+
+A estrutura é idêntica. `Sequential`, `Linear`, `ReLU`, `Sigmoid`, `BCELoss`, `Adam`, `zero_grad`, `backward`, `step`, `train`, `eval`. Todo conceito mapeia um-para-um. A diferença é que PyTorch lida com autograd automaticamente (não precisa implementar backward() em cada módulo), roda em GPU e foi otimizado por anos. Mas os ossos são os mesmos.
+
+Agora quando você vir código PyTorch, sabe exatamente o que está acontecendo em cada linha. Esse entendimento é o ponto principal.
 
 ## Entregue
 
-Quando terminar, você vai entender exatamente o que acontece quando escreve `model = nn.Sequential(...)` no PyTorch. Por que `model.train()` e `model.eval()` existem. Por que `optimizer.zero_grad()` é uma chamada separada.
+Esta aula produz:
+- `outputs/prompt-framework-architect.md` — um prompt pra projetar arquiteturas de redes neurais usando abstrações de framework
 
 ## Exercícios
 
-1. Adicione um módulo `BatchNorm1d` que funcione com o DataLoader. Treine no círculo e compare com e sem batch norm.
-2. Implemente gradient clipping no otimizador: antes de aplicar atualizações, corte a norma do gradiente pra no máximo 1.0.
-3. Adicione suavização de rótulos à BCELoss: em vez de alvos [0, 1], use [0.05, 0.95].
-4. Implemente aprendizado por lotes completos (sem DataLoader) e compare com mini-lotes de 32.
-5. Construa uma rede de 3 camadas (784-256-128-10) pra MNIST usando seu framework e compare acurácia com a implementação PyTorch equivalente.
+1. Adicione uma classe `SoftmaxCrossEntropyLoss` para classificação multiclasse. Faça softmax das previsões, compute entropia cruzada e lide com o backward combinado. Teste num dataset espiral de 3 classes.
+
+2. Implemente agendamento de taxa de aprendizado no otimizador: adicione um método `set_lr()` e conecte o agendamento cosine da Aula 09. Treine o classificador de círculo com warmup + cosine e compare com LR constante.
+
+3. Adicione métodos `save()` e `load()` ao Sequential que serializam todos os pesos pra um arquivo JSON e carregam de volta. Verifique que um modelo carregado produz as mesmas previsões que o original.
+
+4. Implemente weight decay (regularização L2) no otimizador Adam. Adicione um parâmetro `weight_decay` que encolhe pesos em direção a zero a cada passo. Compare treino com decay=0 vs decay=0.01.
+
+5. Substitua o loop de treino por amostra por acumulação adequada de gradiente em mini-lote: acumule gradientes através de todas as amostras num lote, depois divida pelo tamanho do lote e dê um passo do otimizador. Meça se isso muda a velocidade de convergência.
+
+## Termos-chave
+
+| Termo | O que o pessoal diz | O que realmente significa |
+|-------|---------------------|--------------------------|
+| Module | "Uma camada" | A abstração base num framework — qualquer coisa com forward(), backward() e parameters() |
+| Sequential | "Empilhar camadas em ordem" | Um contêiner que encadeia módulos, aplicando-os em sequência no forward e reverso no backward |
+| Passo direto | "Executar a rede" | Computar a saída passando entrada por cada módulo em ordem |
+| Passo reverso | "Computar gradientes" | Propagar o gradiente da perda através de cada módulo ao contrário pra computar gradientes dos parâmetros |
+| Parâmetros | "Os pesos treináveis" | Todos valores na rede que o otimizador pode atualizar — pesos e biases |
+| Otimizador | "A coisa que atualiza pesos" | Um algoritmo que usa gradientes pra atualizar parâmetros, implementando SGD, Adam ou outras regras |
+| DataLoader | "A coisa que alimenta dados" | Um iterador que divide um dataset em lotes, opcionalmente embaralhando entre épocas |
+| Modo treino | "model.train()" | Uma flag que ativa comportamento estocástico como dropout e batch normalization com estatísticas do lote |
+| Modo avaliação | "model.eval()" | Uma flag que desativa dropout e usa estatísticas móveis pra batch normalization |
+| Zero grad | "Limpar gradientes" | Resetar todos gradientes de parâmetros pra zero antes de computar os gradientes do próximo lote |
+
+## Leitura Adicional
+
+- Paszke et al., "PyTorch: An Imperative Style, High-Performance Deep Learning Library" (2019) — o paper descrevendo as decisões de design do PyTorch
+- Chollet, "Deep Learning with Python, Second Edition" (2021) — Capítulo 3 cobre internos do Keras com a mesma abstração módulo/camada
+- Johnson, "Tiny-DNN" (https://github.com/tiny-dnn/tiny-dnn) — um framework de deep learning C++ header-only pra entender internos de framework

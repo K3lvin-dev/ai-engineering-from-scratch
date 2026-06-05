@@ -18,7 +18,7 @@ Você vai construir um painel auto-hospedado que ingere de pelo menos quatro fam
 
 Ingestão é OTLP HTTP. O SDK produz spans com semconv GenAI: `gen_ai.system`, `gen_ai.request.model`, `gen_ai.usage.input_tokens`, `gen_ai.response.id`, `llm.prompts`, `llm.completions`. Spans vão para o ClickHouse para análise colunar; metadados (usuários, sessões, apps) vão para o Postgres.
 
-Avaliações rodam como jobs em lote sobre traces amostrados. DeepEval pontua fidelidade, toxicidade e relevância da resposta. RAGAS pontua métricas de recuperação quando o trace carrega contexto de recuperação. LLM-judges customizados rodam verificações eespecificaçãoíficas do domínio (vazamento de PII, resposta fora de política). Jobs de avaliação escrevem de volta no mesmo ClickHouse como spans de avaliação vinculados ao trace pai.
+Avaliações rodam como jobs em lote sobre traces amostrados. DeepEval pontua fidelidade, toxicidade e relevância da resposta. RAGAS pontua métricas de recuperação quando o trace carrega contexto de recuperação. LLM-judges customizados rodam verificações específicas do domínio (vazamento de PII, resposta fora de política). Jobs de avaliação escrevem de volta no mesmo ClickHouse como spans de avaliação vinculados ao trace pai.
 
 Detecção de deriva observa distribuições de embeddings ao longo do tempo (divergência PSI ou KL em embeddings de prompt) mais tendências de pontuação de avaliação. Alertas alimentam Prometheus Alertmanager e depois Slack / PagerDuty. A UI é Next.js 15 com Recharts.
 
@@ -123,7 +123,7 @@ $ curl -X POST https://my-otel-collector/v1/traces -d @trace.json
 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |------|------------------------|------------------------|
-| Semconv GenAI | "Atributos LLM do OTel" | Eespecificaçãoificação OpenTelemetry 2025 para atributos de span de LLM (sistema, modelo, tokens) |
+| Semconv GenAI | "Atributos LLM do OTel" | Especificação OpenTelemetry 2025 para atributos de span de LLM (sistema, modelo, tokens) |
 | Tail sampling | "Amostragem pós-trace" | Coletor decide manter ou dropar um trace após ele completar (pode olhar erros) |
 | PSI | "Índice de estabilidade populacional" | Métrica de deriva comparando duas distribuições; > 0.2 geralmente sinaliza deriva significativo |
 | LLM-judge | "Avaliação como modelo" | Um LLM pontuando a saída de outro LLM numa rubrica (fidelidade, toxicidade, PII) |
@@ -136,7 +136,7 @@ $ curl -X POST https://my-otel-collector/v1/traces -d @trace.json
 - [Langfuse](https://github.com/langfuse/langfuse) — plataforma de observabilidade open-core de referência
 - [Arize Phoenix](https://github.com/Arize-ai/phoenix) — referência alternativa com forte suporte a deriva
 - [OpenLLMetry (Traceloop)](https://github.com/traceloop/openllmetry) — família de SDKs de auto-instrumentação
-- [Convenções semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — o schema de ingestão
+- [Convenções semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — o schema de ingestão
 - [Helicone](https://www.helicone.ai) — observabilidade hospedada alternativa
 - [Braintrust](https://www.braintrust.dev) — plataforma de avaliação-first alternativa
 - [Documentação ClickHouse](https://clickhouse.com/docs) — armazenamento colunar de spans

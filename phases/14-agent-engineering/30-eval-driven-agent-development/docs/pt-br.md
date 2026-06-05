@@ -74,7 +74,7 @@ Cada aula da Fase 14 gera casos de eval:
 | 23 OTel | Spans emitem atributos necessários |
 | 26 Failure Modes | Detectores etiquetam falhas conhecidas |
 | 27 Prompt Injection | PVE recusa retrievals envenenados |
-| 28 Orquestração | Supervisor roteia pro eespecificaçãoialista certo |
+| 28 Orquestração | Supervisor roteia pro especialista certo |
 | 29 Formatos de Runtime | DLQ lida com N% de falha |
 
 Se sua suíte de eval tem casos pra cada um, você cobriu a Fase 14.
@@ -133,7 +133,7 @@ Saída: pass/fail por caso, flag de regressão, veredicto do gate de CI.
 | Evaluator-optimizer | "Propor-julgamento-refinar" | Itera até o juiz aprovar |
 | Gate de CI | "Bloqueador de merge" | Falhe o build em regressão de eval |
 | Baseline | "Last-known-good" | Score de referência pra detectar regressão |
-| Eficiência de trajetória | "Passos sobre o dourado" | Contagem de passos do agente dividida pelo mínimo do eespecificaçãoialista humano |
+| Eficiência de trajetória | "Passos sobre o dourado" | Contagem de passos do agente dividida pelo mínimo do especialista humano |
 
 ## Leitura Complementar
 

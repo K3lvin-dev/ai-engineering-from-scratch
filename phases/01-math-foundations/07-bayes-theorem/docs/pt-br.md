@@ -14,7 +14,7 @@
 - Comparar estimação MLE e MAP e explicar como MAP corresponde a regularização L2
 - Implementar atualização bayesiana sequencial usando priors conjugados Beta-Binomial para testes A/B
 
-## O Problemo
+## O Problema
 
 Um teste médico é 99% preciso. Você testa positivo. Quais são as chances de você realmente ter a doença?
 
@@ -63,7 +63,7 @@ Esse é o teorema de Bayes. Quatro quantidades, uma equação.
 O termo evidência P(B) funciona como normalizador. Você pode expandi-lo usando a lei da probabilidade total:
 
 ```
-P(B) = P(B|A) * P(A) + P(não A) * P(não A)
+P(B) = P(B|A) * P(A) + P(B|não A) * P(não A)
 ```
 
 ### Exemplo de teste médico
@@ -146,7 +146,7 @@ P(palavra|classe) = (contagem(palavra, classe) + 1) / (total_palavras_na_classe 
 
 Adicionar 1 a toda contagem garante que nenhuma probabilidade seja zero.
 
-### Máxima a posteriori (MLE)
+### Máxima a posteriori (MAP)
 
 MLE pergunta: quais parâmetros maximizam P(dados|parâmetros)?
 
@@ -167,11 +167,11 @@ MAP adiciona um prior sobre os próprios parâmetros. Se você acredita que par�
 
 ### Bayesiano vs frequentista: a diferença prática
 
-Frequentistas tratam parâmetros como incórtos fixos. Eles perguntam: "Se eu repetisse esse experimento muitas vezes, o que aconteceria?"
+Frequentistas tratam parâmetros como incertos fixos. Eles perguntam: "Se eu repetisse esse experimento muitas vezes, o que aconteceria?"
 
 Bayesianos tratam parâmetros como distribuições. Eles perguntam: "Dado o que observei, o que acredito sobre os parâmetros?"
 
-| Aespecificaçãoto | Frequentista | Bayesiano |
+| Aspecto | Frequentista | Bayesiano |
 |--------|-------------|----------|
 | Saída | Estimativa pontual | Distribuição sobre valores |
 | Incerteza | Intervalos de confiança (sobre o procedimento) | Intervalos críveis (sobre o parâmetro) |
@@ -286,7 +286,7 @@ for msg in test_messages:
     print(f"  '{msg}' -> {classifier.predict(msg)}")
 ```
 
-### Passo 4: Inespecificaçãoione as probabilidades aprendidas
+### Passo 4: Inspecione as probabilidades aprendidas
 
 ```python
 def show_top_words(classifier, cls, n=5):
@@ -346,9 +346,9 @@ Por que isso importa: sem priors conjugados, você precisa de amostragem Monte C
 
 A distribuição Beta é o prior conjugado mais comum na prática. Beta(a, b) representa sua crença sobre um parâmetro de probabilidade. A média é a/(a+b). Quanto maior a+b, mais concentrada (confiante) a distribuição.
 
-Casos eespecificaçãoiais do prior Beta:
+Casos especiais do prior Beta:
 - Beta(1, 1) = uniforme. Você não tem opinião sobre o parâmetro.
-- Beta(10, 10) = picada em 0.5. Você acredita firmemente que o parâerto está perto de 0.5.
+- Beta(10, 10) = picada em 0.5. Você acredita firmemente que o parâmetro está perto de 0.5.
 - Beta(1, 10) = enviesada pra 0. Você acredita que o parâmetro é pequeno.
 
 A regra de atualização é super simples:
@@ -425,11 +425,11 @@ Vantagens sobre teste A/B frequentista:
 - Você pode checar resultados a qualquer momento sem inflar taxas de falso positivo (sem "problema de olhar")
 - Você pode incorporar conhecimento prévio (ex: testes anteriores sugerem que taxas de conversão são normalmente 3-8%)
 
-| Aespecificaçãoto | A/B Frequentista | A/B Bayesiano |
+| Aspecto | A/B Frequentista | A/B Bayesiano |
 |--------|----------------|--------------|
 | Saída | p-value | P(B > A) |
 | Interpretação | "Quão surpreendente são esses dados se A=B?" | "Quão provável é que B seja melhor que A?" |
-| Parada antecipada | Infla falsos positivos | Seguro em qualquer ponto (dado um prior bem escolhido e modelo corretamente eespecificaçãoificado) |
+| Parada antecipada | Infla falsos positivos | Seguro em qualquer ponto (dado um prior bem escolhido e modelo corretamente especificaçãoificado) |
 | Conhecimento prévio | Não usado | Codificado como prior Beta |
 | Regra de decisão | p < 0.05 | P(B > A) > limiar |
 
@@ -448,7 +448,7 @@ Vantagens sobre teste A/B frequentista:
 | Termo | O que dizem | O que realmente significa |
 |------|----------------|----------------------|
 | Prior | "Minha suposição inicial" | P(hipótese) antes de observar evidência. No ML: o termo de regularização. |
-| Verossimilhança | "Quão bem os dados se encaixam" | P(evidência\|hipótese). Quão provável são os dados observados sob uma hipótese eespecificaçãoífica. |
+| Verossimilhança | "Quão bem os dados se encaixam" | P(evidência\|hipótese). Quão provável são os dados observados sob uma hipótese específica. |
 | Posterior | "Minha crença atualizada" | P(hipótese\|evidência). O prior multiplicado pela verossimilhança, depois normalizado. |
 | Evidência | "A constante normalizadora" | P(dados) sobre todas hipóteses. Garante que o posterior soma 1. |
 | Naive Bayes | "Aquele classificador simples de texto" | Um classificador que assume que as features são independentes dada a classe. Funciona bem apesar da suposição falsa. |

@@ -125,7 +125,7 @@ latência do turno: 1040ms parada do usuário -> áudio-em-saída
 
 4. Deploy o mesmo agente via PSTN no Twilio. Compare primeiro-áudio-em-saída PSTN com WebRTC. Explique as diferenças de jitter buffer e codec.
 
-5. Adicione detecção de atividade de voz para idiomas não-english (japonês, espanhol). Meça a taxa de falso-disparo do Silero VAD v5 versus fine-tunes eespecificaçãoíficos por idioma.
+5. Adicione detecção de atividade de voz para idiomas não-english (japonês, espanhol). Meça a taxa de falso-disparo do Silero VAD v5 versus fine-tunes específicos por idioma.
 
 ## Termos-Chave
 

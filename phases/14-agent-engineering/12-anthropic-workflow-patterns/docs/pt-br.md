@@ -105,7 +105,7 @@ Cada padrão imprime seu trace. Total de linhas de código por padrão é ~10-15
 | Prompt chaining | "Chamadas sequenciais" | Saída da chamada N é input da chamada N+1 |
 | Routing | "Despacho de classificador" | Escolher qual cadeia/modelo lida com o input |
 | Parallelization | "Fan out" | N chamadas concorrentes; agregação por seção ou votação |
-| Orchestrator-workers | "Agent despachante" | LLM orquestrador escolhe LLMs eespecificaçãoialistas dinamicamente |
+| Orchestrator-workers | "Agent despachante" | LLM orquestrador escolhe LLMs especialistas dinamicamente |
 | Evaluator-optimizer | "Propositor + juiz" | Itere até evaluator aprovar; Self-Refine generalizado |
 
 ## Leitura Complementar

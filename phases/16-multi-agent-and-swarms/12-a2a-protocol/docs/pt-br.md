@@ -1,6 +1,6 @@
 # A2A — O Protocolo Agent-to-Agent
 
-> O Google anunciou o A2A em abril de 2025; até abril de 2026 a eespecificaçãoificação está em https://a2a-protocol.org/latest/especificaçãoification/ e 150+ organizações apoiam. A2A é o complemento horizontal do MCP (Lição 13): enquanto MCP é vertical (agent ↔ tools), A2A é peer-to-peer (agent ↔ agent). Define Agent Cards (descoberta), tasks com artifacts (texto, dados estruturados, vídeo), ciclos de vida opacos de task, e auth. Sistemas em produção cada vez mais combinam MCP com A2A. O Google Cloud incorporou suporte a A2A no Vertex AI Agent Builder durante 2025-2026.
+> O Google anunciou o A2A em abril de 2025; até abril de 2026 a especificação está em https://a2a-protocol.org/latest/specification/ e 150+ organizações apoiam. A2A é o complemento horizontal do MCP (Lição 13): enquanto MCP é vertical (agent ↔ tools), A2A é peer-to-peer (agent ↔ agent). Define Agent Cards (descoberta), tasks com artifacts (texto, dados estruturados, vídeo), ciclos de vida opacos de task, e auth. Sistemas em produção cada vez mais combinam MCP com A2A. O Google Cloud incorporou suporte a A2A no Vertex AI Agent Builder durante 2025-2026.
 
 **Tipo:** Aprender + Construir
 **Linguagens:** Python (stdlib, `http.server`, `json`)
@@ -86,11 +86,11 @@ A adoção empresarial impulsionou a escala do A2A. O destaque: A2A virou o jeit
 
 - **Micro-chamadas sensíveis a latência.** O ciclo de vida do A2A é assíncrono. Agent-a-agent sub-milissegundo não se encaixa; use RPC direto.
 - **Agents tight-coupled no mesmo processo.** Se ambos os agentes rodam no mesmo processo Python, a volta de HTTP do A2A é overkill.
-- **Equipes pequenas.** O overhead da eespecificaçãoificação é real; agentes internos podem não precisar da formalidade.
+- **Equipes pequenas.** O overhead da especificação é real; agentes internos podem não precisar da formalidade.
 
 ### A2A vs ACP, ANP, NLIP
 
-Várias especificaçãos relacionadas surgiram em 2024-2026:
+Várias especificações relacionadas surgiram em 2024-2026:
 
 - **ACP** (IBM/Linux Foundation) — predecessor do A2A, escopo mais restrito.
 - **ANP** (Agent Network Protocol) — focado em descoberta peer, first-class descentralizado.
@@ -134,14 +134,14 @@ Checklist:
 - **Criação de task idempotente.** Submissões duplicadas (retry de rede) devem produzir uma task.
 - **Schemas de artifacts.** Declare quais formatos o agente retorna; consumidores devem validar.
 - **Rate limits + auth.** A2A é público; aplique segurança web padrão.
-- **Dead-letter para tasks falhadas.** Inespecificaçãoione padrões ao longo do tempo para tipos recorrentes de falha.
+- **Dead-letter para tasks falhadas.** Inspecione padrões ao longo do tempo para tipos recorrentes de falha.
 
 ## Exercícios
 
 1. Execute `code/main.py`. Confirme que o client descobre o server e recebe o artifact correto.
 2. Adicione uma segunda habilidade ao server (por exemplo, "summarize"). Atualize o Agent Card. Escreva um client que escolhe a habilidade baseado no tipo de task.
 3. Implemente um endpoint de streaming SSE: `/tasks/{id}/events` que emite mudanças de estado. O que o client precisa fazer de diferente?
-4. Leia a eespecificaçãoificação do A2A (https://a2a-protocol.org/latest/especificaçãoification/). Identifique três coisas que a eespecificaçãoificação obriga e que essa demo não implementa.
+4. Leia a especificação do A2A (https://a2a-protocol.org/latest/specification/). Identifique três coisas que a especificação obriga e que essa demo não implementa.
 5. Compare A2A (descoberta via Agent Card) com MCP (listagem de capacidades no server via `listTools`). Qual é o trade-off entre agentes auto-descritivos e probing de capacidades?
 
 ## Termos Chave
@@ -159,7 +159,7 @@ Checklist:
 
 ## Leitura Complementar
 
-- [Eespecificaçãoificação A2A](https://a2a-protocol.org/latest/especificaçãoification/) — a eespecificaçãoificação canônica
+- [Especificação A2A](https://a2a-protocol.org/latest/specification/) — a especificação canônica
 - [Google Developers Blog — anúncio A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) — post de lançamento de abril de 2025
 - [Repo A2A no GitHub](https://github.com/a2aproject/A2A) — implementações de referência e SDKs
 - [Liu et al. — A Survey of Agent Interoperability Protocols](https://arxiv.org/html/2505.02279v1) — comparação MCP, ACP, A2A, ANP

@@ -20,7 +20,7 @@ Uma pipeline de ingestão aware de AST parseia cada arquivo com tree-sitter, ext
 
 A recuperação é híbrida. Uma consulta dispara buscas densas e BM25 ao mesmo tempo, faz merge do top-k e passa a união para um re-ranqueador cross-encoder (Cohere rerank-3 ou bge-reranker-v2-gemma-2b). A lista re-rankeada vai para um sintetizador de longo contexto (Claude Sonnet 4.7 com prompt caching, ou Llama 3.3 70B auto-hospedado) com instruções de citar cada afirmação por arquivo e faixa de linhas. Respostas sem citações são rejeitadas por um pós-filtro.
 
-Frescor incremental é o problema de infraestrutura. Um git push dispara um diff: quais arquivos mudaram, quais símbolos mudaram. Apenas os chunks afetados são re-embedados. As arestas de símbolos cross-arquivo afetadas (imports, chamadas de método) são recalculadas. O índice se mantém consistente sem reprocesar 2M de linhas a cada commit.
+Frescor incremental é o problema de infraestrutura. Um git push dispara um diff: quais arquivos mudaram, quais símbolos mudaram. Apenas os chunks afetados são re-embutidos. As arestas de símbolos cross-arquivo afetadas (imports, chamadas de método) são recalculadas. O índice se mantém consistente sem reprocesar 2M de linhas a cada commit.
 
 ## Arquitetura
 

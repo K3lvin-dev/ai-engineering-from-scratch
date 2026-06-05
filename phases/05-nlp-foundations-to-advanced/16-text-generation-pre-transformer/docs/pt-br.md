@@ -220,7 +220,7 @@ Refuse to report perplexity computed with different tokenization between systems
 | Perplexidade | Métrica de qualidade de LM | `exp(-log-prob médio)` em dados de teste. Menor é melhor. |
 | Backoff | Fallback pra contexto mais curto | Se contagem de trigramas é zero, usa bigrama. Katz backoff formaliza isso. |
 | Kneser-Ney | Melhor suavização pra n-gramas | Desconto absoluto + probabilidade de continuação pro modelo de ordem inferior. |
-| Probabilidade de continuação | Eespecificaçãoífico do KN | `P(w)` ponderado pelo número de contextos em que `w` aparece, não pela contagem bruta. |
+| Probabilidade de continuação | Especificaçãoífico do KN | `P(w)` ponderado pelo número de contextos em que `w` aparece, não pela contagem bruta. |
 
 ## Leitura Complementar
 

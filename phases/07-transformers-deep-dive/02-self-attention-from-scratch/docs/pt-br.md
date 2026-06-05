@@ -7,9 +7,9 @@
 **Pré-requisitos:** Fase 3 (Deep Learning Core), Fase 5 Aula 10 (Sequence-to-Sequence)
 **Tempo:** ~90 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
-- Implementar self-attention de produto escalar escalonado do zero usando apenas NumPy, incluindo projeções consulta/key/value e a soma ponderada com softmax
+- Implementar self-attention de produto escalar escalonado do zero usando apenas NumPy, incluindo projeções query/key/value e a soma ponderada com softmax
 - Construir uma camada de multi-head attention que separa heads, calcula attention paralela e concatena resultados
 - Rastrear como a matriz de attention captura relacionamentos entre tokens e explicar por que a escala por sqrt(d_k) previne saturação do softmax
 - Aplicar máscara causal para converter attention bidirecional em attention autoregressiva (estilo decoder)
@@ -38,7 +38,7 @@ Attention:
 
 Cada token gera três vetores:
 - **Query (Q)**: "O que estou procurando?"
-- **Key (K)**: "O que eu contém?"
+- **Key (K)**: "O que eu contenho?"
 - **Value (V)**: "Que informação eu forneço se selecionado?"
 
 O produto escalar entre uma consulta e todas as keys produz scores de attention. Score alto significa "essa key combina com minha consulta". Esses scores ponderam os values. A saída é uma soma ponderada de values.

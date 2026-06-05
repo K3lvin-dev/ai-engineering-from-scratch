@@ -90,11 +90,11 @@ Em produção:
 - **GitHub Actions.** Um job `setup-agent` roda o script de init; o job do agente depende dele.
 - **Docker entrypoint.** O container do agente roda o script de init antes de executar o runtime do agent; logs aparecem na falha.
 
-O script de init é portável porque não faz chamadas pra nenhum framework eespecificaçãoífico. Bash, Make ou um arquivo de tasks podem todos encapsulá-lo.
+O script de init é portável porque não faz chamadas pra nenhum framework específico. Bash, Make ou um arquivo de tasks podem todos encapsulá-lo.
 
 ## Entregue
 
-`outputs/skill-init-script.md` entrevista o projeto, classifica o trabalho de setup em verificações e emite um `init_agent.py` eespecificaçãoífico pro projeto mais um workflow de CI que roda ele antes de qualquer etapa do agent.
+`outputs/skill-init-script.md` entrevista o projeto, classifica o trabalho de setup em verificações e emite um `init_agent.py` específico pro projeto mais um workflow de CI que roda ele antes de qualquer etapa do agent.
 
 ## Exercícios
 

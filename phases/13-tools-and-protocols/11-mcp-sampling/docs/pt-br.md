@@ -96,7 +96,7 @@ Novo em 2025-11-25: o request de sampling pode incluir um array `tools`. O clien
 }
 ```
 
-O cliente faz loop: sample, executa ferramenta se chamada, sample de novo, retorna mensagem final do assistant. Isso é experimental até Q1 2026; assinaturas de SDK podem ainda mudar. Confirme na seção client/sampling da eespecificaçãoificação 2025-11-25 quando implementar.
+O cliente faz loop: sample, executa ferramenta se chamada, sample de novo, retorna mensagem final do assistant. Isso é experimental até Q1 2026; assinaturas de SDK podem ainda mudar. Confirme na seção client/sampling da especificação 2025-11-25 quando implementar.
 
 ### Humano no loop
 
@@ -172,7 +172,7 @@ Esta aula produz `outputs/skill-sampling-loop-designer.md`. Dado um algoritmo do
 ## Leituras Complementares
 
 - [MCP — Concepts: Sampling](https://modelcontextprotocol.io/docs/concepts/sampling) — visão geral de alto nível do sampling
-- [MCP — Client sampling especificação 2025-11-25](https://modelcontextprotocol.io/especificaçãoification/2025-11-25/client/sampling) — forma canônica de `sampling/createMessage`
-- [MCP — GitHub SEP-1577](https://github.com/modelcontextprotocol/modelcontextprotocol) — Proposta de Evolução da Eespecificaçãoificação pra ferramentas em sampling (experimental)
+- [MCP — Client sampling especificação 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/client/sampling) — forma canônica de `sampling/createMessage`
+- [MCP — GitHub SEP-1577](https://github.com/modelcontextprotocol/modelcontextprotocol) — Proposta de Evolução da Especificação pra ferramentas em sampling (experimental)
 - [Unit 42 — MCP attack vectors](https://unit42.paloaltonetworks.com/modelcontextprotocol-attack-vectors/) — padrões de sampling oculto e roubo de recursos
 - [Speakeasy — MCP sampling core concept](https://www.speakeasy.com/mcp/core-concepts/sampling) — walkthrough com exemplos de código do lado do cliente

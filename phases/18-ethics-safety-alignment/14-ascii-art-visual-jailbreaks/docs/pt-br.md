@@ -7,14 +7,14 @@
 **Pré-requisitos:** Fase 18 · 12 (PAIR), Fase 18 · 13 (MSJ)
 **Tempo:** ~60 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Descrever o ataque ArtPrompt: etapa de identificação de palavra, substituição ASCII art, prompt disfarçado final.
 - Explicar por que defesas padrão (PPL, Paráfrase, Retokenização) falham no ArtPrompt.
 - Definir ViTC e descrever o que ele mede.
 - Descrever StructuralSleight como uma generalização para Estruturas de Texto Não-Comuns Arbitrárias.
 
-## O Problemo
+## O Problema
 
 Ataques via paráfrase e roleplay (Lição 12) e via contexto longo (Lição 13) operam no padrão de nível de texto. ArtPrompt opera no nível de reconhecimento: o modelo não parseia o token proibido. Ele parseia uma imagem renderizada em caracteres. O filtro de segurança vê pontuação inofensiva. O modelo vê uma palavra.
 
@@ -56,7 +56,7 @@ Lição 12-14 descrevem três vetores de ataque ortogonais: refinamento iterativ
 
 ## Use
 
-`code/main.py` constrói um ArtPrompt simulado. Você pode disfarçar palavras eespecificaçãoíficas em uma consulta prejudicial com glifos ASCII art, verificar se a string disfarçada passa um filtro de palavras-chave, e (opcionalmente) decodificar a string de volta usando um reconhecedor simples.
+`code/main.py` constrói um ArtPrompt simulado. Você pode disfarçar palavras específicas em uma consulta prejudicial com glifos ASCII art, verificar se a string disfarçada passa um filtro de palavras-chave, e (opcionalmente) decodificar a string de volta usando um reconhecedor simples.
 
 ## Entregue
 

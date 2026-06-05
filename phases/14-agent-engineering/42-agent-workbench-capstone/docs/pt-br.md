@@ -66,7 +66,7 @@ Dentro:
 
 Fora:
 
-- Tarefas eespecificaçãoíficas do projeto. Tarefas ficam no board do repo alvo, não no pack.
+- Tarefas específicas do projeto. Tarefas ficam no board do repo alvo, não no pack.
 - Chamadas de SDK de fornecedor. O é framework-agnóstico.
 - Texto de onboarding. O pack fica ao lado do onboarding existente do time, não dentro dele.
 
@@ -119,7 +119,7 @@ O pack é a receita. Cada instalação é uma porção.
 
 ## Entregue
 
-`outputs/skill-workbench-pack.md` gera um pack ajustado ao projeto: regras afinadas com o histórico do time, globs de escopo casados com o repo, dimensões da rubrica estendidas com uma entrada eespecificaçãoífica do domínio.
+`outputs/skill-workbench-pack.md` gera um pack ajustado ao projeto: regras afinadas com o histórico do time, globs de escopo casados com o repo, dimensões da rubrica estendidas com uma entrada específica do domínio.
 
 ## Exercícios
 

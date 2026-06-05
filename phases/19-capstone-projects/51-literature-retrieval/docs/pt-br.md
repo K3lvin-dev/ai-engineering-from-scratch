@@ -98,7 +98,7 @@ Os dois clientes de API mock (`ArxivMockClient`, `SemanticScholarMockClient`) le
 
 ## O que as aulas 52 e 53 leem
 
-O executor na aula 52 le `paper.id`, `paper.title`, e as tres primeiras frases do resumo como contexto para o experimento. O avaliador na aula 53 le `paper.year` e `paper.references` para atribuir uma baseline a um paper eespecificaçãoifico.
+O executor na aula 52 le `paper.id`, `paper.title`, e as tres primeiras frases do resumo como contexto para o experimento. O avaliador na aula 53 le `paper.year` e `paper.references` para atribuir uma baseline a um paper especificaçãoifico.
 
 O cliente de recuperacao retorna um `RetrievalResult` com tanto a lista ranqueada quanto as metricas por consulta: contagem de acertos, media de pontuacao, pontuacao maxima, tempo de parede total. O executor loga essas para que uma passagem de observabilidade downstream possa plotar qualidade ao longo do tempo.
 

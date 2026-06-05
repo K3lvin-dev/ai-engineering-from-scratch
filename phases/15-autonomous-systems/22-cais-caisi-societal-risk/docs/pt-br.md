@@ -9,7 +9,7 @@
 
 ## O Problema
 
-As Aulas 19 e 20 cobriram políticas de escala internas de laboratórios. A Aula 21 cobriu avaliação independente de capacidade. Esta aula cobre a terceira perespecificaçãotiva: organizações de sociedade civil e governo que moldam discussão pública e base regulatória para risco catastrófico de IA.
+As Aulas 19 e 20 cobriram políticas de escala internas de laboratórios. A Aula 21 cobriu avaliação independente de capacidade. Esta aula cobre a terceira perspectiva: organizações de sociedade civil e governo que moldam discussão pública e base regulatória para risco catastrófico de IA.
 
 Duas entidades distintas importam. CAIS é uma organização de pesquisa sem fins lucrativos que publica frameworks para pensar sobre risco de IA e coordena declarações públicas. CAISI é um centro do governo dos EUA dentro do NIST que roda acordos voluntários com laboratórios e avaliações de capacidade não classificadas. Os nomes rimam; as missões não se sobrepõem. Um profissional deveria conhecer ambas.
 
@@ -44,7 +44,7 @@ Alavancas concretas de risco organizacional:
 - **Cultura de segurança**: membros da equipe se sentem capazes de escalar uma preocupação sem custo de carreira? Pesquisas da CAIS encontram que isso é um forte preditor das outras alavancas.
 - **Auditorias rigorosas**: externas e internas. Auditorias apenas internas produzem relatórios otimistas.
 - **Defesas em camadas**: nenhuma camada sozinha é suficiente (o tema corrente da Fase 15).
-- **Segurança da informação**: vazamento de pesos de modelo, vazamento de dados de avaliação, vazamento de técnicas de bypass de monitor. RAND SL-4 na Aula 19 é um padrão eespecificaçãoífico.
+- **Segurança da informação**: vazamento de pesos de modelo, vazamento de dados de avaliação, vazamento de técnicas de bypass de monitor. RAND SL-4 na Aula 19 é um padrão específico.
 
 ### CAISI — Center for AI Standards and Innovation
 
@@ -59,7 +59,7 @@ O papel da CAISI é o equivalente público, voltado para governo, dos engajament
 
 O projeto de lei do Senado da California (sessão 2025–2026) aborda risco catastrófico de modelos de fronteira. Disposições-chave conforme redigido:
 
-- Limiares de capacidade eespecificaçãoíficos que acionam obrigações em nível estadual.
+- Limiares de capacidade específicos que acionam obrigações em nível estadual.
 - Proteções para denunciantes de funcionários de laboratório de IA.
 - Requisitos de relato de incidentes para falhas catastróficas.
 

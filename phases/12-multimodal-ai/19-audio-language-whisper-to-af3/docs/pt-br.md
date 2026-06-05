@@ -3,15 +3,15 @@
 > O Whisper (Radford et al., dezembro de 2022) resolveu reconhecimento de fala — 680 mil horas de fala multilíngue fracamente supervisionada, um transformer encoder-decoder simples, um benchmark que fez toda publicação subsequente de ASR citá-lo. Mas reconhecimento não é raciocínio. Perguntar "quais instrumentos tem nessa gravação" ou "que emoção o falante está expressando" ou "o que aconteceu no minuto 3" exige compreensão de áudio, não transcrição. Qwen-Audio, SALMONN, LTU e o Audio Flamingo 3 da NVIDIA (AF3, julho de 2025) construíram progressivamente essa stack: mantiveram encoders de classe Whisper, encaixaram Q-formers, treinaram em dados de instrução de texto-áudio, adicionaram raciocínio com chain-of-thought. Esta aula percorre o arco.
 
 **Tipo:** Construção
-**Linguagens:** Python (stdlib, eespecificaçãotrograma log-Mel + esqueleto de Q-former de áudio)
+**Linguagens:** Python (stdlib, espectrograma log-Mel + esqueleto de Q-former de áudio)
 **Pré-requisitos:** Fase 6 (Fala e Áudio), Fase 12 · 03 (Q-Former)
 **Tempo:** ~180 minutos
 
 ## Objetivos de Aprendizado
 
-- Computar um eespecificaçãotrograma log-Mel a partir de uma forma de onda: janelamento, FFT, bancos de filtros, transformação logarítmica.
+- Computar um espectrograma log-Mel a partir de uma forma de onda: janelamento, FFT, bancos de filtros, transformação logarítmica.
 - Comparar opções de encoder: encoder Whisper, BEATs, híbrido AF-Whisper. Quando cada um ganha.
-- Construir um Q-former de áudio: N queries aprendíveis com cross-attention sobre patches do eespecificaçãotrograma.
+- Construir um Q-former de áudio: N queries aprendíveis com cross-attention sobre patches do espectrograma.
 - Explicar a diferença entre cascade (Whisper depois LLM) e treinamento de ponta a ponta de áudio-LLM: por que de ponta a ponta escala melhor para raciocínio.
 
 ## O Problema
@@ -28,9 +28,9 @@ Três rotas óbvias:
 
 ## O Conceito
 
-### Eespecificaçãotrograma log-Mel: a funcionalidade de entrada
+### Espectrograma log-Mel: a funcionalidade de entrada
 
-Todo encoder de áudio começa com a mesma feature: um eespecificaçãotrograma log-Mel.
+Todo encoder de áudio começa com a mesma feature: um espectrograma log-Mel.
 
 1. Resample para 16 kHz.
 2. Transformada Fourier de curto prazo com janelas de 25ms, hop de 10ms.
@@ -42,13 +42,13 @@ Resultado: um array 2D de shape (T, 80) onde T é o número de frames de tempo. 
 
 ### O encoder do Whisper
 
-O encoder do Whisper é um transformer estilo ViT com 12 camadas processando o eespecificaçãotrograma log-Mel como sequência de frames de tempo. Saída: um vetor de hidden state por frame de tempo.
+O encoder do Whisper é um transformer estilo ViT com 12 camadas processando o espectrograma log-Mel como sequência de frames de tempo. Saída: um vetor de hidden state por frame de tempo.
 
 Para ASR, o decoder do Whisper é um transformer com cross-attention que gera tokens de texto condicionados na saída do encoder. Encoder-decoder padrão.
 
 Para ALMs (áudio-LLMs), você quer a saída do encoder como entrada de um LLM diferente. O padrão: encoder Whisper congelado, Q-former treinável, LLM congelado ou ajustado.
 
-### BEATs e encoders eespecificaçãoíficos de áudio
+### BEATs e encoders específicos de áudio
 
 O Whisper foi treinado em dados dominados por fala. É mais fraco para música e áudio ambiental.
 
@@ -112,7 +112,7 @@ SOTA aberto (AF3) em 0.72; proprietário na frente ~0.78 (Gemini 2.5 Pro, Claude
 
 `code/main.py`:
 
-- Implementa cálculo de eespecificaçãotrograma log-Mel em stdlib: janelamento, DFT ingênuo, banco de filtros Mel.
+- Implementa cálculo de espectrograma log-Mel em stdlib: janelamento, DFT ingênuo, banco de filtros Mel.
 - Esqueleto de Q-former de áudio: dada saída de frames do encoder, computa Q, K, V, attention, e emite N tokens.
 - Comparação cascata-vs-de ponta a ponta numa tarefa de exemplo.
 
@@ -122,7 +122,7 @@ Esta aula produz `outputs/skill-audio-llm-pipeline-picker.md`. Dada uma tarefa d
 
 ## Exercícios
 
-1. Compute a dimensão do eespecificaçãotrograma log-Mel para um clipe de 30 segundos a 16kHz, janela de 25ms, hop de 10ms, 80 bins Mel. Como muda a 48kHz?
+1. Compute a dimensão do espectrograma log-Mel para um clipe de 30 segundos a 16kHz, janela de 25ms, hop de 10ms, 80 bins Mel. Como muda a 48kHz?
 
 2. Por que o Whisper tem desempenho inferior em música? Que features acústicas o BEATs captura que o Whisper não captura?
 
@@ -136,7 +136,7 @@ Esta aula produz `outputs/skill-audio-llm-pipeline-picker.md`. Dada uma tarefa d
 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |-------|------------------------|--------------------------|
-| Eespecificaçãotrograma log-Mel | "Features Mel" | Array 2D (tempo, frequência) de valores de magnitude logarítmica após bancos de filtros Mel |
+| Espectrograma log-Mel | "Features Mel" | Array 2D (tempo, frequência) de valores de magnitude logarítmica após bancos de filtros Mel |
 | Q-former de áudio | "Perceiver de áudio" | Gargalo de cross-attention da saída do encoder de áudio para queries de comprimento fixo que alimentam o LLM |
 | Cascata | "ASR depois LLM" | Pipeline onde Whisper transcreve e um LLM de texto raciocina; perde informação acústica |
 | End-to-end | "Áudio-LLM" | Features de áudio entram no LLM diretamente via Q-former; preserva sinal acústico |

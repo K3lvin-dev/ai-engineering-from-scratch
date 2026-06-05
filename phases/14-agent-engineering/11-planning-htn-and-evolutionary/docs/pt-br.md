@@ -104,7 +104,7 @@ O trace mostra o planejador HTN decompondo uma tarefa composta (com um reserva d
 
 ## Use
 
-- **Planejadores HTN** — `pyhop`, `SHOP3` ou construa o seu próprio pra imposição de política eespecificaçãoífica de domínio.
+- **Planejadores HTN** — `pyhop`, `SHOP3` ou construa o seu próprio pra imposição de política específica de domínio.
 - **ChatHTN** — código de pesquisa; o padrão (simbólico + reserva LLM) porta limpo pra qualquer planejador HTN.
 - **AlphaEvolve** — paper da DeepMind; o padrão (ensemble + avaliador) é reproduzível. OpenEvolve e forks open-source similares estão surgindo.
 - **Frameworks de agent** — nenhum entrega HTN ou AlphaEvolve de primeira classe ainda. Construa como subagent ou worker de background.

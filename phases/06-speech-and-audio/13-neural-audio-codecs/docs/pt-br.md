@@ -3,8 +3,8 @@
 > A geração de áudio de 2026 é quase toda tokens. EnCodec, SNAC, Mimi e DAC transformam formas de onda contínuas em sequências discretas que um transformer pode prever. A divisão semântico-acústica de tokens — primeiro codebook como semântico, resto como acústico — é a mudança arquitetural mais importante desde o Transformer para áudio.
 
 **Tipo:** Aprender
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas), Fase 10 · 11 (Quantização), Fase 5 · 19 (Tokenização Subword)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas), Fase 10 · 11 (Quantização), Fase 5 · 19 (Tokenização Subword)
 **Tempo:** ~60 minutos
 
 ## O Problema

@@ -28,7 +28,7 @@ A resposta: um Q-Former. 32 vetores "consulta" aprendíveis que fazem cross-atte
 
 O truque central do Q-Former: em vez de deixar os tokens de texto do LLM atentarem sobre patches de imagem, introduz um novo conjunto de 32 vetores de consulta aprendíveis `Q` e deixa *eles* atentarem sobre patches de imagem. As queries são parâmetros do modelo — são aprendidas durante treinamento e as mesmas 32 queries são usadas pra cada imagem.
 
-Após cross-attention, cada consulta guarda um resumo comprimido da imagem — "descreve o objeto principal", "descreve o fundo", "conta os objetos", etc. As queries não se eespecificaçãoializam literalmente em rótulos semânticos; elas aprendem qualquer codificação que faça as perdas downstream caírem.
+Após cross-attention, cada consulta guarda um resumo comprimido da imagem — "descreve o objeto principal", "descreve o fundo", "conta os objetos", etc. As queries não se especializam literalmente em rótulos semânticos; elas aprendem qualquer codificação que faça as perdas downstream caírem.
 
 ### Arquitetura
 
@@ -62,7 +62,7 @@ Qualidade: BLIP-2 iguala ou supera Flamingo-80B em VQA zero-shot sendo 50x menor
 
 ### InstructBLIP e o Q-Former consciente de instrução
 
-InstructBLIP (2023) estende o Q-Former com uma entrada extra: o texto da instrução em si. No momento da cross-attention, as queries agora têm acesso tanto aos patches da imagem quanto à instrução. As queries podem se eespecificaçãoializar por instrução ("conta os carros", "descreve o clima") em vez de aprender um único resumo fixo. Ganhos em benchmarks em tarefas hold-out.
+InstructBLIP (2023) estende o Q-Former com uma entrada extra: o texto da instrução em si. No momento da cross-attention, as queries agora têm acesso tanto aos patches da imagem quanto à instrução. As queries podem se especializar por instrução ("conta os carros", "descreve o clima") em vez de aprender um único resumo fixo. Ganhos em benchmarks em tarefas hold-out.
 
 ### MiniGPT-4 e a abordagem só com projetor
 

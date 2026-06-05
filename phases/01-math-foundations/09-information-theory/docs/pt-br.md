@@ -14,11 +14,11 @@
 - Calcular informação mútua entre features e um alvo pra ranquear importância de features
 - Explicar perplexidade como o tamanho efetivo do vocabulário que um modelo de linguagem escolhe
 
-## O Problemo
+## O Problema
 
 Você chama `CrossEntropyLoss()` em todo modelo de classificação que treina. Você vê "perplexidade" em todo paper de modelo de linguagem. Você lê sobre divergência KL em VAEs, destilação e RLHF. Esses não são conceitos desconectados. São todos a mesma ideia usando chapéus diferentes.
 
-Teoria da Informação dá o idioma pra raciocinar sobre incerteza, compressão e previsão. Claude Shannon inventou em 1948 pra resolver problemas de comunicação. Turns out, treinar uma rede neural é um problema de comunicação: o modelo está tentando transmitir o rótulo correto através de um canal ruidoso de pesos aprendidos.
+Teoria da Informação dá o idioma pra raciocinar sobre incerteza, compressão e previsão. Claude Shannon inventou em 1948 pra resolver problemas de comunicação. Acontece que, treinar uma rede neural é um problema de comunicação: o modelo está tentando transmitir o rótulo correto através de um canal ruidoso de pesos aprendidos.
 
 Esta aula construiu cada fórmula do zero pra você ver de onde vêm e por que funcionam.
 
@@ -214,7 +214,7 @@ Com epsilon = 0.1 e 4 classes:
 - Rótulo duro:  [0, 0, 1, 0]
 - Rótulo suave: [0.025, 0.025, 0.925, 0.025]
 
-Sob a perespecificaçãotiva da teoria da informação, suavização de rótulos aumenta a entropia da distribuição alvo. Rótulos duros one-hot têm entropia 0 — não há incerteza. Rótulos suaves têm entropia positiva.
+Sob a perspectiva da teoria da informação, suavização de rótulos aumenta a entropia da distribuição alvo. Rótulos duros one-hot têm entropia 0 — não há incerteza. Rótulos suaves têm entropia positiva.
 
 Por que isso ajuda:
 - Impede que o modelo envie logits pra valores extremos (logits infinitos seriam necessários pra combinar perfeitamente um alvo one-hot sob entropia cruzada)
@@ -232,7 +232,7 @@ O segundo termo penaliza previsões distantes da uniforme — uma regularizaçã
 
 ### Por que Entropia Cruzada É A Perda de Classificação
 
-Três perespecificaçãotivas, mesma conclusão.
+Três perspectivas, mesma conclusão.
 
 **Visão da teoria da informação.** Entropia cruzada mede quantos bits você desperdiça usando a distribuição do seu modelo em vez da verdadeira. Minimizá-la torna seu modelo o codificador mais eficiente da realidade.
 

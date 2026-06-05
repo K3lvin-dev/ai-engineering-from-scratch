@@ -61,19 +61,19 @@ Se todos os trabalhadores puxam a tarefa disponível mais rápido, tarefas de lo
 
 Mitigações:
 - Filas de prioridade com envelhecimento explícito (aumenta prioridade com tempo de espera).
-- Eespecificaçãoialização de trabalhadores: alguns trabalhadores só pegam tarefas "longas."
+- Especificaçãoialização de trabalhadores: alguns trabalhadores só pegam tarefas "longas."
 - Back-pressure: limite quantas tarefas rápidas entram na fila.
 
 ### O link de roteamento baseado em conteúdo
 
-Swarm se combina naturalmente com roteamento baseado em conteúdo (Lição 22). Em vez de uma fila genérica, tenha uma fila por tipo de mensagem. Trabalhadores eespecificaçãoializados assinam só seu tipo. Isso é a base pra arquiteturas de message-bus que escalam pra milhares de agents.
+Swarm se combina naturalmente com roteamento baseado em conteúdo (Lição 22). Em vez de uma fila genérica, tenha uma fila por tipo de mensagem. Trabalhadores especializados assinam só seu tipo. Isso é a base pra arquiteturas de message-bus que escalam pra milhares de agents.
 
 ## Construa
 
 `code/main.py` implementa um swarm de 4 threads de trabalhador puxando de uma `queue.Queue` compartilhada. Tarefas têm durações variáveis (algumas rápidas, algumas lentas). A demo contrasta:
 
 - **Baseline sequencial:** um trabalhador processa todas as tarefas em série.
-- **Atribuição fixa:** cada tarefa pré-atribuída a um trabalhador eespecificaçãoífico (estilo supervisor).
+- **Atribuição fixa:** cada tarefa pré-atribuída a um trabalhador específico (estilo supervisor).
 - **Swarm:** trabalhadores puxam de uma fila compartilhada.
 
 Swarm balanceia carga automaticamente; atribuição fixa deixa trabalhadores rápidos ociosos quando sua tarefa atribuída é lenta.
@@ -105,8 +105,8 @@ Checklist:
 1. Execute `code/main.py`. Quão mais rápido é swarm que sequencial no workload de duração variável? Quão mais rápido que atribuição fixa?
 2. Adicione uma variante de fila de prioridade (use `queue.PriorityQueue`). Atribua prioridade pelo campo "importância" da tarefa. Observe se tarefas de baixa prioridade alguma vez sofrem starvation sob carga contínua.
 3. Implemente um detector de hot-spot: logue quando qualquer trabalhador processa 3× mais tarefas que o trabalhador mais lento. O que isso indica sobre a distribuição de duração das tarefas?
-4. Leia o resumo do paper Matrix (arXiv:2511.21686) e a Seção 3. Identifique um tradeoff eespecificaçãoífico que o Matrix aceita (ganho de escalabilidade) e um que abandona (rastreabilidade, determinismo).
-5. Converta a demo de swarm pra usar uma `queue.Queue` de tuplas (task_type, payload), com trabalhadores assinando só tipos eespecificaçãoíficos. Quais regras de roteamento fazem sentido quando tarefas são heterogêneas?
+4. Leia o resumo do paper Matrix (arXiv:2511.21686) e a Seção 3. Identifique um tradeoff específico que o Matrix aceita (ganho de escalabilidade) e um que abandona (rastreabilidade, determinismo).
+5. Converta a demo de swarm pra usar uma `queue.Queue` de tuplas (task_type, payload), com trabalhadores assinando só tipos específicos. Quais regras de roteamento fazem sentido quando tarefas são heterogêneas?
 
 ## Termos-Chave
 
@@ -125,5 +125,5 @@ Checklist:
 
 - [Workflows e agentes LangGraph — Swarm Architecture](https://docs.langchain.com/oss/python/langgraph/workflows-agents) — suporte explícito a swarm
 - [Matrix — A Decentralized Framework for Multi-Agent Systems](https://arxiv.org/abs/2511.21686) — swarm full de passagem de mensagens
-- [Engenharia Anthropic — por que supervisor e não swarm em Research](https://www.anthropic.com/engineering/multi-agent-request-system) — por que um sistema de produção eespecificaçãoífico escolheu deliberadamente supervisor sobre swarm
+- [Engenharia Anthropic — por que supervisor e não swarm em Research](https://www.anthropic.com/engineering/multi-agent-request-system) — por que um sistema de produção específico escolheu deliberadamente supervisor sobre swarm
 - [Docs do modelo actor AutoGen v0.4](https://microsoft.github.io/autogen/stable/) — a reescrita event-driven actor, mais perto de swarm que o GroupChat do v0.2

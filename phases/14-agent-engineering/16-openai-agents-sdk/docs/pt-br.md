@@ -121,4 +121,4 @@ O trace mostra dois handoffs bem-sucedidos, um trigger de input guardrail, e uma
 - [OpenAI Agents SDK docs](https://openai.github.io/openai-agents-python/) — primitivos, handoffs, guardrails, tracing
 - [Claude Agent SDK overview](https://platform.claude.com/docs/en/agent-sdk/overview) — contraparte estilo Claude
 - [Anthropic, Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) — quando usar handoffs
-- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — o padrão que os spans do Agents SDK mapeiam
+- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — o padrão que os spans do Agents SDK mapeiam

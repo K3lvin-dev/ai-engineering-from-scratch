@@ -13,7 +13,7 @@ O modelo precisa de números. Você tem strings.
 
 Toda pipeline de NLP tem que responder a mesma pergunta. Como transformamos um fluxo de tokens de tamanho variável num vetor de tamanho fixo que um classificador pode consumir. A primeira resposta que o campo encontrou foi a mais burra que funciona. Conta as palavras. Faz um vetor.
 
-Esse vetor carregou mais NLP de produção do que qualquer modelo de embedding. Filtros de spam, classificadores de tópico, detecção de anomalias em logs, ranking de busca (antes do BM25), a primeira onda de análise de sentimento, a primeira década de benchmarks acadêmicos de NLP. Praticantes de 2026 ainda reaching for it first em tarefas de classificação restritas. É rápido, interpretável, e frequentemente indistinguível de um modelo de embedding com 400M parâmetros em tarefas onde presença de palavra é o que importa.
+Esse vetor carregou mais NLP de produção do que qualquer modelo de embedding. Filtros de spam, classificadores de tópico, detecção de anomalias em logs, ranking de busca (antes do BM25), a primeira onda de análise de sentimento, a primeira década de benchmarks acadêmicos de NLP. Praticantes de 2026 ainda recorrer a ele primeiro em tarefas de classificação restritas. É rápido, interpretável, e frequentemente indistinguível de um modelo de embedding com 400M parâmetros em tarefas onde presença de palavra é o que importa.
 
 Essa lição constrói bag of words, depois TF-IDF, do zero. Depois mostra scikit-learn fazendo o mesmo em três linhas. Depois nomeia o modo de falha que faz você buscar embeddings.
 
@@ -171,7 +171,7 @@ Parâmetros que mudam tudo:
 - Detecção de spam, rotulamento de tópicos, sinalização de anomalias em logs. Presença de palavra é o que importa; nuances semânticas não.
 - Registros com poucos dados (centenas de exemplos rotulados). TF-IDF com regressão logística não tem custo de pre-treinamento.
 - Qualquer lugar onde latência importa. TF-IDF com modelo linear responde em microssegundos. Embedding de documento via transformer leva 10-100ms.
-- Sistemas que precisam explicar suas previsões. Inespecificaçãoione os coeficientes do classificador. As palavras positivas no topo são a razão.
+- Sistemas que precisam explicar suas previsões. Inspecione os coeficientes do classificador. As palavras positivas no topo são a razão.
 
 ### Quando TF-IDF falha
 

@@ -57,3 +57,11 @@ mlruns/
 .link-cache.json
 .claude/
 catalog.json
+
+# Personal / tooling config
+.codegraph/
+reasonix.toml
+
+# Accidental symlinks
+phases/phases
+site/phases

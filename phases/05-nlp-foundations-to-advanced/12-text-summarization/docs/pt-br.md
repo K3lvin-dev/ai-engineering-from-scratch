@@ -153,7 +153,7 @@ Stack de 2026:
 | Resumo de diálogo | `philschmid/bart-large-cnn-samsum` |
 | Extrativo, baixo risco de alucinação por construção | TextRank ou LSA / LexRank do `sumy` |
 
-LLMs com contexto longo frequentemente batem modelos eespecificaçãoializados em 2026 quando compute não é restrição. O tradeoff é custo e reprodutibilidade; modelos eespecificaçãoializados dão saídas mais consistentes.
+LLMs com contexto longo frequentemente batem modelos especializados em 2026 quando compute não é restrição. O tradeoff é custo e reprodutibilidade; modelos especializados dão saídas mais consistentes.
 
 ## Entregando
 

@@ -50,7 +50,7 @@ Em produção (OpenAI Agents SDK, março de 2025) uma das principais coisas que 
 
 ### Quando Swarm/handoffs se encaixam
 
-- **Padrões de triagem.** Agent de frente roteia o usuário para um eespecificaçãoialista.
+- **Padrões de triagem.** Agent de frente roteia o usuário para um especialista.
 - **Handoffs baseados em habilidade.** "Se a tarefa precisa de código, chama o coder; se precisa de pesquisa, chama o pesquisador."
 - **Conversas curtas e delimitadas.** Suporte ao cliente, FAQ-to-ticket, workflows simples.
 
@@ -84,7 +84,7 @@ Swarm é "agent decide o que vem depois"; GroupChat é "manager decide o que vem
 
 `code/main.py` implementa o Swarm do zero: um dataclass Agent, um mecanismo de handoff (tool retorna Agent), e um loop de run que detecta trocas de agent.
 
-Demo: um agente de triagem roteia para eespecificaçãoialistas de reembolso, vendas ou suporte. Cada eespecificaçãoialista tem suas próprias tools. O loop de run imprime cada handoff.
+Demo: um agente de triagem roteia para especialistas de reembolso, vendas ou suporte. Cada especialista tem suas próprias tools. O loop de run imprime cada handoff.
 
 Execute:
 
@@ -102,7 +102,7 @@ Checklist:
 
 - **Logging de handoff.** Cada handoff escreve um evento de trace com from-agent, to-agent, snapshot de contexto.
 - **Regras de transferência de contexto.** Defina o que muda no handoff: histórico completo (carente), últimas N mensagens ou um resumo.
-- **Guardrail no handoff.** Um handoff para um eespecificaçãoialista com permissões de ferramenta diferentes deve ser autenticado — caso contrário, prompt injection pode forçar handoffs indesejados.
+- **Guardrail no handoff.** Um handoff para um especialista com permissões de ferramenta diferentes deve ser autenticado — caso contrário, prompt injection pode forçar handoffs indesejados.
 - **Detecção de loop.** Dois agentes trocando handoffs infinitamente é uma falha comum; detecte com um check simples de ring de últimos K.
 - **Agent de fallback.** Se o alvo do handoff não existir, caia em um padrão seguro.
 
@@ -125,7 +125,7 @@ Checklist:
 | Context transfer | "O que muda no handoff" | Política do que o agente de entrada vê: completo, últimas N ou resumido. |
 | Handoff loop | "Agents ping-pong" | Modo de falha onde dois agentes ficam fazendo handoff um pro outro. |
 | OpenAI Agents SDK | "Swarm em produção" | Sucessor de março de 2025; adiciona sessões, guardrails, tracing sobre o primitive de handoff. |
-| Handoff filter | "Controle na transferência" | Feature do SDK para inespecificaçãoionar e modificar contexto na fronteira do handoff. |
+| Handoff filter | "Controle na transferência" | Feature do SDK para especificar e modificar contexto na fronteira do handoff. |
 
 ## Leitura Complementar
 

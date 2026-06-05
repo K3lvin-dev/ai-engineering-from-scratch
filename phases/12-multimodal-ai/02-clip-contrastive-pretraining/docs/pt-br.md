@@ -95,7 +95,7 @@ SigLIP 2 (2025) adiciona:
 - Multilíngue: treinado em 100+ idiomas onde CLIP era só inglês.
 - Escala de 1B parâmetros onde CLIP chegou no máximo em 400M.
 
-Em VLMs abertos de 2026, SigLIP 2 SO400m/14 é a torre de visão padrão. CLIP continua sendo o padrão pra recuperação pura imagem-texto onde a distribuição de treino LAION-2B eespecificaçãoífica combina com seu padrão de consulta.
+Em VLMs abertos de 2026, SigLIP 2 SO400m/14 é a torre de visão padrão. CLIP continua sendo o padrão pra recuperação pura imagem-texto onde a distribuição de treino LAION-2B específica combina com seu padrão de consulta.
 
 ### ALIGN, BASIC, OpenCLIP, EVA-CLIP
 

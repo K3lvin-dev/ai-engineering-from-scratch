@@ -18,7 +18,7 @@ A maioria do trabalho difícil é delimitação e segurança, não raciocínio. 
 
 O agente opera em um grafo de conhecimento. Nós são objetos K8s (Pods, Deployments, Services, Nodes, HPAs, PVCs) além de fontes de telemetria (séries do Prometheus, streams do Loki, traces do Tempo). Arestas codificam propriedade (Pod -> ReplicaSet -> Deployment), agendamento (Pod -> Node) e observação (Pod -> série do Prometheus). O grafo é mantido atualizado por uma sincronização do kube-state-metrics e reamostrado a cada alerta.
 
-Quando um alerta dispara, o agente investiga a causa raiz a partir do objeto afetado. Percorre arestas, puxa as fatias de telemetria relevantes (últimos 15 minutos) e elabora uma hipótese. A hipótese é ranqueada por evidência: quantas citações de telemetria a suportam, quão recentes, quão eespecificaçãoíficas. As top-3 hipóteses vão para o Slack com visualizações de caminho no grafo e botões de aprovação para ações de remediação.
+Quando um alerta dispara, o agente investiga a causa raiz a partir do objeto afetado. Percorre arestas, puxa as fatias de telemetria relevantes (últimos 15 minutos) e elabora uma hipótese. A hipótese é ranqueada por evidência: quantas citações de telemetria a suportam, quão recentes, quão específicas. As top-3 hipóteses vão para o Slack com visualizações de caminho no grafo e botões de aprovação para ações de remediação.
 
 Remediação é controlada. Ações permitidas por padrão são somente-leitura. Ações destrutivas (escalar para baixo, fazer rollback, deletar Pods) requerem aprovação no Slack; hooks de rollback do ArgoCD requerem um token de autenticação que o agente nunca detém. O log de auditoria registra todo comando que o agente *considerou* — não apenas executou — para que o processo de revisão pegue quase-acertos.
 
@@ -74,7 +74,7 @@ webhook PagerDuty / Alertmanager
 
 4. **Agent de causa raiz.** LangGraph com três nós: `sample` puxa a fatia de telemetria dos últimos 15 minutos, `walk` consulta o grafo por objetos vizinhos, `hypothesize` elabora candidatos de causa raiz ranqueados com citações de telemetria.
 
-5. **Pontuação de evidência.** Cada hipótese tem pontuação = recência * eespecificaçãoificidade * inverso do comprimento do caminho no grafo * contagem de citações. Retorne top-3.
+5. **Pontuação de evidência.** Cada hipótese tem pontuação = recência * especificaçãoificidade * inverso do comprimento do caminho no grafo * contagem de citações. Retorne top-3.
 
 6. **Briefing Slack.** Publique um anexo com a hipótese, a visualização do caminho no grafo (uma imagem de subgrafo renderizada server-side) e botões de aprovação para no máximo uma ação de remediação.
 
@@ -130,7 +130,7 @@ webhook: alert.pagerduty.com -> violação de SLO do checkout-api, taxa de erro 
 | Grafo de conhecimento K8s | "Grafo do cluster" | Nós = objetos K8s + séries de telemetria; arestas = propriedade, agendamento, observação |
 | Somente-leitura por padrão | "RBAC escopado" | Conta de serviço do agente só tem verbos get/list/describe; verbos destrutivos ficam num servidor separado atrás de aprovação |
 | Log de auditoria | "Considerado vs executado" | Registro append-only de cada comando candidato, se rodou, quem aprovou |
-| Ranqueamento de hipóteses | "Pontuação de evidência" | Recência × eespecificaçãoificidade × inverso do comprimento do caminho no grafo × contagem de citações |
+| Ranqueamento de hipóteses | "Pontuação de evidência" | Recência × especificaçãoificidade × inverso do comprimento do caminho no grafo × contagem de citações |
 | Card de aprovação Slack | "Portão HITL" | Mensagem Slack interativa com botões de remediação; agente não pode prosseguir até um humano clicar |
 | Citação de telemetria | "Ponteiro de evidência" | Uma consulta do Prometheus, seletor do Loki ou URL de trace do Tempo que sustenta uma afirmação |
 | MTTR | "Tempo até resolução" | Tempo de relógio do disparo do alerta até a recuperação do SLO |

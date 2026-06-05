@@ -14,7 +14,7 @@
 - Comparar agentes apenas de screenshot vs agentes de accessibility-tree vs agentes híbridos.
 - Configurar uma avaliação de benchmark de agente multimodal num pequeno recorte do VisualWebArena.
 
-## O Problemo
+## O Problema
 
 Um workflow de site de reservas: "ache um voo pra Tóquio pra 15 de abril, assento na janela abaixo de R$ 400, reserve."
 

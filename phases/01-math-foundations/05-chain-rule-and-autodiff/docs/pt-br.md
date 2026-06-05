@@ -14,7 +14,7 @@
 - Construir e treinar um MLP em XOR usando apenas o motor de autograd do zero
 - Verificar a correção do autodiff usando verificação de gradiente contra diferenças finitas numéricas
 
-## O Problemo
+## O Problema
 
 Você consegue computar derivadas de funções simples. Mas uma rede neural não é uma função simples. São centenas de funções compostas: multiplicação de matrizes, adicionar bias, aplicar ativação, multiplicar matrizes de novo, softmax, perda de entropia cruzada. A saída é uma função de uma função de uma função.
 
@@ -108,7 +108,7 @@ Modo reverso: semente dy/dy = 1, propagar pra trás
   x = 2       (dy/dx = dy/da * da/dx = -0.654 * 4 = -2.615)
 ```
 
-Redes neurais têm milhões de entradas (pesos) e uma saída (perda). O modo reverso computa todos os gradientes em um único backward pass. É por isso que a retropropagacao usa o modo reverso.
+Redes neurais têm milhões de entradas (pesos) e uma saída (perda). O modo reverso computa todos os gradientes em um único backward pass. É por isso que a retropropagação usa o modo reverso.
 
 | Modo | Semente | Direção | Melhor quando |
 |------|------|-----------|-----------|
@@ -504,7 +504,7 @@ A classe Value construída aqui é a base para o laço de treino de rede neural 
 | Números duais | "Valor mais derivada" | Números da forma a + b*epsilon (epsilon^2 = 0) que carregam informação de derivada pela aritmética |
 | Ordenação topológica | "Ordem de dependência" | Ordenar nós do grafo de modo que cada nó venha depois de todas as suas dependências. Necessário para propagação correta de gradiente. |
 | MLP | "Perceptron multicamada" | Uma rede neural com uma ou mais camadas ocultas de neurônios. Cada neurônio computa uma soma ponderada mais bias, depois aplica uma função de ativação. |
-| Neuronio | "Soma ponderada + ativação" | A unidade básica: saída = ativação(w1*x1 + w2*x2 + ... + b). Os pesos e bias são parâmetros aprendíveis. |
+| Neurônio | "Soma ponderada + ativação" | A unidade básica: saída = ativação(w1*x1 + w2*x2 + ... + b). Os pesos e bias são parâmetros aprendíveis. |
 
 ## Leitura Complementar
 

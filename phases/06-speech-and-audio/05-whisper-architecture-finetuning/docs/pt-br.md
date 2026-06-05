@@ -3,7 +3,7 @@
 > Whisper é um transformer encoder-decoder com janela de 30 segundos, treinado em 680k horas de pares áudio-texto multilíngues com supervisão fraca. Uma arquitetura, múltiplas tarefas, robusto em 99 idiomas. O ASR de referência de 2026.
 
 **Tipo:** Construir
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 04 (ASR), Fase 5 · 10 (Attention), Fase 7 · 05 (Transformer Completo)
 **Tempo:** ~75 minutos
 
@@ -23,14 +23,14 @@ Mas Whisper não é uma pipeline que você pode tratar como caixa-preta pra semp
 
 **Arquitetura.** Transformer encoder-decoder padrão.
 
-- Entrada: eespecificaçãotrograma log-mel de 30 segundos, 80 mels, hop de 10 ms → 3000 frames. Clips menores são preenchidos com zeros, maiores são fatiados.
+- Entrada: espectrograma log-mel de 30 segundos, 80 mels, hop de 10 ms → 3000 frames. Clips menores são preenchidos com zeros, maiores são fatiados.
 - Encoder: conv-downsample (stride 2) + `N` blocos transformer. Para Large-v3: 32 camadas, dim 1280, 20 heads.
 - Decoder: `N` blocos transformer com self-attn causal + cross-attn para saída do encoder. Mesmo tamanho que o encoder.
 - Saída: tokens BPE sobre vocab de 51.865 tokens.
 
 Large-v3 tem 1,55B params. Turbo usa decoder de 4 camadas (de 32), cortando latência 8× com penalidade de WER <1%.
 
-**O formato de prompt.** Whisper é um modelo multitarefa guiado por tokens eespecificaçãoiais no prompt do decoder:
+**O formato de prompt.** Whisper é um modelo multitarefa guiado por tokens especiais no prompt do decoder:
 
 ```
 <|startoftranscript|><|en|><|transcribe|><|notimestamps|> Hello world.
@@ -44,7 +44,7 @@ O prompt é o que permite um modelo fazer muitas tarefas. Troque `<|en|>` por `<
 
 **Janela de 30 segundos.** Tudo é fixado em 30 segundos. Clips maiores precisam de chunking; menores são preenchidos. Janelas não são transmitidas nativamente — é por isso que existem WhisperX, Whisper-Streaming e faster-whisper.
 
-**Normalização log-mel.** `(log_mel - mean) / std` onde as estatísticas vêm do corpus de treino do Whisper. Você *precisa* usar o pré-processamento do Whisper (`whisper.audio.log_mel_especificaçãotrogram`), não `librosa.feature.melespecificaçãotrogram`.
+**Normalização log-mel.** `(log_mel - mean) / std` onde as estatísticas vêm do corpus de treino do Whisper. Você *precisa* usar o pré-processamento do Whisper (`whisper.audio.log_mel_espectrogram`), não `librosa.feature.melespectrogram`.
 
 ### Variantes em 2026
 
@@ -118,7 +118,7 @@ model = get_peft_model(model, lora)
 
 Depois o loop padrão do Trainer. Checkpoint a cada 1000 steps. Avalie com WER no conjunto de validação.
 
-### Passo 4: inespecificaçãoione o que cada camada aprende
+### Passo 4: inspecione o que cada camada aprende
 
 ```python
 with torch.inference_mode():
@@ -152,7 +152,7 @@ A pilha de 2026:
 - **Texto alucinado em silêncio.** Whisper treinado em legendas inclui "Thanks for watching!", "Subscribe!", letras de música. Sempre use VAD como gate antes de chamar.
 - **Cascata de `condition_on_previous_text`.** Uma alucinação contamina janelas seguintes. Defina `False` a menos que precise de fluidez entre chunks.
 - **Padding de clips curtos.** Um clipe de 2 segundos preenchido para 30 segundos pode alucinar no silêncio restante. Use `pad=False` ou gate VAD.
-- **Estatísticas mel erradas.** Usar mels do librosa em vez das do Whisper produz saída quase-aleatória. Use `whisper.audio.log_mel_especificaçãotrogram`.
+- **Estatísticas mel erradas.** Usar mels do librosa em vez das do Whisper produz saída quase-aleatória. Use `whisper.audio.log_mel_espectrogram`.
 
 ## Entregue
 
@@ -170,7 +170,7 @@ Salve como `outputs/skill-whisper-tuner.md`. Projete uma pipeline de ajuste fino
 |-------|-------------------|---------------------------|
 | Janela de 30 s | Limite do Whisper | Cap rígido de entrada; audios maiores são fatiados. |
 | SOT | Início de transcrição | `<\|startoftranscript\|>` inicia o prompt do decoder. |
-| Token de timestamp | Alinhamento temporal | Cada offset de 0,02 s é um token eespecificaçãoial no vocab de 51k. |
+| Token de timestamp | Alinhamento temporal | Cada offset de 0,02 s é um token especial no vocab de 51k. |
 | Turbo | Variante rápida | 4 camadas decoder, 8× mais rápido, regressão <1% WER. |
 | WhisperX | Wrapper formato longo | VAD + Whisper + alinhamento wav2vec + diarização. |
 | Ajuste fino LoRA | Tuning eficiente | Adaptadores de baixo-rank em attention; treina ~0,3% dos params. |

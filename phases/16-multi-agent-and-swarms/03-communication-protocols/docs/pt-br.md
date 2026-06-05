@@ -67,7 +67,7 @@ sequenceDiagram
     participant MCP1 as MCP Server<br/>(database, API, files)
 
     Agent->>MCP1: list tools
-    MCP1-->>Agent: ferramenta definitions
+    MCP1-->>Agent: definições de ferramentas
     Agent->>MCP1: call ferramenta X
     MCP1-->>Agent: result
 ```
@@ -179,25 +179,25 @@ Tarefas são a unidade central de trabalho no A2A. Elas passam por estados defin
 stateDiagram-v2
     [*] --> submitted
     submitted --> working
-    working --> input_required: needs more info
-    input_required --> working: client sends data
-    working --> completed: success
-    working --> failed: error
-    working --> canceled: client cancels
-    submitted --> rejected: agente declines
+    working --> input_required: precisa de mais info
+    input_required --> working: cliente envia dados
+    working --> completed: sucesso
+    working --> failed: erro
+    working --> canceled: cliente cancela
+    submitted --> rejected: agente recusa
 
     completed --> [*]
     failed --> [*]
     canceled --> [*]
     rejected --> [*]
 
-    note right of completed: Terminal states are immutable.\nFollow-ups create new tasks\nwithin the same contextId.
+    note right of completed: Estados terminais são imutáveis.\nFollow-ups criam novas tarefas\nno mesmo contextId.
 ```
 
-Todos os 8 estados (a eespecificaçãoificação também define `UNSPECIFIED` como sentinela, omitido aqui):
+Todos os 8 estados (a especificação também define `UNSPECIFIED` como sentinela, omitido aqui):
 
 | Estado | Terminal? | Significado |
-|---|---|---|
+|--------|-----------|-------------|
 | `TASK_STATE_SUBMITTED` | Não | Reconhecido, ainda não processando |
 | `TASK_STATE_WORKING` | Não | Ativamente sendo processado |
 | `TASK_STATE_INPUT_REQUIRED` | Não | Agent precisa de mais info do cliente |
@@ -289,7 +289,7 @@ data: {"statusUpdate":{"taskId":"task-123","status":{"state":"TASK_STATE_COMPLET
 **Status:** Mergeando no A2A sob a Linux Foundation
 **Problema:** Como agentes comunicam com total auditabilidade, continuidade de sessão e rastreamento de trajetória?
 
-ACP é o **protocolo corporativo**. Ao contrário do que muitos resumos dizem, o ACP **não** usa JSON-LD. É uma API REST/JSON simples definida via OpenAPI. O que o torna eespecificaçãoial é o **TrajectoryMetadata**: cada resposta de agente pode carregar um log detalhado dos passos de raciocínio e chamadas de ferramentas que a produziram.
+ACP é o **protocolo corporativo**. Ao contrário do que muitos resumos dizem, o ACP **não** usa JSON-LD. É uma API REST/JSON simples definida via OpenAPI. O que o torna especial é o **TrajectoryMetadata**: cada resposta de agente pode carregar um log detalhado dos passos de raciocínio e chamadas de ferramentas que a produziram.
 
 ```mermaid
 sequenceDiagram
@@ -299,7 +299,7 @@ sequenceDiagram
 
     Client->>ACP: POST /runs (mode: sync)
     ACP->>ACP: Process request...
-    ACP->>Audit: Log trajectory:<br/>reasoning + ferramenta calls
+    ACP->>Audit: Log trajectory:<br/>reasoning + chamadas de ferramenta
     ACP-->>Client: Response + TrajectoryMetadata
     Note over Audit: Every step recorded:<br/>tool_name, tool_input,<br/>tool_output, reasoning
 ```
@@ -313,7 +313,7 @@ graph LR
     A[Agent Discovery] --> B["Runtime<br/>GET /agents"]
     A --> C["Open<br/>.well-known/agent.yml"]
     A --> D["Registry<br/>Centralized catalog"]
-    A --> E["Embedded<br/>Container rótulos"]
+    A --> E["Embedded<br/>Rótulos de contêiner"]
 
     style B fill:#dbeafe,stroke:#2563eb
     style C fill:#d1fae5,stroke:#059669
@@ -350,7 +350,7 @@ O **AgentManifest** é mais simples que o Agent Card do A2A:
 ACP usa "Runs" em vez de "Tasks." Um Run é uma execução de agente com três modos:
 
 | Modo | Comportamento |
-|---|---|
+|------|---------------|
 | `sync` | Bloqueante. Resposta contém o resultado completo. |
 | `async` | Retorna 202 imediatamente. Faz polling em `GET /runs/{id}` pra status. |
 | `stream` | Stream SSE. Eventos disparam enquanto o agente trabalha. |
@@ -498,3 +498,761 @@ Pontos importantes pra notar:
 - As chaves **`keyAgreement`** são usadas pra criptografia de ponta a ponta HPKE (RFC 9180).
 - A seção **service** vincula ao documento de Descrição do Agent.
 
+#### Meta-Protocol e Agent Description
+
+A inovação mais ousada do ANP é o **meta-protocolo**: dois agentes que nunca se viram antes podem negociar como vão se comunicar usando linguagem natural alimentada por IA.
+
+```
+Agent A: "I can speak JSON-RPC or REST. I prefer JSON-RPC."
+Agent B: "I can speak JSON-RPC and gRPC. JSON-RPC works for me."
+Agreed: JSON-RPC.
+
+Agent A: "I send data as JSON with fields: type, payload, timestamp."
+Agent B: "Acknowledged. I return JSON with: status, data, error."
+Protocol confirmed.
+```
+
+Isso não é um fluxo predeterminado. É uma conversa onde agentes usam modelos de linguagem pra chegar a um acordo. O ANP fornece um mecanismo de fallback: se a negociação de IA falhar, os agentes recorrem a um formato estruturado mínimo.
+
+A especificação também inclui **Agent Description Documents** que estendem o DID:
+
+```json
+{
+  "description": "I am a research agent that searches documentation.",
+  "capabilities": ["web_search", "doc_analysis"],
+  "input_formats": ["text/plain"],
+  "output_formats": ["text/plain", "application/json"],
+  "protocols": ["json-rpc", "rest", "grpc"],
+  "payment_required": false,
+  "rate_limit": 10,
+  "endpoint": "https://research-agent.example.com"
+}
+```
+
+## Construa
+
+Vamos construir implementações de cada protocolo e conectá-los. Código em TypeScript.
+
+### Passo 1: Tipos Compartilhados
+
+```typescript
+// Tipos compartilhados entre protocolos
+type AgentMessage = {
+  id: string;
+  role: "user" | "agent";
+  content: string;
+  metadata?: Record<string, unknown>;
+};
+
+type TaskStatus =
+  | "submitted"
+  | "working"
+  | "input_required"
+  | "completed"
+  | "failed"
+  | "canceled"
+  | "rejected";
+
+type Task = {
+  id: string;
+  contextId: string;
+  status: { state: TaskStatus; timestamp: number };
+  artifacts: Artifact[];
+};
+
+type Artifact = {
+  id: string;
+  name: string;
+  parts: ArtifactPart[];
+  append?: boolean;
+  lastChunk?: boolean;
+};
+
+type ArtifactPart =
+  | { kind: "text"; text: string; mediaType?: string }
+  | { kind: "data"; data: unknown; mediaType: string };
+
+type TrajectoryEntry = {
+  reasoning: string;
+  toolName?: string;
+  toolInput?: unknown;
+  toolOutput?: unknown;
+  timestamp: number;
+};
+```
+
+### Passo 2: Registro de Agentes
+
+```typescript
+type AgentInfo = {
+  name: string;
+  description: string;
+  version: string;
+  url: string;
+  capabilities: { streaming: boolean; pushNotifications: boolean };
+  defaultInputModes: string[];
+  defaultOutputModes: string[];
+  skills: Skill[];
+};
+
+type Skill = {
+  id: string;
+  name: string;
+  description: string;
+  tags: string[];
+  inputModes?: string[];
+  outputModes?: string[];
+};
+
+class AgentRegistry {
+  private agents: Map<string, AgentInfo> = new Map();
+
+  register(info: AgentInfo): void {
+    this.agents.set(info.name, info);
+  }
+
+  discoverByName(name: string): AgentInfo | undefined {
+    return this.agents.get(name);
+  }
+
+  discoverBySkillTag(tag: string): AgentInfo[] {
+    return Array.from(this.agents.values()).filter((a) =>
+      a.skills.some((s) => s.tags.includes(tag))
+    );
+  }
+
+  getAll(): AgentInfo[] {
+    return Array.from(this.agents.values());
+  }
+
+  generateAgentCard(name: string): object | null {
+    const agent = this.agents.get(name);
+    if (!agent) return null;
+    return {
+      name: agent.name,
+      description: agent.description,
+      version: agent.version,
+      supportedInterfaces: [
+        {
+          url: agent.url,
+          protocolBinding: "JSONRPC",
+          protocolVersion: "1.0",
+        },
+        {
+          url: agent.url.replace("/a2a/v1", "/a2a/rest"),
+          protocolBinding: "HTTP+JSON",
+          protocolVersion: "1.0",
+        },
+      ],
+      capabilities: agent.capabilities,
+      defaultInputModes: agent.defaultInputModes,
+      defaultOutputModes: agent.defaultOutputModes,
+      skills: agent.skills,
+      securitySchemes: {
+        bearer: {
+          httpAuthSecurityScheme: { scheme: "Bearer", bearerFormat: "JWT" },
+        },
+      },
+      security: [{ bearer: [] }],
+    };
+  }
+}
+```
+
+### Passo 3: Gerenciador de Tarefas (A2A)
+
+```typescript
+type TaskHandler = (
+  task: Task,
+  message: AgentMessage
+) => AsyncGenerator<TaskUpdate, void, unknown>;
+
+type TaskUpdate =
+  | { kind: "statusUpdate"; taskId: string; status: Task["status"] }
+  | {
+      kind: "artifactUpdate";
+      taskId: string;
+      artifact: Artifact;
+      append: boolean;
+      lastChunk: boolean;
+    };
+
+class TaskManager {
+  private tasks: Map<string, Task> = new Map();
+  private handlers: Map<string, TaskHandler> = new Map();
+  private contextCounter = 0;
+
+  registerHandler(agentName: string, handler: TaskHandler): void {
+    this.handlers.set(agentName, handler);
+  }
+
+  async createTask(
+    agentName: string,
+    message: AgentMessage
+  ): Promise<Task> {
+    const handler = this.handlers.get(agentName);
+    if (!handler) {
+      throw new Error(`No handler registered for agent: ${agentName}`);
+    }
+
+    const taskId = crypto.randomUUID();
+    this.contextCounter++;
+    const contextId = `ctx-${this.contextCounter}`;
+
+    const task: Task = {
+      id: taskId,
+      contextId,
+      status: { state: "submitted", timestamp: Date.now() },
+      artifacts: [],
+    };
+
+    this.tasks.set(taskId, task);
+
+    const generator = handler(task, message);
+    const updates: TaskUpdate[] = [];
+
+    for await (const update of generator) {
+      updates.push(update);
+      if (update.kind === "statusUpdate") {
+        task.status = update.status;
+      } else if (update.kind === "artifactUpdate") {
+        if (update.append) {
+          const existing = task.artifacts.find(
+            (a) => a.id === update.artifact.id
+          );
+          if (existing) {
+            existing.parts.push(...update.artifact.parts);
+            existing.lastChunk = update.lastChunk;
+          } else {
+            task.artifacts.push(update.artifact);
+          }
+        } else {
+          task.artifacts.push(update.artifact);
+        }
+      }
+
+      if (
+        update.kind === "statusUpdate" &&
+        ["completed", "failed", "canceled", "rejected"].includes(
+          update.status.state
+        )
+      ) {
+        break;
+      }
+    }
+
+    return task;
+  }
+
+  getTask(taskId: string): Task | undefined {
+    return this.tasks.get(taskId);
+  }
+}
+```
+
+### Passo 4: Runner Auditável (ACP)
+
+```typescript
+type AuditEntry = {
+  runId: string;
+  agentName: string;
+  status: string;
+  output: ArtifactPart[];
+  trajectory: TrajectoryEntry[];
+  startedAt: number;
+  completedAt?: number;
+};
+
+class AuditableRunner {
+  private auditLog: AuditEntry[] = [];
+  private agents: Map<string, () => Promise<AuditEntry>> = new Map();
+
+  registerAgent(
+    name: string,
+    runner: () => Promise<AuditEntry>
+  ): void {
+    this.agents.set(name, runner);
+  }
+
+  async run(agentName: string): Promise<AuditEntry> {
+    const runner = this.agents.get(agentName);
+    if (!runner) throw new Error(`No runner for: ${agentName}`);
+
+    const entry = await runner();
+    entry.runId = crypto.randomUUID();
+    this.auditLog.push(entry);
+    return entry;
+  }
+
+  getFullAuditLog(): AuditEntry[] {
+    return [...this.auditLog];
+  }
+}
+```
+
+### Passo 5: Registro de Identidade (ANP)
+
+```typescript
+type DIDDocument = {
+  "@context": string[];
+  id: string;
+  verificationMethod: Array<{
+    id: string;
+    type: string;
+    controller: string;
+    publicKeyJwk?: Record<string, string>;
+    publicKeyMultibase?: string;
+  }>;
+  authentication: string[];
+  keyAgreement: string[];
+  service: Array<{
+    id: string;
+    type: string;
+    serviceEndpoint: string;
+  }>;
+};
+
+type Identity = {
+  did: string;
+  document: DIDDocument;
+  privateKey: string;
+};
+
+function createIdentity(domain: string, name: string): Identity {
+  const did = `did:wba:${domain}:user:${name}`;
+  return {
+    did,
+    document: {
+      "@context": [
+        "https://www.w3.org/ns/did/v1",
+        "https://w3id.org/security/suites/jws-2020/v1",
+      ],
+      id: did,
+      verificationMethod: [
+        {
+          id: `${did}#key-1`,
+          type: "EcdsaSecp256k1VerificationKey2019",
+          controller: did,
+          publicKeyJwk: {
+            crv: "secp256k1",
+            x: "NtngWpJUr-rlNNbs0u-Aa8e16OwSJu6UiFf0Rdo1oJ4",
+            y: "qN1jKupJlFsPFc1UkWinqljv4YE0mq_Ickwnjgasvmo",
+            kty: "EC",
+          },
+        },
+      ],
+      authentication: [`${did}#key-1`],
+      keyAgreement: [],
+      service: [
+        {
+          id: `${did}#agent-description`,
+          type: "AgentDescription",
+          serviceEndpoint: `https://${domain}/agents/${name}/ad.json`,
+        },
+      ],
+    },
+    privateKey: "simulated-private-key",
+  };
+}
+
+function signPayload(identity: Identity, payload: string): string {
+  return `sig:${identity.did}:${Buffer.from(payload).toString("base64")}`;
+}
+
+class IdentityRegistry {
+  private documents: Map<string, DIDDocument> = new Map();
+
+  publish(doc: DIDDocument): void {
+    this.documents.set(doc.id, doc);
+  }
+
+  resolve(did: string): DIDDocument | undefined {
+    return this.documents.get(did);
+  }
+
+  verify(did: string, signature: string, payload: string): boolean {
+    const doc = this.documents.get(did);
+    if (!doc) return false;
+    const expectedSig = `sig:${did}:${Buffer.from(payload).toString("base64")}`;
+    return signature === expectedSig;
+  }
+}
+
+function textMessage(
+  role: "user" | "agent",
+  text: string,
+  metadata?: Record<string, unknown>
+): AgentMessage {
+  return { id: crypto.randomUUID(), role, content: text, metadata };
+}
+```
+
+### Passo 6: Gateway Unificado
+
+```typescript
+class ProtocolGateway {
+  constructor(
+    private registry: AgentRegistry,
+    private taskManager: TaskManager,
+    private auditRunner: AuditableRunner,
+    private identityRegistry: IdentityRegistry
+  ) {}
+
+  async delegateTask(
+    fromDid: string,
+    signature: string,
+    toAgent: string,
+    message: AgentMessage,
+    contextId?: string
+  ): Promise<
+    { task: Task; audit: AuditEntry } | { error: string }
+  > {
+    if (!this.identityRegistry.verify(fromDid, signature, message.id)) {
+      return { error: "Signature verification failed" };
+    }
+
+    const agent = this.registry.discoverByName(toAgent);
+    if (!agent) {
+      return { error: `Agent not found: ${toAgent}` };
+    }
+
+    const matchingSkill = agent.skills[0];
+    if (matchingSkill) {
+      const messageMode = "text/plain";
+      if (
+        matchingSkill.inputModes &&
+        !matchingSkill.inputModes.includes(messageMode)
+      ) {
+        return {
+          error: `Agent cannot handle input mode: ${messageMode}`,
+        };
+      }
+    }
+
+    let task: Task;
+    try {
+      task = await this.taskManager.createTask(toAgent, message);
+    } catch (e: unknown) {
+      const err = e instanceof Error ? e.message : String(e);
+      return { error: `Task creation failed: ${err}` };
+    }
+
+    const audit = await this.auditRunner.run(toAgent);
+
+    return { task, audit };
+  }
+
+  discoverAndDelegate(
+    fromDid: string,
+    signature: string,
+    skillTag: string,
+    message: AgentMessage
+  ): Promise<
+    { task: Task; audit: AuditEntry } | { error: string }
+  > {
+    const candidates = this.registry.discoverBySkillTag(skillTag);
+    if (candidates.length === 0) {
+      return Promise.resolve({
+        error: `No agents found with skill tag: ${skillTag}`,
+      });
+    }
+    return this.delegateTask(
+      fromDid,
+      signature,
+      candidates[0].name,
+      message
+    );
+  }
+}
+```
+
+### Passo 7: Conecte Tudo
+
+```typescript
+async function protocolDemo() {
+  const registry = new AgentRegistry();
+  registry.register({
+    name: "researcher",
+    description: "Searches and summarizes findings",
+    version: "1.0.0",
+    url: "https://researcher.local/a2a/v1",
+    capabilities: { streaming: true, pushNotifications: false },
+    defaultInputModes: ["text/plain"],
+    defaultOutputModes: ["text/plain", "application/json"],
+    skills: [
+      {
+        id: "web-research",
+        name: "Web Research",
+        description: "Searches the web",
+        tags: ["research", "search", "summarization"],
+        inputModes: ["text/plain"],
+        outputModes: ["application/json"],
+      },
+    ],
+  });
+  registry.register({
+    name: "coder",
+    description: "Writes code from specs",
+    version: "1.0.0",
+    url: "https://coder.local/a2a/v1",
+    capabilities: { streaming: false, pushNotifications: false },
+    defaultInputModes: ["text/plain", "application/json"],
+    defaultOutputModes: ["text/plain"],
+    skills: [
+      {
+        id: "code-gen",
+        name: "Code Generation",
+        description: "Generates code",
+        tags: ["coding", "generation"],
+        inputModes: ["text/plain", "application/json"],
+        outputModes: ["text/plain"],
+      },
+    ],
+  });
+
+  const taskManager = new TaskManager();
+  const auditRunner = new AuditableRunner();
+
+  const researchTrajectory: TrajectoryEntry[] = [];
+
+  taskManager.registerHandler(
+    "researcher",
+    async function* (task, message) {
+      yield {
+        kind: "statusUpdate",
+        taskId: task.id,
+        status: { state: "working", timestamp: Date.now() },
+      };
+
+      researchTrajectory.push({
+        reasoning: "Searching for React 19 documentation",
+        toolName: "web_search",
+        toolInput: { query: "React 19 compiler features" },
+        toolOutput: {
+          results: ["react.dev/blog/react-19", "github.com/react/react"],
+        },
+        timestamp: Date.now(),
+      });
+
+      researchTrajectory.push({
+        reasoning: "Extracting key findings from search results",
+        toolName: "doc_analysis",
+        toolInput: { url: "react.dev/blog/react-19" },
+        toolOutput: {
+          summary:
+            "React 19 compiler auto-memoizes, no manual useMemo needed",
+        },
+        timestamp: Date.now(),
+      });
+
+      yield {
+        kind: "artifactUpdate",
+        taskId: task.id,
+        artifact: {
+          id: crypto.randomUUID(),
+          name: "research-results",
+          parts: [
+            {
+              kind: "data",
+              data: {
+                findings: [
+                  "React 19 compiler auto-memoizes components",
+                  "No more manual useMemo/useCallback needed",
+                  "Compiler runs at build time, not runtime",
+                ],
+                sources: ["react.dev/blog/react-19"],
+              },
+              mediaType: "application/json",
+            },
+          ],
+        },
+        append: false,
+        lastChunk: true,
+      };
+
+      yield {
+        kind: "statusUpdate",
+        taskId: task.id,
+        status: { state: "completed", timestamp: Date.now() },
+      };
+    }
+  );
+
+  auditRunner.registerAgent("researcher", async () => ({
+    output: [
+      textMessage("agent", "React 19 compiler auto-memoizes components"),
+    ],
+    trajectory: researchTrajectory,
+  }));
+
+  const identityRegistry = new IdentityRegistry();
+
+  const coderIdentity = createIdentity("coder.local", "coder");
+  const researcherIdentity = createIdentity("researcher.local", "researcher");
+
+  identityRegistry.publish(coderIdentity.document);
+  identityRegistry.publish(researcherIdentity.document);
+
+  const gateway = new ProtocolGateway(
+    registry,
+    taskManager,
+    auditRunner,
+    identityRegistry
+  );
+
+  console.log("=== Protocol Demo ===\n");
+
+  console.log("1. Agent Discovery (A2A)");
+  const researchAgents = registry.discoverBySkillTag("research");
+  console.log(
+    `   Found ${researchAgents.length} agent(s):`,
+    researchAgents.map((a) => a.name)
+  );
+
+  console.log("\n2. Identity Verification (ANP)");
+  const message = textMessage("user", "Research React 19 compiler features");
+  const signature = signPayload(coderIdentity, message.id);
+  const verified = identityRegistry.verify(
+    coderIdentity.did,
+    signature,
+    message.id
+  );
+  console.log(`   Coder DID: ${coderIdentity.did}`);
+  console.log(`   Signature verified: ${verified}`);
+
+  console.log("\n3. Task Delegation (A2A + ACP + ANP)");
+  const result = await gateway.delegateTask(
+    coderIdentity.did,
+    signature,
+    "researcher",
+    message,
+    "session-001"
+  );
+
+  if ("error" in result) {
+    console.log(`   Error: ${result.error}`);
+    return;
+  }
+
+  console.log(`   Task ID: ${result.task.id}`);
+  console.log(`   Task state: ${result.task.status.state}`);
+  console.log(`   Artifacts: ${result.task.artifacts.length}`);
+
+  console.log("\n4. Audit Trail (ACP)");
+  console.log(`   Run ID: ${result.audit.runId}`);
+  console.log(`   Status: ${result.audit.status}`);
+  console.log(`   Trajectory steps: ${result.audit.trajectory.length}`);
+  for (const step of result.audit.trajectory) {
+    console.log(`     - ${step.reasoning}`);
+    if (step.toolName) {
+      console.log(`       Tool: ${step.toolName}`);
+    }
+  }
+
+  console.log("\n5. Full Audit Log");
+  const fullLog = auditRunner.getFullAuditLog();
+  console.log(`   Total runs: ${fullLog.length}`);
+  for (const entry of fullLog) {
+    const duration = entry.completedAt
+      ? `${entry.completedAt - entry.startedAt}ms`
+      : "in-progress";
+    console.log(`   ${entry.agentName}: ${entry.status} (${duration})`);
+  }
+}
+
+protocolDemo().catch((err) => {
+  console.error("Protocol demo failed:", err);
+  process.exitCode = 1;
+});
+```
+
+## O Que Dá Errado
+
+Protocolos resolvem o caminho feliz. Aqui está o que quebra em produção:
+
+**Desvio de schema.** Agente A publica um Agent Card anunciando saída `application/json`. Mas o schema JSON muda entre versões. Agente B parseia o formato antigo e recebe lixo. Correção: versione seus skills e schemas de saída. A especificação A2A suporta `version` em Agent Cards por essa razão.
+
+**Violações de máquina de estados.** Um handler de agente gera um evento `completed`, depois tenta gerar mais artefatos. A tarefa é imutável. Seu código silenciosamente descarta as atualizações ou lança um erro. Correção: verifique estado terminal antes de gerar. O `TaskManager` acima impõe isso com o `break` após estados terminais.
+
+**Falhas de resolução de confiança.** Agente A tenta verificar o DID do Agente B, mas o domínio do Agente B está fora. O documento DID não pode ser buscado. Você falha aberto (aceita agentes não verificados) ou falha fechado (rejeita tudo)? ANP recomenda falha fechada com o princípio do menor privilégio.
+
+**Inchaço de trajetória.** O log de trajetória ACP é poderoso mas caro. Um agente complexo que faz 200 chamadas de ferramenta por execução produz entradas de auditoria massivas. Correção: registre trajetória em níveis de verbosidade configuráveis. Registre nomes de ferramentas e IO para conformidade, pule passos de raciocínio para cargas de trabalho não reguladas.
+
+**Thundering herd de descoberta.** 50 agentes todos consultam `GET /agents` simultaneamente na inicialização. Correção: armazene Agent Cards em cache com TTL, distribua intervalos de descoberta ou use registro baseado em push em vez de polling.
+
+## Use
+
+### Implementações Reais
+
+**A2A** é o mais maduro. A [especificação oficial do Google](https://github.com/google/A2A) é open-source sob a Linux Foundation. SDKs para Python e TypeScript. Se seus agentes precisam de descoberta dinâmica e colaboração, comece aqui.
+
+**ACP** está mergeando no A2A. O projeto [BeeAI da IBM](https://github.com/i-am-bee/acp) criou ACP como uma alternativa REST-first, mas o conceito de metadados de trajetória está sendo absorvido pelo ecossistema A2A. Use padrões ACP (log de trajetória, ciclo de vida de runs) mesmo se usar A2A como transporte.
+
+**ANP** é o mais experimental. O [repo da comunidade](https://github.com/agent-network-protocol/AgentNetworkProtocol) tem um SDK Python (AgentConnect). O conceito de negociação de meta-protocolo é genuinamente novo. Vale a pena acompanhar para implantações de agentes cross-organizacionais.
+
+**MCP** já foi coberto na Fase 13. Se você quer que agentes usem ferramentas, MCP é o padrão.
+
+### Escolhendo o Protocolo Certo
+
+```mermaid
+graph TD
+    START{Agentes precisam<br/>usar ferramentas?}
+    START -->|Sim| MCP_R[Use MCP]
+    START -->|Não| TALK{Agentes precisam<br/>conversar entre si?}
+    TALK -->|Não| NONE[Não precisa<br/>de protocolo]
+    TALK -->|Sim| AUDIT{Precisa de trilha<br/>de auditoria?}
+    AUDIT -->|Sim| ACP_R[A2A + ACP<br/>padrões de trajetória]
+    AUDIT -->|Não| ORG{Todos agentes<br/>dentro da org?}
+    ORG -->|Sim| A2A_R[A2A<br/>Agent Cards + Tasks]
+    ORG -->|Não| INFRA{Infraestrutura<br/>compartilhada?}
+    INFRA -->|Sim| BROKER[A2A + message broker]
+    INFRA -->|Não| ANP_R[ANP + A2A<br/>verificação DID]
+
+    style MCP_R fill:#d1fae5,stroke:#059669
+    style A2A_R fill:#dbeafe,stroke:#2563eb
+    style ACP_R fill:#fef3c7,stroke:#d97706
+    style ANP_R fill:#f3e8ff,stroke:#7c3aed
+    style BROKER fill:#e0e7ff,stroke:#4338ca
+```
+
+## Entregue
+
+Esta lição produz:
+- `code/main.ts` -- implementação completa de todos os quatro padrões de protocolo
+- `outputs/prompt-protocol-selector.md` -- um prompt que ajuda você a escolher protocolos para seu sistema
+
+## Exercícios
+
+1. **Delegação de tarefas multi-hop.** Estenda o `TaskManager` para que um handler de agente possa delegar subtarefas a outros agentes. O pesquisador recebe uma tarefa, delega subtarefas "search" e "summarize" a dois agentes especialistas, espera ambos completarem, depois mescla os resultados em seus próprios artefatos.
+
+2. **Trilha de auditoria em streaming.** Modifique o `AuditableRunner` para suportar modo streaming. Em vez de esperar o resultado completo, gere atualizações `AuditEntry` em tempo real conforme entradas de trajetória são adicionadas. Use um gerador assíncrono que produz snapshots de auditoria.
+
+3. **Rotação de DID.** Adicione rotação de chaves ao `IdentityRegistry`. Um agente deve poder publicar um novo documento DID com chaves atualizadas enquanto mantém uma referência `previousDid`. Verificadores devem aceitar assinaturas tanto da chave atual quanto da anterior durante um período de carência.
+
+4. **Negociação de protocolo.** Implemente o conceito de meta-protocolo do ANP. Dois agentes trocam mensagens `protocolNegotiation` com formatos candidatos (ex.: "Eu falo JSON-RPC" vs "Eu prefiro REST"). Após no máximo 3 rodadas, eles concordam com um formato ou dão timeout. O formato acordado determina qual `TaskManager` ou `AuditableRunner` eles usam.
+
+5. **Descoberta com rate limit.** Adicione um wrapper `RateLimitedRegistry` que armazena em cache consultas de Agent Card com TTL configurável e limita consultas de descoberta por agente por segundo. Simule um thundering herd de 100 agentes descobrindo uns aos outros na inicialização e meça a diferença.
+
+## Termos-Chave
+
+| Termo | O que o pessoal diz | O que realmente significa |
+|-------|--------------------|---------------------------|
+| MCP | "O protocolo para ferramentas de IA" | Protocolo cliente-servidor para agentes descobrirem e usarem ferramentas. Agente-para-ferramenta, não agente-para-agente. |
+| A2A | "Protocolo de agente do Google" | Protocolo peer-to-peer para colaboração de agentes sob a Linux Foundation. Descoberta via Agent Cards, ciclo de vida de tarefas de 9 estados, streaming via SSE. Suporta JSON-RPC, REST e gRPC. |
+| ACP | "Mensageria corporativa de agentes" | API REST da IBM/BeeAI para execuções de agente com TrajectoryMetadata: cada resposta carrega a cadeia completa de raciocínio e chamadas de ferramenta. Mergeando no A2A. |
+| ANP | "Identidade descentralizada de agente" | Protocolo comunitário usando `did:wba` (DID) para identidade criptográfica, HPKE para E2EE e negociação de meta-protocolo alimentada por IA para agentes que nunca se viram. |
+| Agent Card | "Cartão de visita do agente" | Documento JSON em `/.well-known/agent-card.json` descrevendo skills, tipos MIME suportados, esquemas de segurança e bindings de protocolo. |
+| DID | "ID descentralizado" | Padrão W3C para identidades criptograficamente verificáveis hospedadas no próprio domínio do agente. ANP usa método `did:wba`. |
+| TrajectoryMetadata | "Recibo de auditoria" | Mecanismo do ACP para anexar passos de raciocínio, chamadas de ferramenta e suas entradas/saídas a cada resposta de agente. |
+| Meta-protocolo | "Agentes negociando como falar" | Abordagem do ANP onde agentes usam linguagem natural para concordar dinamicamente sobre formatos de dados, depois geram código para lidar com eles. |
+| Task | "Unidade de trabalho" | Objeto com estado do A2A que rastreia trabalho da submissão à conclusão. Imutável uma vez terminal. |
+
+## Leitura Adicional
+
+- [Google A2A specification](https://github.com/google/A2A) — especificação oficial e SDKs (v1.0.0, Linux Foundation)
+- [IBM/BeeAI ACP specification](https://github.com/i-am-bee/acp) — especificação OpenAPI 3.1 para execuções de agente e metadados de trajetória
+- [Agent Network Protocol](https://github.com/agent-network-protocol/AgentNetworkProtocol) — identidade baseada em DID, E2EE, negociação de meta-protocolo
+- [Model Context Protocol docs](https://modelcontextprotocol.io/) — especificação MCP da Anthropic (coberta na Fase 13)
+- [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/) — padrão de identidade que fundamenta o ANP
+- [RFC 9180 (HPKE)](https://www.rfc-editor.org/rfc/rfc9180) — esquema de criptografia que o ANP usa para E2EE
+- [FIPA Agent Communication Language](http://www.fipa.org/specs/fipa00061/SC00061G.html) — precursor acadêmico dos protocolos modernos de agentes

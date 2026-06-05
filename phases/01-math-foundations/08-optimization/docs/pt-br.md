@@ -14,7 +14,7 @@
 - Distinguir paisagens de perda convexas de não-convexas e explicar o papel de pontos de sela em altas dimensões
 - Configurar agendamentos de taxa de aprendizado (decaimento em etapa, cosseno com aneling, warmup) pra estabilidade de treino
 
-## O Problemo
+## O Problema
 
 Você tem uma função de perda. Ela diz quão errado seu modelo está. Você tem gradientes. Eles dizem qual direção torna a perda pior. Agora você precisa de uma estratégia pra caminhar morro abaixo.
 
@@ -344,7 +344,7 @@ As classes de otimizador construídas aqui reaparecem na Fase 3 quando treinamos
 | Adam | "O otimizador padrão" | Estimação de Momento Adaptativo. Rastreia médias móveis de gradientes e gradientes ao quadrado por peso pra dar a cada peso sua própria taxa de aprendizado. |
 | Agendamento de taxa de aprendizado | "Mudar lr ao longo do tempo" | Uma função que ajusta a taxa de aprendizado durante o treino. Passos grandes no início, pequenos no final. |
 | Função convexa | "Um vale" | Uma função onde todo mínimo local é o mínimo global. A descida do gradiente sempre o encontra. Perdas de rede neural não são convexas. |
-| Ponto de sela | "Plano mas não é mínimo" | Um ponto onde o gradiente é zero mas é mínimo em algumas direações e máximo em outras. Comum em altas dimensões. |
+| Ponto de sela | "Plano mas não é mínimo" | Um ponto onde o gradiente é zero mas é mínimo em algumas direções e máximo em outras. Comum em altas dimensões. |
 | Paisagem de perda | "O terreno" | A função de perda plotada sobre o espaço de pesos. Visualizada fatiando ao longo de duas direções aleatórias. |
 | Convergência | "Chegando lá" | O otimizador alcançou um ponto onde passos adicionais não reduzem significativamente a perda. |
 

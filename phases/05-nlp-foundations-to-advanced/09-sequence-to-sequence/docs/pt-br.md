@@ -145,14 +145,14 @@ model = AutoModelForSeq2SeqLM.from_pretrained("facebook/bart-base")
 
 src = tok("Translate this to French: Hello, how are you?", return_tensors="pt")
 out = model.generate(**src, max_new_tokens=50, num_beams=4)
-print(tok.decode(out[0], skip_especificaçãoial_tokens=True))
+print(tok.decode(out[0], skip_special_tokens=True))
 ```
 
 Encoder-decoders modernos trocaram RNNs por transformers. A forma geral (encoder, decoder, gerar-token-por-token) é idêntica ao paper seq2seq de 2014. O mecanismo dentro de cada bloco é diferente.
 
 ### Quando ainda buscar seq2seq baseado em RNN
 
-Quase nunca, pra projetos novos. Exceções eespecificaçãoíficas:
+Quase nunca, pra projetos novos. Exceções específicas:
 
 - Tradução streaming onde você consome entrada token por vez com memória limitada.
 - Geração de texto em dispositivo onde o custo de memória do transformer é proibitivo.

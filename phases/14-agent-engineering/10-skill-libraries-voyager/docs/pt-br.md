@@ -34,7 +34,7 @@ Voyager (arXiv:2305.16291) estrutura um agente ao redor de:
 2. **Biblioteca de skills.** Cada skill é código executável. Novas skills são adicionadas quando uma tarefa dá certo. Skills são recuperadas por similaridade consulta-to-descrição.
 3. **Mecanismo de prompting iterativo.** Em falha, o agente recebe erros de execução, feedback do ambiente e saída de auto-verificação, depois refina a skill.
 
-A avaliação em Minecraft (Wang et al., 2024): 3.3x mais itens únicos, 8.5x mais rápido em ferramentas de pedra, 6.4x mais rápido em ferramentas de ferro, 2.3x mais percorrido no mapa versus baselines. Os números são eespecificaçãoíficos de Minecraft mas o padrão transfere.
+A avaliação em Minecraft (Wang et al., 2024): 3.3x mais itens únicos, 8.5x mais rápido em ferramentas de pedra, 6.4x mais rápido em ferramentas de ferro, 2.3x mais percorrido no mapa versus baselines. Os números são específicos de Minecraft mas o padrão transfere.
 
 ### Espaço de ação = código
 
@@ -108,7 +108,7 @@ O trace mostra escritas na biblioteca, recuperação, composição, uma execuç�
 
 - **Skills do Claude Agent SDK** (Anthropic) — referência de 2026: cada skill tem descrição, código e instruções; carregadas sob demanda durante sessão de agent.
 - **skillkit** (npm: skillkit) — gerenciamento de skills cross-agent pra 32+ agentes de código AI.
-- **Bibliotecas de skills customizadas** — eespecificaçãoíficas de domínio (skills SQL pra agentes de dados, skills Terraform pra agentes de infra). O padrão Voyager escala pra baixo.
+- **Bibliotecas de skills customizadas** — específicas de domínio (skills SQL pra agentes de dados, skills Terraform pra agentes de infra). O padrão Voyager escala pra baixo.
 - **`tools` do OpenAI Agents SDK** — no extremo baixo; cada ferramenta é uma skill leve.
 
 ## Entregue

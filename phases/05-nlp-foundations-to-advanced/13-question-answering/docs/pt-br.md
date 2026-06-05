@@ -119,7 +119,7 @@ Pra QA em produção:
 
 ### RAGAS: o framework de avaliação de produção de 2026
 
-`RAGAS` é construído eespecificaçãoificamente pra sistemas RAG e é o padrão de envio em 2026. Pontua quatro dimensões sem exigir referências douradas:
+`RAGAS` é construído especificamente pra sistemas RAG e é o padrão de envio em 2026. Pontua quatro dimensões sem exigir referências douradas:
 
 - **Fidelidade.** Cada afirmação na resposta vem do contexto recuperado? Medido por implicação baseada em NLI. Sua métrica principal de alucinação.
 - **Relevância da resposta.** A resposta endereça a pergunta? Medido gerando perguntas hipotéticas da resposta e comparando com a pergunta real.
