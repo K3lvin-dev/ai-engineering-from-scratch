@@ -1,0 +1,3796 @@
+{
+  "summary": {
+    "placeholder": 0,
+    "partial_lt_40": 0,
+    "partial_40_70": 0,
+    "complete_gt_70": 473,
+    "missing": 0,
+    "total_en_files": 473
+  },
+  "lessons": [
+    {
+      "en_path": "phases/00-setup-and-tooling/01-dev-environment/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 4183,
+      "pt_size": 4426,
+      "ratio": 1.0580922782691848
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/02-git-and-collaboration/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 3191,
+      "pt_size": 3432,
+      "ratio": 1.075524913820119
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/03-gpu-setup-and-cloud/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 3666,
+      "pt_size": 3901,
+      "ratio": 1.064102564102564
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/04-apis-and-keys/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 4148,
+      "pt_size": 4499,
+      "ratio": 1.084619093539055
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/05-jupyter-notebooks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8720,
+      "pt_size": 9081,
+      "ratio": 1.0413990825688073
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/06-python-environments/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8429,
+      "pt_size": 8205,
+      "ratio": 0.9734250800806739
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/07-docker-for-ai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11564,
+      "pt_size": 12323,
+      "ratio": 1.0656347284676582
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/08-editor-setup/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8281,
+      "pt_size": 8987,
+      "ratio": 1.0852554039367226
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/09-data-management/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8376,
+      "pt_size": 9197,
+      "ratio": 1.098018147086915
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/10-terminal-and-shell/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9678,
+      "pt_size": 10468,
+      "ratio": 1.0816284356271957
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/11-linux-for-ai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11371,
+      "pt_size": 10001,
+      "ratio": 0.8795180722891566
+    },
+    {
+      "en_path": "phases/00-setup-and-tooling/12-debugging-and-profiling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12147,
+      "pt_size": 13663,
+      "ratio": 1.1248044784720508
+    },
+    {
+      "en_path": "phases/01-math-foundations/01-linear-algebra-intuition/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16483,
+      "pt_size": 17282,
+      "ratio": 1.0484741855244797
+    },
+    {
+      "en_path": "phases/01-math-foundations/02-vectors-matrices-operations/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11836,
+      "pt_size": 12445,
+      "ratio": 1.0514531936465021
+    },
+    {
+      "en_path": "phases/01-math-foundations/03-matrix-transformations/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15703,
+      "pt_size": 16350,
+      "ratio": 1.0412023180284022
+    },
+    {
+      "en_path": "phases/01-math-foundations/04-calculus-for-ml/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23277,
+      "pt_size": 22272,
+      "ratio": 0.9568243330326073
+    },
+    {
+      "en_path": "phases/01-math-foundations/05-chain-rule-and-autodiff/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18466,
+      "pt_size": 18621,
+      "ratio": 1.0083938048304992
+    },
+    {
+      "en_path": "phases/01-math-foundations/06-probability-and-distributions/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15204,
+      "pt_size": 15757,
+      "ratio": 1.0363720073664826
+    },
+    {
+      "en_path": "phases/01-math-foundations/07-bayes-theorem/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20211,
+      "pt_size": 21542,
+      "ratio": 1.0658552273514423
+    },
+    {
+      "en_path": "phases/01-math-foundations/08-optimization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16179,
+      "pt_size": 16242,
+      "ratio": 1.0038939365844612
+    },
+    {
+      "en_path": "phases/01-math-foundations/09-information-theory/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17597,
+      "pt_size": 18590,
+      "ratio": 1.0564300733079501
+    },
+    {
+      "en_path": "phases/01-math-foundations/10-dimensionality-reduction/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17569,
+      "pt_size": 18785,
+      "ratio": 1.0692128180317604
+    },
+    {
+      "en_path": "phases/01-math-foundations/11-singular-value-decomposition/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23106,
+      "pt_size": 24749,
+      "ratio": 1.0711070717562539
+    },
+    {
+      "en_path": "phases/01-math-foundations/12-tensor-operations/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14940,
+      "pt_size": 11837,
+      "ratio": 0.7923025435073627
+    },
+    {
+      "en_path": "phases/01-math-foundations/13-numerical-stability/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 25359,
+      "pt_size": 26893,
+      "ratio": 1.0604913442959107
+    },
+    {
+      "en_path": "phases/01-math-foundations/14-norms-and-distances/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23640,
+      "pt_size": 25829,
+      "ratio": 1.0925972927241963
+    },
+    {
+      "en_path": "phases/01-math-foundations/15-statistics-for-ml/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20763,
+      "pt_size": 23248,
+      "ratio": 1.1196840533641574
+    },
+    {
+      "en_path": "phases/01-math-foundations/16-sampling-methods/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 29458,
+      "pt_size": 31286,
+      "ratio": 1.062054450403965
+    },
+    {
+      "en_path": "phases/01-math-foundations/17-linear-systems/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24449,
+      "pt_size": 25975,
+      "ratio": 1.062415640721502
+    },
+    {
+      "en_path": "phases/01-math-foundations/18-convex-optimization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24661,
+      "pt_size": 26577,
+      "ratio": 1.077693524187989
+    },
+    {
+      "en_path": "phases/01-math-foundations/19-complex-numbers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18528,
+      "pt_size": 19503,
+      "ratio": 1.0526230569948187
+    },
+    {
+      "en_path": "phases/01-math-foundations/20-fourier-transform/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21469,
+      "pt_size": 23315,
+      "ratio": 1.0859844426848013
+    },
+    {
+      "en_path": "phases/01-math-foundations/21-graph-theory/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19301,
+      "pt_size": 20484,
+      "ratio": 1.061292161027926
+    },
+    {
+      "en_path": "phases/01-math-foundations/22-stochastic-processes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23237,
+      "pt_size": 25075,
+      "ratio": 1.0790979902741318
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/01-what-is-machine-learning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21112,
+      "pt_size": 22994,
+      "ratio": 1.089143615005684
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/02-linear-regression/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22258,
+      "pt_size": 19749,
+      "ratio": 0.8872764848593764
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/03-logistic-regression/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19717,
+      "pt_size": 20867,
+      "ratio": 1.0583253030379876
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/04-decision-trees/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17439,
+      "pt_size": 19003,
+      "ratio": 1.089684041516142
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/05-support-vector-machines/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15661,
+      "pt_size": 16530,
+      "ratio": 1.0554881552902113
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/06-knn-and-distances/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16616,
+      "pt_size": 17976,
+      "ratio": 1.0818488204140588
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/07-unsupervised-learning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19588,
+      "pt_size": 20483,
+      "ratio": 1.045691239534409
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/08-feature-engineering/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21875,
+      "pt_size": 22739,
+      "ratio": 1.039497142857143
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/09-model-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 27043,
+      "pt_size": 28234,
+      "ratio": 1.0440409717856747
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/10-bias-variance/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23037,
+      "pt_size": 24717,
+      "ratio": 1.0729261622607111
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/11-ensemble-methods/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15976,
+      "pt_size": 16919,
+      "ratio": 1.059026039058588
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/12-hyperparameter-tuning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 25681,
+      "pt_size": 27311,
+      "ratio": 1.0634710486351777
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/13-ml-pipelines/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14365,
+      "pt_size": 15509,
+      "ratio": 1.0796380090497737
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/14-naive-bayes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24255,
+      "pt_size": 26457,
+      "ratio": 1.0907854050711194
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/15-time-series/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 23763,
+      "pt_size": 25876,
+      "ratio": 1.0889197491899172
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/16-anomaly-detection/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 25415,
+      "pt_size": 27663,
+      "ratio": 1.0884517017509345
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/17-imbalanced-data/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22542,
+      "pt_size": 23691,
+      "ratio": 1.0509715198296514
+    },
+    {
+      "en_path": "phases/02-ml-fundamentals/18-feature-selection/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22616,
+      "pt_size": 24112,
+      "ratio": 1.066147859922179
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/01-the-perceptron/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13996,
+      "pt_size": 14504,
+      "ratio": 1.0362960845955986
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/02-multi-layer-networks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15791,
+      "pt_size": 16662,
+      "ratio": 1.0551580013931987
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/03-backpropagation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19046,
+      "pt_size": 19690,
+      "ratio": 1.033812874094298
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/04-activation-functions/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21397,
+      "pt_size": 18630,
+      "ratio": 0.8706828060008412
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/05-loss-functions/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21248,
+      "pt_size": 17559,
+      "ratio": 0.8263836596385542
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/06-optimizers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20798,
+      "pt_size": 21590,
+      "ratio": 1.038080584671603
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/07-regularization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24540,
+      "pt_size": 25641,
+      "ratio": 1.0448655256723716
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/08-weight-initialization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15594,
+      "pt_size": 16155,
+      "ratio": 1.0359753751442862
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/09-learning-rate-schedules/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17479,
+      "pt_size": 18130,
+      "ratio": 1.037244693632359
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/10-mini-framework/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24135,
+      "pt_size": 24599,
+      "ratio": 1.0192251916304123
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/11-intro-to-pytorch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22784,
+      "pt_size": 23695,
+      "ratio": 1.0399841994382022
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/12-intro-to-jax/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20352,
+      "pt_size": 21290,
+      "ratio": 1.0460888364779874
+    },
+    {
+      "en_path": "phases/03-deep-learning-core/13-debugging-neural-networks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 31305,
+      "pt_size": 32617,
+      "ratio": 1.0419102379811531
+    },
+    {
+      "en_path": "phases/04-computer-vision/01-image-fundamentals/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20221,
+      "pt_size": 21731,
+      "ratio": 1.0746748429850155
+    },
+    {
+      "en_path": "phases/04-computer-vision/02-convolutions-from-scratch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16958,
+      "pt_size": 18235,
+      "ratio": 1.0753036914730512
+    },
+    {
+      "en_path": "phases/04-computer-vision/03-cnns-lenet-to-resnet/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17487,
+      "pt_size": 18675,
+      "ratio": 1.0679361811631498
+    },
+    {
+      "en_path": "phases/04-computer-vision/04-image-classification/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19566,
+      "pt_size": 20852,
+      "ratio": 1.0657262598384953
+    },
+    {
+      "en_path": "phases/04-computer-vision/05-transfer-learning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17009,
+      "pt_size": 18777,
+      "ratio": 1.103944970309836
+    },
+    {
+      "en_path": "phases/04-computer-vision/06-object-detection-yolo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 19213,
+      "pt_size": 20477,
+      "ratio": 1.065788788840889
+    },
+    {
+      "en_path": "phases/04-computer-vision/07-semantic-segmentation-unet/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18534,
+      "pt_size": 19794,
+      "ratio": 1.067983166073163
+    },
+    {
+      "en_path": "phases/04-computer-vision/08-instance-segmentation-mask-rcnn/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14321,
+      "pt_size": 15753,
+      "ratio": 1.0999930172473988
+    },
+    {
+      "en_path": "phases/04-computer-vision/09-image-generation-gans/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14753,
+      "pt_size": 15623,
+      "ratio": 1.0589710567342236
+    },
+    {
+      "en_path": "phases/04-computer-vision/10-image-generation-diffusion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14545,
+      "pt_size": 15644,
+      "ratio": 1.0755586112066002
+    },
+    {
+      "en_path": "phases/04-computer-vision/11-stable-diffusion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13647,
+      "pt_size": 14780,
+      "ratio": 1.0830219095771965
+    },
+    {
+      "en_path": "phases/04-computer-vision/12-video-understanding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13494,
+      "pt_size": 14781,
+      "ratio": 1.0953757225433527
+    },
+    {
+      "en_path": "phases/04-computer-vision/13-3d-vision-nerf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13286,
+      "pt_size": 14368,
+      "ratio": 1.081439108836369
+    },
+    {
+      "en_path": "phases/04-computer-vision/14-vision-transformers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12885,
+      "pt_size": 13733,
+      "ratio": 1.06581296080714
+    },
+    {
+      "en_path": "phases/04-computer-vision/15-real-time-edge/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13238,
+      "pt_size": 14350,
+      "ratio": 1.0840006043208943
+    },
+    {
+      "en_path": "phases/04-computer-vision/16-vision-pipeline-capstone/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15328,
+      "pt_size": 16608,
+      "ratio": 1.0835073068893528
+    },
+    {
+      "en_path": "phases/04-computer-vision/17-self-supervised-vision/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12467,
+      "pt_size": 13758,
+      "ratio": 1.1035533809256437
+    },
+    {
+      "en_path": "phases/04-computer-vision/18-open-vocab-clip/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9915,
+      "pt_size": 10918,
+      "ratio": 1.1011598587997984
+    },
+    {
+      "en_path": "phases/04-computer-vision/19-ocr-document-understanding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11741,
+      "pt_size": 12794,
+      "ratio": 1.0896857167191891
+    },
+    {
+      "en_path": "phases/04-computer-vision/20-image-retrieval-metric/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11451,
+      "pt_size": 12869,
+      "ratio": 1.1238319797397607
+    },
+    {
+      "en_path": "phases/04-computer-vision/21-keypoint-pose/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10473,
+      "pt_size": 11543,
+      "ratio": 1.1021674782774755
+    },
+    {
+      "en_path": "phases/04-computer-vision/22-3d-gaussian-splatting/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18452,
+      "pt_size": 19618,
+      "ratio": 1.0631909820073704
+    },
+    {
+      "en_path": "phases/04-computer-vision/23-diffusion-transformers-rectified-flow/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16579,
+      "pt_size": 17592,
+      "ratio": 1.06110139332891
+    },
+    {
+      "en_path": "phases/04-computer-vision/24-sam3-open-vocab-segmentation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13759,
+      "pt_size": 15380,
+      "ratio": 1.1178137946071662
+    },
+    {
+      "en_path": "phases/04-computer-vision/25-vision-language-models/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15365,
+      "pt_size": 16671,
+      "ratio": 1.08499837292548
+    },
+    {
+      "en_path": "phases/04-computer-vision/26-monocular-depth/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12563,
+      "pt_size": 14288,
+      "ratio": 1.1373079678420759
+    },
+    {
+      "en_path": "phases/04-computer-vision/27-multi-object-tracking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14473,
+      "pt_size": 16369,
+      "ratio": 1.1310025564844883
+    },
+    {
+      "en_path": "phases/04-computer-vision/28-world-models-video-diffusion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 16655,
+      "pt_size": 18128,
+      "ratio": 1.0884419093365356
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/01-text-processing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10867,
+      "pt_size": 11514,
+      "ratio": 1.0595380509800314
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/02-bag-of-words-tfidf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12364,
+      "pt_size": 13236,
+      "ratio": 1.070527337431252
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/03-word-embeddings-word2vec/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12144,
+      "pt_size": 12737,
+      "ratio": 1.04883069828722
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/04-glove-fasttext-subword/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11762,
+      "pt_size": 12389,
+      "ratio": 1.053307260669954
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/05-sentiment-analysis/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12652,
+      "pt_size": 13348,
+      "ratio": 1.0550110654441986
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/06-named-entity-recognition/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13986,
+      "pt_size": 14670,
+      "ratio": 1.0489060489060489
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/07-pos-tagging-parsing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12505,
+      "pt_size": 13222,
+      "ratio": 1.0573370651739304
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/08-cnns-rnns-for-text/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10965,
+      "pt_size": 11570,
+      "ratio": 1.0551755585955311
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/09-sequence-to-sequence/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11527,
+      "pt_size": 12019,
+      "ratio": 1.0426823978485296
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/10-attention-mechanism/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11098,
+      "pt_size": 11587,
+      "ratio": 1.0440619931519193
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/11-machine-translation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11746,
+      "pt_size": 12591,
+      "ratio": 1.0719393836199558
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/12-text-summarization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11045,
+      "pt_size": 11369,
+      "ratio": 1.0293345405160705
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/13-question-answering/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11391,
+      "pt_size": 12041,
+      "ratio": 1.0570625932753928
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/14-information-retrieval-search/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13048,
+      "pt_size": 13934,
+      "ratio": 1.0679031269160024
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/15-topic-modeling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9788,
+      "pt_size": 10408,
+      "ratio": 1.063342868818962
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/16-text-generation-pre-transformer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10876,
+      "pt_size": 11562,
+      "ratio": 1.0630746598013976
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/17-chatbots-rule-to-neural/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14870,
+      "pt_size": 16219,
+      "ratio": 1.090719569603228
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/18-multilingual-nlp/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13744,
+      "pt_size": 14642,
+      "ratio": 1.065337601862631
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/19-subword-tokenization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9540,
+      "pt_size": 10302,
+      "ratio": 1.079874213836478
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/20-structured-outputs-constrained-decoding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10624,
+      "pt_size": 11403,
+      "ratio": 1.0733245481927711
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/21-nli-textual-entailment/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9528,
+      "pt_size": 10163,
+      "ratio": 1.0666456759026028
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/22-embedding-models-deep-dive/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10527,
+      "pt_size": 11310,
+      "ratio": 1.0743801652892562
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/23-chunking-strategies-rag/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11583,
+      "pt_size": 12304,
+      "ratio": 1.062246395579729
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/24-coreference-resolution/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8773,
+      "pt_size": 9487,
+      "ratio": 1.0813860708993503
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/25-entity-linking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9887,
+      "pt_size": 10693,
+      "ratio": 1.0815211894406798
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/26-relation-extraction-kg/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10325,
+      "pt_size": 11004,
+      "ratio": 1.0657627118644069
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/27-llm-evaluation-frameworks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11389,
+      "pt_size": 12337,
+      "ratio": 1.0832382123101238
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/28-long-context-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10426,
+      "pt_size": 11160,
+      "ratio": 1.0704009207749856
+    },
+    {
+      "en_path": "phases/05-nlp-foundations-to-advanced/29-dialogue-state-tracking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10142,
+      "pt_size": 10883,
+      "ratio": 1.0730625123249853
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/01-audio-fundamentals/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8153,
+      "pt_size": 8758,
+      "ratio": 1.0742058138108672
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/02-spectrograms-mel-features/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9318,
+      "pt_size": 10119,
+      "ratio": 1.0859626529298132
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/03-audio-classification/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8692,
+      "pt_size": 9194,
+      "ratio": 1.0577542567878508
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/04-speech-recognition-asr/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9522,
+      "pt_size": 10056,
+      "ratio": 1.0560806553245117
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/05-whisper-architecture-finetuning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9279,
+      "pt_size": 9669,
+      "ratio": 1.042030391205949
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/06-speaker-recognition-verification/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8591,
+      "pt_size": 8738,
+      "ratio": 1.0171109300430683
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/07-text-to-speech/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8828,
+      "pt_size": 9219,
+      "ratio": 1.0442908926144088
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/08-voice-cloning-conversion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8798,
+      "pt_size": 9253,
+      "ratio": 1.0517162991588997
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/09-music-generation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8426,
+      "pt_size": 9066,
+      "ratio": 1.0759553762164729
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/10-audio-language-models/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8763,
+      "pt_size": 9431,
+      "ratio": 1.0762296017345658
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/11-real-time-audio-processing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7950,
+      "pt_size": 8521,
+      "ratio": 1.0718238993710691
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/12-voice-assistant-pipeline/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7938,
+      "pt_size": 8662,
+      "ratio": 1.091206853111615
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/13-neural-audio-codecs/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9687,
+      "pt_size": 10335,
+      "ratio": 1.066893775162589
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/14-voice-activity-detection-turn-taking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8033,
+      "pt_size": 8672,
+      "ratio": 1.0795468691646957
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/15-streaming-speech-to-speech-moshi-hibiki/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9419,
+      "pt_size": 10151,
+      "ratio": 1.077715256396645
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/16-anti-spoofing-audio-watermarking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9236,
+      "pt_size": 9981,
+      "ratio": 1.0806626245127762
+    },
+    {
+      "en_path": "phases/06-speech-and-audio/17-audio-evaluation-metrics/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10624,
+      "pt_size": 11516,
+      "ratio": 1.083960843373494
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/01-why-transformers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8636,
+      "pt_size": 9705,
+      "ratio": 1.1237841593330244
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/02-self-attention-from-scratch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11748,
+      "pt_size": 12278,
+      "ratio": 1.0451140619679946
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/03-multi-head-attention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8987,
+      "pt_size": 9515,
+      "ratio": 1.0587515299877601
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/04-positional-encoding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9839,
+      "pt_size": 10641,
+      "ratio": 1.0815123488159366
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/05-full-transformer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9046,
+      "pt_size": 9564,
+      "ratio": 1.0572628786203846
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/06-bert-masked-language-modeling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9028,
+      "pt_size": 9747,
+      "ratio": 1.0796411165263624
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/07-gpt-causal-language-modeling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9222,
+      "pt_size": 9920,
+      "ratio": 1.0756885708089352
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/08-t5-bart-encoder-decoder/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9539,
+      "pt_size": 10017,
+      "ratio": 1.0501100744312821
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/09-vision-transformers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8409,
+      "pt_size": 9047,
+      "ratio": 1.0758710904982756
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/10-audio-transformers-whisper/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9871,
+      "pt_size": 10614,
+      "ratio": 1.0752709958464188
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/11-mixture-of-experts/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9494,
+      "pt_size": 10313,
+      "ratio": 1.0862650094796713
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/12-kv-cache-flash-attention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11553,
+      "pt_size": 12459,
+      "ratio": 1.0784211893014801
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/13-scaling-laws/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8692,
+      "pt_size": 9452,
+      "ratio": 1.087436723423838
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/14-build-a-transformer-capstone/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7931,
+      "pt_size": 8427,
+      "ratio": 1.0625394023452275
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/15-attention-variants/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12119,
+      "pt_size": 12925,
+      "ratio": 1.0665071375526034
+    },
+    {
+      "en_path": "phases/07-transformers-deep-dive/16-speculative-decoding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13164,
+      "pt_size": 14221,
+      "ratio": 1.080294743239137
+    },
+    {
+      "en_path": "phases/08-generative-ai/01-generative-models-taxonomy-history/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10433,
+      "pt_size": 11314,
+      "ratio": 1.084443592447043
+    },
+    {
+      "en_path": "phases/08-generative-ai/02-autoencoders-vae/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10054,
+      "pt_size": 10689,
+      "ratio": 1.0631589417147405
+    },
+    {
+      "en_path": "phases/08-generative-ai/03-gans-generator-discriminator/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10165,
+      "pt_size": 11074,
+      "ratio": 1.0894244958189867
+    },
+    {
+      "en_path": "phases/08-generative-ai/04-conditional-gans-pix2pix/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9040,
+      "pt_size": 9741,
+      "ratio": 1.0775442477876107
+    },
+    {
+      "en_path": "phases/08-generative-ai/05-stylegan/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9582,
+      "pt_size": 10440,
+      "ratio": 1.089542892924233
+    },
+    {
+      "en_path": "phases/08-generative-ai/06-diffusion-ddpm-from-scratch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11071,
+      "pt_size": 11723,
+      "ratio": 1.0588926022942824
+    },
+    {
+      "en_path": "phases/08-generative-ai/07-latent-diffusion-stable-diffusion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10629,
+      "pt_size": 11642,
+      "ratio": 1.095305296829429
+    },
+    {
+      "en_path": "phases/08-generative-ai/08-controlnet-lora-conditioning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10608,
+      "pt_size": 11373,
+      "ratio": 1.0721153846153846
+    },
+    {
+      "en_path": "phases/08-generative-ai/09-inpainting-outpainting-editing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10276,
+      "pt_size": 11065,
+      "ratio": 1.0767808485792136
+    },
+    {
+      "en_path": "phases/08-generative-ai/10-video-generation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10514,
+      "pt_size": 11596,
+      "ratio": 1.1029104051740537
+    },
+    {
+      "en_path": "phases/08-generative-ai/11-audio-generation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9383,
+      "pt_size": 10305,
+      "ratio": 1.0982628157305765
+    },
+    {
+      "en_path": "phases/08-generative-ai/12-3d-generation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9796,
+      "pt_size": 10703,
+      "ratio": 1.092588811759902
+    },
+    {
+      "en_path": "phases/08-generative-ai/13-flow-matching-rectified-flows/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9589,
+      "pt_size": 10531,
+      "ratio": 1.0982375638752737
+    },
+    {
+      "en_path": "phases/08-generative-ai/14-evaluation-fid-clip-score/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10822,
+      "pt_size": 11991,
+      "ratio": 1.108020698576973
+    },
+    {
+      "en_path": "phases/08-generative-ai/19-visual-autoregressive-var/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10000,
+      "pt_size": 11219,
+      "ratio": 1.1219
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/01-mdps-states-actions-rewards/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11482,
+      "pt_size": 12640,
+      "ratio": 1.100853509841491
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/02-dynamic-programming/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10897,
+      "pt_size": 11706,
+      "ratio": 1.0742406166834908
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/03-monte-carlo-methods/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11444,
+      "pt_size": 12389,
+      "ratio": 1.0825760223698007
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/04-q-learning-sarsa/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11106,
+      "pt_size": 11932,
+      "ratio": 1.0743742121375832
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/05-dqn/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12122,
+      "pt_size": 13052,
+      "ratio": 1.0767200131991421
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/06-policy-gradients-reinforce/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11174,
+      "pt_size": 12095,
+      "ratio": 1.0824234830857347
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/07-actor-critic-a2c-a3c/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10619,
+      "pt_size": 11573,
+      "ratio": 1.0898389678877485
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/08-ppo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11359,
+      "pt_size": 12319,
+      "ratio": 1.0845144819086188
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/09-reward-modeling-rlhf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15032,
+      "pt_size": 16483,
+      "ratio": 1.096527408195849
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/10-multi-agent-rl/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13219,
+      "pt_size": 14693,
+      "ratio": 1.111506165368031
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/11-sim-to-real-transfer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11790,
+      "pt_size": 13272,
+      "ratio": 1.1256997455470739
+    },
+    {
+      "en_path": "phases/09-reinforcement-learning/12-rl-for-games/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15609,
+      "pt_size": 17414,
+      "ratio": 1.1156384137356654
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/01-tokenizers/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22776,
+      "pt_size": 23847,
+      "ratio": 1.047023182297155
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/02-building-a-tokenizer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18628,
+      "pt_size": 19853,
+      "ratio": 1.065761219669315
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/03-data-pipelines/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 22173,
+      "pt_size": 24003,
+      "ratio": 1.0825328101745366
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/04-pre-training-mini-gpt/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 29203,
+      "pt_size": 30709,
+      "ratio": 1.0515700441735438
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/05-scaling-distributed/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 29685,
+      "pt_size": 31814,
+      "ratio": 1.071719723766212
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/06-instruction-tuning-sft/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 28037,
+      "pt_size": 29936,
+      "ratio": 1.067731925669651
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/07-rlhf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 31643,
+      "pt_size": 32639,
+      "ratio": 1.031476155863856
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/08-dpo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 33168,
+      "pt_size": 34261,
+      "ratio": 1.0329534491075736
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/09-constitutional-ai-self-improvement/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 21284,
+      "pt_size": 22356,
+      "ratio": 1.0503664724675812
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/10-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 24878,
+      "pt_size": 26323,
+      "ratio": 1.0580834472224456
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/11-quantization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 45791,
+      "pt_size": 47216,
+      "ratio": 1.031119652333428
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/12-inference-optimization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 36640,
+      "pt_size": 38754,
+      "ratio": 1.0576965065502184
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/13-building-complete-llm-pipeline/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 18555,
+      "pt_size": 20481,
+      "ratio": 1.1037995149555375
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/14-open-models-architecture-walkthroughs/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 17483,
+      "pt_size": 18490,
+      "ratio": 1.0575988102728364
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/15-speculative-decoding-eagle3/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14952,
+      "pt_size": 16603,
+      "ratio": 1.1104200107009097
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/16-differential-attention-v2/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14416,
+      "pt_size": 15562,
+      "ratio": 1.0794950055493895
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/17-native-sparse-attention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13688,
+      "pt_size": 14877,
+      "ratio": 1.0868644067796611
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/18-multi-token-prediction/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13915,
+      "pt_size": 15404,
+      "ratio": 1.10700682716493
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/19-dualpipe-parallelism/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13854,
+      "pt_size": 14853,
+      "ratio": 1.0721091381550454
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/20-deepseek-v3-walkthrough/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13300,
+      "pt_size": 14299,
+      "ratio": 1.0751127819548871
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/21-jamba-hybrid-ssm-transformer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13430,
+      "pt_size": 14530,
+      "ratio": 1.0819061801935965
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/22-async-hogwild-inference/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15305,
+      "pt_size": 16624,
+      "ratio": 1.0861809866056844
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/25-speculative-decoding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13603,
+      "pt_size": 15069,
+      "ratio": 1.1077703447768874
+    },
+    {
+      "en_path": "phases/10-llms-from-scratch/34-gradient-checkpointing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14575,
+      "pt_size": 15447,
+      "ratio": 1.0598284734133792
+    },
+    {
+      "en_path": "phases/11-llm-engineering/01-prompt-engineering/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 45474,
+      "pt_size": 39873,
+      "ratio": 0.876830716453358
+    },
+    {
+      "en_path": "phases/11-llm-engineering/02-few-shot-cot/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 28989,
+      "pt_size": 22301,
+      "ratio": 0.7692918003380592
+    },
+    {
+      "en_path": "phases/11-llm-engineering/03-structured-outputs/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 25999,
+      "pt_size": 27244,
+      "ratio": 1.0478864571714297
+    },
+    {
+      "en_path": "phases/11-llm-engineering/04-embeddings/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 26040,
+      "pt_size": 28015,
+      "ratio": 1.0758448540706604
+    },
+    {
+      "en_path": "phases/11-llm-engineering/05-context-engineering/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 30809,
+      "pt_size": 32773,
+      "ratio": 1.063747606218962
+    },
+    {
+      "en_path": "phases/11-llm-engineering/06-rag/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20733,
+      "pt_size": 22302,
+      "ratio": 1.0756764578208653
+    },
+    {
+      "en_path": "phases/11-llm-engineering/07-advanced-rag/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 26807,
+      "pt_size": 28298,
+      "ratio": 1.0556198007982989
+    },
+    {
+      "en_path": "phases/11-llm-engineering/08-fine-tuning-lora/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 26006,
+      "pt_size": 27612,
+      "ratio": 1.0617549796200876
+    },
+    {
+      "en_path": "phases/11-llm-engineering/09-function-calling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 35946,
+      "pt_size": 37084,
+      "ratio": 1.0316585990096256
+    },
+    {
+      "en_path": "phases/11-llm-engineering/10-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 40917,
+      "pt_size": 40199,
+      "ratio": 0.9824522814478089
+    },
+    {
+      "en_path": "phases/11-llm-engineering/11-caching-cost/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 41714,
+      "pt_size": 41162,
+      "ratio": 0.9867670326509086
+    },
+    {
+      "en_path": "phases/11-llm-engineering/12-guardrails/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 46055,
+      "pt_size": 42588,
+      "ratio": 0.9247204429486483
+    },
+    {
+      "en_path": "phases/11-llm-engineering/13-production-app/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 50495,
+      "pt_size": 42195,
+      "ratio": 0.8356272898306764
+    },
+    {
+      "en_path": "phases/11-llm-engineering/14-model-context-protocol/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12042,
+      "pt_size": 11792,
+      "ratio": 0.9792393290151138
+    },
+    {
+      "en_path": "phases/11-llm-engineering/15-prompt-caching/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12954,
+      "pt_size": 13462,
+      "ratio": 1.0392156862745099
+    },
+    {
+      "en_path": "phases/11-llm-engineering/16-langgraph-state-machines/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 14018,
+      "pt_size": 15649,
+      "ratio": 1.11635040662006
+    },
+    {
+      "en_path": "phases/11-llm-engineering/17-agent-framework-tradeoffs/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12744,
+      "pt_size": 14640,
+      "ratio": 1.1487758945386064
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/01-vision-transformer-patch-tokens/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12150,
+      "pt_size": 13532,
+      "ratio": 1.1137448559670782
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/02-clip-contrastive-pretraining/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10798,
+      "pt_size": 11946,
+      "ratio": 1.1063159844415633
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/03-blip2-qformer-bridge/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11403,
+      "pt_size": 12452,
+      "ratio": 1.0919933350872577
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/04-flamingo-gated-cross-attention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11179,
+      "pt_size": 12169,
+      "ratio": 1.0885589050899007
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/05-llava-visual-instruction-tuning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10884,
+      "pt_size": 11857,
+      "ratio": 1.0893972804116134
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/06-any-resolution-patch-n-pack/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11077,
+      "pt_size": 12358,
+      "ratio": 1.1156450302428456
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/07-open-weight-vlm-recipes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11080,
+      "pt_size": 12185,
+      "ratio": 1.0997292418772564
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/08-llava-onevision-single-multi-video/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10238,
+      "pt_size": 11255,
+      "ratio": 1.099335807774956
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/09-qwen-vl-family-dynamic-fps/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10332,
+      "pt_size": 11436,
+      "ratio": 1.1068524970963995
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/10-internvl3-native-multimodal/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9869,
+      "pt_size": 11146,
+      "ratio": 1.1293950754889046
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/11-chameleon-early-fusion-tokens/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9771,
+      "pt_size": 10908,
+      "ratio": 1.116364752840037
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/12-emu3-next-token-for-generation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9225,
+      "pt_size": 10206,
+      "ratio": 1.1063414634146342
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/13-transfusion-autoregressive-diffusion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9337,
+      "pt_size": 10441,
+      "ratio": 1.118239263146621
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/14-show-o-discrete-diffusion-unified/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8355,
+      "pt_size": 9313,
+      "ratio": 1.1146618791143028
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/15-janus-pro-decoupled-encoders/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8534,
+      "pt_size": 9460,
+      "ratio": 1.108507147879072
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/16-mio-any-to-any-streaming/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9217,
+      "pt_size": 10148,
+      "ratio": 1.1010090050992731
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/17-video-language-temporal-grounding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8088,
+      "pt_size": 8855,
+      "ratio": 1.094831849653808
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/18-long-video-million-token/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8291,
+      "pt_size": 9121,
+      "ratio": 1.100108551441322
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/19-audio-language-whisper-to-af3/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8955,
+      "pt_size": 10125,
+      "ratio": 1.1306532663316582
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/20-omni-models-thinker-talker/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8480,
+      "pt_size": 9425,
+      "ratio": 1.111438679245283
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/21-embodied-vlas-openvla-pi0-groot/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9142,
+      "pt_size": 10340,
+      "ratio": 1.1310435353314374
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/22-document-diagram-understanding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8562,
+      "pt_size": 9539,
+      "ratio": 1.1141088530717123
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/23-colpali-vision-native-rag/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8374,
+      "pt_size": 9486,
+      "ratio": 1.1327919751612132
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/24-multimodal-rag-cross-modal/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8173,
+      "pt_size": 8996,
+      "ratio": 1.100697418328643
+    },
+    {
+      "en_path": "phases/12-multimodal-ai/25-multimodal-agents-computer-use/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8389,
+      "pt_size": 9534,
+      "ratio": 1.136488258433663
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/01-the-tool-interface/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12759,
+      "pt_size": 14222,
+      "ratio": 1.1146641586331216
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/02-function-calling-deep-dive/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11736,
+      "pt_size": 12975,
+      "ratio": 1.1055725971370143
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/03-parallel-and-streaming-tool-calls/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11185,
+      "pt_size": 12303,
+      "ratio": 1.0999552972731337
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/04-structured-output/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10837,
+      "pt_size": 11643,
+      "ratio": 1.0743748269816369
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/05-tool-schema-design/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10124,
+      "pt_size": 11317,
+      "ratio": 1.117838798893718
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/06-mcp-fundamentals/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10538,
+      "pt_size": 11559,
+      "ratio": 1.0968874549250331
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/07-building-an-mcp-server/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8912,
+      "pt_size": 9703,
+      "ratio": 1.0887567324955116
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/08-building-an-mcp-client/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8537,
+      "pt_size": 9430,
+      "ratio": 1.1046034906875952
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/09-mcp-transports/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10683,
+      "pt_size": 11517,
+      "ratio": 1.0780679584386408
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/10-mcp-resources-and-prompts/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9316,
+      "pt_size": 10277,
+      "ratio": 1.1031558608844998
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/11-mcp-sampling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9173,
+      "pt_size": 10148,
+      "ratio": 1.1062901994985284
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/12-mcp-roots-and-elicitation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8667,
+      "pt_size": 9817,
+      "ratio": 1.1326872043382947
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/13-mcp-async-tasks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7973,
+      "pt_size": 8944,
+      "ratio": 1.1217860278439735
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/14-mcp-apps/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9877,
+      "pt_size": 10718,
+      "ratio": 1.085147311936823
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/15-mcp-security-tool-poisoning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9006,
+      "pt_size": 10032,
+      "ratio": 1.1139240506329113
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/16-mcp-security-oauth-2-1/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9276,
+      "pt_size": 10043,
+      "ratio": 1.0826865028029322
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/17-mcp-gateways-and-registries/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8491,
+      "pt_size": 9427,
+      "ratio": 1.1102343657990814
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/18-mcp-auth-production/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20314,
+      "pt_size": 21660,
+      "ratio": 1.0662597223589643
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/19-a2a-protocol/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8701,
+      "pt_size": 9347,
+      "ratio": 1.0742443397310655
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/20-opentelemetry-genai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8037,
+      "pt_size": 8946,
+      "ratio": 1.1131019036954088
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/21-llm-routing-layer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7936,
+      "pt_size": 8861,
+      "ratio": 1.1165574596774193
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/22-skills-and-agent-sdks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8776,
+      "pt_size": 9469,
+      "ratio": 1.078965360072926
+    },
+    {
+      "en_path": "phases/13-tools-and-protocols/23-capstone-tool-ecosystem/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8409,
+      "pt_size": 8989,
+      "ratio": 1.068973718634796
+    },
+    {
+      "en_path": "phases/14-agent-engineering/01-the-agent-loop/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9017,
+      "pt_size": 9943,
+      "ratio": 1.1026949096151712
+    },
+    {
+      "en_path": "phases/14-agent-engineering/02-rewoo-plan-and-execute/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8253,
+      "pt_size": 9073,
+      "ratio": 1.0993578092814733
+    },
+    {
+      "en_path": "phases/14-agent-engineering/03-reflexion-verbal-rl/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8376,
+      "pt_size": 9098,
+      "ratio": 1.0861986628462272
+    },
+    {
+      "en_path": "phases/14-agent-engineering/04-tree-of-thoughts-lats/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7478,
+      "pt_size": 8222,
+      "ratio": 1.0994918427387002
+    },
+    {
+      "en_path": "phases/14-agent-engineering/05-self-refine-and-critic/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8477,
+      "pt_size": 9156,
+      "ratio": 1.0800990916597852
+    },
+    {
+      "en_path": "phases/14-agent-engineering/06-tool-use-and-function-calling/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8146,
+      "pt_size": 9329,
+      "ratio": 1.1452246501350356
+    },
+    {
+      "en_path": "phases/14-agent-engineering/07-memory-virtual-context-memgpt/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8368,
+      "pt_size": 9492,
+      "ratio": 1.134321223709369
+    },
+    {
+      "en_path": "phases/14-agent-engineering/08-memory-blocks-sleep-time-compute/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7768,
+      "pt_size": 8622,
+      "ratio": 1.1099382080329556
+    },
+    {
+      "en_path": "phases/14-agent-engineering/09-hybrid-memory-mem0/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7733,
+      "pt_size": 8771,
+      "ratio": 1.134229923703608
+    },
+    {
+      "en_path": "phases/14-agent-engineering/10-skill-libraries-voyager/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8072,
+      "pt_size": 8974,
+      "ratio": 1.1117443012884043
+    },
+    {
+      "en_path": "phases/14-agent-engineering/11-planning-htn-and-evolutionary/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7682,
+      "pt_size": 8520,
+      "ratio": 1.1090861754751367
+    },
+    {
+      "en_path": "phases/14-agent-engineering/12-anthropic-workflow-patterns/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6717,
+      "pt_size": 7379,
+      "ratio": 1.0985559029328569
+    },
+    {
+      "en_path": "phases/14-agent-engineering/13-langgraph-stateful-graphs/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7034,
+      "pt_size": 7648,
+      "ratio": 1.0872903042365654
+    },
+    {
+      "en_path": "phases/14-agent-engineering/14-autogen-actor-model/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6597,
+      "pt_size": 7155,
+      "ratio": 1.0845839017735335
+    },
+    {
+      "en_path": "phases/14-agent-engineering/15-crewai-role-based-crews/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 15765,
+      "pt_size": 17222,
+      "ratio": 1.0924199175388518
+    },
+    {
+      "en_path": "phases/14-agent-engineering/16-openai-agents-sdk/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6304,
+      "pt_size": 6878,
+      "ratio": 1.0910532994923858
+    },
+    {
+      "en_path": "phases/14-agent-engineering/17-claude-agent-sdk/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6784,
+      "pt_size": 7385,
+      "ratio": 1.0885908018867925
+    },
+    {
+      "en_path": "phases/14-agent-engineering/18-agno-and-mastra-runtimes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 5979,
+      "pt_size": 6520,
+      "ratio": 1.0904833584211406
+    },
+    {
+      "en_path": "phases/14-agent-engineering/19-benchmarks-swebench-gaia/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6636,
+      "pt_size": 7226,
+      "ratio": 1.0889089813140447
+    },
+    {
+      "en_path": "phases/14-agent-engineering/20-benchmarks-webarena-osworld/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6153,
+      "pt_size": 6770,
+      "ratio": 1.1002762879895986
+    },
+    {
+      "en_path": "phases/14-agent-engineering/21-computer-use-agents/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6324,
+      "pt_size": 6973,
+      "ratio": 1.1026249209361163
+    },
+    {
+      "en_path": "phases/14-agent-engineering/22-voice-agents-pipecat-livekit/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 5956,
+      "pt_size": 6534,
+      "ratio": 1.0970449966420417
+    },
+    {
+      "en_path": "phases/14-agent-engineering/23-otel-genai-conventions/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6269,
+      "pt_size": 6793,
+      "ratio": 1.083585898867443
+    },
+    {
+      "en_path": "phases/14-agent-engineering/24-agent-observability-platforms/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 5848,
+      "pt_size": 6520,
+      "ratio": 1.1149110807113543
+    },
+    {
+      "en_path": "phases/14-agent-engineering/25-multi-agent-debate/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 5983,
+      "pt_size": 6520,
+      "ratio": 1.0897543038609394
+    },
+    {
+      "en_path": "phases/14-agent-engineering/26-failure-modes-agentic/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6509,
+      "pt_size": 7287,
+      "ratio": 1.1195268090336457
+    },
+    {
+      "en_path": "phases/14-agent-engineering/27-prompt-injection-defense/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7313,
+      "pt_size": 8184,
+      "ratio": 1.119102967318474
+    },
+    {
+      "en_path": "phases/14-agent-engineering/28-orchestration-patterns/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6265,
+      "pt_size": 6875,
+      "ratio": 1.097366320830008
+    },
+    {
+      "en_path": "phases/14-agent-engineering/29-production-runtimes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6552,
+      "pt_size": 7267,
+      "ratio": 1.1091269841269842
+    },
+    {
+      "en_path": "phases/14-agent-engineering/30-eval-driven-agent-development/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6598,
+      "pt_size": 7251,
+      "ratio": 1.0989693846620188
+    },
+    {
+      "en_path": "phases/14-agent-engineering/31-agent-workbench-why-models-fail/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20030,
+      "pt_size": 22008,
+      "ratio": 1.0987518721917124
+    },
+    {
+      "en_path": "phases/14-agent-engineering/32-minimal-agent-workbench/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8231,
+      "pt_size": 8926,
+      "ratio": 1.084436884947151
+    },
+    {
+      "en_path": "phases/14-agent-engineering/33-instructions-as-executable-constraints/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8320,
+      "pt_size": 9179,
+      "ratio": 1.1032451923076922
+    },
+    {
+      "en_path": "phases/14-agent-engineering/34-repo-memory-and-state/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8855,
+      "pt_size": 9724,
+      "ratio": 1.0981366459627329
+    },
+    {
+      "en_path": "phases/14-agent-engineering/35-initialization-scripts/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7624,
+      "pt_size": 8464,
+      "ratio": 1.1101783840503672
+    },
+    {
+      "en_path": "phases/14-agent-engineering/36-scope-contracts/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8898,
+      "pt_size": 9596,
+      "ratio": 1.0784445942908518
+    },
+    {
+      "en_path": "phases/14-agent-engineering/37-runtime-feedback-loops/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7761,
+      "pt_size": 8336,
+      "ratio": 1.0740883906713052
+    },
+    {
+      "en_path": "phases/14-agent-engineering/38-verification-gates/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9068,
+      "pt_size": 9924,
+      "ratio": 1.0943978826643141
+    },
+    {
+      "en_path": "phases/14-agent-engineering/39-reviewer-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9750,
+      "pt_size": 10814,
+      "ratio": 1.1091282051282052
+    },
+    {
+      "en_path": "phases/14-agent-engineering/40-multi-session-handoff/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9328,
+      "pt_size": 9974,
+      "ratio": 1.069253859348199
+    },
+    {
+      "en_path": "phases/14-agent-engineering/41-workbench-for-real-repos/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7640,
+      "pt_size": 8263,
+      "ratio": 1.081544502617801
+    },
+    {
+      "en_path": "phases/14-agent-engineering/42-agent-workbench-capstone/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8093,
+      "pt_size": 8495,
+      "ratio": 1.0496725565303349
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/01-long-horizon-agents/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8527,
+      "pt_size": 9912,
+      "ratio": 1.162425237480943
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/02-star-family-reasoning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8965,
+      "pt_size": 10027,
+      "ratio": 1.1184606804238706
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/03-alphaevolve-evolutionary-coding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9358,
+      "pt_size": 10200,
+      "ratio": 1.0899764907031417
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/04-darwin-godel-machine/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8419,
+      "pt_size": 9464,
+      "ratio": 1.124124005226274
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/05-ai-scientist-v2/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8887,
+      "pt_size": 9782,
+      "ratio": 1.1007089006413864
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/06-automated-alignment-research/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8710,
+      "pt_size": 9911,
+      "ratio": 1.1378874856486796
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/07-recursive-self-improvement/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8553,
+      "pt_size": 9281,
+      "ratio": 1.0851163334502514
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/08-bounded-self-improvement/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8501,
+      "pt_size": 9512,
+      "ratio": 1.1189271850370546
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/09-coding-agent-landscape/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8843,
+      "pt_size": 9732,
+      "ratio": 1.1005314938369333
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/10-claude-code-permission-modes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8959,
+      "pt_size": 10144,
+      "ratio": 1.1322692264761691
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/11-browser-agents/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9693,
+      "pt_size": 10852,
+      "ratio": 1.1195708243062004
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/12-durable-execution/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8729,
+      "pt_size": 9623,
+      "ratio": 1.1024172299232444
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/13-cost-governors/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8055,
+      "pt_size": 9124,
+      "ratio": 1.1327126008690254
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/14-kill-switches-canaries/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9571,
+      "pt_size": 10798,
+      "ratio": 1.1281997701389614
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/15-propose-then-commit/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8955,
+      "pt_size": 9817,
+      "ratio": 1.0962590731434954
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/16-checkpoints-rollback/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8790,
+      "pt_size": 9712,
+      "ratio": 1.104891922639363
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/17-constitutional-ai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9884,
+      "pt_size": 11055,
+      "ratio": 1.118474301902064
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/18-llama-guard/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9070,
+      "pt_size": 10133,
+      "ratio": 1.1171995589856671
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/19-anthropic-rsp/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9044,
+      "pt_size": 9874,
+      "ratio": 1.0917735515258735
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/20-openai-preparedness-deepmind-fsf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9269,
+      "pt_size": 10042,
+      "ratio": 1.0833962671269823
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/21-metr-external-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9209,
+      "pt_size": 10338,
+      "ratio": 1.1225974590074927
+    },
+    {
+      "en_path": "phases/15-autonomous-systems/22-cais-caisi-societal-risk/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9528,
+      "pt_size": 10728,
+      "ratio": 1.1259445843828715
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/01-why-multi-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 20197,
+      "pt_size": 21106,
+      "ratio": 1.045006684161014
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/02-fipa-acl-heritage/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13629,
+      "pt_size": 15041,
+      "ratio": 1.1036026120771882
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/03-communication-protocols/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 49950,
+      "pt_size": 43130,
+      "ratio": 0.8634634634634635
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/04-primitive-model/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10926,
+      "pt_size": 12036,
+      "ratio": 1.101592531576057
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/05-supervisor-orchestrator-pattern/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9933,
+      "pt_size": 10946,
+      "ratio": 1.1019832880297997
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/06-hierarchical-architecture/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7976,
+      "pt_size": 8713,
+      "ratio": 1.0924022066198595
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/07-society-of-mind-debate/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7492,
+      "pt_size": 8257,
+      "ratio": 1.1021089161772557
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/08-role-specialization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8407,
+      "pt_size": 9394,
+      "ratio": 1.1174021648626145
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/09-parallel-swarm-networks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8200,
+      "pt_size": 9249,
+      "ratio": 1.1279268292682927
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/10-group-chat-speaker-selection/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8377,
+      "pt_size": 9203,
+      "ratio": 1.098603318610481
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/11-handoffs-and-routines/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7954,
+      "pt_size": 8693,
+      "ratio": 1.0929092280613528
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/12-a2a-protocol/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8343,
+      "pt_size": 8982,
+      "ratio": 1.0765911542610571
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/13-shared-memory-blackboard/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12244,
+      "pt_size": 13402,
+      "ratio": 1.094576935641947
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/14-consensus-and-bft/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11545,
+      "pt_size": 12517,
+      "ratio": 1.08419229103508
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/15-voting-debate-topology/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11437,
+      "pt_size": 12507,
+      "ratio": 1.0935560024481945
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/16-negotiation-bargaining/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 12282,
+      "pt_size": 13130,
+      "ratio": 1.069044129620583
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/17-generative-agents-simulation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10937,
+      "pt_size": 11945,
+      "ratio": 1.0921642132211757
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/18-theory-of-mind-coordination/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10936,
+      "pt_size": 11813,
+      "ratio": 1.0801938551572787
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/19-swarm-optimization-pso-aco/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10494,
+      "pt_size": 11792,
+      "ratio": 1.1236897274633124
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/20-marl-maddpg-qmix-mappo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11777,
+      "pt_size": 12885,
+      "ratio": 1.0940816846395516
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/21-agent-economies/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11995,
+      "pt_size": 13348,
+      "ratio": 1.112796998749479
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/22-production-scaling-queues-checkpoints/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10964,
+      "pt_size": 12222,
+      "ratio": 1.114739146296972
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/23-failure-modes-mast-groupthink/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11935,
+      "pt_size": 13421,
+      "ratio": 1.124507750314202
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/24-evaluation-coordination-benchmarks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11380,
+      "pt_size": 12457,
+      "ratio": 1.0946397188049208
+    },
+    {
+      "en_path": "phases/16-multi-agent-and-swarms/25-case-studies-2026-sota/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 13446,
+      "pt_size": 14733,
+      "ratio": 1.0957161981258368
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/01-managed-llm-platforms/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10560,
+      "pt_size": 11572,
+      "ratio": 1.0958333333333334
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/02-inference-platform-economics/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9534,
+      "pt_size": 10340,
+      "ratio": 1.0845395426893225
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/03-gpu-autoscaling-kubernetes/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10125,
+      "pt_size": 11467,
+      "ratio": 1.1325432098765431
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/04-vllm-serving-internals/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11127,
+      "pt_size": 11973,
+      "ratio": 1.0760312752763548
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/05-eagle3-speculative-decoding/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10121,
+      "pt_size": 11109,
+      "ratio": 1.0976188123703192
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/06-sglang-radixattention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9452,
+      "pt_size": 10781,
+      "ratio": 1.1406051629284808
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/07-tensorrt-llm-blackwell/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9029,
+      "pt_size": 9720,
+      "ratio": 1.0765311773175323
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/08-inference-metrics-goodput/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8533,
+      "pt_size": 9238,
+      "ratio": 1.0826204148599554
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/09-production-quantization/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8996,
+      "pt_size": 9904,
+      "ratio": 1.1009337483325923
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/10-cold-start-mitigation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9260,
+      "pt_size": 10341,
+      "ratio": 1.1167386609071275
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/11-multi-region-kv-locality/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8475,
+      "pt_size": 9304,
+      "ratio": 1.0978171091445428
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/12-edge-inference/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8443,
+      "pt_size": 8964,
+      "ratio": 1.061707923723795
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/13-llm-observability/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8624,
+      "pt_size": 9619,
+      "ratio": 1.1153756957328387
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/14-prompt-semantic-caching/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9490,
+      "pt_size": 10319,
+      "ratio": 1.087355110642782
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/15-batch-apis/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7818,
+      "pt_size": 8394,
+      "ratio": 1.0736761320030699
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/16-model-routing/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7021,
+      "pt_size": 7898,
+      "ratio": 1.1249109813416893
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/17-disaggregated-prefill-decode/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11065,
+      "pt_size": 11694,
+      "ratio": 1.056845910528694
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/18-vllm-production-stack-lmcache/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7654,
+      "pt_size": 8434,
+      "ratio": 1.1019074993467468
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/19-ai-gateways/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7997,
+      "pt_size": 8812,
+      "ratio": 1.1019132174565462
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/20-shadow-canary-progressive/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7904,
+      "pt_size": 8780,
+      "ratio": 1.11082995951417
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/21-ab-testing-llm-features/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7953,
+      "pt_size": 8728,
+      "ratio": 1.0974475040865082
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/22-load-testing-llm-apis/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7800,
+      "pt_size": 8602,
+      "ratio": 1.1028205128205129
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/23-sre-for-ai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7719,
+      "pt_size": 8587,
+      "ratio": 1.1124497991967872
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/24-chaos-engineering-llm/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7484,
+      "pt_size": 8444,
+      "ratio": 1.1282736504543025
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/25-security-secrets-audit/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7859,
+      "pt_size": 8934,
+      "ratio": 1.136785850617127
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/26-compliance-frameworks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9956,
+      "pt_size": 11009,
+      "ratio": 1.105765367617517
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/27-finops-llms/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7838,
+      "pt_size": 8701,
+      "ratio": 1.110104618525134
+    },
+    {
+      "en_path": "phases/17-infrastructure-and-production/28-self-hosted-serving-selection/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7860,
+      "pt_size": 8574,
+      "ratio": 1.0908396946564884
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/01-instruction-following-alignment-signal/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8630,
+      "pt_size": 9472,
+      "ratio": 1.097566628041715
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/02-reward-hacking-goodhart/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10797,
+      "pt_size": 11755,
+      "ratio": 1.0887283504677225
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/03-direct-preference-optimization-family/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9244,
+      "pt_size": 10254,
+      "ratio": 1.1092600605798355
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/04-sycophancy-rlhf-amplification/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9965,
+      "pt_size": 10912,
+      "ratio": 1.0950326141495232
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/05-constitutional-ai-rlaif/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8969,
+      "pt_size": 9948,
+      "ratio": 1.1091537518117962
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/06-mesa-optimization-deceptive-alignment/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9977,
+      "pt_size": 10814,
+      "ratio": 1.0838929537937256
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/07-sleeper-agents-persistent-deception/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8920,
+      "pt_size": 9851,
+      "ratio": 1.104372197309417
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/08-in-context-scheming-frontier-models/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9166,
+      "pt_size": 10064,
+      "ratio": 1.097970761509928
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/09-alignment-faking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9553,
+      "pt_size": 10530,
+      "ratio": 1.1022715377368366
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/10-ai-control-subversion/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8855,
+      "pt_size": 9984,
+      "ratio": 1.1274985883681536
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/11-scalable-oversight-weak-to-strong/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8523,
+      "pt_size": 9325,
+      "ratio": 1.0940983221870233
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/12-red-teaming-pair-automated-attacks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7522,
+      "pt_size": 8093,
+      "ratio": 1.0759106620579633
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/13-many-shot-jailbreaking/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6987,
+      "pt_size": 7710,
+      "ratio": 1.103477887505367
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/14-ascii-art-visual-jailbreaks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6883,
+      "pt_size": 7645,
+      "ratio": 1.1107075403167224
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/15-indirect-prompt-injection/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7943,
+      "pt_size": 8730,
+      "ratio": 1.0990809517814428
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/16-red-team-tooling-garak-llamaguard-pyrit/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7384,
+      "pt_size": 8273,
+      "ratio": 1.1203954496208017
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/17-wmdp-dual-use-evaluation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8394,
+      "pt_size": 9283,
+      "ratio": 1.1059089826066237
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/18-frontier-safety-frameworks-rsp-pf-fsf/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8862,
+      "pt_size": 9747,
+      "ratio": 1.0998645903859174
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/19-model-welfare-research/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8214,
+      "pt_size": 9315,
+      "ratio": 1.1340394448502558
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/20-bias-representational-harm/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8055,
+      "pt_size": 8849,
+      "ratio": 1.0985723153320919
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/21-fairness-criteria-group-individual-counterfactual/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7733,
+      "pt_size": 8180,
+      "ratio": 1.0578042156989524
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/22-differential-privacy-for-llms/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8278,
+      "pt_size": 9139,
+      "ratio": 1.1040106305870983
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/23-watermarking-synthid-stable-signature-c2pa/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8357,
+      "pt_size": 9231,
+      "ratio": 1.1045829843245183
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/24-regulatory-frameworks-eu-us-uk-korea/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8325,
+      "pt_size": 9374,
+      "ratio": 1.126006006006006
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/25-echoleak-cves-for-ai/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7855,
+      "pt_size": 8845,
+      "ratio": 1.126034373010821
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/26-model-system-dataset-cards/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7675,
+      "pt_size": 8470,
+      "ratio": 1.1035830618892508
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/27-data-provenance-training-governance/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9573,
+      "pt_size": 10781,
+      "ratio": 1.126188237752011
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/28-alignment-research-ecosystem/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7543,
+      "pt_size": 8619,
+      "ratio": 1.142648813469442
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/29-moderation-systems-openai-perspective-llamaguard/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8200,
+      "pt_size": 9338,
+      "ratio": 1.138780487804878
+    },
+    {
+      "en_path": "phases/18-ethics-safety-alignment/30-dual-use-risk-cyber-bio-chem-nuclear/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8560,
+      "pt_size": 9610,
+      "ratio": 1.1226635514018692
+    },
+    {
+      "en_path": "phases/19-capstone-projects/01-terminal-native-coding-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10588,
+      "pt_size": 11820,
+      "ratio": 1.1163581412920287
+    },
+    {
+      "en_path": "phases/19-capstone-projects/02-rag-over-codebase/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10554,
+      "pt_size": 11741,
+      "ratio": 1.1124692059882508
+    },
+    {
+      "en_path": "phases/19-capstone-projects/03-realtime-voice-assistant/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10396,
+      "pt_size": 11423,
+      "ratio": 1.0987879953828394
+    },
+    {
+      "en_path": "phases/19-capstone-projects/04-multimodal-document-qa/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9372,
+      "pt_size": 10467,
+      "ratio": 1.1168373879641484
+    },
+    {
+      "en_path": "phases/19-capstone-projects/05-autonomous-research-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10481,
+      "pt_size": 11701,
+      "ratio": 1.1164011067646218
+    },
+    {
+      "en_path": "phases/19-capstone-projects/06-devops-troubleshooting-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10095,
+      "pt_size": 11467,
+      "ratio": 1.1359088657751362
+    },
+    {
+      "en_path": "phases/19-capstone-projects/07-end-to-end-fine-tuning-pipeline/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8678,
+      "pt_size": 9657,
+      "ratio": 1.112814012445264
+    },
+    {
+      "en_path": "phases/19-capstone-projects/08-production-rag-chatbot/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10032,
+      "pt_size": 11294,
+      "ratio": 1.1257974481658692
+    },
+    {
+      "en_path": "phases/19-capstone-projects/09-code-migration-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9103,
+      "pt_size": 10122,
+      "ratio": 1.1119411183126442
+    },
+    {
+      "en_path": "phases/19-capstone-projects/10-multi-agent-software-team/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10059,
+      "pt_size": 11364,
+      "ratio": 1.1297345660602445
+    },
+    {
+      "en_path": "phases/19-capstone-projects/11-llm-observability-dashboard/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8960,
+      "pt_size": 10048,
+      "ratio": 1.1214285714285714
+    },
+    {
+      "en_path": "phases/19-capstone-projects/12-video-understanding-pipeline/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8724,
+      "pt_size": 9489,
+      "ratio": 1.0876891334250345
+    },
+    {
+      "en_path": "phases/19-capstone-projects/13-mcp-server-with-registry/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9585,
+      "pt_size": 10855,
+      "ratio": 1.1324986958789776
+    },
+    {
+      "en_path": "phases/19-capstone-projects/14-speculative-decoding-server/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8214,
+      "pt_size": 9031,
+      "ratio": 1.099464329194059
+    },
+    {
+      "en_path": "phases/19-capstone-projects/15-constitutional-safety-harness/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9781,
+      "pt_size": 10960,
+      "ratio": 1.1205398221040794
+    },
+    {
+      "en_path": "phases/19-capstone-projects/16-github-issue-to-pr-agent/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9510,
+      "pt_size": 10452,
+      "ratio": 1.0990536277602523
+    },
+    {
+      "en_path": "phases/19-capstone-projects/17-personal-ai-tutor/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9877,
+      "pt_size": 11373,
+      "ratio": 1.1514629948364887
+    },
+    {
+      "en_path": "phases/19-capstone-projects/20-agent-harness-loop-contract/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6775,
+      "pt_size": 7258,
+      "ratio": 1.0712915129151293
+    },
+    {
+      "en_path": "phases/19-capstone-projects/21-tool-registry-schema-validation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 5968,
+      "pt_size": 6548,
+      "ratio": 1.0971849865951742
+    },
+    {
+      "en_path": "phases/19-capstone-projects/22-jsonrpc-stdio-transport/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6619,
+      "pt_size": 7015,
+      "ratio": 1.0598277685450974
+    },
+    {
+      "en_path": "phases/19-capstone-projects/23-function-call-dispatcher/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7312,
+      "pt_size": 7656,
+      "ratio": 1.0470459518599562
+    },
+    {
+      "en_path": "phases/19-capstone-projects/24-plan-execute-control-flow/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6705,
+      "pt_size": 7064,
+      "ratio": 1.0535421327367636
+    },
+    {
+      "en_path": "phases/19-capstone-projects/25-verification-gates-observation-budget/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7167,
+      "pt_size": 7509,
+      "ratio": 1.0477187107576391
+    },
+    {
+      "en_path": "phases/19-capstone-projects/26-sandbox-runner-denylist/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7220,
+      "pt_size": 7701,
+      "ratio": 1.0666204986149586
+    },
+    {
+      "en_path": "phases/19-capstone-projects/27-eval-harness-fixture-tasks/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6953,
+      "pt_size": 7301,
+      "ratio": 1.0500503379836041
+    },
+    {
+      "en_path": "phases/19-capstone-projects/28-observability-otel-traces/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7345,
+      "pt_size": 7831,
+      "ratio": 1.0661674608577263
+    },
+    {
+      "en_path": "phases/19-capstone-projects/29-end-to-end-coding-task-demo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7120,
+      "pt_size": 7646,
+      "ratio": 1.073876404494382
+    },
+    {
+      "en_path": "phases/19-capstone-projects/30-bpe-tokenizer-from-scratch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7154,
+      "pt_size": 7865,
+      "ratio": 1.0993849594632374
+    },
+    {
+      "en_path": "phases/19-capstone-projects/31-tokenized-dataset-sliding-window/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7368,
+      "pt_size": 7973,
+      "ratio": 1.0821118349619978
+    },
+    {
+      "en_path": "phases/19-capstone-projects/32-token-positional-embeddings/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8244,
+      "pt_size": 8835,
+      "ratio": 1.071688500727802
+    },
+    {
+      "en_path": "phases/19-capstone-projects/33-multihead-self-attention/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8144,
+      "pt_size": 8699,
+      "ratio": 1.0681483300589392
+    },
+    {
+      "en_path": "phases/19-capstone-projects/34-transformer-block/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8922,
+      "pt_size": 9784,
+      "ratio": 1.096615108720018
+    },
+    {
+      "en_path": "phases/19-capstone-projects/35-gpt-model-assembly/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9839,
+      "pt_size": 10798,
+      "ratio": 1.09746925500559
+    },
+    {
+      "en_path": "phases/19-capstone-projects/36-training-loop-eval/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9597,
+      "pt_size": 10566,
+      "ratio": 1.100969052829009
+    },
+    {
+      "en_path": "phases/19-capstone-projects/37-loading-pretrained-weights/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10653,
+      "pt_size": 11638,
+      "ratio": 1.0924622172158078
+    },
+    {
+      "en_path": "phases/19-capstone-projects/38-classifier-finetuning/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8326,
+      "pt_size": 9191,
+      "ratio": 1.1038914244535192
+    },
+    {
+      "en_path": "phases/19-capstone-projects/39-instruction-tuning-sft/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9208,
+      "pt_size": 9649,
+      "ratio": 1.0478931364031276
+    },
+    {
+      "en_path": "phases/19-capstone-projects/40-dpo-from-scratch/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9283,
+      "pt_size": 9756,
+      "ratio": 1.0509533555962511
+    },
+    {
+      "en_path": "phases/19-capstone-projects/41-eval-pipeline/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8956,
+      "pt_size": 9331,
+      "ratio": 1.0418713711478338
+    },
+    {
+      "en_path": "phases/19-capstone-projects/42-large-corpus-downloader/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10727,
+      "pt_size": 11232,
+      "ratio": 1.047077468071222
+    },
+    {
+      "en_path": "phases/19-capstone-projects/43-hdf5-tokenized-corpus/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10499,
+      "pt_size": 11222,
+      "ratio": 1.0688637013048863
+    },
+    {
+      "en_path": "phases/19-capstone-projects/44-cosine-lr-warmup/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 10070,
+      "pt_size": 10748,
+      "ratio": 1.0673286991062563
+    },
+    {
+      "en_path": "phases/19-capstone-projects/45-gradient-clipping-amp/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 11184,
+      "pt_size": 11697,
+      "ratio": 1.0458690987124464
+    },
+    {
+      "en_path": "phases/19-capstone-projects/46-gradient-accumulation/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 8754,
+      "pt_size": 9241,
+      "ratio": 1.0556317112177291
+    },
+    {
+      "en_path": "phases/19-capstone-projects/47-checkpoint-save-resume/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9443,
+      "pt_size": 10205,
+      "ratio": 1.0806946944826856
+    },
+    {
+      "en_path": "phases/19-capstone-projects/48-distributed-fsdp-ddp/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9702,
+      "pt_size": 10096,
+      "ratio": 1.0406101834673263
+    },
+    {
+      "en_path": "phases/19-capstone-projects/49-lm-eval-harness/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 9643,
+      "pt_size": 10337,
+      "ratio": 1.0719693041584568
+    },
+    {
+      "en_path": "phases/19-capstone-projects/50-hypothesis-generator/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7471,
+      "pt_size": 8031,
+      "ratio": 1.0749564984607147
+    },
+    {
+      "en_path": "phases/19-capstone-projects/51-literature-retrieval/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6946,
+      "pt_size": 7470,
+      "ratio": 1.0754391016412324
+    },
+    {
+      "en_path": "phases/19-capstone-projects/52-experiment-runner/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7688,
+      "pt_size": 8265,
+      "ratio": 1.0750520291363164
+    },
+    {
+      "en_path": "phases/19-capstone-projects/53-result-evaluator/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7072,
+      "pt_size": 7220,
+      "ratio": 1.0209276018099547
+    },
+    {
+      "en_path": "phases/19-capstone-projects/54-paper-writer/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6988,
+      "pt_size": 7197,
+      "ratio": 1.0299084144247281
+    },
+    {
+      "en_path": "phases/19-capstone-projects/55-critic-loop/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7289,
+      "pt_size": 7642,
+      "ratio": 1.048429139799698
+    },
+    {
+      "en_path": "phases/19-capstone-projects/56-iteration-scheduler/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 7083,
+      "pt_size": 7656,
+      "ratio": 1.0808979246082169
+    },
+    {
+      "en_path": "phases/19-capstone-projects/57-end-to-end-research-demo/docs/en.md",
+      "pt_exists": true,
+      "status": "complete_gt_70",
+      "en_size": 6312,
+      "pt_size": 6664,
+      "ratio": 1.055766793409379
+    }
+  ]
+}
