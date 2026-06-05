@@ -118,7 +118,7 @@ A skill recebe uma descrição de tarefa e gera: (1) qual família usar, (2) uma
 
 Cada família mapeia para uma curva de custo diferente no servidor de inferência. A literatura de inferência em produção enquadra inferência LLM como prefill + decode; a mesma decomposição se aplica aqui:
 
-- **Autoregressivo (balde 1 e 5).** Decode sequencial domina a latência; KV-cache, batch contínuo e decode eespecificaçãoulativo se aplicam diretamente.
+- **Autoregressivo (balde 1 e 5).** Decode sequencial domina a latência; KV-cache, batch contínuo e decode especificaçãoulativo se aplicam diretamente.
 - **VAE / difusão / flow-matching (balde 2 e 4).** Não tem decode no sentido de LLM. Custo = `num_steps × step_cost`, e o `step_cost` é um transformer ou U-Net forward na resolução latente completa. Os parâmetros de produção são contagem de passos (DDIM / DPM-Solver / destilação), tamanho do lote e precisão (bf16 / fp8 / int4).
 - **GAN (balde 3).** Um forward pass. Sem agendamento, sem KV-cache. TTFT ≈ latência total. É por isso que StyleGAN ainda vence em UX de domínio estreito.
 

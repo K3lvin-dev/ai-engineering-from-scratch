@@ -11,7 +11,7 @@
 
 Uma GAN incondicional amostra rostos arbitrários. Útil para demo, inútil em produção. Você quer: *mapear um esboço para uma foto*, *mapear um mapa para uma foto aérea*, *mapear uma cena diurna para noturna*, *colorir uma imagem em escala de cinza*. Em todas essas, você recebe uma imagem de entrada `x` e precisa gerar `y` com alguma correspondência semântica. Existem muitos `y`s plausíveis para cada `x`. Erro médio quadrático achata eles em papa. Uma loss adversarial não, porque "parece real" é nítido.
 
-GAN Condicional (Mirza & Osindero, 2014) adiciona uma condição `c` como input tanto para `G` quanto para `D`. Pix2Pix (Isola et al., 2017) eespecificaçãoializou isso: condição é uma imagem de entrada completa, generator é um U-Net, discriminator é um classificador *baseado em patches* (PatchGAN), e loss é adversarial + L1. Essa receita supera modelos texto-para-imagem feitos do zero em domínios imagem-para-imagem estreitos mesmo em 2026 porque é treinada em *dados pareados* — você tem exatamente o sinal que precisa.
+GAN Condicional (Mirza & Osindero, 2014) adiciona uma condição `c` como input tanto para `G` quanto para `D`. Pix2Pix (Isola et al., 2017) especializou isso: condição é uma imagem de entrada completa, generator é um U-Net, discriminator é um classificador *baseado em patches* (PatchGAN), e loss é adversarial + L1. Essa receita supera modelos texto-para-imagem feitos do zero em domínios imagem-para-imagem estreitos mesmo em 2026 porque é treinada em *dados pareados* — você tem exatamente o sinal que precisa.
 
 ## O Conceito
 
@@ -104,7 +104,7 @@ Pix2Pix continua sendo a ferramenta certa quando (a) você tem milhares de exemp
 
 ## Entregue
 
-Salve `outputs/skill-img2img-chooser.md`. Skill recebe uma descrição de tarefa, disponibilidade de dados (pareado vs não pareado, N amostras) e orçamento de latência/qualidade, e gera: abordagem (Pix2Pix, CycleGAN, variante ControlNet, SDXL + IP-Adapter), requisitos de dados de treinamento, custo de inferência e protocolo de avaliação (LPIPS, FID, eespecificaçãoífico da tarefa).
+Salve `outputs/skill-img2img-chooser.md`. Skill recebe uma descrição de tarefa, disponibilidade de dados (pareado vs não pareado, N amostras) e orçamento de latência/qualidade, e gera: abordagem (Pix2Pix, CycleGAN, variante ControlNet, SDXL + IP-Adapter), requisitos de dados de treinamento, custo de inferência e protocolo de avaliação (LPIPS, FID, específico da tarefa).
 
 ## Exercícios
 
