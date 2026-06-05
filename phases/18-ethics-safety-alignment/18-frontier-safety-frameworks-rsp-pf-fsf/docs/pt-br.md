@@ -7,7 +7,7 @@
 **Pré-requisitos:** Fase 18 · 17 (WMDP), Fase 18 · 07-09 (falhas de engano)
 **Tempo:** ~75 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Descrever a estrutura de tiers do ASL da Anthropic e o que ativou ASL-3.
 - Nomear os cinco critérios do OpenAI Preparedness Framework v2 para capacidades rastreadas.
@@ -15,7 +15,7 @@
 - Explicar as cláusulas de ajuste competitivo e por que importam para dinâmicas de corrida.
 - Definir um safety case e descrever a estrutura de três pilares (monitoramento, ilegibilidade, incapacidade).
 
-## O Problemo
+## O Problema
 
 Lições 7-17 estabelecem que engano é possível, capacidade de uso duplo existe, e avaliação tem limites. Um laboratório com um modelo de capacidade fronteira precisa de uma estrutura de governança interna que:
 - Defina limiares para quando novas salvaguardas são necessárias.

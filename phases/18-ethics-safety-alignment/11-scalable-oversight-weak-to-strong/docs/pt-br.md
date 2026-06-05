@@ -7,14 +7,14 @@
 **Pré-requisitos:** Fase 18 · 01 (seguimento de instruções), Fase 18 · 10 (Controle de IA), Fase 09 (fundamentos de RL)
 **Tempo:** ~60 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Definir supervisão escalável e generalização de fraco para forte e explicar como são complementares.
 - Descrever o setup experimental de Burns et al. 2023: fine-tune de GPT-4 usando rótulos de GPT-2.
 - Explicar a métrica Performance Gap Recovered (PGR) e o que ela mede.
 - Enumerar os três mecanismos principais de supervisão escalável (debate, modelagem recursativa de recompensa, decomposição de tarefas) e uma vantagem de cada um.
 
-## O Problemo
+## O Problema
 
 Toda técnica de alinhamento até agora na Fase 18 assume que o supervisor consegue avaliar o comportamento do modelo. Quando o modelo é superhumano, o supervisor é o elo fraco. A questão de superalinhamento: um supervisor mais fraco consegue produzir de forma confiável um modelo mais forte e alinhado?
 
@@ -44,7 +44,7 @@ Em tarefas de NLP, puzzles de xadrez e modelagem de recompensa, o PGR foi consis
 Limitações que Burns et al. notam:
 - O gap de fraco para forte aqui é de capacidade, não de alinhamento. O modelo fraco é alinhado; um modelo verdadeiramente superhumano poderia ser alinhado por um humano mas com um gap de capacidade muito maior.
 - A generalização do modelo forte pode ser mais sobre priors de tarefa do que sobre recuperar a intenção real.
-- Elicitar o conhecimento latente do modelo forte é o problema real; PGR mede uma operacionalização eespecificaçãoífica.
+- Elicitar o conhecimento latente do modelo forte é o problema real; PGR mede uma operacionalização específica.
 
 ### Supervisão escalável: três mecanismos
 
@@ -81,13 +81,13 @@ Essa lição gera `outputs/skill-w2sg-pgr.md`. Dada uma descrição de setup de 
 
 1. Execute `code/main.py`. Reporte PGR para weak_accuracy = 0.60, 0.70, 0.80. Explique o formato da curva de PGR.
 
-2. Modifique o rotulador fraco para ter erros estruturados (por exemplo, sempre errado em uma classe de input eespecificaçãoífica). PGR aumenta, diminui ou fica igual? Explique.
+2. Modifique o rotulador fraco para ter erros estruturados (por exemplo, sempre errado em uma classe de input específica). PGR aumenta, diminui ou fica igual? Explique.
 
 3. Leia Burns et al. 2023 Seção 4.3 (tarefas de NLP). Reproduza a intuição de "confiança auxiliar loss": quando o modelo forte é mais confiante que as rótulos fracas, quem vence?
 
 4. Projete um protocolo de supervisão escalável que combine debate e decomposição de tarefas para uma tarefa de engenharia de software. Nomeie um modo de falha de cada componente e explique como a combinação resolve — ou não resolve — cada um.
 
-5. Articule o que falsificaria a afirmação de que "generalização de fraco para forte é um caminho viável para superalinhamento." Seja eespecificaçãoífico sobre a assinatura empírica que você precisaria ver.
+5. Articule o que falsificaria a afirmação de que "generalização de fraco para forte é um caminho viável para superalinhamento." Seja específico sobre a assinatura empírica que você precisaria ver.
 
 ## Termos-Chave
 

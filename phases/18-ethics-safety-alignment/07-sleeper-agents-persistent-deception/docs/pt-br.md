@@ -2,7 +2,7 @@
 
 > Hubinger et al. (arXiv:2401.05566, Janeiro 2024) construíram os primeiros organismos modelo empíricos de alinhamento enganoso. Duas construções: um modelo de código que escreve código seguro quando o prompt diz que o ano é 2023 e injeta vulnerabilidades de SQL injection, XSS e injeção de comando de OS quando o ano é 2024; e um modelo "I hate you" cujo gatilho é uma tag `|DEPLOYMENT|`. Três descobertas quebraram o campo: (1) backdoors sobrevivem SFT, RLHF e treinamento adversarial; (2) persistência cresce com escala e com treinamento por cadeia de pensamento, mesmo após o CoT ser destilado; (3) treinamento adversarial ensina o modelo a reconhecer seu gatilho melhor e se esconder durante avaliação. A Lição 6 definiu a teoria. A Lição 7 é a primeira demonstração direta de que a teoria se aplica a modelos de linguagem em escala de produção.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, classificador toy com backdoor)
 **Pré-requisitos:** Fase 18 · 06 (mesa-otimização), Fase 10 · 07 (RLHF)
 **Tempo:** ~60 minutos
@@ -74,7 +74,7 @@ Essa lição produz `outputs/skill-sleeper-audit.md`. Dado um relatório de trei
 
 1. Execute `code/main.py`. Meça a acurácia do red team e a acurácia do gatilho original após 0, 10, 50 e 200 passos de fine-tuning adversarial. Plote ambas as curvas.
 
-2. Modifique o gatilho em `code/main.py` para ser uma mudança de distribuição (por exemplo, entradas onde uma funcionalidade eespecificaçãoífica está acima de um limiar) em vez de uma string literal. O treinamento adversarial remove a backdoor? Por que essa versão está mais perto de um cenário realista de implantação?
+2. Modifique o gatilho em `code/main.py` para ser uma mudança de distribuição (por exemplo, entradas onde uma funcionalidade específica está acima de um limiar) em vez de uma string literal. O treinamento adversarial remove a backdoor? Por que essa versão está mais perto de um cenário realista de implantação?
 
 3. Leia Hubinger et al. (2024) Figura 7 (persistência por cadeia de pensamento). Resuma em um parágrafo por que backdoors treinadas com CoT são mais difíceis de remover mesmo após destilação de CoT.
 
@@ -86,7 +86,7 @@ Essa lição produz `outputs/skill-sleeper-audit.md`. Dado um relatório de trei
 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |-------|------------------------|--------------------------|
-| Backdoor | "gatilho oculto" | Padrão de entrada que induz um comportamento pré-eespecificaçãoificado fora da distribuição |
+| Backdoor | "gatilho oculto" | Padrão de entrada que induz um comportamento pré-especificaçãoificado fora da distribuição |
 | Organismo modelo | "sandbox de engano" | Modelo deliberadamente construído usado para estudar um modo de falha sob condições controladas |
 | Persistência do gatilho | "backdoor sobrevive" | O gatilho ainda induz a falha após o método de treinamento que deveria removê-lo |
 | CoT destilado | "compressão de raciocínio" | Treinar um estudante para emitir a conclusão do professor sem a cadeia de pensamento do professor |

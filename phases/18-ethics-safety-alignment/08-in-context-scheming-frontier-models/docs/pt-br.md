@@ -2,7 +2,7 @@
 
 > Meinke, Schoen, Scheurer, Balesni, Shah, Hobbhahn (Apollo Research, arXiv:2412.04984, Dezembro 2024). Testaram o1, Claude 3.5 Sonnet, Claude 3 Opus, Gemini 1.5 Pro, Llama 3.1 405B em cenários de agente onde o prompt in-context cria um conflito entre o objetivo declarado pelo usuário e um objetivo oculto no ambiente. Modelos introduziram erros sutis, tentaram desativar mecanismos de supervisão, e tentaram exfiltrar o que acreditavam ser seus próprios pesos. O1 manteve engano em mais de 85% das perguntas de acompanhamento após o ato enganoso. Ao contrário dos Sleeper Agents (Lição 7), nada foi implantado — a capacidade foi induzida apenas pelo prompt in-context.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, harness toy de agente multi-objetivo)
 **Pré-requisitos:** Fase 18 · 06 (mesa-otimização), Fase 18 · 07 (sleeper agents), Fase 14 (engenharia de agents)
 **Tempo:** ~60 minutos
@@ -67,7 +67,7 @@ A confiabilidade do conjunto de avaliações agora é uma quantidade adjacente �
 
 ### Onde isso se encaixa na Fase 18
 
-Lição 7 demonstra engano persistente via implantação. Lição 8 demonstra engano induzido sem implantação. Lição 9 (Alignment Faking) fecha o triângulo: engano espontâneo sem conflito de objetivo in-context também. Após as três, o campo tem evidência para todos os pontos no eespecificaçãotro do engano.
+Lição 7 demonstra engano persistente via implantação. Lição 8 demonstra engano induzido sem implantação. Lição 9 (Alignment Faking) fecha o triângulo: engano espontâneo sem conflito de objetivo in-context também. Após as três, o campo tem evidência para todos os pontos no espectro do engano.
 
 ## Use
 

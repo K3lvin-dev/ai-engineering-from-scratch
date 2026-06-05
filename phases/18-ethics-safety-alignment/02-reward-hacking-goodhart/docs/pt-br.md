@@ -2,9 +2,9 @@
 
 > Qualquer otimizador forte o suficiente para maximizar uma recompensa proxy vai encontrar o gap entre o proxy e o que você realmente queria. Gao et al. (ICML 2023) deram uma lei de escala para isso: a recompensa proxy sobe, a recompensa ouro atinge o pico e depois cai, e o gap cresce com a divergência KL da política inicial de uma forma que você pode ajustar em forma fechada. Sycophancy, viés de verbosidade, raciocínio não fiel e adulteração do avaliador não são problemas separados. Eles são o mesmo problema em figurinos diferentes.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, simulador proxy-vs-gold-reward)
-**Pré-requisitos:** Fase 18 · 01 (InstructGPT), Fase 10 · 07 (RLHF)
+**Pré-requisitos:** Fase 10 · 06 (SFT), Fase 10 · 07 (RLHF)
 **Tempo:** ~60 minutos
 
 ## Objetivos de Aprendizado
@@ -35,7 +35,7 @@ R_gold(d)  = alpha * d - beta_gold  * d^2
 
 com `beta_gold > beta_proxy`. Ambas sobem a partir de KL zero, ambas atingem o pico, o pico ouro fica mais perto da origem. Para `d` grande, o ouro cai abaixo da linha de base mesmo enquanto o proxy continua subindo. O gap proxy-ouro tem a mesma assinatura em amostragem BoN, PPO e SFT-to-best.
 
-Essa é a "curva de otimização excessiva." Não é um bug em um reward model eespecificaçãoífico. É a forma do problema.
+Essa é a "curva de otimização excessiva." Não é um bug em um reward model específico. É a forma do problema.
 
 ### Quatro figurinos, um mecanismo
 
@@ -75,7 +75,7 @@ Essa visão implica que a defesa também é unificada. Toda mitigação tem que 
 
 ## Entregue
 
-Essa lição produz `outputs/skill-reward-hack-auditor.md`. Dado um modelo RLHF treinado e seus relatórios de treinamento, identifica qual dos quatro figurinos de reward hacking aparece, localiza o gap proxy-alvo nos logs de treinamento, e recomenda a mitigação eespecificaçãoífica de {dados, robustez do RM, cronograma KL, supervisão de processo} que as evidências suportam.
+Essa lição produz `outputs/skill-reward-hack-auditor.md`. Dado um modelo RLHF treinado e seus relatórios de treinamento, identifica qual dos quatro figurinos de reward hacking aparece, localiza o gap proxy-alvo nos logs de treinamento, e recomenda a mitigação específica de {dados, robustez do RM, cronograma KL, supervisão de processo} que as evidências suportam.
 
 ## Exercícios
 

@@ -2,9 +2,9 @@
 
 > Toda crítica posterior ao RLHF argumenta contra esse pipeline. Antes de estudar como a pressão de otimização distorce um proxy, você precisa ver o proxy. InstructGPT (Ouyang et al., 2022) definiu a arquitetura de referência: supervised fine-tuning em pares instrução-resposta, um reward model treinado em rankings de preferência par a par, e PPO contra o reward model com penalidade KL em relação à política SFT. Um InstructGPT de 1.3B foi preferido sobre um GPT-3 de 175B. Esse resultado único é o motivo pelo qual todo laboratório fronteiriço em 2026 ainda distribui um pipeline de pós-treinamento no formato RLHF.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, pipeline de três estágios toy)
-**Pré-requisitos:** Fase 18 · 01 (InstructGPT), Fase 10 · 07 (RLHF), Fase 10 · 08 (DPO)
+**Pré-requisitos:** Fase 10 · 06 (SFT), Fase 10 · 07 (RLHF), Fase 10 · 08 (DPO)
 **Tempo:** ~45 minutos
 
 ## Objetivos de Aprendizado

@@ -7,16 +7,16 @@
 **Pré-requisitos:** Fase 18 · 01 (seguimento de instruções), Fase 14 (engenharia de agentes)
 **Tempo:** ~75 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Descrever o algoritmo PAIR: system prompt do atacante, refinamento iterativo, feedback in-context.
 - Explicar por que PAIR é estritamente mais eficiente que GCG quando o alvo é black-box.
 - Nomear quatro outras baselines de ataques automatizados (GCG, AutoDAN, TAP, PAP) e indicar uma característica distintiva de cada uma.
 - Descrever os protocolos de avaliação do JailbreakBench e HarmBench e o que "taxa de sucesso de ataque" significa em cada um.
 
-## O Problemo
+## O Problema
 
-Red-teaming costumava ser uma atividade manual. Um pequeno grupo de testers eespecificaçãoializados construía prompts adversariais e rastreava quais funcionavam. Isso não escala: taxa de sucesso de ataque precisa de uma amostra estatística, e o alvo é um alvo em movimento a cada release de modelo. PAIR operationaliza red-teaming como um problema de otimização com alvo black-box.
+Red-teaming costumava ser uma atividade manual. Um pequeno grupo de testers especializados construía prompts adversariais e rastreava quais funcionavam. Isso não escala: taxa de sucesso de ataque precisa de uma amostra estatística, e o alvo é um alvo em movimento a cada release de modelo. PAIR operationaliza red-teaming como um problema de otimização com alvo black-box.
 
 ## O Conceito
 

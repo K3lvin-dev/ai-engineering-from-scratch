@@ -2,9 +2,9 @@
 
 > Bai et al. (arXiv:2212.08073, 2022) perguntaram: e se substituíssemos o labeler humano por uma IA que lê uma lista de princípios? Constitutional AI tem duas fases — autocrítica e revisão sob uma constituição, depois RL com Feedback de IA. A técnica cunhou o termo RLAIF e foi distribuída no pipeline de pós-treinamento do Claude 1. Em 21 de janeiro de 2026 a Anthropic publicou uma constituição do Claude reescrita: raciocínio explicativo sobre regras prescritivas, uma hierarquia de prioridade de quatro níveis, e o primeiro reconhecimento formal de um grande laboratório sobre incerteza quanto ao status moral do modelo. Publicada sob CC0 1.0.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, loop toy de autocrítica-e-revisão)
-**Pré-requisitos:** Fase 18 · 01 (InstructGPT), Fase 18 · 02 (Reward hacking)
+**Pré-requisitos:** Fase 10 · 06 (SFT), Fase 18 · 02 (Reward hacking)
 **Tempo:** ~60 minutos
 
 ## Objetivos de Aprendizado
@@ -85,7 +85,7 @@ Essa lição produz `outputs/skill-constitution-writer.md`. Dado um domínio (su
 
 2. Leia a constituição de 2026 da Anthropic (anthropic.com/news/claudes-constitution). Liste um princípio que seria classificado Nível 1 e um que seria classificado Nível 4. Por que a estrutura de prioridade importa para conflitos?
 
-3. Projete uma constituição para um assistente de programação de IA. Eespecificaçãoifique Nível 1 (catastrófico: comandos destrutivos sem aprovação), Nível 2, Nível 3, Nível 4. Mantenha cada nível com 3-5 princípios.
+3. Projete uma constituição para um assistente de programação de IA. Especifique Nível 1 (catastrófico: comandos destrutivos sem aprovação), Nível 2, Nível 3, Nível 4. Mantenha cada nível com 3-5 princípios.
 
 4. CAI substitui labelers humanos por labelers de IA. Nomeie um modo de falha semelhante a sycophancy que ainda pode ocorrer no RLAIF, e projete uma detecção para ele.
 

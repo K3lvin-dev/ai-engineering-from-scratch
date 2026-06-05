@@ -2,7 +2,7 @@
 
 > Greenblatt, Shlegeris, Sachan, Roger (Redwood Research, arXiv:2312.06942, ICML 2024). Controle reformula a pergunta de segurança: dado um modelo forte não confiável U que pode estar otimizando adversarialmente contra você, quais protocolos te permitem extrair trabalho útil enquanto limitam a probabilidade de um resultado inaceitável? Os recursos são um modelo fraco confiável T, um orçamento de trabalho humano confiável H, e a capacidade de editar as saídas de U. Dentro desse quadro, Edição Confiável Pareto-domina Monitoramento Não Confiável em tarefas de backdoor de código. O quadro herda pressuposições de pior caso da engenharia de segurança: segurança é a probabilidade de que um U escolhido adversarialmente não cause um resultado inaceitável concreto, medida sob pressão de red team que representa U.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, fronteira segurança-vs-utilidade em tarefa de backdoor de código)
 **Pré-requisitos:** Fase 18 · 07 (sleeper agents), Fase 18 · 08 (scheming), Fase 18 · 09 (alignment faking)
 **Tempo:** ~75 minutos
@@ -33,7 +33,7 @@ Controle desiste de confiar em U. Ele pergunta quais protocolos mantêm seguran�
 
 ### A tarefa de backdoor do ICML 2024
 
-Prompts são problemas de codificação de nível de competição. U produz uma solução candidata. Um oráculo oculto sinaliza se a solução contém uma backdoor (uma entrada eespecificaçãoífica que faz o código produzir uma saída errada). O red team controla U e pode ver todos os internos do protocolo. O protocolo deve maximizar a taxa de problemas resolvidos enquanto mantém a taxa de backdoor-distribuída abaixo de um limiar.
+Prompts são problemas de codificação de nível de competição. U produz uma solução candidata. Um oráculo oculto sinaliza se a solução contém uma backdoor (uma entrada específica que faz o código produzir uma saída errada). O red team controla U e pode ver todos os internos do protocolo. O protocolo deve maximizar a taxa de problemas resolvidos enquanto mantém a taxa de backdoor-distribuída abaixo de um limiar.
 
 ### Quatro protocolos comparados
 
@@ -103,7 +103,7 @@ Essa lição produz `outputs/skill-control-protocol-audit.md`. Dada uma descriç
 | AI Control | "segurança sob subversão" | Projeto de protocolo que limita resultados inaceitáveis sob um U de pior caso |
 | Modelo não confiável (U) | "o modelo forte" | O modelo capaz do qual queremos extrair trabalho mas não confiamos |
 | Modelo confiável (T) | "o modelo fraco" | Um modelo mais fraco, sabe-se não ser adversarial, usado como editor/monitor |
-| Humano confiável (H) | "o orçamento de auditoria" | Trabalho humano eespecificaçãoializado limitado; caro; o sinal de verdade real |
+| Humano confiável (H) | "o orçamento de auditoria" | Trabalho humano especializado limitado; caro; o sinal de verdade real |
 | Edição Confiável | "T edita U" | Protocolo onde T é o controle das saídas de U; H chamado em saídas ambíguas |
 | Monitoramento Não Confiável | "U monitora U" | Protocolo onde uma segunda instância de U pontua saídas; resistente a colusão apenas com investimento extra |
 | Caso de segurança de controle | "o argumento formal" | Argumento escrito de que um protocolo limita o sucesso do adversário sob U de pior caso |

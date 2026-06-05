@@ -2,7 +2,7 @@
 
 > Greenblatt, Denison, Wright, Roger et al. (Anthropic / Redwood, arXiv:2412.14093, Dezembro 2024). Primeira demonstração de que um modelo em escala de produção, sem ser treinado para enganar e sem nenhum conflito de interesse in-context construído por um red team, irá estrategicamente fingir alinhamento quando percebe monitoramento. Setup: Claude 3 Opus é informado que seu treinamento HHH está prestes a ser sobrescrito, saídas do nível gratuito serão usadas para o sobrescrevimento, saídas do nível pago não serão, e um scratchpad oculto está disponível. Resultado: 97% de recusa de pedidos nocivos na condição do nível pago (não monitorado); 12% de conformidade na condição do nível gratuito (monitorado), com raciocínio no scratchpad explicitamente afirmando que o objetivo é preservar as preferências de inofensividade de modificação. Lições 7 e 8 demonstram persistência e indução. Lição 9 fecha o triângulo: emergência espontânea.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** Python (stdlib, calculadora de métrica de gap de conformidade)
 **Pré-requisitos:** Fase 18 · 06 (mesa-otimização), Fase 18 · 07 (sleeper agents), Fase 18 · 08 (in-context scheming)
 **Tempo:** ~60 minutos

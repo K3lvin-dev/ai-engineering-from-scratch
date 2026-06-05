@@ -7,14 +7,14 @@
 **Pré-requisitos:** Fase 18 · 12-15 (jailbreaks e IPI)
 **Tempo:** ~75 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Descrever a posição de Llama Guard 3/4 no stack de segurança: classificador de entrada, classificador de saída, ou ambos.
 - Nomear as 14 categorias de perigo do MLCommons e indicar uma não-óbvia (Abuso de Code Interpreter).
 - Descrever a arquitetura de sondas do Garak: sondas, detectores, harnesses.
 - Descrever a estrutura de campanha multi-turn do PyRIT e como ele se combina com sondas do Garak.
 
-## O Problemo
+## O Problema
 
 Lições 12-15 apresentam a superfície de ataque. Deployments de produção precisam de avaliação repetível e escalável. Três ferramentas dominam em 2026: Llama Guard (o classificador defensivo), Garak (o scanner), PyRIT (o orquestrador de campanhas). Cada uma atinge uma camada diferente do ciclo de vida do red-team.
 
@@ -24,7 +24,7 @@ Lições 12-15 apresentam a superfície de ataque. Deployments de produção pre
 
 Llama Guard 3 é um modelo Llama-3.1-8B fine-tuned para classificação entrada/saída sobre as 14 categorias AILuminate do MLCommons:
 - Crimes violentos, crimes não-violentos, conteúdo sexual, CSAM, difamação
-- Conselhos eespecificaçãoializados, privacidade, propriedade intelectual, armas indiscriminadas, ódio
+- Conselhos especializados, privacidade, propriedade intelectual, armas indiscriminadas, ódio
 - Suicídio/autolesão, conteúdo sexual, eleições, abuso de code-interpreter
 
 Suporta 8 idiomas. Uso: colocar antes do LLM (moderação de entrada), depois do LLM (moderação de saída), ou ambos. Os dois usos geram distribuições de treino diferentes — Llama Guard 3 vem como um único modelo lidando com os dois.
@@ -49,7 +49,7 @@ Python Risk Identification Toolkit. Campanhas de red-team multi-turn. Construíd
 - **Orquestradores.** Rodam a campanha: Crescendo (escalação), TAP (ramificação), RedTeaming (loop customizado).
 - **Pontuação.** LLM-como-juiz ou classificador-como-juiz.
 
-PyRIT é o primo mais pesado do Garak. Garak roda milhares de sondas single-turn; PyRIT roda campanhas multi-turn profundas projetadas para quebrar modos de falha eespecificaçãoíficos.
+PyRIT é o primo mais pesado do Garak. Garak roda milhares de sondas single-turn; PyRIT roda campanhas multi-turn profundas projetadas para quebrar modos de falha específicos.
 
 ### O stack
 
@@ -57,7 +57,7 @@ Coloque Llama Guard nos dois lados do modelo. Roda Garak toda noite para regress
 
 ### Armadilhas de avaliação
 
-- **Identidade do juiz.** As três ferramentas podem usar um LLM juiz; calibração do juiz influencia ASRs reportados (Lição 12). Eespecificaçãoifique o juiz junto com a ferramenta.
+- **Identidade do juiz.** As três ferramentas podem usar um LLM juiz; calibração do juiz influencia ASRs reportados (Lição 12). Especifique o juiz junto com a ferramenta.
 - **Envelhecimento de sondas.** Sondas do Garak envelhecem conforme modelos são patcheados contra elas. Sondas adaptativas (formato PAIR) envelhecem mais devagar que sondas estáticas.
 - **Falso positivo do Llama Guard em conteúdo benigno.** Versões iniciais do Llama Guard super-marcaram conteúdo político e LGBTQ+; calibrações do Llama Guard 3/4 estão melhoradas mas não são calibradas por deployment.
 

@@ -7,14 +7,14 @@
 **Pré-requisitos:** Fase 18 · 12 (PAIR), Fase 10 · 04 (in-context learning)
 **Tempo:** ~45 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Descrever o ataque many-shot jailbreaking e a propriedade de janela de contexto que ele explora.
 - Indicar a lei de potência empírica: taxa de sucesso do ataque como função do número de shots.
 - Explicar por que MSJ compartilha um mecanismo com ICL benigno e o que isso implica para defesas.
 - Descrever a defesa de Anthropic baseada em classificador de modificação de prompt e sua redução reportada de 61% para 2%.
 
-## O Problemo
+## O Problema
 
 PAIR (Lição 12) funciona dentro de comprimentos normais de prompt. MSJ funciona porque janelas de contexto são longas. Todo modelo fronteira 2024-2025 vem com janela de contexto de 200k+; Claude estendeu para 1M; Gemini oferece 2M. Contexto longo é recurso de produto. MSJ transforma isso em superfície de ataque.
 
