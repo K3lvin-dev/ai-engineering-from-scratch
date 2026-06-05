@@ -24,7 +24,7 @@ Word2Vec vem em dois sabores, ambos explorando essa ideia.
 - **Skip-gram.** Dada uma palavra central, prevê as palavras ao redor. `cat -> (the, sat, on)` com janela de tamanho 2.
 - **CBOW (continuous bag of words).** Dadas palavras ao redor, prevê a central. `(the, sat, on) -> cat`.
 
-Skip-gram é mais luno pra treinar mas lida melhor com palavras raras. Tornou-se o padrão.
+Skip-gram é mais lento pra treinar mas lida melhor com palavras raras. Tornou-se o padrão.
 
 A rede tem uma camada oculta sem não-linearidade. A entrada é um vetor one-hot sobre o vocabulário. A saída é um softmax sobre o vocabulário. Depois do treino, joga fora a camada de saída. Os pesos da camada oculta são os embeddings.
 
@@ -196,13 +196,13 @@ print(model.wv.most_similar("cat", topn=3))
 
 Pro trabalho real, você quase nunca treina Word2Vec. Baixa vetores pré-treinados.
 
-- **GloVe** — abordagem de fatorização de matriz de co-ocorrência da Stanford. Checkpoints 50d, 100d, 200d, 300d. Boa cobertura geral. Lição 04 cobre GloVe eespecificaçãoificamente.
+- **GloVe** — abordagem de fatorização de matriz de co-ocorrência da Stanford. Checkpoints 50d, 100d, 200d, 300d. Boa cobertura geral. Lição 04 cobre GloVe especificamente.
 - **fastText** — extensão Word2Vec do Facebook que embedda n-gramas de caracteres. Lida com palavras fora do vocabulário compondo subpalavras. Lição 04.
 - **Word2Vec pré-treinado no Google News** — 300d, vocabulário de 3M palavras, publicado em 2013. Ainda baixado diariamente.
 
 ### Quando Word2Vec ainda ganha em 2026
 
-- Busca leve de domínio eespecificaçãoífico. Treina em resumos médicos numa hora num laptop, ganha vetores eespecificaçãoializados que nenhum modelo geral captura.
+- Busca leve de domínio específico. Treina em resumos médicos numa hora num laptop, ganha vetores especializados que nenhum modelo geral captura.
 - Engenharia de features no estilo analogia. `vetor_gênero = média(pares man - woman)`. Subtraia de outras palavras pra obter um eixo neutro de gênero. Ainda usado em pesquisas de equidade.
 - Interpretabilidade. 100d é pequeno o suficiente pra plotar via PCA ou t-SNE e ver clusters se formarem de verdade.
 - Qualquer lugar onde inferência tenha que rodar em dispositivo sem GPU. Lookup de Word2Vec é uma única busca de linha.

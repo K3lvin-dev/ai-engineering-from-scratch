@@ -30,7 +30,7 @@ The/DET cats/NOUN were/AUX running/VERB at/ADP 3pm/NOUN ./PUNCT
 - **Parsing de constituintes.** Frases nominais, frases verbais, frases preposicionais se aninham umas nas outras. A saída é uma árvore de categorias não-terminais (NP, VP, PP) com palavras como folhas.
 - **Parsing de dependência.** Cada palavra tem uma palavra-chave da qual depende, rotulada com uma relação gramatical. A saída é uma árvore onde cada aresta é uma tupla (chave, dependente, relação).
 
-Parsing de dependência ganhou nos anos 2010 porque generaliza limpo entre idiomas, eespecificaçãoialmente de ordem livre.
+Parsing de dependência ganhou nos anos 2010 porque generaliza limpo entre idiomas, especialmente de ordem livre.
 
 ```
 running is ROOT
@@ -233,7 +233,7 @@ Refuse to recommend rolling your own parser. Building parsers from scratch is a 
 | Termo | O que a gente diz | O que realmente significa |
 |------|-----------------|-----------------------|
 | Tag POS | Tipo da palavra | Categoria gramatical. PTB tem 36; UD tem 17. |
-| Penn Treebank | Conjunto de tags padrão | Eespecificaçãoífico do inglês. Tempos verbais e número de substantivos granulares. |
+| Penn Treebank | Conjunto de tags padrão | Especificaçãoífico do inglês. Tempos verbais e número de substantivos granulares. |
 | Universal Dependencies | Conjunto de tags multilíngue | Mais grosso que PTB; neutro de idioma; padrão pra trabalho cross-lingual. |
 | Parse de dependência | Árvore da frase | Cada palavra tem uma chave, cada aresta tem relação gramatical. |
 | Viterbi | Programação dinâmica | Encontra a sequência de tags de maior probabilidade dadas emissões e transições. |

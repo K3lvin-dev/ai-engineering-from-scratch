@@ -11,7 +11,7 @@
 
 Seu vocabulário tem 50.000 palavras. Um usuário digita "untokenizable". Seu tokenizer retorna `[UNK]`. Agora o modelo não tem sinal nenhum sobre a palavra. Pior: o percentil 90 do seu corpus tem 40 palavras raras, o que significa 40 bits de informação perdida por documento.
 
-Tokenização subword resolve isso. Palavras comuns ficam como tokens únicos. Palavras raras se decompõem em pedaços significativos: `untokenizable` → `un`, `token`, `izable`. Dados de treino cobrem tudo porque qualquer string é ultimate uma sequência de bytes.
+Tokenização subword resolve isso. Palavras comuns ficam como tokens únicos. Palavras raras se decompõem em pedaços significativos: `untokenizable` → `un`, `token`, `izable`. Dados de treino cobrem tudo porque qualquer string é ultimamente uma sequência de bytes.
 
 Todo LLM de fronteira em 2026 roda em um de três algoritmos (BPE, Unigram, WordPiece), envolvido em uma de três bibliotecas (tiktoken, SentencePiece, HF Tokenizers). Você não pode disponibilizar um modelo de linguagem sem escolher um.
 
@@ -21,7 +21,7 @@ Todo LLM de fronteira em 2026 roda em um de três algoritmos (BPE, Unigram, Word
 
 **BPE (Byte-Pair Encoding).** Começa com vocabulário em nível de caractere. Conta cada par adjacente. Funde o par mais frequente num novo token. Repete até atingir o tamanho do vocabulário alvo. Algoritmo dominante: GPT-2/3/4, Llama, Gemma, Qwen2, Mistral.
 
-**BPE em nível de byte.** Mesmo algoritmo mas sobre bytes brutos (256 tokens base) em vez de caracteres Unicode. Garante zero tokens `[UNK]` — qualquer sequência de bytes é codificável. GPT-2 usa 50.257 tokens (256 bytes + 50.000 fusões + 1 eespecificaçãoial).
+**BPE em nível de byte.** Mesmo algoritmo mas sobre bytes brutos (256 tokens base) em vez de caracteres Unicode. Garante zero tokens `[UNK]` — qualquer sequência de bytes é codificável. GPT-2 usa 50.257 tokens (256 bytes + 50.000 fusões + 1 especial).
 
 **Unigram.** Começa com um vocabulário enorme. Atribui a cada token uma probabilidade unigrama. Poda iterativamente tokens cuja remoção menos aumenta a verossimilhança do corpus. Probabilístico em inferência: pode amostrar tokenizações (útil pra augmentação de dados via regularização subword). Usado por T5, mBART, ALBERT, XLNet, Gemma.
 
@@ -112,7 +112,7 @@ Apenas codificação. Rápido (backend em Rust). Corresponde exatamente à token
 ## Armadilhas que ainda causam problemas em 2026
 
 - **Drift de tokenizer.** Treina com vocabulário A, deploya com vocabulário B. IDs de tokens diferentes; modelo produz lixo. Verifique o hash de `tokenizer.json` no CI.
-- **Ambiguidade de espaço em branco.** BPE "hello" vs " hello" produzem tokens diferentes. Sempre eespecificaçãoifique `add_especificaçãoial_tokens` e `add_prefix_space` explicitamente.
+- **Ambiguidade de espaço em branco.** BPE "hello" vs " hello" produzem tokens diferentes. Sempre especifique `add_especificaçãoial_tokens` e `add_prefix_space` explicitamente.
 - **Sub-treinamento multilíngue.** Corpora com predominância de inglês produzem vocabulários que dividem escritas não-latinas em 5-10x mais tokens. O mesmo prompt custa 5-10x mais em japonês/árabe no GPT-3.5. o200k_base corrigiu parcialmente.
 - **Divisão de emoji.** Um único emoji pode custar 5 tokens. Considere o tratamento de emoji ao orçar contexto.
 
@@ -125,7 +125,7 @@ A stack de 2026:
 | Treinar modelo monolíngue do zero | HF Tokenizers (BPE) |
 | Treinar modelo multilíngue | SentencePiece (Unigram, `character_coverage=0.9995`) |
 | Servir API compatível com OpenAI | tiktoken (`o200k_base` pra GPT-4+) |
-| Vocabulário de domínio eespecificaçãoífico (código, matemática, proteína) | Treinar BPE customizado em corpus de domínio, fundir com vocabulário base |
+| Vocabulário de domínio específico (código, matemática, proteína) | Treinar BPE customizado em corpus de domínio, fundir com vocabulário base |
 | Inferência em borda, modelo pequeno | Unigram (vocabulários menores funcionam melhor) |
 
 Tamanho do vocabulário é uma decisão de escala, não uma constante. Heurística rough: 32k pra <1B parâmetros, 50-100k pra 1-10B, 200k+ pra multilíngue/fronteira.

@@ -150,7 +150,7 @@ Três estágios compostos. BM25 encontra correspondências lexicais. Denso encon
 | MRR (Mean Reciprocal Rank) | Média de 1/rank do primeiro documento relevante. |
 | nDCG@k | Conta graduações de relevância, não só binário relevante/não. |
 
-Pra RAG eespecificaçãoificamente, **Recall@k** do recuperador é o número mais importante. Seu leitor não consegue responder se o trecho certo não está no conjunto recuperado.
+Pra RAG especificamente, **Recall@k** do recuperador é o número mais importante. Seu leitor não consegue responder se o trecho certo não está no conjunto recuperado.
 
 Dica de debug: pra consultas que falham, compare os rankings esparso e denso. Se um encontra o documento certo e o outro não, você tem um mismatch de vocabulário (correção: adicione a metade faltante) ou ambiguidade semântica (correção: embeddings melhores ou reranker).
 
@@ -176,7 +176,7 @@ O que você escolher, orçamenta avaliação. Benchmark recall de recuperação 
 - **HyDE / expansão de consulta.** Gera uma resposta hipotética a partir da consulta, embedda, recupera. Prega a lacuna de formulação entre perguntas curtas e documentos longos. Ganho de precisão grátis sem treino.
 - **Orçamento de contexto abaixo de 8K tokens.** Acertos consistentes nesse limite significam que o limiar do reranker está solto demais.
 - **Versione tudo.** Prompts, regras de chunking, modelo de embedding, reranker. Qualquer deriva quebra silenciosamente qualidade da resposta. Gates de CI em fidelidade, precisão de contexto e taxa de perguntas sem resposta bloqueiam regressões antes de os usuários verem.
-- **Recuperação tripla (BM25 + denso + esparso-aprendido como SPLADE) supera a dupla** em benchmarks de 2026, eespecificaçãoialmente pra consultas que misturam substantivos próprios com semântica. Envie quando infraestrutura suportar índices SPLADE.
+- **Recuperação tripla (BM25 + denso + esparso-aprendido como SPLADE) supera a dupla** em benchmarks de 2026, especialmente pra consultas que misturam substantivos próprios com semântica. Envie quando infraestrutura suportar índices SPLADE.
 
 Recuperação adequada reduz alucinações em 70-90% segundo medições industriais de 2026. A maioria dos ganhos de performance de RAG vem de recuperação melhor, não fine-tuning de modelo.
 

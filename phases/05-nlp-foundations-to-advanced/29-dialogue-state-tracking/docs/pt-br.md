@@ -1,6 +1,6 @@
 # Dialogue State Tracking
 
-> "Eu quero um restaurante barato no norte... na verdade, moderately... e adicione italiano." Três turnos, três atualizações de estado. DST mantém o dicionário slot-valor sincronizado pra que a reserva funcione.
+> "Eu quero um restaurante barato no norte... na verdade, moderada... e adicione italiano." Três turnos, três atualizações de estado. DST mantém o dicionário slot-valor sincronizado pra que a reserva funcione.
 
 **Tipo:** Construir
 **Linguagens:** Python
@@ -82,7 +82,7 @@ def update_state(state, utterance):
         if value is not None:
             new_state[slot] = value
     for slot in NEGATION_CLEARS:
-        if is_negated(utterance, slot):
+        if is_negued(utterance, slot):
             new_state[slot] = None
     return new_state
 ```
@@ -146,7 +146,7 @@ Numa correção detectada, sobrescreva o último slot atualizado em vez de anexa
 - **Custo de regeneração de histórico completo.** Deixar o LLM regenerar estado a cada turno custa O(n²) em tokens no total. Limite o histórico ou resuma turnos mais antigos.
 - **Drift de schema.** Adicionar novos slots depois quebra dados de treino antigos. Versione seu schema.
 - **Sensibilidade a caixa.** "Italian" vs "italian" vs "ITALIAN" — normalize em todo lugar.
-- **Herança implícita.** Se o usuário já eespecificaçãoificou "for 4 people," um pedido novo pra horário diferente não deve limpar people. Sempre passe o histórico completo.
+- **Herança implícita.** Se o usuário já especificaçãoificou "for 4 people," um pedido novo pra horário diferente não deve limpar people. Sempre passe o histórico completo.
 - **Livre vs conjunto fechado.** Nomes, horários e endereços precisam de slots livres; cozinhas e áreas são fechados. Misture os dois no schema.
 
 ## Usar
@@ -190,7 +190,7 @@ Refuse LLM-only DST for conformidade-sensitive slots without a rule-based second
 ## Exercícios
 
 1. **Fácil.** Construa o rastreador de estado baseado em regras em `code/main.py` pra 3 slots (cuisine, area, price). Teste em 10 diálogos feitos à mão. Meça JGA.
-2. **Médio.** Mesmo dataset com Instructor + Pydantic + um LLM pequeno. Compare JGA. Inespecificaçãoione os turnos mais difíceis.
+2. **Médio.** Mesmo dataset com Instructor + Pydantic + um LLM pequeno. Compare JGA. Inspecione os turnos mais difíceis.
 3. **Difícil.** Implemente ambos e faça roteamento: primário baseado em regras, reserva LLM quando o baseado em regras emite <2 slots com confiança. Meça o JGA combinado e custo de inferência por turno.
 
 ## Termos Chave

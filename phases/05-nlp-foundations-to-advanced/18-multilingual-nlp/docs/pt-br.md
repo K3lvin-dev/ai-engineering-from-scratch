@@ -9,7 +9,7 @@
 
 ## O Problema
 
-Inglês tem bilhões de exemplos rotulados. Urdu tem milhares. Maithili quase nenhum. Qualquer sistema de NLP prático que serve um público global tem que funcionar na cauda longa de idiomas onde dados de treino eespecificaçãoíficos da tarefa não existem.
+Inglês tem bilhões de exemplos rotulados. Urdu tem milhares. Maithili quase nenhum. Qualquer sistema de NLP prático que serve um público global tem que funcionar na cauda longa de idiomas onde dados de treino específicos da tarefa não existem.
 
 Modelos multilíngues resolvem isso treinando um modelo em muitos idiomas ao mesmo tempo. A representação compartilhada permite que o modelo transfira habilidades aprendidas em idiomas com muitos recursos pra idiomas com poucos. Fine-tune o modelo em análise de sentimento em inglês e ele produz previsões de sentimento surpreendentemente boas em Urdu sem nenhum ajuste. Isso é transferência cross-lingual zero-shot, e redefiniu como o NLP chega ao mundo.
 
