@@ -14,7 +14,7 @@
 - Determinar independência linear, posto e base de um conjunto de vetores usando eliminação gaussiana
 - Conectar conceitos de álgebra linear às suas aplicações em IA: embeddings, scores de attention e LoRA
 
-## O Problemo
+## O Problema
 
 Abra qualquer paper de ML. Na primeira página, você vai ver vetores, matrizes, produtos escalares e transformações. Sem intuição de álgebra linear, isso são só símbolos. Com ela, você consegue ver o que uma rede neural realmente está fazendo — movendo pontos pelo espaço.
 
@@ -421,7 +421,7 @@ Esta aula produz:
 
 ## Conexões
 
-Tudo nesta aula se conecta a partes eespecificaçãoíficas da IA moderna:
+Tudo nesta aula se conecta a partes específicas da IA moderna:
 
 | Conceito | Onde aparece |
 |---------|------------------|
@@ -433,7 +433,7 @@ Tudo nesta aula se conecta a partes eespecificaçãoíficas da IA moderna:
 | Gram-Schmidt / QR | Solucionadores numéricos, computação de autovalores |
 | Base ortonormal | Computação numérica estável, transformações de whitening |
 
-LoRA merece uma menção eespecificaçãoial. Ele faz fine-tuning de grandes modelos de linguagem decompondo atualizações de pesos em matrizes de baixo posto. Em vez de atualizar uma matriz de pesos de 4096x4096 (16M parâmetros), LoRA atualiza duas matrizes de tamanho 4096x16 e 16x4096 (131K parâmetros). A restrição de posto 16 significa que LoRA assume que a atualização dos pesos vive em um subespaço de 16 dimensões do espaço completo de 4096 dimensões. Isso é álgebra linear fazendo trabalho real.
+LoRA merece uma menção especial. Ele faz fine-tuning de grandes modelos de linguagem decompondo atualizações de pesos em matrizes de baixo posto. Em vez de atualizar uma matriz de pesos de 4096x4096 (16M parâmetros), LoRA atualiza duas matrizes de tamanho 4096x16 e 16x4096 (131K parâmetros). A restrição de posto 16 significa que LoRA assume que a atualização dos pesos vive em um subespaço de 16 dimensões do espaço completo de 4096 dimensões. Isso é álgebra linear fazendo trabalho real.
 
 ## Exercícios
 

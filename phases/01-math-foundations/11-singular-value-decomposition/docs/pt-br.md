@@ -1,9 +1,9 @@
 # Decomposição em Valores Singulares
 
-> SVD é a canivete suíço da álgebra linear. Toda matriz tem uma. Todo cientista de dados precisa de uma.
+> SVD é o canivete suíço da álgebra linear. Toda matriz tem uma. Todo cientista de dados precisa de uma.
 
 **Tipo:** Construção
-**Idiomas:** Python, Julia
+**Linguagens:** Python, Julia
 **Pré-requisitos:** Fase 1, Lições 01 (Intuição de Álgebra Linear), 02 (Operações de Vetores & Matrizes), 03 (Transformações de Matriz)
 **Tempo:** ~120 minutos
 
@@ -140,7 +140,7 @@ Essa conexão te diz três coisas:
 
 ### SVD truncado: aproximação de baixo posto
 
-O teorema de Eckart-Young-Mirsky afirma que a melhor aproximação de rank-k para A (em ambas as normas de Frobenius e eespecificaçãotral) é obtida mantendo apenas os top k valores singulares e seus vetores correspondentes:
+O teorema de Eckart-Young-Mirsky afirma que a melhor aproximação de rank-k para A (em ambas as normas de Frobenius e espectral) é obtida mantendo apenas os top k valores singulares e seus vetores correspondentes:
 
 ```
 A_k = U_k * Sigma_k * V_k^T
@@ -150,11 +150,11 @@ onde:
   Sigma_k é k x k  (bloco superior esquerdo k x k de Sigma)
   V_k     é n x k  (primeiras k colunas de V)
 
-Erro de aproximação = sigma_{k+1}  (na norma eespecificaçãotral)
+Erro de aproximação = sigma_{k+1}  (na norma espectral)
                     = sqrt(sigma_{k+1}^2 + ... + sigma_r^2)  (na norma de Frobenius)
 ```
 
-Isso não é apenas "uma boa" aproximação. É provavelmente a melhor aproximação possível de rank k. Nenhuma outra matriz de rank k está mais perto de A.
+Isso não é apenas "uma boa" aproximação. É comprovadamente a melhor aproximação possível de rank k. Nenhuma outra matriz de rank k está mais perto de A.
 
 | Componente | Magnitude relativa | Mantida na aprox de rank-3? |
 |-----------|-------------------|---------------------------|

@@ -38,7 +38,7 @@ Dimensão     Razão média de distância (max/min entre pontos aleatórios)
 1000         ~1.02
 ```
 
-**Volume concentra nos cantos.** Um hiper cubo unitário em d dimensões tem 2^d cantos. Em 100 dimensões, quase todo o volume está nos cantos, longe do centro. Os pontos de dados se espalham pelas bordas e seus modelos ficam com fome de dados no interior.
+**Volume concentra nos cantos.** Um hipercubo unitário em d dimensões tem 2^d cantos. Em 100 dimensões, quase todo o volume está nos cantos, longe do centro. Os pontos de dados se espalham pelas bordas e seus modelos ficam com fome de dados no interior.
 
 **Você precisa de dados exponencialmente maiores.** Para manter a mesma densidade de amostras em um espaço, ir de 2D para 20D significa que você precisa de 10^18 vezes mais dados. Você nunca tem o suficiente. Reduzir dimensões traz a densidade de dados de volta para algo viável.
 
@@ -64,7 +64,7 @@ graph LR
 ```
 
 - **Antes do PCA:** A nuvem de dados se espalha diagonalmente em ambos os eixos x e y
-- **Após o PCA:** O sistema de coordenadas é rotacionado para que PC1 se alinhe com a direção de máxima variância (espacalhamento alongado) e PC2 com a direção de mínima variância (espalhamento estreito)
+- **Após o PCA:** O sistema de coordenadas é rotacionado para que PC1 se alinhe com a direção de máxima variância (espalhamento alongado) e PC2 com a direção de mínima variância (espalhamento estreito)
 - **Redução de dimensionalidade:** Descartar PC2 projeta os dados em PC1, perdendo muito pouca informação
 
 ### Razão de variância explicada
@@ -132,7 +132,7 @@ Regra geral: use PCA para pré-processamento e compressão de dados. Use t-SNE o
 
 PCA padrão encontra subespaços lineares. Ele rotaciona seu sistema de coordenadas e descarta eixos. Mas e se os dados estão em uma variedade não-linear? Um círculo em 2D não pode ser separado por nenhuma linha. PCA padrão não ajuda.
 
-Kernel PCA aplica PCA em um espaço de features de alta dimensão induzido por uma função kernel, sem computar explicitamente as coordenadas nesse espaço. Essa é a truque do kernel -- a mesma ideia por trás dos SVMs.
+Kernel PCA aplica PCA em um espaço de features de alta dimensão induzido por uma função kernel, sem computar explicitamente as coordenadas nesse espaço. Esse é o truque do kernel -- a mesma ideia por trás dos SVMs.
 
 O algoritmo:
 1. Compute a matriz kernel K onde K_ij = k(x_i, x_j)

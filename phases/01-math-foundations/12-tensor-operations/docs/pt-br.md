@@ -40,7 +40,7 @@ Total de elementos = produto de todos os tamanhos. Uma forma `(2, 3, 4)` guarda 
 
 ### Formas de tensores em deep learning
 
-Diferentes tipos de dados mapeiam para formas de tensor eespecificaçãoíficas por convenção.
+Diferentes tipos de dados mapeiam para formas de tensor específicas por convenção.
 
 ```mermaid
 graph TD
@@ -99,7 +99,7 @@ graph LR
     end
 ```
 
-Padrões-chave: `i,i->` (produto escalar), `i,j->ij` (produto externo), `ii->` (traço), `ij->ji` (transpose), `bij,bjk->bik` (matmul em lote), `bhtd,bhsd->bhts` (pontos de attention).
+Padrões-chave: `i,i->` (produto escalar), `i,j->ij` (produto externo), `ii->` (traço), `ij->ji` (transpose), `bij,bjk->bik` (matmul em lote), `bhtd,bhsd->bhts` (escores de attention).
 
 ## Construa
 

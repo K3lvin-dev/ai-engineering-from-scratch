@@ -14,7 +14,7 @@
 - Derivar o gradiente de um modelo de regressão linear e treiná-lo via atualizações manuais de pesos
 - Explicar a matriz Hessiana, aproximações de série de Taylor e sua conexão com métodos de otimização
 
-## O Problemo
+## O Problema
 
 Você tem uma rede neural com milhões de pesos. Cada peso é um botão. Você precisa descobrir a direção de girar cada botão pra deixar o modelo um pouco menos errado. O cálculo dá essa direção.
 
@@ -81,7 +81,7 @@ A função forma um copo com círculos concêntricos como linhas de contorno. O 
 | (1, 1) | [2, 2] (aponta pra cima, longe do mínimo) | [-2, -2] (aponta pra baixo, em direção ao mínimo) |
 | (0, 0) | [0, 0] (plano, no mínimo) | [0, 0] |
 
-Isso é descida do gradiente em uma imagem. Calcule o gradiente, negate, dê um passo.
+Isso é descida do gradiente em uma imagem. Calcule o gradiente, negue, dê um passo.
 
 ### A conexão com otimização
 
@@ -161,7 +161,7 @@ Exemplo: y = (3x + 1)^2
   dy/dx = 2(3x + 1) * 3 = 6(3x + 1)
 ```
 
-Redes neurais são cadeias de funções: entrada -> linear -> ativação -> linear -> ativação -> perda. A retropropagacao é a regra da cadeia aplicada repetidamente da saída pra entrada. Esse é o algoritmo inteiro.
+Redes neurais são cadeias de funções: entrada -> linear -> ativação -> linear -> ativação -> perda. A retropropagação é a regra da cadeia aplicada repetidamente da saída pra entrada. Esse é o algoritmo inteiro.
 
 ### A Matriz Hessiana
 
@@ -314,7 +314,7 @@ graph RL
 
 Cada seta multiplica pela derivada local. O gradiente de qualquer parâmetro é o produto de todas as derivadas locais ao longo do caminho da perda até esse parâmetro. Quando caminhos ramificam e se unem, você soma as contribuições (regra da cadeia multivariada).
 
-Isso é tudo que a retropropagacao faz: a regra da cadeia aplicada sistematicamente por um grafo de computação, da saída às entradas.
+Isso é tudo que a retropropagação faz: a regra da cadeia aplicada sistematicamente por um grafo de computação, da saída às entradas.
 
 ### A matriz Jacobiana
 
@@ -329,7 +329,7 @@ Para f: R^n -> R^m, o Jacobiano J é uma matriz m x n:
 | ... | ... | ... | ... | ... |
 | fm | dfm/dx1 | dfm/dx2 | ... | dfm/dxn |
 
-Você não vai computar Jacobianos à mão para redes neurais. PyTorch lida com isso. Mas saber que existe ajuda a entender formatos na retropropagacao: se uma camada mapeia R^n para R^m, seu Jacobiano é m x n. O gradiente flui de volta pela transposta dessa matriz.
+Você não vai computar Jacobianos à mão para redes neurais. PyTorch lida com isso. Mas saber que existe ajuda a entender formatos na retropropagação: se uma camada mapeia R^n para R^m, seu Jacobiano é m x n. O gradiente flui de volta pela transposta dessa matriz.
 
 ### Por que isso importa pra rede neural
 
@@ -576,7 +576,7 @@ Você acabou de construir a descida do gradiente do zero. PyTorch automatiza o c
 | Gradiente | "Direção de maior ascensão" | Um vetor de todas as derivadas parciais. Aponta na direção que aumenta a função mais rápido. |
 | Descida do gradiente | "Ir pra baixo" | Subtrair o gradiente (vezes uma taxa de aprendizado) dos parâmetros para reduzir a perda. O cerne do treino de rede neural. |
 | Taxa de aprendizado | "Tamanho do passo" | Um escalar que controla o tamanho de cada passo da descida do gradiente. Muito grande: diverge. Muito pequeno: converge devagar. |
-| Regra da cadeia | "Multiplicar as derivadas" | A regra para diferenciar funções compostas: df/dx = df/dg * dg/dx. A base matemática da retropropagacao. |
+| Regra da cadeia | "Multiplicar as derivadas" | A regra para diferenciar funções compostas: df/dx = df/dg * dg/dx. A base matemática da retropropagação. |
 | Hessiana | "Matriz de segundas derivadas" | A matriz de todas as derivadas parciais de segunda ordem. Descreve a curvatura de uma função. Hessiana positiva definida em ponto crítico significa mínimo local. |
 | Integral | "Área sob a curva" | A acumulação de uma quantidade sobre um intervalo. No ML, integrais definem probabilidades, valores esperados e divergência KL. |
 

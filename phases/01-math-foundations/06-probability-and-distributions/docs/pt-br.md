@@ -14,7 +14,7 @@
 - Construir funções softmax e log-softmax com o truque de estabilidade numérica (subtrair o máximo logit)
 - Calcular perda de entropia cruzada a partir de logits e conectá-la à verossimilhança negativa
 
-## O Problemo
+## O Problema
 
 Um classificador produz `[0.03, 0.91, 0.06]`. Um modelo de linguagem escolhe a próxima palavra entre 50.000 candidatos. Um modelo de difusão gera imagens amostrando de distribuições aprendidas. Tudo isso é probabilidade em ação.
 
@@ -67,7 +67,7 @@ Lançamentos de moeda são independentes. Tirar cartas sem reposição não é.
 
 ### Função de Massa de Probabilidade vs Função de Densidade de Probabilidade
 
-Variáveis aleatórias discretas têm uma função de massa de probabilidade (PMF). Cada resultado tem uma probabilidade eespecificaçãoífica que você pode ler diretamente.
+Variáveis aleatórias discretas têm uma função de massa de probabilidade (PMF). Cada resultado tem uma probabilidade específica que você pode ler diretamente.
 
 ```
 PMF: P(X = k)
@@ -187,7 +187,7 @@ Isso funciona para QUALQUER distribuição inicial.
 ```
 
 É por isso que:
-- Erros de medicação são aproximadamente normais (muitas fontes independentes pequenas)
+- Erros de medição são aproximadamente normais (muitas fontes independentes pequenas)
 - Inicializações de pesos em redes neurais usam distribuições normais
 - Ruído de gradiente em SGD é aproximadamente normal (soma de muitos gradientes de amostras)
 - A distribuição normal é a distribuição de máxima entropia para uma média e variância dadas
@@ -397,7 +397,7 @@ print(f"Média: {np.mean(samples):.4f}, DP: {np.std(samples):.4f}")
 print(f"P(X < 1.96) = {normal.cdf(1.96):.4f}")
 
 logits = np.array([2.0, 1.0, 0.1])
-from scipy.especificaçãoial import softmax, log_softmax
+from scipy.special import softmax, log_softmax
 probs = softmax(logits)
 log_probs = log_softmax(logits)
 print(f"Softmax: {probs}")
