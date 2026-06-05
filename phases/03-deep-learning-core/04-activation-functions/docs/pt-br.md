@@ -74,7 +74,7 @@ O valor máximo dessa derivada é 0.25, ocorrendo em x = 0. Em retropropagação
 0.25^10 = 0.000000953674
 ```
 
-Menos de um milionésimo do sinal original. Esse é o problema do gradiente desvanecimento. Gradientees nas camadas iniciais ficam tão pequenos que os pesos mal se atualizam. A rede parece aprender — a perda diminui nas camadas finais — mas as primeiras camadas estão congeladas. Redes sigmoid profundas simplesmente não treinam.
+Menos de um milionésimo do sinal original. Esse é o problema do gradiente desvanecimento. Gradientes nas camadas iniciais ficam tão pequenos que os pesos mal se atualizam. A rede parece aprender — a perda diminui nas camadas finais — mas as primeiras camadas estão congeladas. Redes sigmoid profundas simplesmente não treinam.
 
 Problema adicional: as saídas da sigmoid são sempre positivas (0 a 1), o que significa que gradientes nos pesos sempre têm o mesmo sinal. Isso causa ziguezague durante a descida do gradiente.
 
@@ -274,7 +274,7 @@ def softmax(xs):
     return [e / total for e in exps]
 ```
 
-### Passo 2: Visualizar Onde os Gradientees Morrem
+### Passo 2: Visualizar Onde os Gradientes Morrem
 
 Compute o gradiente em 100 pontos uniformemente espaçados de -5 a 5. Imprima um histograma de texto mostrando onde cada gradiente de ativação é próximo de zero.
 
@@ -487,7 +487,7 @@ model = nn.Sequential(
 
 Camadas ocultas em transformer: GELU. Camadas ocultas em CNN: ReLU. Camada de saída pra classificação: softmax. Camada de saída pra regressão: nenhuma (linear). Camada de saída pra probabilidades: sigmoid. É isso. Comece com esses padrões. Mude só quando tiver evidência.
 
-RNNs e LSTMs usam tanh pro estado oculto e sigmoid pra gates, mas se você está construindo do zero hoje, provavelmente não está usando RNNs. Se neurônios estão morrendo na sua rede ReLU, troque pra GELU. Não chegue no Leaky ReLU sem uma razão eespecificaçãoífica — GELU resolve o problema do neurônio morto e dá melhor fluxo de gradiente.
+RNNs e LSTMs usam tanh pro estado oculto e sigmoid pra gates, mas se você está construindo do zero hoje, provavelmente não está usando RNNs. Se neurônios estão morrendo na sua rede ReLU, troque pra GELU. Não chegue no Leaky ReLU sem uma razão específica — GELU resolve o problema do neurônio morto e dá melhor fluxo de gradiente.
 
 ## Entregue
 
