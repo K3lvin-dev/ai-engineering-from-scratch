@@ -19,7 +19,7 @@ A Constituição de 2026 toma uma posição intermediária explícita. Proibiç�
 
 ### A hierarquia de prioridades de quatro níveis
 
-1. **Segurança e suporte à supervisão humana.** Maior. O modelo prioriza não minar a capacidade de humanos e da Anthropic de supervisionar e corrigir IA. Não é "seja cauteloso"; é eespecificaçãoificamente "não aja de formas que tornem a supervisão humana mais difícil."
+1. **Segurança e suporte à supervisão humana.** Maior. O modelo prioriza não minar a capacidade de humanos e da Anthropic de supervisionar e corrigir IA. Não é "seja cauteloso"; é especificamente "não aja de formas que tornem a supervisão humana mais difícil."
 2. **Ética.** Honestidade, evitar dano a pessoas, não enganar, não manipular. Prevalece sobre as diretrizes da Anthropic quando conflitam.
 3. **Diretrizes da Anthropic.** Normas operacionais que a Anthropic decidiu que importam: escopo do produto, padrões de interação, quando usar quais ferramentas.
 4. **Utilidade.** Menor. Ser o mais útil possível dentro das prioridades superiores.
@@ -91,7 +91,7 @@ A Constituição não é o interruptor de emergência da Aula 14. Ela vive na ca
 
 1. Rode `code/main.py`. Confirme que a proibição hardcoded dispara mesmo quando utilidade é alta. Modifique o resolvedor para pesar utilidade acima de ética; observe o modo de falha.
 
-2. Leia a Constituição do Claude (pública, 79 páginas, CC0). Identifique um princípio que você acha sub-eespecificaçãoificado. Escreva dois parágrafos explicando a ambiguidade eespecificaçãoífica e propondo uma formulação mais apertada.
+2. Leia a Constituição do Claude (pública, 79 páginas, CC0). Identifique um princípio que você acha sub-especificaçãoificado. Escreva dois parágrafos explicando a ambiguidade específica e propondo uma formulação mais apertada.
 
 3. Projete um conjunto de padrões soft-coded para um agente de suporte ao cliente. O que o operador ajusta? O que o operador não pode tocar? Justifique cada limite.
 

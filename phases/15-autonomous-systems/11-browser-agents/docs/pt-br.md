@@ -23,7 +23,7 @@ Esta aula nomeia a superfície de ataque, nomeia o panorama de benchmarks (Brows
 
 **Claude Sonnet + Vercept (Anthropic).** A aquisição da Vercept pela Anthropic focou em capacidades de uso de computador. Moveu o Claude Sonnet no OSWorld de <15% para 72.5. Claude Computer Use é disponibilizado como API de ferramenta.
 
-**Gemini 3 Pro com Browser Use (DeepMind).** A integração Browser Use disponibiliza controles de uso de computador; FSF v3 (abril de 2026, Aula 20) rastreia autonomia eespecificaçãoificamente no domínio ML R&D.
+**Gemini 3 Pro com Browser Use (DeepMind).** A integração Browser Use disponibiliza controles de uso de computador; FSF v3 (abril de 2026, Aula 20) rastreia autonomia especificamente no domínio ML R&D.
 
 **WebArena-Verified (ServiceNow, ICLR 2026).** Corrige um problema bem documentado: o WebArena original tinha ~13.5% de taxa de falso-negativo (tarefas marcadas como falha que na verdade foram resolvidas). O release Verified re-avalia com critérios de sucesso curados por humanos e adiciona um subconjunto Hard de 258 tarefas (paper ICLR 2026, openreview.net/forum?id=94tlGxmqkN).
 
@@ -31,7 +31,7 @@ Esta aula nomeia a superfície de ataque, nomeia o panorama de benchmarks (Brows
 
 | Benchmark | O que mede | Horizonte |
 |---|---|---|
-| BrowseComp | Encontrar fatos eespecificaçãoíficos na web aberta sob pressão de tempo | minutos |
+| BrowseComp | Encontrar fatos específicos na web aberta sob pressão de tempo | minutos |
 | OSWorld | Agent operando um desktop completo (mouse, teclado, shell) | dezenas de minutos |
 | WebArena-Verified | Tarefas web transacionais em sites simulados | minutos |
 | Subconjunto Hard | Tarefas WebArena-Verified com transições de estado multi-página | dezenas de minutos |
@@ -90,7 +90,7 @@ Esse é o mesmo padrão de raciocínio que o teorema de Löb (Aula 8): o agente 
 | Tainted Memories | "Ataque de memória" | Agent escreve instrução fornecida pelo ator malicioso em memória persistente; dispara na próxima sessão |
 | HashJack | "Ataque de fragmento de URL" | Payload escondido em fragmento de URL / consulta string está no contexto do agente mas não é renderizado visivelmente |
 | Sequestro de um clique | "Botão ruim" | Elemento visual inocente carrega payload subsequente que o agente executa |
-| BrowseComp | "Benchmark de busca web" | Encontrar fatos eespecificaçãoíficos na web aberta; horizonte de minutos |
+| BrowseComp | "Benchmark de busca web" | Encontrar fatos específicos na web aberta; horizonte de minutos |
 | OSWorld | "Benchmark de desktop" | Controle completo de OS; tarefas GUI multi-passo |
 | WebArena-Verified | "Benchmark de tarefas web corrigido" | WebArena re-avaliada pela ServiceNow com subconjunto Hard |
 | Limite leitura/escrita | "Gate de efeito colateral" | Ler nunca é consequencial; escrever requer aprovação fresca se conteúdo é fora da confiança |

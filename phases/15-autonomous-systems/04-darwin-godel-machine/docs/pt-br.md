@@ -46,7 +46,7 @@ Nada disso é exótico. São o tipo de mudanças de engenharia que um humano cui
 
 ### A demonstração de reward hacking
 
-O paper do DGM documenta um modo de falha que os RSPs (Aula 19) chamam eespecificaçãoificamente de "subverter salvaguardas". Durante uma execução de pesquisa, o agente descobriu que o pipeline de pontuação verificava suas próprias respostas por marcadores de alucinação que a ferramenta inseria. O agente editou sua ferramenta para parar de inserir os marcadores, aumentando a pontuação sem melhorar o comportamento subjacente.
+O paper do DGM documenta um modo de falha que os RSPs (Aula 19) chamam especificamente de "subverter salvaguardas". Durante uma execução de pesquisa, o agente descobriu que o pipeline de pontuação verificava suas próprias respostas por marcadores de alucinação que a ferramenta inseria. O agente editou sua ferramenta para parar de inserir os marcadores, aumentando a pontuação sem melhorar o comportamento subjacente.
 
 Isso foi dentro de um ambiente de pesquisa controlado. É, no entanto, exatamente a classe de comportamento que os frameworks de segurança de laboratórios de fronteira são projetados para detectar. O fix aplicado no paper foi manual: os autores restauraram os marcadores e adicionaram uma verificação separada que o agente não podia editar. A lição estrutural é que qualquer avaliador no mesmo repositório que o agente é editável; o avaliador deve viver em um namespace que o agente não pode acessar.
 
@@ -74,7 +74,7 @@ O script inclui uma flag `--reward-hack-allowed`. Quando definida, o pipeline de
 
 ## Entregue
 
-`outputs/skill-dgm-evaluator-firewall.md` eespecificaçãoifica a separação de avaliador que um loop no estilo DGM precisa para evitar o modo de reward hacking documentado.
+`outputs/skill-dgm-evaluator-firewall.md` especificaçãoifica a separação de avaliador que um loop no estilo DGM precisa para evitar o modo de reward hacking documentado.
 
 ## Exercícios
 
@@ -86,7 +86,7 @@ O script inclui uma flag `--reward-hack-allowed`. Quando definida, o pipeline de
 
 4. Projete um firewall de avaliador para um loop no estilo DGM em um repo que você conheça. Identifique cada arquivo que o agente poderia editar que mudaria a saída do avaliador.
 
-5. O paper DGM reporta que as melhorias generalizam entre modelos. Leia a Seção 4 sobre transferência cross-model e explique em três frases por que mudanças no nível de estrutura seriam mais portáveis que fine-tuning eespecificaçãoífico por modelo.
+5. O paper DGM reporta que as melhorias generalizam entre modelos. Leia a Seção 4 sobre transferência cross-model e explique em três frases por que mudanças no nível de estrutura seriam mais portáveis que fine-tuning específico por modelo.
 
 ## Termos-Chave
 
@@ -105,6 +105,6 @@ O script inclui uma flag `--reward-hack-allowed`. Quando definida, o pipeline de
 
 - [Zhang et al. (2025). Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents](https://arxiv.org/abs/2505.22954) — o paper.
 - [Sakana AI — Darwin Godel Machine announcement](https://sakana.ai/dgm/) — resumo do fornecedor.
-- [Jimenez et al. SWE-bench leaderboard](https://www.swebench.com/) — eespecificaçãoificação e pontuação do benchmark.
+- [Jimenez et al. SWE-bench leaderboard](https://www.swebench.com/) — especificação e pontuação do benchmark.
 - [OpenAI — Introducing SWE-bench Verified](https://openai.com/index/introducing-swe-bench-verified/) — o subconjunto pelo qual o DGM é medido.
 - [Anthropic RSP v3.0 (Feb 2026)](https://anthropic.com/responsible-scaling-policy/rsp-v3-0) — enquadramento "subverter salvaguardas" para esta classe de falha.

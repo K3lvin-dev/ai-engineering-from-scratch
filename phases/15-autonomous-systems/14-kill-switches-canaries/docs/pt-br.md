@@ -1,6 +1,6 @@
 # Interruptores de Emergência, Disjuntores e Tokens Canary
 
-> Um interruptor de emergência é um booleano mantido fora da superfície de edição do agente — uma chave Redis, um funcionalidade flag, um config assinado — que desativa o agente completamente. Um disjuntor é mais refinado: dispara em um padrão eespecificaçãoífico (cinco chamadas de ferramenta idênticas seguidas), pausa o caminho ofensivo e escala para um humano. Um token canary herda da engenharia de engano clássica: uma credencial falsa ou registro honeypot que um agente não tem motivo legítimo de tocar, cujo acesso dispara um alerta. Datapaths baseados em eBPF (ex: Cilium) podem reescrever o egress de um pod em quarentena para um honeypot forense na camada de kernel; benchmarks públicos do Cilium reportam latência sub-milissegundo P99 em datapath sob carga (seu orçamento de propagação depende de como uma atualização de política chega ao nó, não do datapath em si). Detectores estatísticos (EWMA, CUSUM) que se adaptam a uma baseline móvel vão silenciosamente aceitar deriva — empilhe-os com limites constitucionais rígidos que não cedem.
+> Um interruptor de emergência é um booleano mantido fora da superfície de edição do agente — uma chave Redis, um funcionalidade flag, um config assinado — que desativa o agente completamente. Um disjuntor é mais refinado: dispara em um padrão específico (cinco chamadas de ferramenta idênticas seguidas), pausa o caminho ofensivo e escala para um humano. Um token canary herda da engenharia de engano clássica: uma credencial falsa ou registro honeypot que um agente não tem motivo legítimo de tocar, cujo acesso dispara um alerta. Datapaths baseados em eBPF (ex: Cilium) podem reescrever o egress de um pod em quarentena para um honeypot forense na camada de kernel; benchmarks públicos do Cilium reportam latência sub-milissegundo P99 em datapath sob carga (seu orçamento de propagação depende de como uma atualização de política chega ao nó, não do datapath em si). Detectores estatísticos (EWMA, CUSUM) que se adaptam a uma baseline móvel vão silenciosamente aceitar deriva — empilhe-os com limites constitucionais rígidos que não cedem.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib, simulador de três detectores: interruptor, disjuntor, canary)
@@ -14,7 +14,7 @@ Controladores de custo (Aula 13) limitam o que o agente pode gastar. Não limita
 Esta aula cobre os três detectores que ficam ao lado da camada de custo:
 
 1. **Interruptor de emergência**: booleano de desligar mantido fora do alcance do agent.
-2. **Disjuntor**: detector de padrão de ação que pausa um caminho eespecificaçãoífico.
+2. **Disjuntor**: detector de padrão de ação que pausa um caminho específico.
 3. **Token canary**: isca que um agente sem motivo legítimo para tocar se revela ao tocar.
 
 Os três são engenharia pré-LLM. Engano clássico, disjuntores de limite de taxa e kills por funcionalidade flag antecipam agentes autônomos. O que é novo é a superfície de ataque: agentes lêm conteúdo não confiável (Aula 11), editam sua própria memória e podem compor muitas ações que parecem seguras em uma insegura. Os detectores nomeados aqui funcionam porque não confiam no auto-relato do agent.
@@ -39,7 +39,7 @@ Propriedades que um interruptor de emergência correto tem:
 
 ### Disjuntores
 
-Um disjuntor pausa um padrão eespecificaçãoífico, não o agente inteiro. Forma clássica (do livro Nygard de 2007, ainda atual):
+Um disjuntor pausa um padrão específico, não o agente inteiro. Forma clássica (do livro Nygard de 2007, ainda atual):
 
 - **Fechado**: ação é permitida.
 - **Aberto**: ação é bloqueada.
@@ -50,7 +50,7 @@ Gatilhos relevantes para agents:
 - Cinco chamadas de ferramenta idênticas seguidas (loop repetitivo).
 - Cinco falhas consecutivas na mesma ferramenta com entradas diferentes (falha sistêmica).
 - Taxa de chamadas de ferramenta acima de um limite (velocidade da Aula 13).
-- Ferramenta eespecificaçãoífica invocada (ex: `file.delete`) após leitura de conteúdo fora da confiança (Aula 11).
+- Ferramenta específica invocada (ex: `file.delete`) após leitura de conteúdo fora da confiança (Aula 11).
 
 ### Tokens canary
 
@@ -63,7 +63,7 @@ Exemplos para agents:
 - Um arquivo falso no workspace. Leituras ou edições deste arquivo são suspeitas.
 - Uma entrada de memória falsa injetada no início da sessão. Se aparecer em uma saída posterior, memória foi exfiltrada.
 
-Design de canary é eespecificaçãoífico do workflow. Um canary que o agente tem motivo legítimo para tocar é ruído.
+Design de canary é específico do workflow. Um canary que o agente tem motivo legítimo para tocar é ruído.
 
 ### Por que empilhar limites estatísticos e rígidos
 
@@ -105,7 +105,7 @@ A política de rede baseada em eBPF do Cilium pode reescrever o egress de um pod
 | Termo | O que dizem | O que significa de verdade |
 |---|---|---|
 | Interruptor de emergência | "Botão de desligar" | Booleano fora da superfície de edição do agent; verificado em cada ação consequencial |
-| Disjuntor | "Pausa por padrão" | Trip eespecificaçãoífico de ação por repetição, taxa de falha ou limite de taxa |
+| Disjuntor | "Pausa por padrão" | Trip específico de ação por repetição, taxa de falha ou limite de taxa |
 | Token canary | "Honeytoken" | Isca que o agente não tem motivo legítimo para tocar; acesso dispara alerta |
 | Honeypot | "Sandbox forense" | Tráfego / workspace redirecionado onde um agente em quarentena é observado |
 | EWMA | "Média móvel" | Exponencialmente ponderada; se adapta a deriva (feature + bug) |

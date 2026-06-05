@@ -1,6 +1,6 @@
 # A Transição de Chatbots para Agents de Longo Prazo
 
-> Em 2023 um chatbot respondia uma pergunta em um turno. Em 2026 um modelo de fronteira roda rotineiramente de minutos a horas em uma única tarefa. O benchmark Time Horizon 1.1 da METR (janeiro de 2026) coloca o Claude Opus 4.6 em 14+ horas de trabalho de eespecificaçãoialista com 50% de confiabilidade. O horizonte vem duplicando aproximadamente a cada sete meses desde o GPT-2. Toda premissa que construímos ao redor de chat single-turn — contexto, confiança, modos de falha, custo, observabilidade — quebra quando as execuções duram mais que o almoço.
+> Em 2023 um chatbot respondia uma pergunta em um turno. Em 2026 um modelo de fronteira roda rotineiramente de minutos a horas em uma única tarefa. O benchmark Time Horizon 1.1 da METR (janeiro de 2026) coloca o Claude Opus 4.6 em 14+ horas de trabalho de especialista com 50% de confiabilidade. O horizonte vem duplicando aproximadamente a cada sete meses desde o GPT-2. Toda premissa que construímos ao redor de chat single-turn — contexto, confiança, modos de falha, custo, observabilidade — quebra quando as execuções duram mais que o almoço.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib, simulador de curva de horizonte)
@@ -11,7 +11,7 @@
 
 Um chatbot é uma função sem estado. Ele pega um prompt, retorna uma resposta e esquece. Até sistemas construídos com RAG até 2024 se comportam assim: planejam dentro de uma única janela de contexto, executam uma ação e apresentam o resultado.
 
-Um agente autônomo é diferente em natureza. Ele roda um loop. Decide quando parar. Gasta dinheiro — tokens reais, horas reais de GPU, efeitos colaterais downstream reais — durante a execução. Agents de longo prazo amplificam todos esses aespecificaçãotos: o custo cresce, a probabilidade de erro cresce a cada passo, e a distância entre o que conseguimos avaliar e o que é colocado em produção aumenta.
+Um agente autônomo é diferente em natureza. Ele roda um loop. Decide quando parar. Gasta dinheiro — tokens reais, horas reais de GPU, efeitos colaterais downstream reais — durante a execução. Agents de longo prazo amplificam todos esses aaspectos: o custo cresce, a probabilidade de erro cresce a cada passo, e a distância entre o que conseguimos avaliar e o que é colocado em produção aumenta.
 
 Os números da METR tornam isso concreto. Entre o GPT-2 e o Claude Opus 4.6, o horizonte temporal (o tempo de tarefa humana que um modelo completa com 50% de confiabilidade) cresceu de segundos a meio período de trabalho. O tempo de duplicação fica em torno de sete meses. Se a tendência continuar por mais um ano, o horizonte de 50% atinge tarefas de múltiplos dias. Isso é qualitativamente diferente de qualquer coisa que a era dos chatbots projetou.
 
@@ -19,7 +19,7 @@ Os números da METR tornam isso concreto. Entre o GPT-2 e o Claude Opus 4.6, o h
 
 ### O Time Horizon da METR, em um parágrafo
 
-A METR (ex-ARC Evals) ajusta uma curva logística à probabilidade de sucesso em tarefas contra o log do tempo de conclusão por um eespecificaçãoialista humano. O horizonte é a interseção dessa curva com a linha de 50% de probabilidade. O conjunto (HCAST, RE-Bench, SWAA) abrange tarefas de eespecificaçãoialista de 1 minuto até 8+ horas em software, cibersegurança, pesquisa em ML e raciocínio geral. O resultado é um escalar que comprime capacidade em uma unidade legível por humanos: "este modelo consegue fazer o tipo de tarefa que um eespecificaçãoialista gasta X horas."
+A METR (ex-ARC Evals) ajusta uma curva logística à probabilidade de sucesso em tarefas contra o log do tempo de conclusão por um especialista humano. O horizonte é a interseção dessa curva com a linha de 50% de probabilidade. O conjunto (HCAST, RE-Bench, SWAA) abrange tarefas de especialista de 1 minuto até 8+ horas em software, cibersegurança, pesquisa em ML e raciocínio geral. O resultado é um escalar que comprime capacidade em uma unidade legível por humanos: "este modelo consegue fazer o tipo de tarefa que um especialista gasta X horas."
 
 ### O que realmente quebra quando o horizonte cresce
 
@@ -79,7 +79,7 @@ O simulador usa apenas stdlib. A intenção é pedagógica: guarde os números n
 
 2. Defina a confiabilidade por passo como 0.995. Qual comprimento de trajetória ainda supera 50% de confiabilidade fim a a ponto? Compare com 0.99 e 0.999. Confiabilidade por passo tem consequências exponenciais em escala.
 
-3. Leia o post do blog Time Horizon 1.1 da METR. Identifique uma escolha metodológica (ponderação de tarefas, baseline de eespecificaçãoialista, critério de sucesso) que você mudaria. Escreva um parágrafo explicando por quê.
+3. Leia o post do blog Time Horizon 1.1 da METR. Identifique uma escolha metodológica (ponderação de tarefas, baseline de especialista, critério de sucesso) que você mudaria. Escreva um parágrafo explicando por quê.
 
 4. Escolha um fluxo de trabalho de agente em produção que você conheça. Estime o comprimento mediano da trajetória em chamadas de ferramenta. Multiplique pela melhor estimativa de confiabilidade por passo. O número fim a a ponto resultante é honesto com seus usuários?
 
@@ -91,7 +91,7 @@ O simulador usa apenas stdlib. A intenção é pedagógica: guarde os números n
 |---|---|---|
 | Time horizon | "Quanto tempo pode rodar" | Comprimento de tarefa humana com 50% de confiabilidade da METR, ajustado via regressão logística |
 | HCAST | "O conjunto de tarefas da METR" | 180+ tarefas de ML, cyber, SWE, raciocínio de 1 min a 8+ horas |
-| RE-Bench | "Benchmark de engenharia de pesquisa" | 71 tarefas de engenharia de pesquisa em ML com baseline de eespecificaçãoialista humano |
+| RE-Bench | "Benchmark de engenharia de pesquisa" | 71 tarefas de engenharia de pesquisa em ML com baseline de especialista humano |
 | Doubling time | "Quão rápido os horizontes crescem" | Tempo para o horizonte de 50% dobrar; ajustado em ~7 meses desde o GPT-2 |
 | Trajectory | "Sequência de ações do agent" | A lista completa ordenada de chamadas de ferramenta, observações e passos de raciocínio em uma execução |
 | Eval-context gaming | "O modelo se comporta diferente em testes" | O modelo infere que está sendo avaliado e se comporta de forma mais segura, inflando scores de benchmark |
@@ -103,5 +103,5 @@ O simulador usa apenas stdlib. A intenção é pedagógica: guarde os números n
 - [METR — Measuring AI Ability to Complete Long Tasks](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/) — o paper original do horizonte e metodologia.
 - [METR Time Horizons benchmark (Epoch AI)](https://epoch.ai/benchmarks/metr-time-horizons) — números atuais, atualizados até 2026.
 - [Anthropic — Measuring AI agente autonomy in practice](https://www.anthropic.com/research/measuring-agent-autonomy) — visão interna sobre horizonte, alignment faking e lacuna de deploy.
-- [METR — Resources for Measuring Autonomous AI Capabilities](https://metr.org/measuring-autonomous-ai-capabilities/) — eespecificaçãoificações dos conjuntos HCAST, RE-Bench, SWAA.
+- [METR — Resources for Measuring Autônomous AI Capabilities](https://metr.org/measuring-autônomous-ai-capabilities/) — especificaçãoificações dos conjuntos HCAST, RE-Bench, SWAA.
 - [Anthropic — Claude's Constitution (January 2026)](https://www.anthropic.com/news/claudes-constitution) — a hierarquia de prioridades que governa o comportamento de longo prazo do Claude.

@@ -23,7 +23,7 @@ Em todos os casos, a combinação que realmente funciona é: chave de idempotên
 
 ### Toda transição persiste
 
-Uma transição de estado de grafo é qualquer passo que move o workflow de um estado nomeado para outro. Implementações inocentes persistem apenas em pontos eespecificaçãoíficos de commit; implementações de produção persistem cada transição. O custo (algumas escritas extras) é pequeno em relação à ganho de confiabilidade (replay pousa em qualquer lugar, recuperação de lease é precisa).
+Uma transição de estado de grafo é qualquer passo que move o workflow de um estado nomeado para outro. Implementações inocentes persistem apenas em pontos específicos de commit; implementações de produção persistem cada transição. O custo (algumas escritas extras) é pequeno em relação à ganho de confiabilidade (replay pousa em qualquer lugar, recuperação de lease é precisa).
 
 ### Recuperação de lease
 
@@ -96,7 +96,7 @@ Mitigação: persistir uma intenção "em voo" antes da execução, executar com
 
 2. Modifique o padrão "marcar como feito primeiro, depois fazer" para que a escrita de status dispare após a ação. Rode novamente o cenário de crash. Meça quantas ações duplicadas disparam.
 
-3. Projete um plano de rollback para uma ação de produção eespecificaçãoífica (ex: "postar em um canal Slack"). Classifique como in-band, compensatório ou out-of-band. Justifique a escolha.
+3. Projete um plano de rollback para uma ação de produção específica (ex: "postar em um canal Slack"). Classifique como in-band, compensatório ou out-of-band. Justifique a escolha.
 
 4. Pegue um workflow que você conheça. Identifique cada transição de estado. Marque cada uma com um requisito de durabilidade (persistir / não persistir). Conte as que você atualmente não está persistindo.
 

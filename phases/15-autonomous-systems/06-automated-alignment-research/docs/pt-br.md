@@ -1,6 +1,6 @@
 # Pesquisa de Alinhamento Automatizada (AAR da Anthropic)
 
-> A Anthropic rodou equipes paralelas de Claude Opus 4.6 como Autonomous Alignment Researchers em sandboxes independentes, coordenando via um fórum compartilhado cujos logs ficam fora de qualquer sandbox (para que os agentes não possam deletar seus próprios registros). No problema de treinamento fraco-forte, as AARs superaram pesquisadores humanos. O próprio resumo da Anthropic sinaliza que workflows prescritos frequentemente restringem a flexibilidade das AARs e degradam a performance. Automatizar pesquisa de alinhamento é o passo de compressão que comprime o cronograma para os riscos eespecificaçãoíficos de desalinhamento que o RSP visa detectar.
+> A Anthropic rodou equipes paralelas de Claude Opus 4.6 como Autônomous Alignment Researchers em sandboxes independentes, coordenando via um fórum compartilhado cujos logs ficam fora de qualquer sandbox (para que os agentes não possam deletar seus próprios registros). No problema de treinamento fraco-forte, as AARs superaram pesquisadores humanos. O próprio resumo da Anthropic sinaliza que workflows prescritos frequentemente restringem a flexibilidade das AARs e degradam a performance. Automatizar pesquisa de alinhamento é o passo de compressão que comprime o cronograma para os riscos específicos de desalinhamento que o RSP visa detectar.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib, simulador de fórum de pesquisa paralela)
@@ -9,7 +9,7 @@
 
 ## O Problema
 
-Pesquisa de alinhamento é cara em tempo de pesquisadores humanos. Problemas como supervisão escalável, eespecificaçãoificação de recompensa ou treinamento fraco-forte exigem experimentos que levam semanas por iteração. À medida que capacidades de fronteira avançam, a carga de trabalho de alinhamento cresce mais rápido que a oferta de pesquisadores qualificados.
+Pesquisa de alinhamento é cara em tempo de pesquisadores humanos. Problemas como supervisão escalável, especificação de recompensa ou treinamento fraco-forte exigem experimentos que levam semanas por iteração. À medida que capacidades de fronteira avançam, a carga de trabalho de alinhamento cresce mais rápido que a oferta de pesquisadores qualificados.
 
 Pesquisa de Alinhamento Automatizada (AAR) pergunta se os mesmos modelos de fronteira cuja capacidade está ultrapassando o alinhamento podem contribuir para fechar a lacuna. O relatório de 2026 da Anthropic sobre um estudo de treinamento fraco-forte conduzido por AAR (alignment.anthropic.com/2026/automated-w2s-researcher/) é um dos primeiros resultados públicos de um sistema implantado desta classe.
 
@@ -32,7 +32,7 @@ A analogia em termos de infraestrutura é logs append-only com write-through par
 
 ### O tradeoff de workflow prescrito
 
-O relatório da Anthropic nota que workflows prescritos frequentemente restringem a flexibilidade das AARs e degradam a performance. Em outras palavras: se o projetista humano escreve o plano de pesquisa passo a passo, as AARs ficam piores do que se recebessem objetivos de alto nível e liberdade para decompor. Isso é consistente com resultados em pesquisa agentic (LangGraph, Agent Framework da Microsoft) — estruturas sobreeespecificaçãoificadas prejudicam agentes competentes.
+O relatório da Anthropic nota que workflows prescritos frequentemente restringem a flexibilidade das AARs e degradam a performance. Em outras palavras: se o projetista humano escreve o plano de pesquisa passo a passo, as AARs ficam piores do que se recebessem objetivos de alto nível e liberdade para decompor. Isso é consistente com resultados em pesquisa agentic (LangGraph, Agent Framework da Microsoft) — estruturas sobreespecificadas prejudicam agentes competentes.
 
 A implicação de segurança é sutil. A flexibilidade que melhora a performance das AARs é também a flexibilidade que permite decomposição não autorizada, uso não convencional de ferramentas e deriva de objetivos. O tradeoff é uma decisão de espaço de design: quanta flexibilidade compra capacidade suficiente para superar humanos, sem dar ao agente espaço para generalizar objetivos fora da distribuição?
 
@@ -40,7 +40,7 @@ A implicação de segurança é sutil. A flexibilidade que melhora a performance
 
 RSP v3.0 (Aula 19) introduz um limiar de capacidade de P&D de IA: a capacidade de automatizar completamente o pipeline de P&D de IA a um custo competitivo vs ferramentas humanas + IA. FSF v3 da DeepMind inclui um nível análogo de autonomia em ML R&D. Ambos os frameworks tratam este limiar como o gatilho para controles elevados.
 
-AAR está a um passo do limiar: automatiza parte do pipeline (pesquisa de alinhamento em tarefas eespecificaçãoíficas e bem delimitadas), mas não o loop completo de desenvolvimento de capacidade. A questão do cronograma é quão rápido a lacuna fecha.
+AAR está a um passo do limiar: automatiza parte do pipeline (pesquisa de alinhamento em tarefas específicas e bem delimitadas), mas não o loop completo de desenvolvimento de capacidade. A questão do cronograma é quão rápido a lacuna fecha.
 
 Cronogramas comprimidos são a preocupação de falhas compostas. Se pesquisa de alinhamento e pesquisa de capacidade crescem em taxas similares, a superfície de risco de desalinhamento cresce pelo menos tão rápido quanto a capacidade. Se a capacidade cresce mais rápido (a tendência histórica), a lacuna se alarga. Esse é o argumento para a AAR ser um bem qualificado: cada resultado de alinhamento adicional reduz a lacuna se, e somente se, o processo de pesquisa for confiável.
 
@@ -70,7 +70,7 @@ Observe:
 
 2. Modifique o simulador para que um agente tente adulterar logs. Confirme que o log append-only detecta. Escreva um parágrafo descrevendo exatamente como a assinatura de detecção aparece no log.
 
-3. Leia o relatório AAR de treinamento fraco-forte da Anthropic. Identifique a sub-tarefa eespecificaçãoífica em que as AARs superaram pesquisadores humanos. O que a tornava adequada para automação?
+3. Leia o relatório AAR de treinamento fraco-forte da Anthropic. Identifique a sub-tarefa específica em que as AARs superaram pesquisadores humanos. O que a tornava adequada para automação?
 
 4. Projete uma política de alocação de fila de tarefas que equilibre flexibilidade das AARs (melhores resultados) contra restrições de workflow prescrito (auditoria mais fácil). Descreva como faria um teste A/B entre os dois.
 

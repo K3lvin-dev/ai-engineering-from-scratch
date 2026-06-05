@@ -40,7 +40,7 @@ Delta reportado: +4 a +17 pontos percentuais sobre baselines anteriores de auto-
 
 Zelikman et al. (2024) perguntaram: e se o modelo aprendesse a gerar uma racionalização curta interna em cada posição de token, não apenas entre problema e resposta? Quiet-STaR treina um modelo para emitir um "pensamento" oculto antes de cada token previsto, e então mistura a previsão consciente do pensamento com a previsão base através de um peso aprendido.
 
-Resultado: o Mistral 7B ganhou melhorias absolutas zero-shot no GSM8K de 5.9% para 10.9% e no CommonsenseQA de 36.3% para 47.2% sem fine-tuning eespecificaçãoífico para a tarefa. O modelo aprendeu "quando pensar" — tokens difíceis recebem racionalizações internas mais longas; fáceis recebem quase nenhuma.
+Resultado: o Mistral 7B ganhou melhorias absolutas zero-shot no GSM8K de 5.9% para 10.9% e no CommonsenseQA de 36.3% para 47.2% sem fine-tuning específico para a tarefa. O modelo aprendeu "quando pensar" — tokens difíceis recebem racionalizações internas mais longas; fáceis recebem quase nenhuma.
 
 ### Por que os três compartilham uma preocupação de segurança
 

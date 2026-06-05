@@ -28,7 +28,7 @@ Um invariante é uma propriedade que deve valer antes e depois de cada auto-modi
 
 Invariantes são verificados por código externo que o loop não pode editar. Se uma modificação proposta violar um invariante, é rejeitada. Isso pega o modo de adulteração de avaliador no estilo DGM (Aula 4).
 
-A parte difícil é escolher invariantes que são necessários para segurança e computáveis em tempo razoável. Sobreeespecificaçãoificar trava progresso; subeespecificaçãoificar deixa o loop passar por cima de propriedades importantes.
+A parte difícil é escolher invariantes que são necessários para segurança e computáveis em tempo razoável. Sobreespecificar trava progresso; subespecificar deixa o loop passar por cima de propriedades importantes.
 
 ### Primitiva 2: âncoras de alinhamento
 
@@ -78,7 +78,7 @@ Os quatro devem passar para a edição ser aceita. Qualquer falha individual pau
 
 ## Use
 
-`code/main.py` roda um loop de auto-aprimoramento limitado no brinquedo DGM da Aula 4, mas com as quatro primitivas sobrepostas. Cada primitiva pode ser habilitada ou desabilitada individualmente. A demonstração é que cada primitiva pega uma classe eespecificaçãoífica de falha, e que remover qualquer uma delas deixa essa classe passar.
+`code/main.py` roda um loop de auto-aprimoramento limitado no brinquedo DGM da Aula 4, mas com as quatro primitivas sobrepostas. Cada primitiva pode ser habilitada ou desabilitada individualmente. A demonstração é que cada primitiva pega uma classe específica de falha, e que remover qualquer uma delas deixa essa classe passar.
 
 ## Entregue
 

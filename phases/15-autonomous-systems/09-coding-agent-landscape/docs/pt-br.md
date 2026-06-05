@@ -1,6 +1,6 @@
 # O Panorama de Agents de Codificação Autônomos (2026)
 
-> SWE-bench Verified passou de 4% para 80.9% em menos de três anos. O mesmo Claude Sonnet 4.5 pontuou 43.2% no SWE-agent v1 e 59.8% no Cline autonomous — a estrutura ao redor do modelo agora importa tanto quanto o modelo em si. OpenHands (antigo OpenDevin) é a plataforma MIT mais ativa e seu loop CodeAct executa ações Python diretamente em um sandbox ao invés de chamadas JSON de ferramenta. Os números de destaque escondem uma questão metodológica: 161 das 500 tarefas do SWE-bench Verified requerem apenas uma mudança de 1-2 linhas, e SWE-bench Pro (tarefas de 10+ linhas) fica em 23-59% para os mesmos modelos de fronteira.
+> SWE-bench Verified passou de 4% para 80.9% em menos de três anos. O mesmo Claude Sonnet 4.5 pontuou 43.2% no SWE-agent v1 e 59.8% no Cline autônomous — a estrutura ao redor do modelo agora importa tanto quanto o modelo em si. OpenHands (antigo OpenDevin) é a plataforma MIT mais ativa e seu loop CodeAct executa ações Python diretamente em um sandbox ao invés de chamadas JSON de ferramenta. Os números de destaque escondem uma questão metodológica: 161 das 500 tarefas do SWE-bench Verified requerem apenas uma mudança de 1-2 linhas, e SWE-bench Pro (tarefas de 10+ linhas) fica em 23-59% para os mesmos modelos de fronteira.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib, comparação CodeAct vs chamadas JSON de ferramenta)
@@ -32,7 +32,7 @@ A inclinação veio de três fontes compostas: melhores modelos base, melhor est
 
 ### CodeAct vs chamadas JSON de ferramenta
 
-OpenHands (All-Hands-AI, arXiv:2407.16741, antigo OpenDevin) fez uma aposta arquitetural eespecificaçãoífica: em vez do modelo emitir chamadas JSON de ferramenta que um host decodifica e executa, o modelo emite código Python e um kernel estilo Jupyter o roda em um sandbox. O agente pode iterar sobre arquivos, encadear ferramentas e capturar suas próprias exceções dentro de uma ação.
+OpenHands (All-Hands-AI, arXiv:2407.16741, antigo OpenDevin) fez uma aposta arquitetural específica: em vez do modelo emitir chamadas JSON de ferramenta que um host decodifica e executa, o modelo emite código Python e um kernel estilo Jupyter o roda em um sandbox. O agente pode iterar sobre arquivos, encadear ferramentas e capturar suas próprias exceções dentro de uma ação.
 
 O tradeoff:
 
@@ -89,7 +89,7 @@ Ambas usam um "modelo" stub (regras determinísticas), para que a comparação i
 
 4. SWE-bench Verified tem 161 tarefas single-file de 1-2 linhas. Construa um score que as exclua. Como o ranking muda?
 
-5. Leia "Introducing SWE-bench Verified" (OpenAI). Explique a metodologia eespecificaçãoífica usada para remover tarefas ambíguas e nomeie uma categoria que a curadoria perderia.
+5. Leia "Introducing SWE-bench Verified" (OpenAI). Explique a metodologia específica usada para remover tarefas ambíguas e nomeie uma categoria que a curadoria perderia.
 
 ## Termos-Chave
 

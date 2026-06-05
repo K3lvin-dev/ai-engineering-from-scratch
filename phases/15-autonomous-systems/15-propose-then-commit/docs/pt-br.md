@@ -1,6 +1,6 @@
 # Human-in-the-Loop: Proposta-Então-Commit
 
-> O consenso de 2026 sobre HITL é eespecificaçãoífico. Não é "o agente pergunta, o usuário clica Aprovar." É proposta-então-commit: a ação proposta é persistida em um armazenamento durable com uma chave de idempotência; apresentada a um revisor com intenção, linhagem de dados, permissões tocadas, raio de explosão e um plano de rollback; comprometida somente após reconhecimento positivo; verificada após a execução para confirmar que o efeito colateral realmente aconteceu. `interrupt()` do LangGraph mais checkpointing em PostgreSQL, `RequestInfoEvent` do Microsoft Agent Framework e `waitForApproval()` do Cloudflare implementam todos a mesma forma. O modo de falha canônico é a aprovação de carimbo de borracha: "Aprovar?" é clicado sem revisão. A mitigação documentada é pergunta-e-resposta com uma checklist explícita.
+> O consenso de 2026 sobre HITL é específico. Não é "o agente pergunta, o usuário clica Aprovar." É proposta-então-commit: a ação proposta é persistida em um armazenamento durable com uma chave de idempotência; apresentada a um revisor com intenção, linhagem de dados, permissões tocadas, raio de explosão e um plano de rollback; comprometida somente após reconhecimento positivo; verificada após a execução para confirmar que o efeito colateral realmente aconteceu. `interrupt()` do LangGraph mais checkpointing em PostgreSQL, `RequestInfoEvent` do Microsoft Agent Framework e `waitForApproval()` do Cloudflare implementam todos a mesma forma. O modo de falha canônico é a aprovação de carimbo de borracha: "Aprovar?" é clicado sem revisão. A mitigação documentada é pergunta-e-resposta com uma checklist explícita.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib, máquina de estados proposta-então-commit com idempotência)
@@ -42,7 +42,7 @@ A sala de espera de aprovação é uma peça de estado que o agente não possui.
 
 ### Aprovações de carimbo de borracha e a mitigação de pergunta-e-resposta
 
-A UI padrão para HITL ("Aprovar" / "Rejeitar" botões) produz aprovações rápidas sem revisão genuína. Mitigação documentada: uma checklist de pergunta-e-resposta que exige respostas positivas a perguntas eespecificaçãoíficas antes que o botão Aprovar seja habilitado. Forma concreta:
+A UI padrão para HITL ("Aprovar" / "Rejeitar" botões) produz aprovações rápidas sem revisão genuína. Mitigação documentada: uma checklist de pergunta-e-resposta que exige respostas positivas a perguntas específicas antes que o botão Aprovar seja habilitado. Forma concreta:
 
 - "Você entende em que recurso isso toca? [ ]"
 - "Você verificou que o raio de explosão é aceitável? [ ]"
@@ -64,7 +64,7 @@ Nem toda ação precisa de proposta-então-commit. A orientação de 2026:
 
 ### EU AI Act Artigo 14
 
-Artigo 14 exige supervisão humana efetiva para sistemas de IA de alto risco na UE. "Efetivo" não é decorativo. Linguagem regulatória exclui eespecificaçãoificamente padrões de carimbo de borracha. Proposta-então-commit com pergunta-e-resposta é a forma que sobrevive ao escrutínio do Artigo 14 nos documentos de conformidade do Microsoft Agent Governance Toolkit.
+Artigo 14 exige supervisão humana efetiva para sistemas de IA de alto risco na UE. "Efetivo" não é decorativo. Linguagem regulatória exclui especificamente padrões de carimbo de borracha. Proposta-então-commit com pergunta-e-resposta é a forma que sobrevive ao escrutínio do Artigo 14 nos documentos de conformidade do Microsoft Agent Governance Toolkit.
 
 ## Use
 
@@ -82,7 +82,7 @@ Artigo 14 exige supervisão humana efetiva para sistemas de IA de alto risco na 
 
 3. Leia a documentação de `RequestInfoEvent` do Microsoft Agent Framework. Identifique um campo de metadados que a API inclui que a engine de brinquedo não tem. Adicione e explique contra o que protege.
 
-4. Projete uma checklist de pergunta-e-resposta para uma ação eespecificaçãoífica (ex: "postar em uma conta pública do Twitter"). Quais três perguntas o revisor deve responder? Por quê essas três?
+4. Projete uma checklist de pergunta-e-resposta para uma ação específica (ex: "postar em uma conta pública do Twitter"). Quais três perguntas o revisor deve responder? Por quê essas três?
 
 5. Escolha um caso onde um prompt síncrono "Aprovar?" seria suficiente (sem necessidade de armazenamento durable). Explique por quê, e nomeie a classe de risco que você está aceitando.
 
@@ -92,10 +92,10 @@ Artigo 14 exige supervisão humana efetiva para sistemas de IA de alto risco na 
 |---|---|---|
 | Proposta-então-commit | "Aprovação em duas fases" | Proposta persistida + commit positivo + verificação |
 | Chave de idempotência | "Token seguro contra retry" | Única por proposta; segunda execução é no-op |
-| Linhagem de dados | "De onde veio" | O conteúdo-fonte eespecificaçãoífico que levou à proposta |
+| Linhagem de dados | "De onde veio" | O conteúdo-fonte específico que levou à proposta |
 | Raio de explosão | "Pior caso" | Escopo do efeito se a ação der errado |
 | Carimbo de borracha | "Aprovação rápida" | "Aprovar" clicado sem revisão genuína |
-| Pergunta-e-resposta | "Checklist forçadora" | Revisor deve reconhecer positivamente perguntas eespecificaçãoíficas |
+| Pergunta-e-resposta | "Checklist forçadora" | Revisor deve reconhecer positivamente perguntas específicas |
 | RequestInfoEvent | "Primitiva MS Agent Framework" | Pedido HITL durável com metadados estruturados |
 | `interrupt()` / `waitForApproval()` | "Primitivas de framework" | Equivalente LangGraph / Cloudflare da mesma forma |
 
