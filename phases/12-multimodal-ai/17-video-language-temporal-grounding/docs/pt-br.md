@@ -14,7 +14,7 @@
 - Descrever Q-former por clip (Video-LLaMA) vs pooling por frame (Video-LLaVA) vs M-RoPE por token (Qwen2.5-VL).
 - Nomear os quatro benchmarks de vídeo: VideoMME, TempCompass, EgoSchema, Video-MMMU.
 
-## O Problemo
+## O Problema
 
 Um vídeo de 1 minuto a 30 FPS tem 1800 frames. A 196 tokens visuais por frame (ViT-B a 224), isso são 352k tokens — maior que qualquer contexto de LLM de 2024.
 
@@ -91,7 +91,7 @@ Formatos de saída pra grounding temporal:
 
 - Texto livre: "O gato pula por volta dos 4 segundos." Fácil de parsear, mas impreciso.
 - JSON estruturado: `{"event": "jump", "start": 4.1, "end": 4.3}`. Qwen2.5-VL treina isso.
-- Baseado em tokens: tokens eespecificaçãoiais `<time>4.1</time>` intercalados com a resposta. Formato interno do Qwen2.5-VL.
+- Baseado em tokens: tokens especiais `<time>4.1</time>` intercalados com a resposta. Formato interno do Qwen2.5-VL.
 
 Baseado em tokens é o mais preciso pra uso downstream. O formato JSON de saída do Qwen2.5-VL parseia diretamente.
 
@@ -121,7 +121,7 @@ Esta aula produz `outputs/skill-video-vlm-frame-planner.md`. Dada uma tarefa de 
 
 1. Pra uma demonstração de culinária de 3 minutos, escolha uniforme vs FPS dinâmico. Justifique com contagem de tokens.
 
-2. O TMRoPE adiciona o que eespecificaçãoificamente que uma tabela simples de embedding temporal não consegue fazer?
+2. O TMRoPE adiciona o que especificamente que uma tabela simples de embedding temporal não consegue fazer?
 
 3. Escreva um schema JSON pra grounding temporal que um VLM possa aprender a emitir. Inclua casos de erro.
 
@@ -133,7 +133,7 @@ Esta aula produz `outputs/skill-video-vlm-frame-planner.md`. Dada uma tarefa de 
 
 | Termo | O que a galera diz | O que realmente significa |
 |-------|-------------------|--------------------------|
-| Grounding temporal | "Respostas com localização temporal" | VLM produz uma faixa de timestamp eespecificaçãoífica pra quando um evento acontece |
+| Grounding temporal | "Respostas com localização temporal" | VLM produz uma faixa de timestamp específica pra quando um evento acontece |
 | TMRoPE | "RoPE Multimodal Temporal" | Rotação posicional 3D com timestamps absolutos, usado por Qwen2.5-VL |
 | FPS dinâmico | "Amostragem consciente de movimento" | Amostra mais frames em segmentos de alto movimento, menos nos estáticos |
 | Pooling de frames | "Compressão espacial por frame" | Reduz patches por frame com interpolação bilinear antes do LLM |

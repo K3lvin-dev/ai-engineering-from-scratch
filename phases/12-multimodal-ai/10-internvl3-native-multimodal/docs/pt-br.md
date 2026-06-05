@@ -14,13 +14,13 @@
 - Comparar V2PE (codificação posicional visual variável) com o M-RoPE do Qwen2-VL.
 - Nomear as otimizações de deployment Visual Resolution Router (ViR) e Decoupled Vision-Language (DvD).
 
-## O Problemo
+## O Problema
 
 O treinamento post-hoc de VLM é o padrão. LLaVA, BLIP-2, Qwen-VL, Idefics — todos pegam um LLM já pré-treinado (Llama, Vicuna, Qwen, Mistral) e adicionam visão. As etapas de treinamento tipicamente são:
 
 1. LLM congelado + encoder de visão congelado + projetor treinável, treinado em pares de legendas para alinhar embeddings.
 2. Descongelar o LLM, treinar em dados de instrução (LLaVA-Instruct, ShareGPT4V).
-3. Fine-tune opcional eespecificaçãoífico para a tarefa.
+3. Fine-tune opcional específico para a tarefa.
 
 Três sintomas da dívida de alinhamento aparecem:
 

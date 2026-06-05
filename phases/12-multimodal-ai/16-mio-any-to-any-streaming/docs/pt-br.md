@@ -14,7 +14,7 @@
 - Explicar o currículo de quatro etapas que constrói geração any-to-any.
 - Nomear as três receitas open any-to-any e seus principais trade-offs: MIO, AnyGPT, Unified-IO 2.
 
-## O Problemo
+## O Problema
 
 Um modelo multimodal unificado é fácil de alegar e difícil de construir em escala. A maioria dos sistemas "any-to-any" até 2024 eram em pipeline: modelo de visão → representação de texto → modelo de fala → áudio. Cada salto perde informação, adiciona latência e complica o treinamento. O vídeo de demo do GPT-4o mostrou uma alternativa de modelo único com resposta sub-segundo; sistemas open ficaram pra trás por meses.
 
@@ -70,7 +70,7 @@ O currículo de treinamento do MIO:
 3. Etapa 3 — fala melhorada. Dados extras de áudio pra elevar qualidade de fala sem perder capacidade de texto.
 4. Etapa 4 — SFT. Instrução tuning entre modalidades: VQA, legendagem, narração, diálogo fala-a-fala.
 
-Pular uma etapa degrada capacidades eespecificaçãoíficas: pular etapa 2 e o modelo perde contexto cross-modal; pular etapa 3 e a fala fica ruim.
+Pular uma etapa degrada capacidades específicas: pular etapa 2 e o modelo perde contexto cross-modal; pular etapa 3 e a fala fica ruim.
 
 ### Cadeia-de-pensamento-visual
 
@@ -86,7 +86,7 @@ A imagem intermediária renderizada serve como rascunho. Benchmarks melhoram em 
 
 - AnyGPT (arXiv:2402.12226): 4 modalidades (texto, imagem, fala, música), design similar.
 - Unified-IO 2 (arXiv:2312.17172): adiciona saídas de ação visual, profundidade, normais. Mais diversidade de tarefas, escala menor.
-- NExT-GPT (arXiv:2309.05519): LLM + decoders de difusão eespecificaçãoíficos por modalidade. Não é abordagem de modelo único.
+- NExT-GPT (arXiv:2309.05519): LLM + decoders de difusão específicos por modalidade. Não é abordagem de modelo único.
 - CoDi (arXiv:2305.11846): difusão componível; any-to-any via latente compartilhado.
 
 MIO é o mais perto de any-to-any puramente por tokens. AnyGPT é seu ancestral conceitual.
@@ -122,7 +122,7 @@ Esses são problemas de pesquisa aberta. Qwen3-Omni (Aula 12.20) é a tentativa 
 
 ## Implemente
 
-Esta aula produz `outputs/skill-any-to-any-pipeline-auditor.md`. Dada uma eespecificaçãoificação de produto conversacional (modalidades de entrada, modalidades de saída, alvo de latência), audita as escolhas de design da família MIO e calcula o orçamento de latência.
+Esta aula produz `outputs/skill-any-to-any-pipeline-auditor.md`. Dada uma especificação de produto conversacional (modalidades de entrada, modalidades de saída, alvo de latência), audita as escolhas de design da família MIO e calcula o orçamento de latência.
 
 ## Exercícios
 

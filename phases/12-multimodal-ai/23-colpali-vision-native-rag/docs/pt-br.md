@@ -14,7 +14,7 @@
 - Construir um indexador pequeno estilo ColPali: página → embeddings de patches → MaxSim sobre embeddings de termos de consulta → top-k páginas.
 - Comparar ColPali + gerador Qwen2.5-VL vs RAG de texto + GPT-4 num caso de uso de notas fiscais / relatórios financeiros.
 
-## O Problemo
+## O Problema
 
 RAG de texto em PDFs joga fora a maioria do documento. O crescimento de receita do Q3 de um relatório financeiro geralmente está num gráfico; os achados de um relatório médico estão em imagens anotadas; o bloco de assinatura de um contrato jurídico é um fato de layout, não um fato de texto.
 
