@@ -1,6 +1,6 @@
 # Tasks Assíncronas (SEP-1686) — Chamar Agora, Buscar Depois pra Trabalho de Longa Duração
 
-> Trabalho real de agente leva minutos a horas: CI runs, síntese de pesquisa profunda, exports em lote. Chamadas de ferramenta síncronas caem conexões, estouram timeout ou bloqueiam a UI. SEP-1686, incorporado em 2025-11-25, adiciona a primitiva Tasks: qualquer request pode ser aumentada pra virar uma task, e o resultado pode ser buscado depois ou transmitido via notificações de estado. Nota de risco de deriva: Tasks são experimentais até H1 2026; superfície de SDK ainda está sendo projetada ao redor da eespecificaçãoificação.
+> Trabalho real de agente leva minutos a horas: CI runs, síntese de pesquisa profunda, exports em lote. Chamadas de ferramenta síncronas caem conexões, estouram timeout ou bloqueiam a UI. SEP-1686, incorporado em 2025-11-25, adiciona a primitiva Tasks: qualquer request pode ser aumentada pra virar uma task, e o resultado pode ser buscado depois ou transmitido via notificações de estado. Nota de risco de deriva: Tasks são experimentais até H1 2026; superfície de SDK ainda está sendo projetada ao redor da especificação.
 
 **Tipo:** Construir
 **Linguagens:** Python (stdlib, máquina de estados de task assíncrona)
@@ -88,7 +88,7 @@ Clientes que fazem streaming em vez de polling ganham melhor UX. Polling sempre 
 
 ### Estado durável
 
-A eespecificaçãoificação requer que servidores que declaram suporte a task persistam estado. Um crash não deve perder resultados completados dentro do ttl. Stores vão de SQLite a Redis ao sistema de arquivos. O harness da Aula 13 usa o sistema de arquivos.
+A especificação requer que servidores que declaram suporte a task persistam estado. Um crash não deve perder resultados completados dentro do ttl. Stores vão de SQLite a Redis ao sistema de arquivos. O harness da Aula 13 usa o sistema de arquivos.
 
 ### Semântica de cancelamento
 
@@ -108,7 +108,7 @@ Uma task pode em si chamar `sampling/createMessage`. É assim que funcionam task
 
 ### Por que isso é experimental
 
-SEP-1686 saiu na 2025-11-25 mas o roadmap mais amplo aponta três questões abertas: primitivas de assinatura duráveis, subtarefas (relações pai-filho de task) e padronização de TTL de resultado. Espere a eespecificaçãoificação evoluir ao longo de 2026. Código de produção deve tratar Tasks como estável só pro caso comum e se prevenir contra mudanças futuras de SDK pra subtarefas.
+SEP-1686 saiu na 2025-11-25 mas o roadmap mais amplo aponta três questões abertas: primitivas de assinatura duráveis, subtarefas (relações pai-filho de task) e padronização de TTL de resultado. Espere a especificação evoluir ao longo de 2026. Código de produção deve tratar Tasks como estável só pro caso comum e se prevenir contra mudanças futuras de SDK pra subtarefas.
 
 ## Use
 
@@ -142,7 +142,7 @@ Esta aula produz `outputs/skill-task-store-designer.md`. Dada uma ferramenta de 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |-------|----------------------|--------------------------|
 | Task | "Chamada de ferramenta de longa duração" | Request aumentado com `_meta.task` pra execução assíncrona |
-| SEP-1686 | "Eespecificaçãoificação de Tasks" | Proposta de Evolução da Eespecificaçãoificação que adicionou Tasks na 2025-11-25 |
+| SEP-1686 | "Especificação de Tasks" | Proposta de Evolução da Especificação que adicionou Tasks na 2025-11-25 |
 | `_meta.task` | "Envelope da task" | Metadados por request contendo id, estado, ttl |
 | taskSupport | "Flag de ferramenta" | `forbidden` / `optional` / `required` por ferramenta |
 | `tasks/status` | "Método de polling" | Buscar estado atual e dica de progresso opcional |

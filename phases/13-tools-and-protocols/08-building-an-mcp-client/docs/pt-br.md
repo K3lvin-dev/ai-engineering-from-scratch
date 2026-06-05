@@ -136,7 +136,7 @@ Esta aula produz `outputs/skill-mcp-client-harness.md`. Dada uma lista declarati
 
 ## Leituras Complementares
 
-- [Model Context Protocol — Client especificação](https://modelcontextprotocol.io/especificaçãoification/2025-11-25/client) — comportamento canônico do cliente
+- [Model Context Protocol — Client especificação](https://modelcontextprotocol.io/specification/2025-11-25/client) — comportamento canônico do cliente
 - [MCP — Quickstart client guide](https://modelcontextprotocol.io/quickstart/client) — tutorial hello-world com o SDK Python
 - [MCP Python SDK — client module](https://github.com/modelcontextprotocol/python-sdk) — referência `ClientSession` e `stdio_client`
 - [MCP TypeScript SDK — Client](https://github.com/modelcontextprotocol/typescript-sdk) — TS paralelo

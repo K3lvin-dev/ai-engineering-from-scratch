@@ -51,7 +51,7 @@ Conforme semconv 2025-2026:
 Pra spans de ferramenta:
 
 - `gen_ai.tool.name` — identificador da ferramenta.
-- `gen_ai.tool.call.id` — ID da chamada eespecificaçãoífica.
+- `gen_ai.tool.call.id` — ID da chamada específica.
 - `gen_ai.tool.description` — descrição da ferramenta (opcional).
 
 Pra spans de agent:
@@ -65,7 +65,7 @@ Pra spans de agent:
 
 ### Captura de conteúdo opt-in
 
-Por padrão, spans carregam métricas e timing — não prompts ou completions. Payloads grandes e PII estão desligados por padrão. Defina `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` e variáveis de ambiente eespecificaçãoíficas de captura de conteúdo pra incluir conteúdo. Revise com cuidado antes de habilitar em prod.
+Por padrão, spans carregam métricas e timing — não prompts ou completions. Payloads grandes e PII estão desligados por padrão. Defina `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` e variáveis de ambiente específicas de captura de conteúdo pra incluir conteúdo. Revise com cuidado antes de habilitar em prod.
 
 ### Eventos em spans
 
@@ -82,7 +82,7 @@ Eventos ficam ordenados no tempo dentro de um span pra replay detalhado.
 Spans OTel exportam pra:
 
 - **Jaeger / Tempo.** OSS, on-prem.
-- **Langfuse.** Eespecificaçãoífico de observabilidade de LLM; visualiza uso de tokens.
+- **Langfuse.** Especificaçãoífico de observabilidade de LLM; visualiza uso de tokens.
 - **Arize Phoenix.** Evals + rastreamento combinados.
 - **Datadog.** Comercial; parseia nativamente atributos `gen_ai.*`.
 - **Honeycomb.** Orientado a colunas; amigável a consultas.
@@ -91,7 +91,7 @@ Todos falam OTLP, o formato de wire. Seu código não se importa.
 
 ### Propagação via MCP
 
-Quando um cliente MCP chama um servidor, injete o header traceparent W3C na requisição. Streamable HTTP suporta headers padrão. Stdio não carrega headers HTTP nativamente; o roadmap de 2026 da eespecificaçãoificação discute adicionar um campo `_meta.traceparent` em chamadas JSON-RPC.
+Quando um cliente MCP chama um servidor, injete o header traceparent W3C na requisição. Streamable HTTP suporta headers padrão. Stdio não carrega headers HTTP nativamente; o roadmap de 2026 da especificação discute adicionar um campo `_meta.traceparent` em chamadas JSON-RPC.
 
 Até isso ser disponibilizado: inclua o traceparent no `_meta` de cada requisição manualmente. O servidor registra o trace id.
 
@@ -107,7 +107,7 @@ Use pra dashboards que não precisam de detalhe por chamada.
 
 ### Camada AgentOps
 
-AgentOps (fundado em 2024) eespecificaçãoializa-se em observabilidade de GenAI. Encapsula frameworks populares (LangGraph, Pydantic AI, CrewAI) pra emitir spans OTel automaticamente. Útil se sua stack usa um framework suportado; use instrumentação manual caso contrário.
+AgentOps (fundado em 2024) especializa-se em observabilidade de GenAI. Encapsula frameworks populares (LangGraph, Pydantic AI, CrewAI) pra emitir spans OTel automaticamente. Útil se sua stack usa um framework suportado; use instrumentação manual caso contrário.
 
 ## Usar
 
@@ -134,7 +134,7 @@ Essa lição produz `outputs/skill-otel-genai-instrumentation.md`. Dado um codeb
 
 4. Propague um traceparent de um span de agente pai pro campo `_meta.traceparent` de uma requisição MCP. Verifique que o servidor MCP veria o mesmo trace id.
 
-5. Leia a eespecificaçãoificação semconv OTel GenAI. Identifique um atributo listado na semconv que o código da lição NÃO emite. Adicione-o.
+5. Leia a especificação semconv OTel GenAI. Identifique um atributo listado na semconv que o código da lição NÃO emite. Adicione-o.
 
 ## Termos Chave
 
@@ -149,12 +149,12 @@ Essa lição produz `outputs/skill-otel-genai-instrumentation.md`. Dado um codeb
 | OTLP | "OpenTelemetry Line Protocol" | Formato de wire pra exportadores |
 | Conteúdo opt-in | "Captura de prompt / completion" | Desligado por padrão; variável de ambiente pra habilitar |
 | traceparent | "Header W3C" | Propaga contexto de trace entre serviços |
-| Exportador | "Embarcador eespecificaçãoífico de backend" | Componente que envia spans pra Jaeger / Datadog / etc. |
+| Exportador | "Embarcador específico de backend" | Componente que envia spans pra Jaeger / Datadog / etc. |
 
 ## Leitura Complementar
 
-- [OpenTelemetry — GenAI semconv](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — convenções canônicas pra spans, métricas e eventos GenAI
-- [OpenTelemetry — GenAI spans](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/gen-ai-spans/) — lista de atributos de spans de LLM e execução de ferramenta
-- [OpenTelemetry — GenAI agente spans](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/gen-ai-agent-spans/) — span `invoke_agent` em nível de agent
+- [OpenTelemetry — GenAI semconv](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — convenções canônicas pra spans, métricas e eventos GenAI
+- [OpenTelemetry — GenAI spans](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) — lista de atributos de spans de LLM e execução de ferramenta
+- [OpenTelemetry — GenAI agente spans](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-agent-spans/) — span `invoke_agent` em nível de agent
 - [open-telemetry/semantic-conventions — GenAI spans](https://github.com/open-telemetry/semantic-conventions/blob/main/docs/gen-ai/gen-ai-spans.md) — fonte da verdade no GitHub
 - [Datadog — LLM OTel semantic convention](https://www.datadoghq.com/blog/llm-otel-semantic-convention/) — walkthrough de integração em produção

@@ -105,7 +105,7 @@ O que conferir:
 
 ## Entregue
 
-Esta aula produz `outputs/skill-gateway-bootstrap.md`. Dado um plano MCP empresarial (usuários, backends, conformidade), a skill produz uma eespecificaçãoificação de configuração do gateway.
+Esta aula produz `outputs/skill-gateway-bootstrap.md`. Dado um plano MCP empresarial (usuários, backends, conformidade), a skill produz uma especificação de configuração do gateway.
 
 ## Exercícios
 
