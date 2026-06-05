@@ -59,7 +59,7 @@ Claude computer use, OpenAI CUA, Gemini 2.5 Computer Use (Aula 21) todos treinam
 
 - **Evals só com screenshot.** OSWorld é screenshot-driven; avaliar um agente que usa DOM ou APIs de acessibilidade no OSWorld perde o desafio de grounding.
 - **Ignorar comprimento da trajetória.** Pontuar só taxa de sucesso perde a ineficiência de 1.4-2.7x de passos que o OSWorld-Human revela.
-- **Apps self-hosted desatualizados.** Os apps do WebArena fixam versões eespecificaçãoíficas; atualizar sem re-cura quebra comparabilidade.
+- **Apps self-hosted desatualizados.** Os apps do WebArena fixam versões específicas; atualizar sem re-cura quebra comparabilidade.
 
 ## Construa
 
@@ -107,7 +107,7 @@ Saída: taxa de sucesso e eficiência de trajetória por tarefa, espelhando a me
 | GUI grounding | "Mapeamento pixel-to-elemento" | Modelo localizando elementos de UI em 1920x1080 |
 | Conhecimento operacional | "Know-how de OS" | Qual menu, qual atalho, qual painel de preferências |
 | OSWorld-G | "Suíte de grounding" | 564 amostras só de grounding + conjunto de treino |
-| OSWorld-Human | "Trajetórias douradas" | Sequências de ações manuais de eespecificaçãoialistas pra medir eficiência |
+| OSWorld-Human | "Trajetórias douradas" | Sequências de ações manuais de especialistas pra medir eficiência |
 | Eficiência de trajetória | "Passos sobre o dourado" | Contagem de passos do agente dividida pelo mínimo humano |
 
 ## Leitura Complementar

@@ -82,7 +82,7 @@ O trace mostra entrega de mensagens, uma falha simulada num ator que não crasha
 - **AutoGen v0.4/v0.7** (manutenção) — estável pra pesquisa, prototipagem, padrões multi-agent.
 - **Microsoft Agent Framework** (pré-visualização) — o caminho à frente; mesmas ideias de modelo ator numa API renovada.
 - **Topologia swarm do LangGraph** (Aula 13) — padrão similar via handoffs de ferramentas compartilhadas.
-- **Runtime de ator custom** — quando você precisa de transporte eespecificaçãoífico (NATS, RabbitMQ, gRPC).
+- **Runtime de ator custom** — quando você precisa de transporte específico (NATS, RabbitMQ, gRPC).
 
 ## Entregue
 
@@ -114,4 +114,4 @@ O trace mostra entrega de mensagens, uma falha simulada num ator que não crasha
 
 - [AutoGen v0.4, Microsoft Research](https://www.microsoft.com/en-us/research/articles/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) — o post de redesenho
 - [LangGraph overview](https://docs.langchain.com/oss/python/langgraph/overview) — alternativa em formato de grafo
-- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — spans que o AutoGen emite por padrão
+- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — spans que o AutoGen emite por padrão

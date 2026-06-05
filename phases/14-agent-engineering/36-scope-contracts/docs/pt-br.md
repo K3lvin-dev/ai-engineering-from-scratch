@@ -10,7 +10,7 @@
 ## Objetivos de Aprendizado
 
 - Escrever um contrato de escopo que um agente lê no início da tarefa e um verificador lê no final.
-- Eespecificaçãoificar arquivos permitidos, arquivos proibidos, critérios de aceitação, plano de rollback e limites de aprovação.
+- Especificaçãoificar arquivos permitidos, arquivos proibidos, critérios de aceitação, plano de rollback e limites de aprovação.
 - Implementar um verificador de escopo que compara um diff com o contrato e sinaliza violações.
 - Tornar o scope creep visível, automático e revisável.
 
@@ -79,15 +79,15 @@ Saída: o contrato, as duas rodadas, os veredictos por rodada e um `scope_report
 
 ## Padrões de produção no mundo real
 
-Um praticante rodando "especificaçãosmaxxing" (contratos de escopo em YAML antes de invocar o agent) relata que a taxa de rabbit-hole caiu de 52% pra 21% em três semanas sem mudar o agent. O contrato fez o trabalho, não o modelo. Três padrões garantem que o ganho persista.
+Um praticante rodando "especificaçõesmaxxing" (contratos de escopo em YAML antes de invocar o agent) relata que a taxa de rabbit-hole caiu de 52% pra 21% em três semanas sem mudar o agent. O contrato fez o trabalho, não o modelo. Três padrões garantem que o ganho persista.
 
 **Orçamentos de violação, não falhas binárias.** `agent-guardrails` (o merge gate OSS usado pelo Claude Code, Cursor, Windsurf, Codex via MCP) entrega um `violationBudget` por tarefa: desvios menores dentro do orçamento aparecem como warnings; só quando o orçamento é excedido o merge gate recusa. Combine com `violationSeverity: "error" | "warning"`. O orçamento é a diferença entre um gate que entrega e um gate que é desligado pelo time que odiou.
 
-**Assimetria de severidade por família de caminho.** Escritas fora do escopo em `docs/**` geralmente são `warn`; escritas fora do escopo em `scripts/**`, `migrations/**`, `config/prod/**` são sempre `block`. Essa assimetria precisa morar no contrato, não no runtime, porque é eespecificaçãoífica do projeto e muda por tarefa.
+**Assimetria de severidade por família de caminho.** Escritas fora do escopo em `docs/**` geralmente são `warn`; escritas fora do escopo em `scripts/**`, `migrations/**`, `config/prod/**` são sempre `block`. Essa assimetria precisa morar no contrato, não no runtime, porque é específica do projeto e muda por tarefa.
 
 **Orçamentos de tempo e rede ao lado dos orçamentos de arquivo.** Um campo `time_budget_minutes` limita o relógio; o runtime recusa continuar sem nova aprovação. Uma allowlist de `network_egress` por hostname impede que o agente acesse silenciosamente uma API externa que não fazia parte da tarefa. Essas são dimensões de escopo também; os globs de arquivo são necessários, mas não suficientes.
 
-**Semântica de merge multi-contrato (menor privilégio).** Quando dois contratos de escopo se aplicam (ex: um contrato de projeto inteiro mais um eespecificaçãoífico da tarefa), o merge é: **interseção** de `allowed_files` (ambos devem permitir o caminho), **união** de `forbidden_files` (qualquer um pode proibir), `time_budget_minutes` é o mais restritivo (mínimo), `approvals_required` acumula. `network_egress` é `None` pra sem enforcement, `[]` pra negar tudo, `[...]` como allowlist; sob merge, `None` cede pro outro lado, duas listas intersectam, e deny-all continua deny-all. Declare isso no schema do contrato pra que o merge seja mecânico e revisável.
+**Semântica de merge multi-contrato (menor privilégio).** Quando dois contratos de escopo se aplicam (ex: um contrato de projeto inteiro mais um específico da tarefa), o merge é: **interseção** de `allowed_files` (ambos devem permitir o caminho), **união** de `forbidden_files` (qualquer um pode proibir), `time_budget_minutes` é o mais restritivo (mínimo), `approvals_required` acumula. `network_egress` é `None` pra sem enforcement, `[]` pra negar tudo, `[...]` como allowlist; sob merge, `None` cede pro outro lado, duas listas intersectam, e deny-all continua deny-all. Declare isso no schema do contrato pra que o merge seja mecânico e revisável.
 
 ## Use
 
@@ -127,10 +127,10 @@ O contrato viaja com a tarefa. Quando a tarefa fecha, o contrato é arquivado em
 - [OpenAI Agents SDK ferramenta approval policies](https://platform.openai.com/docs/guides/agents-sdk)
 - [logi-cmd/agent-guardrails — merge gates and scope validation](https://github.com/logi-cmd/agent-guardrails) — orçamentos de violação, tiers de severidade
 - [Dev|Journal, Preventing AI Agent Configuration Drift with Agent Contract Testing](https://earezki.com/ai-news/2026-05-05-i-built-a-tiny-ci-tool-to-keep-ai-agent-configs-from-derivaing-in-my-repo/) — modo `--strict` sem deps externas
-- [Agentic Coding Is Not a Trap (production logs)](https://dev.to/jtorchia/agentic-coding-is-not-a-trap-i-answered-the-viral-hn-post-with-my-own-production-logs-33d9) — receitas do especificaçãosmaxxing: 52% → 21%
+- [Agentic Coding Is Not a Trap (production logs)](https://dev.to/jtorchia/agentic-coding-is-not-a-trap-i-answered-the-viral-hn-post-with-my-own-production-logs-33d9) — receitas do especificaçõesmaxxing: 52% → 21%
 - [OpenCode permission globs](https://opencode.ai/docs/agents/) — escopo por permissão de granularidade fina
 - [Knostic, AI Coding Agent Security: Threat Models and Protection Strategies](https://www.knostic.ai/blog/ai-coding-agent-security) — escopo como parte do menor privilégio
 - [Augment Code, AI Spec Template](https://www.augmentcode.com/guides/ai-especificação-template) — sistema de limites em três níveis (must/ask/never)
 - Fase 14 · 27 — defesas contra prompt injection que combinam com restrições de escopo
-- Fase 14 · 33 — o conjunto de regras que esse contrato eespecificaçãoializa por tarefa
+- Fase 14 · 33 — o conjunto de regras que esse contrato especializa por tarefa
 - Fase 14 · 38 — o verification gate que o verificador reporta

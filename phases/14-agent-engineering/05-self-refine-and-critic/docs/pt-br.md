@@ -49,7 +49,7 @@ Fraqueza do Self-Refine: o passo de feedback é um LLM se pontuando. Pra afirma�
 - Um mecanismo de busca pra afirmações factuais.
 - Um interpretador de código pra correção de código.
 - Uma calculadora pra aritmética.
-- Verificadores eespecificaçãoíficos de domínio (testes unitários, type checkers, linters).
+- Verificadores específicos de domínio (testes unitários, type checkers, linters).
 
 O verificador produz uma crítica estruturada ancorada em resultados de ferramenta. O refinator depois condiciona nessa crítica.
 

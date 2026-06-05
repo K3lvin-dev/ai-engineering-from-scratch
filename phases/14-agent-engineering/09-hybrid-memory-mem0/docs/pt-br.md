@@ -14,7 +14,7 @@
 - Descrever a pontuação de fusão do Mem0 — relevância, importância, recenticidade — e por que é uma soma ponderada, não uma hierarquia.
 - Implementar uma memória de três armazenamentos em stdlib com um `add()` que escreve nos três e um `search()` que funde resultados.
 
-## O Problemo
+## O Problema
 
 Um armazenamento só erra em uma de três classes de consulta:
 

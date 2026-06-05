@@ -42,7 +42,7 @@ Cada vendor inventa seus próprios nomes de span. Times de ops acabam construind
 - `gen_ai.operation.name` — `chat`, `completion`, `invoke_agent`, `tool_call`.
 - `gen_ai.data_source.id` — pra RAG: qual corpus ou store foi consultado.
 
-Convenções eespecificaçãoíficas por tecnologia existem pra Anthropic, Azure AI Inference, AWS Bedrock, OpenAI.
+Convenções específicas por tecnologia existem pra Anthropic, Azure AI Inference, AWS Bedrock, OpenAI.
 
 ### Content capture
 
@@ -103,7 +103,7 @@ Saída: uma árvore de spans com todos os atributos GenAI necessários, e um "st
 
 1. Instrumente seu loop ReAct da Aula 01 com `invoke_agent` (INTERNAL) + spans por tool. Envie pra uma instância do Jaeger.
 2. Adicione content capture no modo "só referências": prompts no SQLite, atributos de span carregam só IDs de linha.
-3. Leia a eespecificaçãoificação de `gen_ai.data_source.id`. Conecte-o na sua busca Mem0 da Aula 09.
+3. Leia a especificação de `gen_ai.data_source.id`. Conecte-o na sua busca Mem0 da Aula 09.
 4. Set `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` e verifique se seus atributos não são renomeados pelo collector.
 5. Construa um dashboard: "quais erros de ferramenta se correlacionam com quais modelos" usando só atributos GenAI.
 
@@ -122,7 +122,7 @@ Saída: uma árvore de spans com todos os atributos GenAI necessários, e um "st
 
 ## Leitura Complementar
 
-- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — a especificação
+- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — a especificação
 - [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/) — GenAI spans por padrão
 - [AutoGen v0.4 (Microsoft Research)](https://www.microsoft.com/en-us/research/articles/autogen-v0-4-reimagining-the-foundation-of-agentic-ai-for-scale-extensibility-and-robustness/) — OTel spans built-in
 - [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) — propagação W3C trace context

@@ -1,6 +1,6 @@
 # Observabilidade de Agent: Langfuse, Phoenix, Opik
 
-> Três plataformas de observabilidade de agentes open-source dominam 2026. Langfuse (MIT) — 6M+ installs/mês, tracing + gestão de prompts + evals + replay de sessão. Arize Phoenix (Elastic 2.0) — evals profundas eespecificaçãoíficas pra agentes, relevância de RAG, auto-instrumentação OpenInference. Comet Opik (Apache 2.0) — otimização automática de prompts, guardrails, detecção de alucinação por LLM-judge.
+> Três plataformas de observabilidade de agentes open-source dominam 2026. Langfuse (MIT) — 6M+ installs/mês, tracing + gestão de prompts + evals + replay de sessão. Arize Phoenix (Elastic 2.0) — evals profundas específicas pra agentes, relevância de RAG, auto-instrumentação OpenInference. Comet Opik (Apache 2.0) — otimização automática de prompts, guardrails, detecção de alucinação por LLM-judge.
 
 **Tipo:** Aprender
 **Linguagens:** Python (stdlib)
@@ -29,7 +29,7 @@ OTel GenAI (Aula 23) te dá o schema. Você ainda precisa da plataforma que inge
 
 ### Arize Phoenix (Elastic License 2.0)
 
-- Eval eespecificaçãoíficas pra agentes mais profundas: clustering de traces, detecção de anomalias, relevância de recuperação pra RAG.
+- Eval específicas pra agentes mais profundas: clustering de traces, detecção de anomalias, relevância de recuperação pra RAG.
 - Auto-instrumentação OpenInference nativa.
 - Complementa o Arize AX gerenciado pra produção.
 - Sem versionamento de prompts — posicionado como ferramenta de deriva/regressão comportamental ao lado de plataformas mais amplas.
@@ -116,4 +116,4 @@ Saída: scores de eval por sessão e categorização de falhas correspondente ao
 - [Langfuse docs](https://langfuse.com/) — tracing, evals, gestão de prompts
 - [Arize Phoenix docs](https://docs.arize.com/phoenix) — auto-instrumentação, deriva
 - [Comet Opik](https://www.comet.com/site/products/opik/) — otimização + guardrails
-- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/) — o schema que todos três consomem
+- [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — o schema que todos três consomem

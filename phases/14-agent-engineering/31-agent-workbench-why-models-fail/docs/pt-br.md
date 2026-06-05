@@ -125,7 +125,7 @@ A conclusão não é "harness ganha pra sempre." Modelos absorvem truques de har
 Essa é a parte que você não precisa ser educado sobre.
 
 - O *Anatomy of an Agent Harness* da LangChain enumera onze componentes — prompts, ferramentas, hooks, sandboxes, orquestração, memória, skills, subagents e um runtime "loop burro." Não nomeia queues, workers como unidade de deploy, semânticas de triggers, persistência de sessão como preocupação separada, ou política de autorização. Trata o harness como um objeto que você configura, não como um sistema que você deploya.
-- O *Agent Harness Engineering* do Addy Osmani acerta o enquadramento `Agent = Model + Harness` e o padrão ratchet, mas não diz de que o harness é feito. Soa como uma posição, não como uma eespecificaçãoificação.
+- O *Agent Harness Engineering* do Addy Osmani acerta o enquadramento `Agent = Model + Harness` e o padrão ratchet, mas não diz de que o harness é feito. Soa como uma posição, não como uma especificação.
 - Anthropic e OpenAI vão mais fundo nas superfícies mas ficam dentro dos seus próprios runtimes. O anúncio de "sepuração harness-compute" no Agents SDK de abril de 2026 é o primeiro artigo de vendor que endossa explicitamente a separação plano de controle / plano de dados. Isso é uma ideia primitiva, não nova.
 - O livro agentic_harness trata o harness como objeto de configuração (Jaymin West, *Agentic Engineering*, capítulo 6) e a frase mais forte é "o harness é a fronteira de segurança primária em um sistema agentic." Isso é só política de autorização, reformulada.
 - As threads do Hacker News chegam sempre no mesmo lugar. A thread de abril de 2026 *The agente harness belongs outside the sandbox* argumenta que o harness deveria ficar "mais como um hypervisor que fica fora de tudo e autoriza acesso baseado em contexto e usuário." Isso é, de novo, política de autorização como plano separado.
@@ -192,7 +192,7 @@ Artigos de vendors:
 - [LangChain, The Anatomy of an Agent Harness](https://blog.langchain.com/the-anatomy-of-an-agent-harness/) — onze componentes: prompts, ferramentas, hooks, orquestração, sandboxes, memória, skills, subagents, runtime; omite queues, deploy, authz
 - [OpenAI, Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/) — visão do time Codex sobre as superfícies ao redor do runtime
 - [OpenAI, Unrolling the Codex agente loop](https://openai.com/index/unrolling-the-codex-agent-loop/) — o agente loop reduzido a um `while` sobre chamadas de function
-- [Anthropic, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — superfícies de horizonte longo dentro de um runtime eespecificaçãoífico
+- [Anthropic, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) — superfícies de horizonte longo dentro de um runtime específico
 - [Anthropic, Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) — notas de design aplicado
 - [LangChain Deep Agents harness capabilities](https://docs.langchain.com/oss/python/deepagents/harness) — superfície de configuração do runtime
 

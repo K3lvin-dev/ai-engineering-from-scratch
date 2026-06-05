@@ -86,7 +86,7 @@ Saída: trace por chamada mostrando veredictos do validador e comportamento do e
 - **Guardrails do OpenAI Agents SDK** (Aula 16) — padrão built-in estilo PVE.
 - **Serviço de segurança do Gemini 2.5 Computer Use** — por passo, gerenciado pelo vendor.
 - **Melhores práticas de uso de ferramentas da Anthropic** — trate conteúdo recuperado como não-confiável; o system prompt do Claude discute isso explicitamente.
-- **PVE customizado** — seu próprio modelo validador pra padrões de injeção eespecificaçãoíficos do domínio.
+- **PVE customizado** — seu próprio modelo validador pra padrões de injeção específicos do domínio.
 
 ## Entregue
 

@@ -55,7 +55,7 @@ Implicações:
 ### Instantiações práticas de 2026
 
 - **Anthropic orchestrator-workers** (Aula 12) — uma variante de debate com etapa de síntese.
-- **LangGraph supervisor** (Aula 13) — roteador central + agentes eespecificaçãoialistas podem implementar debate como um nó.
+- **LangGraph supervisor** (Aula 13) — roteador central + agentes especialistas podem implementar debate como um nó.
 - **OpenAI Agents SDK** (Aula 16) — agentes fazem handoff pra lá e pra cá pra critique iterativo.
 - **Evals multi-agente** — combine debate + evaluator-optimizer pra sinal de eval.
 
@@ -86,7 +86,7 @@ Saída: acurácia e custo por protocolo; esparsa empata com full mesh em 2/3 per
 
 - **Anthropic orchestrator-workers** pra debates simples de 2-3 workers.
 - **LangGraph** pra debate multi-rodada stateful com checkpointing.
-- **Custom** pra pesquisa ou garantias eespecificaçãoializadas de correção.
+- **Custom** pra pesquisa ou garantias especializadas de correção.
 
 ## Entregue
 

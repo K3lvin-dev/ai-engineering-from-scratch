@@ -38,15 +38,15 @@ A superfície do CrewAI é pequena. Memorize isso e o resto é configuração.
 
 Agents não se veem diretamente. Tasks referenciam agents. A Crew sequencia tasks. O Process decide quem escolhe a próxima task. Esse é o modelo mental inteiro.
 
-> **Validado contra** CrewAI 0.86 (2026-05). Versões mais recentes podem renomear ou mesclar tipos de processos; cheque a [documentação de CrewAI Processes](https://docs.crewai.com/concepts/processes) antes de depender de uma forma eespecificaçãoífica.
+> **Validado contra** CrewAI 0.86 (2026-05). Versões mais recentes podem renomear ou mesclar tipos de processos; cheque a [documentação de CrewAI Processes](https://docs.crewai.com/concepts/processes) antes de depender de uma forma específica.
 
 ### Sequential vs Hierarchical vs Consensus
 
 - **Sequential.** Tasks rodam na ordem de declaração. Saída da task N está disponível como `context` pra task N+1. Menor custo. Mais previsível. Use quando a ordem é fixa.
-- **Hierarchical.** Um Agent manager (chamada de LLM separada) roteia entre eespecificaçãoialistas. CrewAI cria o manager da sua config `manager_llm` ou um padrão. O manager escolhe a próxima task a cada rodada e pode recusar ou re-rotear. Use quando você tem quatro ou mais eespecificaçãoialistas e a ordem genuinamente depende da saída anterior.
+- **Hierarchical.** Um Agent manager (chamada de LLM separada) roteia entre especialistas. CrewAI cria o manager da sua config `manager_llm` ou um padrão. O manager escolhe a próxima task a cada rodada e pode recusar ou re-rotear. Use quando você tem quatro ou mais especialistas e a ordem genuinamente depende da saída anterior.
 - **Consensus.** Planejado, não implementado na API pública. A documentação reserva o nome pra um processo futuro baseado em voto. Não dependa disso hoje.
 
-Hierarchical adiciona uma chamada de LLM por rodada (o manager) em cima de cada chamada de eespecificaçãoialista. Custo em tokens pode triplicar numa execução de cinco etapas. Pague só quando precisar do roteamento.
+Hierarchical adiciona uma chamada de LLM por rodada (o manager) em cima de cada chamada de especialista. Custo em tokens pode triplicar numa execução de cinco etapas. Pague só quando precisar do roteamento.
 
 ### Crews vs Flows
 
@@ -129,7 +129,7 @@ Independente de LangChain. Python 3.10 a 3.13. Usa `uv`. Contagem de stars: veja
 ### Onde esse padrão dá errado
 
 - **Inchaço de prompt de backstories.** Um backstory de 2000 palavras por agente e uma crew de cinco agentes queima o orçamento de contexto antes da primeira chamada de ferramenta. Mantenha backstories abaixo de 200 palavras. Reuse frases entre agents; não repita o estilo cinco vezes.
-- **Imposto de tokens do manager-LLM.** Processo Hierarchical adiciona uma chamada de LLM do manager antes de cada chamada de eespecificaçãoialista. Numa crew de cinco tasks são seis chamadas de LLM em vez de cinco, e a chamada do manager carrega a lista completa de tasks mais saídas anteriores. Mude pra Sequential a menos que roteamento dependa da saída.
+- **Imposto de tokens do manager-LLM.** Processo Hierarchical adiciona uma chamada de LLM do manager antes de cada chamada de especialista. Numa crew de cinco tasks são seis chamadas de LLM em vez de cinco, e a chamada do manager carrega a lista completa de tasks mais saídas anteriores. Mude pra Sequential a menos que roteamento dependa da saída.
 - **Handoffs frágeis.** `expected_output` da task N é "um esboço." Task N+1 lê como `context` e tenta parsear três seções. O LLM produziu quatro. O agente downstream improvisa. Conserte com `output_pydantic` na task N pra que N+1 leia um objeto tipado, não texto livre.
 - **Crew como produção.** Crew de forma livre entregue em produção sem wrapper de Flow. Variabilidade de saída é alta; replay é impossível; on-call não consegue diff de uma execução ruim contra uma boa. Enrole com um Flow.
 
@@ -141,7 +141,7 @@ Forma:
 
 - `Agent`, `Task` dataclasses combinando com a superfície do CrewAI.
 - `SequentialCrew.kickoff(inputs)` roda tasks na ordem de declaração, passando saídas como `context`.
-- `HierarchicalCrew.kickoff(topic)` adiciona um Agent manager escolhendo o próximo eespecificaçãoialista a cada rodada, para em "done."
+- `HierarchicalCrew.kickoff(topic)` adiciona um Agent manager escolhendo o próximo especialista a cada rodada, para em "done."
 - `Flow` com decorators `@start` e `@listen(topic)`, um mini loop de eventos e um trace.
 - Decorator `tool(name)` espelhando a forma `@tool` do CrewAI.
 - `Memory` com armazenamentos `short_term`, `long_term`, `entity`; similaridade mock usa numpy.
@@ -162,8 +162,8 @@ O trace da Crew é fluido; o manager poderia em princípio reordenar. O trace do
 ## Use
 
 - **CrewAI Flow** pra produção. Mesmo quando o Flow é uma etapa que chama `Crew.kickoff()`. O Flow dá o limite de auditoria.
-- **CrewAI Crew (Sequential)** pra trabalho colaborativo de ordem clara, eespecificaçãoialmente primeiros rascunhos e loops de revisão.
-- **CrewAI Crew (Hierarchical)** quando roteamento depende da saída e você tem quatro ou mais eespecificaçãoialistas.
+- **CrewAI Crew (Sequential)** pra trabalho colaborativo de ordem clara, especialmente primeiros rascunhos e loops de revisão.
+- **CrewAI Crew (Hierarchical)** quando roteamento depende da saída e você tem quatro ou mais especialistas.
 - **LangGraph** (Aula 13) pra máquinas de estados explícitas, resume durável, ordenação rígida.
 - **AutoGen v0.4** (Aula 14) pra concorrência de modelo ator e isolamento de falhas.
 - **OpenAI Agents SDK** (Aula 16) pra produtos OpenAI-first com handoffs e guardrails.
@@ -171,7 +171,7 @@ O trace da Crew é fluido; o manager poderia em princípio reordenar. O trace do
 
 ## Entregue
 
-`outputs/skill-crew-or-flow.md` escolhe Crew vs Flow pra uma tarefa e scaffolds a implementação mínima. Rejeições rígidas em Crew-sem-backstory, Flow-sem-topics-explícitos, Hierarchical com menos de três eespecificaçãoialistas.
+`outputs/skill-crew-or-flow.md` escolhe Crew vs Flow pra uma tarefa e scaffolds a implementação mínima. Rejeições rígidas em Crew-sem-backstory, Flow-sem-topics-explícitos, Hierarchical com menos de três especialistas.
 
 ## Armadilhas
 
