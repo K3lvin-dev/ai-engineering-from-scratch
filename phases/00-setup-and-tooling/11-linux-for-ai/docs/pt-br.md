@@ -2,7 +2,7 @@
 
 > A maioria da IA roda em Linux. Você precisa saber o suficiente pra não ficar travado.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** --
 **Pré-requisitos:** Fase 0, Aula 01
 **Tempo:** ~30 minutos
@@ -137,7 +137,29 @@ sudo comando                # Rodar um comando como root
 sudo su                     # Tornar root (exit pra voltar, usar com moderação)
 ```
 
-Em instâncias de GPU na nuvem, você geralmente é o único usuário e já tem acesso sudo.
+Em instâncias de GPU na nuvem, você geralmente é o único usuário e já tem acesso sudo. Não rode tudo como root. Use sudo só quando necessário.
+
+## Processos e systemd
+
+Quando seu treino trava, ou você precisa verificar o que está rodando:
+
+```bash
+htop                        # Visualizador interativo de processos (q pra sair)
+ps aux | grep python        # Encontrar processos Python rodando
+kill 12345                  # Parar gentilmente processo com PID 12345
+kill -9 12345               # Forçar parada (use quando o gentil não funciona)
+nvidia-smi                  # Processos GPU e uso de memória
+```
+
+systemd gerencia serviços (daemons em background). Você vai usar se rodar servidores de inferência:
+
+```bash
+sudo systemctl start nginx          # Iniciar um serviço
+sudo systemctl stop nginx           # Pará-lo
+sudo systemctl restart nginx        # Reiniciá-lo
+sudo systemctl status nginx         # Verificar se está rodando
+sudo systemctl enable nginx         # Iniciar automaticamente na inicialização
+```
 
 ## Disco
 
@@ -150,19 +172,36 @@ du -sh ~/.cache             # Tamanho do seu cache (pip, modelos huggingface fic
 du -h --max-depth=1 / 2>/dev/null | sort -hr | head -20
 ```
 
+Economizadores de espaço comuns:
+
+```bash
+# Limpar cache do pip
+pip cache purge
+
+# Limpar cache do apt
+sudo apt clean
+
+# Remover checkpoints antigos que não precisa mais
+rm -rf checkpoints/experimento-falhou/
+rm -rf ~/.cache/huggingface/hub/
+```
+
 ## Networking
 
 ```bash
 # Baixar arquivos
 wget https://exemplo.com/model.bin
 curl -O https://exemplo.com/data.tar.gz
+curl -s https://api.exemplo.com/health | python3 -m json.tool  # Chamar API, formatar JSON
 
 # Transferir arquivos entre máquinas
 scp model.bin user@remote:/data/
 scp user@remote:/data/results.csv ./
+scp -r user@remote:/data/checkpoints/ ./local-dir/
 
 # Sincronizar diretórios (mais rápido que scp pra transferências grandes)
 rsync -avz --progress ./data/ user@remote:/data/
+rsync -avz --progress user@remote:/results/ ./results/
 ```
 
 Use `rsync` ao invés de `scp` pra qualquer coisa grande. Ele transfere só bytes alterados e lida com conexões interrompidas.

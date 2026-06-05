@@ -2,7 +2,7 @@
 
 > Controle de versão não é opcional. Cada experimento, cada modelo, cada aula que você construir aqui fica rastreado.
 
-**Tipo:** Learn
+**Tipo:** Aprender
 **Linguagens:** --
 **Pré-requisitos:** Fase 0, Aula 01
 **Tempo:** ~30 minutos
