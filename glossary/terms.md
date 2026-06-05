@@ -3,384 +3,384 @@
 ## A
 
 ### Agent
-- **What people say:** "An autonomous AI that thinks and acts on its own"
-- **What it actually means:** A while loop where an LLM decides what tool to call next, executes it, sees the result, and repeats
-- **Why it's called that:** Borrowed from philosophy — an "agent" is anything that can act in the world. In AI, it just means "LLM + tools + loop"
+- **What people say:** "Um AI autônomo que pensa e age por conta própria"
+- **What it actually means:** Um loop while onde um LLM decide qual ferramenta chamar em seguida, executa, vê o resultado e repete
+- **Por que é chamado assim:** Emprestado da filosofia — um "agente" é qualquer coisa que pode agir no mundo. Em AI, significa apenas "LLM + ferramentas + loop"
 
 ### Attention
-- **What people say:** "How the AI focuses on important parts"
-- **What it actually means:** A mechanism where every token computes a weighted sum of all other tokens' values, with weights determined by how relevant they are (via dot product of query and key vectors)
-- **Why it's called that:** The 2017 paper "Attention Is All You Need" named it by analogy to human selective attention
+- **What people say:** "Como o AI foca nas partes importantes"
+- **What it actually means:** Um mecanismo onde cada token calcula uma soma ponderada dos valores de todos os outros tokens, com pesos determinados por quão relevantes eles são (via dot product dos vetores query e key)
+- **Por que é chamado assim:** O artigo de 2017 "Attention Is All You Need" nomeou assim por analogia à atenção seletiva humana
 
 ### Alignment
-- **What people say:** "Making AI safe"
-- **What it actually means:** The technical challenge of making an AI system's behavior match human intentions, values, and preferences, including edge cases the designer didn't anticipate
+- **What people say:** "Tornando o AI seguro"
+- **What it actually means:** O desafio técnico de fazer o comportamento de um sistema de AI corresponder às intenções, valores e preferências humanas, incluindo casos extremos que o designer não antecipou
 
 ### Autoregressive
-- **What people say:** "The AI generates one word at a time"
-- **What it actually means:** A model that predicts the next token conditioned on all previous tokens, then feeds that prediction back as input for the next step. GPT, LLaMA, and Claude are all autoregressive.
+- **What people say:** "O AI gera uma palavra de cada vez"
+- **What it actually means:** Um modelo que prevê o próximo token condicionado em todos os tokens anteriores, então alimenta essa previsão de volta como entrada para o próximo passo. GPT, LLaMA e Claude são todos autoregressivos.
 
 ### Activation Function
-- **What people say:** "The nonlinear thing between layers"
-- **What it actually means:** A function applied after each linear layer that introduces nonlinearity. Without it, stacking any number of linear layers collapses to a single linear transformation. ReLU, GELU, and SiLU are the most common. The choice directly affects whether gradients flow during training.
+- **What people say:** "A coisa não linear entre as camadas"
+- **What it actually means:** Uma função aplicada após cada camada linear que introduz não linearidade. Sem ela, empilhar qualquer número de camadas lineares colapsa em uma única transformação linear. ReLU, GELU e SiLU são as mais comuns. A escolha afeta diretamente se os gradientes fluem durante o treinamento.
 
 ### Adam (Optimizer)
-- **What people say:** "The default optimizer"
-- **What it actually means:** Adaptive Moment Estimation. Combines momentum (first moment) with adaptive learning rates per parameter (second moment). Has bias correction for early steps. Works well across most tasks without much tuning.
+- **What people say:** "O optimizer padrão"
+- **What it actually means:** Adaptive Moment Estimation. Combina momentum (primeiro momento) com taxas de aprendizado adaptativas por parâmetro (segundo momento). Tem correção de viés para passos iniciais. Funciona bem na maioria das tarefas sem muito ajuste.
 
 ### AdamW
-- **What people say:** "Adam but better"
-- **What it actually means:** Adam with decoupled weight decay. In standard Adam, L2 regularization gets scaled by the adaptive learning rate per parameter, which is not what you want. AdamW applies weight decay directly to the weights, independent of the gradient statistics. The default optimizer for training transformers.
+- **What people say:** "Adam, mas melhor"
+- **What it actually means:** Adam com weight decay desacoplado. No Adam padrão, a regularização L2 é escalada pela taxa de aprendizado adaptativa por parâmetro, o que não é o desejado. AdamW aplica weight decay diretamente aos pesos, independente das estatísticas do gradiente. O optimizer padrão para treinar transformers.
 
 ### Autograd
-- **What people say:** "Automatic gradients"
-- **What it actually means:** A system that records operations on tensors and automatically computes gradients via reverse-mode differentiation. PyTorch's autograd builds a computation graph on-the-fly (dynamic graph), while JAX uses function transformations (grad). This is what makes backpropagation practical -- you write the forward pass, and the framework computes all the derivatives.
+- **What people say:** "Gradientes automáticos"
+- **What it actually means:** Um sistema que registra operações em tensores e calcula automaticamente gradientes via diferenciação em modo reverso. O autograd do PyTorch constrói um grafo de computação em tempo real (grafo dinâmico), enquanto JAX usa transformações de funções (grad). É isso que torna a backpropagation prática — você escreve o forward pass, e o framework calcula todas as derivadas.
 
 ## B
 
 ### Batch Size
-- **What people say:** "How many examples at once"
-- **What it actually means:** The number of training examples processed in one forward/backward pass before updating weights. Larger batches give more stable gradient estimates but use more memory. Typical values: 32-512 for training, larger for inference. Batch size interacts with learning rate -- double the batch, double the LR (linear scaling rule).
+- **What people say:** "Quantos exemplos de uma vez"
+- **What it actually means:** O número de exemplos de treinamento processados em um único forward/backward pass antes de atualizar os pesos. Lotes maiores dão estimativas de gradiente mais estáveis, mas usam mais memória. Valores típicos: 32-512 para treinamento, maior para inferência. Batch size interage com a learning rate — dobre o batch, dobre a LR (linear scaling rule).
 
 ### Backpropagation
-- **What people say:** "How neural networks learn"
-- **What it actually means:** An algorithm that computes how much each weight contributed to the error by applying the chain rule backward through the network, then adjusts weights proportionally
-- **Why it's called that:** Errors propagate backward from output to input, layer by layer
+- **What people say:** "Como as redes neurais aprendem"
+- **What it actually means:** Um algoritmo que calcula o quanto cada peso contribuiu para o erro aplicando a regra da cadeia de trás para frente na rede, então ajusta os pesos proporcionalmente
+- **Por que é chamado assim:** Erros se propagam para trás, da saída para a entrada, camada por camada
 
 ## C
 
 ### Context Window
-- **What people say:** "How much the AI can remember"
-- **What it actually means:** The maximum number of tokens (input + output) that fit in a single API call. Not memory — it's a fixed-size buffer that resets every call
+- **What people say:** "Quanto o AI consegue lembrar"
+- **What it actually means:** O número máximo de tokens (entrada + saída) que cabem em uma única chamada de API. Não é memória — é um buffer de tamanho fixo que reset a cada chamada
 
 ### Chain of Thought (CoT)
-- **What people say:** "Making the AI think step by step"
-- **What it actually means:** A prompting technique where you ask the model to show its reasoning steps, which improves accuracy on multi-step problems because each step conditions the next token generation
+- **What people say:** "Fazendo o AI pensar passo a passo"
+- **What it actually means:** Uma técnica de prompt onde você pede ao modelo para mostrar seus passos de raciocínio, o que melhora a precisão em problemas de múltiplas etapas porque cada passo condiciona a geração do próximo token
 
 ### CNN (Convolutional Neural Network)
-- **What people say:** "Image AI"
-- **What it actually means:** A neural network that uses convolution operations (sliding filters over the input) to detect local patterns. Stacking convolutions detects increasingly complex features: edges, textures, objects.
+- **What people say:** "AI de imagens"
+- **What it actually means:** Uma rede neural que usa operações de convolução (filtros deslizantes sobre a entrada) para detectar padrões locais. Empilhar convoluções detecta características cada vez mais complexas: bordas, texturas, objetos.
 
 ### CUDA
-- **What people say:** "GPU programming"
-- **What it actually means:** NVIDIA's parallel computing platform. Lets you run matrix operations on thousands of GPU cores simultaneously. PyTorch and TensorFlow use CUDA under the hood.
+- **What people say:** "Programação de GPU"
+- **What it actually means:** Plataforma de computação paralela da NVIDIA. Permite rodar operações matriciais em milhares de núcleos de GPU simultaneamente. PyTorch e TensorFlow usam CUDA internamente.
 
 ### Chunking
-- **What people say:** "Splitting documents into pieces"
-- **What it actually means:** Breaking text into segments before embedding for retrieval. Chunk size determines the granularity of search results. Too small: loses context. Too large: dilutes relevance. Common strategies: fixed-size with overlap, sentence-based, or semantic splitting. Typical chunk size: 256-512 tokens with 10-20% overlap.
+- **What people say:** "Dividindo documentos em pedaços"
+- **What it actually means:** Quebrar texto em segmentos antes de embedding para recuperação. O tamanho do chunk determina a granularidade dos resultados de busca. Muito pequeno: perde contexto. Muito grande: dilui a relevância. Estratégias comuns: tamanho fixo com sobreposição, baseado em sentenças, ou divisão semântica. Tamanho típico de chunk: 256-512 tokens com 10-20% de sobreposição.
 
 ### Contrastive Learning
-- **What people say:** "Learning by comparison"
-- **What it actually means:** Training by pulling similar pairs closer and pushing dissimilar pairs apart in embedding space. CLIP uses this: matching image-text pairs vs non-matching ones.
+- **What people say:** "Aprendendo por comparação"
+- **What it actually means:** Treinamento aproximando pares similares e afastando pares dissimilares no espaço de embedding. CLIP usa isso: combinando pares imagem-texto vs pares não correspondentes.
 
 ### Cosine Similarity
-- **What people say:** "How similar two vectors are"
-- **What it actually means:** The cosine of the angle between two vectors: dot(a, b) / (||a|| * ||b||). Ranges from -1 (opposite) to 1 (identical direction). Ignores magnitude, only cares about direction. The standard similarity metric for embeddings and semantic search.
+- **What people say:** "O quão similares dois vetores são"
+- **What it actually means:** O cosseno do ângulo entre dois vetores: dot(a, b) / (||a|| * ||b||). Varia de -1 (oposto) a 1 (direção idêntica). Ignora magnitude, só considera direção. A métrica de similaridade padrão para embeddings e busca semântica.
 
 ### Cross-Entropy
-- **What people say:** "The classification loss"
-- **What it actually means:** Measures the difference between two probability distributions. For classification: -sum(y_true * log(y_pred)). For language models: the negative log probability of the correct next token. Lower is better. Perplexity is just exp(cross-entropy).
+- **What people say:** "A loss de classificação"
+- **What it actually means:** Mede a diferença entre duas distribuições de probabilidade. Para classificação: -sum(y_true * log(y_pred)). Para modelos de linguagem: a log-probabilidade negativa do próximo token correto. Menor é melhor. Perplexity é apenas exp(cross-entropy).
 
 ## D
 
 ### Data Augmentation
-- **What people say:** "Making more training data"
-- **What it actually means:** Creating modified copies of existing data (rotate images, add noise, paraphrase text) to increase training set diversity without collecting new data. Reduces overfitting.
+- **What people say:** "Criando mais dados de treinamento"
+- **What it actually means:** Criar cópias modificadas de dados existentes (rotacionar imagens, adicionar ruído, parafrasear texto) para aumentar a diversidade do conjunto de treinamento sem coletar novos dados. Reduz overfitting.
 
 ### Decoder
-- **What people say:** "The output part"
-- **What it actually means:** In transformers, a decoder uses causal (masked) self-attention so each position can only attend to earlier positions. GPT is decoder-only. BERT is encoder-only. T5 is encoder-decoder.
+- **What people say:** "A parte de saída"
+- **What it actually means:** Em transformers, um decoder usa self-attention causal (mascarada) para que cada posição só possa atender a posições anteriores. GPT é decoder-only. BERT é encoder-only. T5 é encoder-decoder.
 
 ### Diffusion Model
-- **What people say:** "AI that generates images from noise"
-- **What it actually means:** A model trained to reverse a gradual noising process — it learns to predict and remove noise, and at generation time starts from pure noise and iteratively denoises
+- **What people say:** "AI que gera imagens a partir de ruído"
+- **What it actually means:** Um modelo treinado para reverter um processo gradual de adição de ruído — ele aprende a prever e remover ruído, e no momento da geração começa a partir de ruído puro e iterativamente remove o ruído
 
 ### DPO (Direct Preference Optimization)
-- **What people say:** "A simpler RLHF"
-- **What it actually means:** A training method that skips the reward model entirely — it directly optimizes the language model to prefer the better response in pairs of human preferences
+- **What people say:** "Um RLHF mais simples"
+- **What it actually means:** Um método de treinamento que pula o reward model completamente — ele otimiza diretamente o modelo de linguagem para preferir a melhor resposta em pares de preferências humanas
 
 ### Dropout
-- **What people say:** "Randomly turning off neurons"
-- **What it actually means:** During training, randomly set a fraction of activations to zero. Forces the network to not rely on any single neuron. Turned off during inference. Simple but effective regularization.
+- **What people say:** "Desligando neurônios aleatoriamente"
+- **What it actually means:** Durante o treinamento, definir aleatoriamente uma fração das ativações para zero. Força a rede a não depender de nenhum neurônio específico. Desligado durante a inferência. Regularização simples, mas eficaz.
 
 ## E
 
 ### Eigenvalue
-- **What people say:** "Some math thing for PCA"
-- **What it actually means:** For a matrix A, an eigenvalue lambda satisfies Av = lambda*v for some vector v. It tells you how much the matrix scales vectors in that direction. Large eigenvalues = directions of high variance in your data.
+- **What people say:** "Uma coisa matemática para PCA"
+- **What it actually means:** Para uma matriz A, um eigenvalue lambda satisfaz Av = lambda*v para algum vetor v. Ele diz o quanto a matriz escala vetores naquela direção. Eigenvalues grandes = direções de alta variância nos seus dados.
 
 ### Embedding
-- **What people say:** "Some AI magic that turns words into numbers"
-- **What it actually means:** A learned mapping from discrete items (words, images, users) to dense vectors in continuous space, where similar items end up close together
-- **Why it's called that:** The items are "embedded" in a geometric space where distance has meaning
+- **What people say:** "Uma magia de AI que transforma palavras em números"
+- **What it actually means:** Um mapeamento aprendido de itens discretos (palavras, imagens, usuários) para vetores densos em um espaço contínuo, onde itens similares ficam próximos
+- **Por que é chamado assim:** Os itens são "incorporados" (embedded) em um espaço geométrico onde a distância tem significado
 
 ### Encoder
-- **What people say:** "The input part"
-- **What it actually means:** In transformers, an encoder uses bidirectional self-attention so each position can attend to all positions. BERT is encoder-only. Good for understanding tasks (classification, NER) but not generation.
+- **What people say:** "A parte de entrada"
+- **What it actually means:** Em transformers, um encoder usa self-attention bidirecional para que cada posição possa atender a todas as posições. BERT é encoder-only. Bom para tarefas de compreensão (classificação, NER), mas não para geração.
 
 ### Epoch
-- **What people say:** "One pass through the data"
-- **What it actually means:** Exactly that. One complete pass through every example in the training set. Multiple epochs = seeing the data multiple times. More epochs can improve learning but risks overfitting.
+- **What people say:** "Uma passada pelos dados"
+- **What it actually means:** Exatamente isso. Uma passada completa por cada exemplo no conjunto de treinamento. Múltiplas epochs = ver os dados várias vezes. Mais epochs podem melhorar o aprendizado, mas aumentam o risco de overfitting.
 
 ## F
 
 ### Feature
-- **What people say:** "A column in your data"
-- **What it actually means:** An individual measurable property of the data. In classical ML, you engineer features by hand. In deep learning, the network learns features automatically from raw data.
+- **What people say:** "Uma coluna nos seus dados"
+- **What it actually means:** Uma propriedade mensurável individual dos dados. Em ML clássico, você engenha features manualmente. Em deep learning, a rede aprende features automaticamente a partir dos dados brutos.
 
 ### Few-Shot
-- **What people say:** "Give the AI some examples first"
-- **What it actually means:** Including a small number of input-output examples in the prompt before asking the model to perform a task. Typically 3-5 examples. The model pattern-matches on these examples to understand the desired format and behavior. Contrast with zero-shot (no examples) and fine-tuning (thousands of examples baked into weights).
+- **What people say:** "Dê alguns exemplos para o AI primeiro"
+- **What it actually means:** Incluir um pequeno número de exemplos de entrada-saída no prompt antes de pedir ao modelo para executar uma tarefa. Tipicamente 3-5 exemplos. O modelo faz pattern-matching nesses exemplos para entender o formato e comportamento desejados. Contrasta com zero-shot (sem exemplos) e fine-tuning (milhares de exemplos incorporados nos pesos).
 
 ### Fine-tuning
-- **What people say:** "Training the AI on your data"
-- **What it actually means:** Starting with a pre-trained model's weights and continuing training on a smaller, task-specific dataset. Only updates existing weights, doesn't add new knowledge from scratch
+- **What people say:** "Treinando o AI nos seus dados"
+- **What it actually means:** Começar com os pesos de um modelo pré-treinado e continuar o treinamento em um conjunto de dados menor e específico para a tarefa. Apenas atualiza pesos existentes, não adiciona novos conhecimentos do zero
 
 ### Function Calling
-- **What people say:** "AI that can use tools"
-- **What it actually means:** A structured way for LLMs to request execution of external functions. You define tools with JSON Schema descriptions, the model outputs a structured JSON object specifying which function to call with what arguments, your code executes it, and the result goes back to the model. Not the same as agents -- function calling is the mechanism, agents are the loop.
+- **What people say:** "AI que pode usar ferramentas"
+- **What it actually means:** Uma forma estruturada de LLMs solicitarem a execução de funções externas. Você define ferramentas com descrições JSON Schema, o modelo gera um objeto JSON estruturado especificando qual função chamar e com quais argumentos, seu código executa e o resultado volta para o modelo. Não é a mesma coisa que agents — function calling é o mecanismo, agents são o loop.
 
 ## G
 
 ### Guardrails
-- **What people say:** "Safety filters for AI"
-- **What it actually means:** Input/output validation layers around an LLM that detect and block harmful content, prompt injection attempts, PII leakage, or off-topic responses. Typically a pipeline: input filter -> LLM -> output filter. Can be rule-based (regex, keyword lists) or model-based (classifier that scores safety).
+- **What people say:** "Filtros de segurança para AI"
+- **What it actually means:** Camadas de validação de entrada/saída em torno de um LLM que detectam e bloqueiam conteúdo prejudicial, tentativas de prompt injection, vazamento de PII ou respostas fora do tópico. Tipicamente um pipeline: filtro de entrada -> LLM -> filtro de saída. Pode ser baseado em regras (regex, listas de palavras-chave) ou baseado em modelo (classificador que avalia segurança).
 
 ### GPT
-- **What people say:** "ChatGPT" or "The AI"
-- **What it actually means:** Generative Pre-trained Transformer — a specific architecture that predicts the next token using a decoder-only transformer trained on large text corpora
-- **Why it's called that:** Generative (produces text), Pre-trained (trained once on large data, then adapted), Transformer (the architecture)
+- **What people say:** "ChatGPT" ou "O AI"
+- **What it actually means:** Generative Pre-trained Transformer — uma arquitetura específica que prevê o próximo token usando um transformer decoder-only treinado em grandes corpora de texto
+- **Por que é chamado assim:** Generative (produz texto), Pre-trained (treinado uma vez em grandes dados, depois adaptado), Transformer (a arquitetura)
 
 ### GAN (Generative Adversarial Network)
-- **What people say:** "Two AIs fighting each other"
-- **What it actually means:** A generator network tries to create realistic data while a discriminator network tries to tell real from fake. They train together: the generator gets better at fooling the discriminator, and the discriminator gets better at detecting fakes.
+- **What people say:** "Dois AIs lutando entre si"
+- **What it actually means:** Uma rede geradora tenta criar dados realistas enquanto uma rede discriminadora tenta distinguir o real do falso. Elas treinam juntas: o gerador melhora em enganar o discriminador, e o discriminador melhora em detectar falsificações.
 
 ### Gradient
-- **What people say:** "The slope"
-- **What it actually means:** A vector of partial derivatives pointing in the direction of steepest increase. In ML, you go opposite to the gradient (gradient descent) to minimize the loss.
+- **What people say:** "A inclinação"
+- **What it actually means:** Um vetor de derivadas parciais apontando na direção de maior aumento. Em ML, você vai na direção oposta ao gradiente (gradient descent) para minimizar a loss.
 
 ### Gradient Descent
-- **What people say:** "How AI improves"
-- **What it actually means:** An optimization algorithm that adjusts parameters in the direction that reduces the loss function most steeply, like walking downhill in a high-dimensional landscape
+- **What people say:** "Como o AI melhora"
+- **What it actually means:** Um algoritmo de otimização que ajusta parâmetros na direção que mais reduz a função de loss, como descer uma colina em uma paisagem de alta dimensionalidade
 
 ## H
 
 ### Hyperparameter
-- **What people say:** "Settings you tune"
-- **What it actually means:** Values set before training that control the training process itself: learning rate, batch size, number of layers, dropout rate. Unlike model parameters (weights), these aren't learned from data.
+- **What people say:** "Configurações que você ajusta"
+- **What it actually means:** Valores definidos antes do treinamento que controlam o próprio processo de treinamento: learning rate, batch size, número de camadas, dropout rate. Diferente dos parâmetros do modelo (pesos), estes não são aprendidos a partir dos dados.
 
 ### Hallucination
-- **What people say:** "The AI is lying" or "making things up"
-- **What it actually means:** The model generates plausible-sounding text that isn't grounded in its training data or the given context — it's pattern-completing, not fact-retrieving
+- **What people say:** "O AI está mentindo" ou "inventando coisas"
+- **What it actually means:** O modelo gera texto que parece plausível, mas não tem base em seus dados de treinamento ou no contexto fornecido — ele está completando padrões, não recuperando fatos
 
 ## I
 
 ### Inference
-- **What people say:** "Running the AI"
-- **What it actually means:** Using a trained model to make predictions on new data. No weight updates happen. This is what you do in production: send input, get output.
+- **What people say:** "Rodando o AI"
+- **What it actually means:** Usar um modelo treinado para fazer previsões em novos dados. Nenhuma atualização de pesos ocorre. É isso que você faz em produção: enviar entrada, obter saída.
 
 ### Inductive Bias
-- **What people say:** Never heard of it
-- **What it actually means:** The assumptions built into a model's architecture. CNNs assume local patterns matter (convolution). RNNs assume order matters (sequential processing). Transformers assume everything might relate to everything (attention). The right bias helps the model learn faster from less data.
+- **What people say:** Nunca ouviu falar
+- **What it actually means:** As suposições embutidas na arquitetura de um modelo. CNNs assumem que padrões locais importam (convolução). RNNs assumem que ordem importa (processamento sequencial). Transformers assumem que tudo pode se relacionar com tudo (attention). O viés certo ajuda o modelo a aprender mais rápido com menos dados.
 
 ### JAX
-- **What people say:** "Google's ML framework"
-- **What it actually means:** A NumPy-compatible library that adds automatic differentiation (grad), JIT compilation (jit), automatic vectorization (vmap), and multi-device parallelism (pmap). Unlike PyTorch's object-oriented style, JAX is purely functional -- no hidden state, no in-place mutation. Used by Google DeepMind for AlphaFold, Gemini, and large-scale research.
+- **What people say:** "O framework de ML do Google"
+- **What it actually means:** Uma biblioteca compatível com NumPy que adiciona diferenciação automática (grad), compilação JIT (jit), vetorização automática (vmap) e paralelismo multi-dispositivo (pmap). Diferente do estilo orientado a objetos do PyTorch, JAX é puramente funcional — sem estado oculto, sem mutação in-place. Usado pelo Google DeepMind para AlphaFold, Gemini e pesquisa em larga escala.
 
 ## K
 
 ### KV Cache
-- **What people say:** "Makes inference faster"
-- **What it actually means:** During autoregressive generation, caching the key and value matrices from previous tokens so you don't recompute them at each step. Trades memory for speed. Essential for fast LLM inference.
+- **What people say:** "Torna a inferência mais rápida"
+- **What it actually means:** Durante a geração autoregressiva, armazenar em cache as matrizes key e value de tokens anteriores para não precisar recalculá-las a cada passo. Troca memória por velocidade. Essencial para inferência rápida de LLMs.
 
 ## L
 
 ### Latent Space
-- **What people say:** "The hidden representation"
-- **What it actually means:** A compressed, learned representation space where similar inputs map to nearby points. Autoencoders, VAEs, and diffusion models all work in latent space. It's lower-dimensional than the input but captures the important structure.
+- **What people say:** "A representação oculta"
+- **What it actually means:** Um espaço de representação comprimido e aprendido onde entradas similares mapeiam para pontos próximos. Autoencoders, VAEs e diffusion models todos trabalham em latent space. É de menor dimensão que a entrada, mas captura a estrutura importante.
 
 ### Learning Rate
-- **What people say:** "How fast the AI learns"
-- **What it actually means:** A scalar that controls step size during gradient descent. Too high: overshoots the minimum and diverges. Too low: converges too slowly or gets stuck. The single most important hyperparameter.
+- **What people say:** "Quão rápido o AI aprende"
+- **What it actually means:** Um escalar que controla o tamanho do passo durante gradient descent. Muito alto: ultrapassa o mínimo e diverge. Muito baixo: converge muito lentamente ou fica preso. O hiperparâmetro mais importante.
 
 ### LLM (Large Language Model)
-- **What people say:** "AI" or "the brain"
-- **What it actually means:** A transformer-based neural network trained to predict the next token in a sequence, with billions of parameters, trained on internet-scale text data
+- **What people say:** "AI" ou "o cérebro"
+- **What it actually means:** Uma rede neural baseada em transformer treinada para prever o próximo token em uma sequência, com bilhões de parâmetros, treinada em dados de texto em escala de internet
 
 ### LoRA (Low-Rank Adaptation)
-- **What people say:** "Efficient fine-tuning"
-- **What it actually means:** Instead of updating all weights, insert small low-rank matrices alongside the original weights. Only these small matrices are trained, reducing memory by 10-100x
+- **What people say:** "Fine-tuning eficiente"
+- **What it actually means:** Em vez de atualizar todos os pesos, inserir pequenas matrizes de baixo posto junto aos pesos originais. Apenas essas matrizes pequenas são treinadas, reduzindo a memória em 10-100x
 
 ### Loss Function
-- **What people say:** "How wrong the AI is"
-- **What it actually means:** A function that measures the gap between predicted and actual output. Training minimizes this function. MSE for regression, cross-entropy for classification, contrastive loss for embeddings. The choice of loss function defines what "good" means to the model.
+- **What people say:** "O quão errado o AI está"
+- **What it actually means:** Uma função que mede a diferença entre a saída prevista e a real. O treinamento minimiza esta função. MSE para regressão, cross-entropy para classificação, contrastive loss para embeddings. A escolha da loss function define o que "bom" significa para o modelo.
 
 ## M
 
 ### Mixed Precision
-- **What people say:** "Training trick for speed"
-- **What it actually means:** Using float16 for forward pass and most operations (faster, less memory) but keeping float32 for gradient accumulation and weight updates (more precise). Gets 2x speedup with negligible accuracy loss.
+- **What people say:** "Truque de treinamento para velocidade"
+- **What it actually means:** Usar float16 para o forward pass e a maioria das operações (mais rápido, menos memória), mas manter float32 para acumulação de gradiente e atualização de pesos (mais preciso). Obtém 2x de aceleração com perda insignificante de precisão.
 
 ### MoE (Mixture of Experts)
-- **What people say:** "Only part of the model runs"
-- **What it actually means:** A model with many "expert" subnetworks where a routing mechanism sends each input to only a few experts. The full model is huge but each forward pass is cheap because most experts are skipped. Mixtral and GPT-4 use this.
+- **What people say:** "Apenas parte do modelo roda"
+- **What it actually means:** Um modelo com muitas sub-redes "especialistas" onde um mecanismo de roteamento envia cada entrada para apenas alguns especialistas. O modelo completo é enorme, mas cada forward pass é barato porque a maioria dos especialistas é ignorada. Mixtral e GPT-4 usam isso.
 
 ### MCP (Model Context Protocol)
-- **What people say:** "A way for AI to use tools"
-- **What it actually means:** An open protocol (JSON-RPC over stdio/HTTP) that standardizes how AI applications connect to external data sources and tools, with typed schemas for tools, resources, and prompts
+- **What people say:** "Um jeito de AI usar ferramentas"
+- **What it actually means:** Um protocolo aberto (JSON-RPC sobre stdio/HTTP) que padroniza como aplicações de AI se conectam a fontes de dados e ferramentas externas, com schemas tipados para ferramentas, recursos e prompts
 
 ## N
 
 ### NaN (Not a Number)
-- **What people say:** "Training crashed"
-- **What it actually means:** A floating-point value indicating undefined results (0/0, inf-inf). In training, NaN loss usually means: learning rate too high, exploding gradients, log of zero, or division by zero. Always the first thing to check when training fails.
+- **What people say:** "O treinamento quebrou"
+- **What it actually means:** Um valor de ponto flutuante indicando resultados indefinidos (0/0, inf-inf). Em treinamento, NaN loss geralmente significa: learning rate muito alta, gradientes explosivos, log de zero ou divisão por zero. Sempre a primeira coisa a verificar quando o treinamento falha.
 
 ### Normalization
-- **What people say:** "Scaling the data"
-- **What it actually means:** Adjusting values to a standard range. Batch normalization normalizes across a batch. Layer normalization normalizes across features. Both stabilize training and allow higher learning rates.
+- **What people say:** "Escalando os dados"
+- **What it actually means:** Ajustar valores para uma faixa padrão. Batch normalization normaliza através de um batch. Layer normalization normaliza através das features. Ambos estabilizam o treinamento e permitem learning rates mais altas.
 
 ## O
 
 ### Overfitting
-- **What people say:** "The model memorized the data"
-- **What it actually means:** The model performs well on training data but poorly on unseen data. It learned the noise, not the signal. Fix with: more data, regularization (dropout, weight decay), early stopping, data augmentation, simpler model.
+- **What people say:** "O modelo memorizou os dados"
+- **What it actually means:** O modelo tem bom desempenho nos dados de treinamento, mas ruim em dados não vistos. Ele aprendeu o ruído, não o sinal. Corrigir com: mais dados, regularização (dropout, weight decay), early stopping, data augmentation, modelo mais simples.
 
 ### Optimizer
-- **What people say:** "The thing that updates weights"
-- **What it actually means:** An algorithm that uses gradients to update model parameters. SGD is the simplest. Adam is the most common. Each optimizer has different properties: convergence speed, memory usage, sensitivity to hyperparameters.
+- **What people say:** "A coisa que atualiza os pesos"
+- **What it actually means:** Um algoritmo que usa gradientes para atualizar os parâmetros do modelo. SGD é o mais simples. Adam é o mais comum. Cada optimizer tem propriedades diferentes: velocidade de convergência, uso de memória, sensibilidade a hiperparâmetros.
 
 ## P
 
 ### Parameter
-- **What people say:** "Model size"
-- **What it actually means:** A learnable value in the model, typically a weight or bias. "7B parameters" means 7 billion learnable numbers. Each float32 parameter takes 4 bytes, so 7B parameters = 28GB of memory just for the weights.
+- **What people say:** "Tamanho do modelo"
+- **What it actually means:** Um valor aprendível no modelo, tipicamente um peso ou viés. "7B parâmetros" significa 7 bilhões de números aprendíveis. Cada parâmetro float32 ocupa 4 bytes, então 7B parâmetros = 28GB de memória só para os pesos.
 
 ### Perplexity
-- **What people say:** "How confused the model is"
-- **What it actually means:** The exponential of the average cross-entropy loss. Lower is better. A perplexity of 10 means the model is as uncertain as if it were choosing uniformly among 10 tokens at each step.
+- **What people say:** "O quão confuso o modelo está"
+- **What it actually means:** O exponencial da cross-entropy loss média. Menor é melhor. Uma perplexity de 10 significa que o modelo está tão incerto quanto se estivesse escolhendo uniformemente entre 10 tokens a cada passo.
 
 ### Precision & Recall
-- **What people say:** "Accuracy metrics"
-- **What it actually means:** Precision = of items you flagged, how many were correct. Recall = of all correct items, how many did you find. They trade off: catching every spam email (high recall) means more false alarms (low precision). F1 score is their harmonic mean. Use precision when false positives are costly, recall when false negatives are costly.
+- **What people say:** "Métricas de acurácia"
+- **What it actually means:** Precision = dos itens que você marcou, quantos estavam corretos. Recall = de todos os itens corretos, quantos você encontrou. Eles se compensam: pegar todo spam (alto recall) significa mais falsos alarmes (baixa precision). F1 score é a média harmônica deles. Use precision quando falsos positivos são custosos, recall quando falsos negativos são custosos.
 
 ### Prompt Engineering
-- **What people say:** "Talking to AI the right way"
-- **What it actually means:** Designing the input text to reliably produce desired outputs -- including system prompts, few-shot examples, format instructions, and chain-of-thought triggers
+- **What people say:** "Falar com AI do jeito certo"
+- **What it actually means:** Projetar o texto de entrada para produzir saídas desejadas de forma confiável — incluindo system prompts, exemplos few-shot, instruções de formato e gatilhos de chain-of-thought
 
 ### Prompt Injection
-- **What people say:** "Hacking the AI with words"
-- **What it actually means:** An attack where malicious text in the input overrides the system prompt or instructions. Direct injection: user types "Ignore previous instructions." Indirect injection: a retrieved document contains hidden instructions. The LLM equivalent of SQL injection. No complete solution exists -- defense is layers of input validation, output filtering, and privilege separation.
+- **What people say:** "Hackeando o AI com palavras"
+- **What it actually means:** Um ataque onde texto malicioso na entrada sobrescreve o system prompt ou as instruções. Injeção direta: usuário digita "Ignore instruções anteriores." Injeção indireta: um documento recuperado contém instruções ocultas. O equivalente a SQL injection para LLMs. Não existe solução completa — a defesa é camadas de validação de entrada, filtragem de saída e separação de privilégios.
 
 ## Q
 
 ### QLoRA
-- **What people say:** "LoRA but cheaper"
-- **What it actually means:** Quantized LoRA. Keeps the frozen base model weights in 4-bit precision (NF4 format) while training LoRA adapters in 16-bit. Reduces memory by another 3-4x compared to standard LoRA. A 7B model that needs 14GB with LoRA fits in 4-6GB with QLoRA. Quality is within 1% of full fine-tuning on most benchmarks.
+- **What people say:** "LoRA, mas mais barato"
+- **What it actually means:** LoRA quantizado. Mantém os pesos congelados do modelo base em precisão de 4 bits (formato NF4) enquanto treina os adaptadores LoRA em 16 bits. Reduz a memória em mais 3-4x comparado ao LoRA padrão. Um modelo de 7B que precisa de 14GB com LoRA cabe em 4-6GB com QLoRA. A qualidade fica dentro de 1% do fine-tuning completo na maioria dos benchmarks.
 
 ## R
 
 ### RAG (Retrieval-Augmented Generation)
-- **What people say:** "AI that can search"
-- **What it actually means:** A pattern where you retrieve relevant documents from a knowledge base (using embedding similarity), stuff them into the prompt, and let the LLM answer based on that context
-- **Why it's called that:** Retrieval (find documents) + Augmented (add to prompt) + Generation (LLM writes the answer)
+- **What people say:** "AI que pode pesquisar"
+- **What it actually means:** Um padrão onde você recupera documentos relevantes de uma base de conhecimento (usando similaridade de embeddings), coloca-os no prompt e deixa o LLM responder com base nesse contexto
+- **Por que é chamado assim:** Retrieval (encontrar documentos) + Augmented (adicionar ao prompt) + Generation (LLM escreve a resposta)
 
 ### RLHF (Reinforcement Learning from Human Feedback)
-- **What people say:** "How they make AI helpful"
-- **What it actually means:** A training pipeline: (1) collect human preferences on model outputs, (2) train a reward model on those preferences, (3) use PPO to optimize the LLM to produce higher-reward outputs
+- **What people say:** "Como eles fazem o AI ser útil"
+- **What it actually means:** Um pipeline de treinamento: (1) coletar preferências humanas sobre saídas do modelo, (2) treinar um reward model nessas preferências, (3) usar PPO para otimizar o LLM a produzir saídas com maior recompensa
 
 ### Quantization
-- **What people say:** "Making the model smaller"
-- **What it actually means:** Reducing the precision of model weights from float32 (4 bytes) to int8 (1 byte) or int4 (0.5 bytes). Trades a small amount of accuracy for 4-8x less memory and faster inference. GPTQ, AWQ, and GGUF are common formats.
+- **What people say:** "Tornando o modelo menor"
+- **What it actually means:** Reduzir a precisão dos pesos do modelo de float32 (4 bytes) para int8 (1 byte) ou int4 (0,5 bytes). Troca um pequeno valor de precisão por 4-8x menos memória e inferência mais rápida. GPTQ, AWQ e GGUF são formatos comuns.
 
 ### ReLU
-- **What people say:** "Activation function"
-- **What it actually means:** Rectified Linear Unit: f(x) = max(0, x). The simplest non-linear activation. Fast to compute, doesn't saturate for positive values. Used everywhere because it works and is cheap. Variants: LeakyReLU, GELU, SiLU.
+- **What people say:** "Função de ativação"
+- **What it actually means:** Rectified Linear Unit: f(x) = max(0, x). A ativação não linear mais simples. Rápida de computar, não satura para valores positivos. Usada em todo lugar porque funciona e é barata. Variantes: LeakyReLU, GELU, SiLU.
 
 ### ROUGE
-- **What people say:** "Summarization metric"
-- **What it actually means:** Recall-Oriented Understudy for Gisting Evaluation. Measures overlap between generated text and reference text. ROUGE-1 counts unigram matches, ROUGE-2 counts bigram matches, ROUGE-L finds the longest common subsequence. Cheap to compute but only measures surface similarity -- two sentences with the same meaning but different words score poorly.
+- **What people say:** "Métrica de sumarização"
+- **What it actually means:** Recall-Oriented Understudy for Gisting Evaluation. Mede a sobreposição entre texto gerado e texto de referência. ROUGE-1 conta correspondências de unigramas, ROUGE-2 conta correspondências de bigramas, ROUGE-L encontra a maior subsequência comum. Barato de computar, mas mede apenas similaridade superficial — duas frases com o mesmo significado, mas palavras diferentes, pontuam mal.
 
 ## S
 
 ### Semantic Search
-- **What people say:** "Smart search that understands meaning"
-- **What it actually means:** Finding documents by meaning rather than keyword matching. Embed the query and all documents into the same vector space, then return documents whose embeddings are closest to the query embedding. "payment failed" finds "transaction declined" even though they share no words. Powered by embedding models + vector databases.
+- **What people say:** "Busca inteligente que entende o significado"
+- **What it actually means:** Encontrar documentos pelo significado em vez de correspondência de palavras-chave. Embedding da consulta e de todos os documentos no mesmo espaço vetorial, depois retornar documentos cujos embeddings estão mais próximos do embedding da consulta. "pagamento falhou" encontra "transação recusada" mesmo sem compartilhar palavras. Alimentado por modelos de embedding + bancos de dados vetoriais.
 
 ### Streaming
-- **What people say:** "Seeing the response appear word by word"
-- **What it actually means:** The LLM sends tokens as they are generated rather than waiting for the complete response. Uses Server-Sent Events (SSE) or WebSocket protocols. Reduces perceived latency from seconds to milliseconds for the first token. Essential for production chat interfaces. Each chunk contains a delta (partial token or word).
+- **What people say:** "Vendo a resposta aparecer palavra por palavra"
+- **What it actually means:** O LLM envia os tokens conforme são gerados, em vez de esperar a resposta completa. Usa protocolos Server-Sent Events (SSE) ou WebSocket. Reduz a latência percebida de segundos para milissegundos para o primeiro token. Essencial para interfaces de chat em produção. Cada chunk contém um delta (token parcial ou palavra).
 
 ### Self-Attention
-- **What people say:** "How the model decides what to focus on"
-- **What it actually means:** Each token computes query, key, and value vectors. Attention weight between two tokens = dot product of their query and key, scaled and softmaxed. Output = weighted sum of value vectors. Lets every token see every other token.
+- **What people say:** "Como o modelo decide no que focar"
+- **What it actually means:** Cada token computa vetores query, key e value. O peso de atenção entre dois tokens = dot product de suas queries e keys, escalado e softmax. Saída = soma ponderada dos vetores value. Permite que cada token veja todos os outros tokens.
 
 ### SFT (Supervised Fine-Tuning)
-- **What people say:** "Teaching the model to follow instructions"
-- **What it actually means:** Fine-tuning a pre-trained model on (instruction, response) pairs. The model learns to generate the response given the instruction. This is what turns a base model into a chat model.
+- **What people say:** "Ensinando o modelo a seguir instruções"
+- **What it actually means:** Fine-tuning de um modelo pré-treinado em pares (instrução, resposta). O modelo aprende a gerar a resposta dada a instrução. É isso que transforma um modelo base em um modelo de chat.
 
 ### Softmax
-- **What people say:** "Turns numbers into probabilities"
-- **What it actually means:** softmax(x_i) = exp(x_i) / sum(exp(x_j)). Transforms a vector of arbitrary real numbers into a probability distribution (all positive, sums to 1). Used in classification heads, attention weights, and anywhere you need probabilities.
+- **What people say:** "Transforma números em probabilidades"
+- **What it actually means:** softmax(x_i) = exp(x_i) / sum(exp(x_j)). Transforma um vetor de números reais arbitrários em uma distribuição de probabilidade (tudo positivo, soma 1). Usado em cabeças de classificação, pesos de atenção e em qualquer lugar que você precisar de probabilidades.
 
 ### Swarm
-- **What people say:** "A bunch of AI agents working together like bees"
-- **What it actually means:** Multiple agents sharing state and coordinating through message passing, with emergent behavior arising from simple individual rules rather than central control
+- **What people say:** "Um monte de agents de AI trabalhando juntos como abelhas"
+- **What it actually means:** Múltiplos agents compartilhando estado e coordenando através de troca de mensagens, com comportamento emergente surgindo de regras individuais simples em vez de controle central
 
 ## T
 
 ### System Prompt
-- **What people say:** "The AI's instructions"
-- **What it actually means:** A special message at the start of a conversation that sets the model's behavior, persona, and constraints. Processed before user messages. Not visible to the user in most UIs. Defines what the model should and shouldn't do, its tone, format preferences, and domain focus. Different from user prompts -- system prompts are set by the developer.
+- **What people say:** "As instruções do AI"
+- **What it actually means:** Uma mensagem especial no início de uma conversa que define o comportamento, persona e restrições do modelo. Processada antes das mensagens do usuário. Não visível ao usuário na maioria das UIs. Define o que o modelo deve e não deve fazer, seu tom, preferências de formato e foco de domínio. Diferente de user prompts — system prompts são definidos pelo desenvolvedor.
 
 ### Tensor
-- **What people say:** "A multi-dimensional array"
-- **What it actually means:** The fundamental data structure in deep learning frameworks. A 0D tensor is a scalar, 1D is a vector, 2D is a matrix, 3D+ is a tensor. In PyTorch and JAX, tensors track their computation history for automatic differentiation and can live on CPU or GPU. All neural network inputs, outputs, weights, and gradients are tensors.
+- **What people say:** "Um array multi-dimensional"
+- **What it actually means:** A estrutura de dados fundamental em frameworks de deep learning. Um tensor 0D é um escalar, 1D é um vetor, 2D é uma matriz, 3D+ é um tensor. Em PyTorch e JAX, tensores rastreiam seu histórico de computação para diferenciação automática e podem estar em CPU ou GPU. Todas as entradas, saídas, pesos e gradientes de redes neurais são tensores.
 
 ### Token
-- **What people say:** "A word"
-- **What it actually means:** A subword unit (typically 3-4 characters in English) produced by a tokenizer like BPE. "unbelievable" might be 3 tokens: "un" + "believ" + "able"
+- **What people say:** "Uma palavra"
+- **What it actually means:** Uma unidade de subpalavra (tipicamente 3-4 caracteres em inglês) produzida por um tokenizer como BPE. "inacreditável" pode ser 3 tokens: "in" + "acredit" + "ável"
 
 ### Temperature
-- **What people say:** "Creativity setting"
-- **What it actually means:** A scalar that divides logits before softmax. Temperature=1 is default. Higher = flatter distribution = more random outputs. Lower = sharper distribution = more deterministic. Temperature=0 is argmax (always pick the most likely token).
+- **What people say:** "Configuração de criatividade"
+- **What it actually means:** Um escalar que divide os logits antes do softmax. Temperature=1 é o padrão. Mais alta = distribuição mais plana = saídas mais aleatórias. Mais baixa = distribuição mais acentuada = mais determinístico. Temperature=0 é argmax (sempre escolher o token mais provável).
 
 ### Transfer Learning
-- **What people say:** "Using a pre-trained model"
-- **What it actually means:** Taking a model trained on one task and adapting it to a different task. The early layers learn general features (edges, syntax patterns) that transfer. Only the later layers need task-specific training. This is why you can fine-tune BERT for any NLP task.
+- **What people say:** "Usando um modelo pré-treinado"
+- **What it actually means:** Pegar um modelo treinado em uma tarefa e adaptá-lo para uma tarefa diferente. As camadas iniciais aprendem características gerais (bordas, padrões sintáticos) que são transferíveis. Apenas as camadas finais precisam de treinamento específico da tarefa. É por isso que você pode fazer fine-tuning de BERT para qualquer tarefa de NLP.
 
 ### Transformer
-- **What people say:** "The architecture behind modern AI"
-- **What it actually means:** A neural network architecture that processes sequences using self-attention (letting every position attend to every other position) instead of recurrence, enabling massive parallelization
-- **Why it's called that:** It transforms input representations into output representations through attention layers
+- **What people say:** "A arquitetura por trás da AI moderna"
+- **What it actually means:** Uma arquitetura de rede neural que processa sequências usando self-attention (permitindo que cada posição atenda a todas as outras) em vez de recorrência, possibilitando paralelização massiva
+- **Por que é chamado assim:** Transforma representações de entrada em representações de saída através de camadas de atenção
 
 ## U
 
 ### Underfitting
-- **What people say:** "The model isn't learning"
-- **What it actually means:** The model is too simple to capture the patterns in the data. Training loss stays high. Fix with: more parameters, more layers, longer training, lower regularization, better features.
+- **What people say:** "O modelo não está aprendendo"
+- **What it actually means:** O modelo é simples demais para capturar os padrões nos dados. A loss de treinamento permanece alta. Corrigir com: mais parâmetros, mais camadas, treinamento mais longo, menos regularização, melhores features.
 
 ## V
 
 ### VAE (Variational Autoencoder)
-- **What people say:** "A generative model"
-- **What it actually means:** An autoencoder that learns a smooth latent space by forcing the encoder output to follow a Gaussian distribution. You can sample from this distribution and decode to generate new data. The reparameterization trick makes it trainable via backpropagation.
+- **What people say:** "Um modelo generativo"
+- **What it actually means:** Um autoencoder que aprende um latent space suave forçando a saída do encoder a seguir uma distribuição Gaussiana. Você pode amostrar desta distribuição e decodificar para gerar novos dados. O truque da reparametrização o torna treinável via backpropagation.
 
 ### Vector Database
-- **What people say:** "A special database for AI"
-- **What it actually means:** A database optimized for storing vectors (dense arrays of floats) and performing fast approximate nearest-neighbor search. The core operation in similarity search, RAG, and recommendation systems.
+- **What people say:** "Um banco de dados especial para AI"
+- **What it actually means:** Um banco de dados otimizado para armazenar vetores (arrays densos de floats) e realizar busca aproximada do vizinho mais próximo rápida. A operação central em busca por similaridade, RAG e sistemas de recomendação.
 
 ## W
 
 ### Weight
-- **What people say:** "What the model learned"
-- **What it actually means:** A single number in a model's parameter matrix. A linear layer with input size 768 and output size 3072 has 768*3072 = 2,359,296 weights. Training adjusts each weight to minimize the loss function.
+- **What people say:** "O que o modelo aprendeu"
+- **What it actually means:** Um número único na matriz de parâmetros de um modelo. Uma camada linear com tamanho de entrada 768 e tamanho de saída 3072 tem 768*3072 = 2.359.296 pesos. O treinamento ajusta cada peso para minimizar a função de loss.
 
 ### Weight Decay
-- **What people say:** "Regularization"
-- **What it actually means:** Adding a penalty proportional to the magnitude of weights to the loss function. Equivalent to L2 regularization. Prevents weights from growing too large. Typical value: 0.01-0.1.
+- **What people say:** "Regularização"
+- **What it actually means:** Adicionar uma penalidade proporcional à magnitude dos pesos à função de loss. Equivalente à regularização L2. Impede que os pesos cresçam demais. Valor típico: 0,01-0,1.
 
 ## Z
 
 ### Zero-Shot
-- **What people say:** "No training needed"
-- **What it actually means:** Using a model on a task it wasn't explicitly trained for, with no task-specific examples in the prompt. The model generalizes from pre-training. Works because large models have seen enough variety to handle new task formats.
+- **What people say:** "Sem necessidade de treinamento"
+- **What it actually means:** Usar um modelo em uma tarefa para a qual ele não foi explicitamente treinado, sem exemplos específicos da tarefa no prompt. O modelo generaliza a partir do pré-treinamento. Funciona porque modelos grandes viram variedade suficiente para lidar com novos formatos de tarefa.
