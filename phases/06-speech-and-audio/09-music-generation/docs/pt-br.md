@@ -3,8 +3,8 @@
 > Geração de música em 2026: Suno v5 e Udio v4 dominam o comercial; MusicGen, Stable Audio Open e ACE-Step lideram o open-source. O problema técnico está quase resolvido. O problema jurídico (acordo Warner Music de $500M, acordo UMG) remodelou o campo em 2025-2026.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas), Fase 4 · 10 (Modelos de Diffusão)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas), Fase 4 · 10 (Modelos de Diffusão)
 **Tempo:** ~75 minutos
 
 ## O Problema
@@ -33,7 +33,7 @@ Texto → clipe de música de 30 segundos a 4 minutos, com letras, vocais e estr
 
 ### Híbrido (produção) — Suno, Udio, Lyria
 
-Pesos fechados. Provavelmente codec LM AR + vocoder baseado em diffusão com heads eespecificaçãoializados de voz/bateria/melodia. Suno v5 (2026) é o líder de qualidade ELO 1293. Udio v4 adiciona inpainting + separação de stems (baixo, bateria, vocals downloads separados).
+Pesos fechados. Provavelmente codec LM AR + vocoder baseado em diffusão com heads especializados de voz/bateria/melodia. Suno v5 (2026) é o líder de qualidade ELO 1293. Udio v4 adiciona inpainting + separação de stems (baixo, bateria, vocals downloads separados).
 
 ### Avaliação
 

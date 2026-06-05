@@ -3,8 +3,8 @@
 > ASR inverte fala em texto; TTS inverte texto em fala. A pilha de 2026 tem três partes: texto → tokens, tokens → mel, mel → forma de onda. Cada parte tem um modelo padrão que cabe num laptop.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas e Mel), Fase 5 · 09 (Seq2Seq), Fase 7 · 05 (Transformer Completo)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas e Mel), Fase 5 · 09 (Seq2Seq), Fase 7 · 05 (Transformer Completo)
 **Tempo:** ~75 minutos
 
 ## O Problema
@@ -14,7 +14,7 @@ Você tem uma string: "Por favor, me lembre de regar as plantas às 18h." Precis
 Pipelines TTS modernas parecem isso:
 
 1. **Frontend de texto.** Normalizar texto (datas, números, emails), converter para fonemas ou tokens subword, prever características de prosódia.
-2. **Modelo acústico.** Texto → eespecificaçãotrograma mel. Tacotron 2 (2017), FastSpeech 2 (2020), VITS (2021), F5-TTS (2024), Kokoro (2024).
+2. **Modelo acústico.** Texto → espectrograma mel. Tacotron 2 (2017), FastSpeech 2 (2020), VITS (2021), F5-TTS (2024), Kokoro (2024).
 3. **Vocoder.** Mel → forma de onda. WaveNet (2016), WaveRNN, HiFi-GAN (2020), BigVGAN (2022), vocoders de codec neural em 2024+.
 
 Em 2026 a divisão acústico + vocoder se blura com modelos de ponta a ponta de diffusão e flow-matching. Mas o modelo mental de três partes ainda vale para debug.
@@ -45,7 +45,7 @@ Em 2026 a divisão acústico + vocoder se blura com modelos de ponta a ponta de 
 | 2022 | BigVGAN | 50× tempo real | generaliza entre falantes/idiomas |
 | 2024 | SNAC, DAC (codecs neurais) | integrado com modelos AR | tokens discretos, eficiente em bits |
 
-Em 2026 a maioria dos modelos "TTS" são de ponta a ponta de texto a forma de onda; o eespecificaçãotrograma mel é uma representação interna.
+Em 2026 a maioria dos modelos "TTS" são de ponta a ponta de texto a forma de onda; o espectrograma mel é uma representação interna.
 
 ### Avaliação
 
@@ -114,7 +114,7 @@ class HiFiGAN(nn.Module):
         return self.blocks(mel)  # -> forma de onda
 ```
 
-Treino: adversarial (discriminador em janelas curtas) + perda de reconstrução de eespecificaçãotrograma mel + perda de matching de características. Comoditizado — use checkpoints pré-treinados do repo `hifi-gan` ou nvidia-NeMo.
+Treino: adversarial (discriminador em janelas curtas) + perda de reconstrução de espectrograma mel + perda de matching de características. Comoditizado — use checkpoints pré-treinados do repo `hifi-gan` ou nvidia-NeMo.
 
 ### Passo 5: a pipeline completa (pseudocódigo)
 

@@ -3,7 +3,7 @@
 > Clonagem de voz foi mais rápida que as defesas. Sistemas de voz de produção de 2026 precisam de duas coisas: um detector (AASIST, RawNet2) que classifica fala real vs falsa, e uma marca d'água (AudioSeal) que sobrevive a compressão e edição. Entregue ambas ou não faça implantação de clonagem de voz.
 
 **Tipo:** Construir
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 06 (Reconhecimento de Falante), Fase 6 · 08 (Clonagem de Voz)
 **Tempo:** ~75 minutos
 
@@ -34,7 +34,7 @@ SOTA no ASVspoof 5: ~7,23% EER. No ASVspoof 2019 LA mais antigo: 0,42% EER. Depl
 
 ### AASIST e RawNet2 — famílias de modelos de detecção
 
-**AASIST** (2021, atualizado até 2026). Attention em grafo sobre características eespecificaçãotrais. SOTA atual na tarefa de contramedida ASVspoof 5.
+**AASIST** (2021, atualizado até 2026). Attention em grafo sobre características espectrais. SOTA atual na tarefa de contramedida ASVspoof 5.
 
 **RawNet2.** Front-end convolucional sobre forma de onda bruta + backbone TDNN. Baseline mais simples; ainda competitivo com ajuste fino.
 
@@ -60,7 +60,7 @@ O baseline open pré-AudioSeal. Rede neural invertível, 32 bits/seg. Problemas:
 
 ### WaveVerify (julho 2025)
 
-Resolve as fraquezas do AudioSeal — eespecificaçãoificamente manipulações temporais (reversão, velocidade). Usa gerador baseado em FiLM + detector Mixture-of-Experts. Competitivo com AudioSeal em ataques padrão; lida com edições temporais.
+Resolve as fraquezas do AudioSeal — especificamente manipulações temporais (reversão, velocidade). Usa gerador baseado em FiLM + detector Mixture-of-Experts. Competitivo com AudioSeal em ataques padrão; lida com edições temporais.
 
 ### O gap que adversários exploram
 
@@ -72,10 +72,10 @@ Não é técnica ML — é formato manifesto. Arquivos de áudio carregam metada
 
 ## Construa
 
-### Passo 1: detector simples de características eespecificaçãotrais (toy)
+### Passo 1: detector simples de características espectrais (toy)
 
 ```python
-def especificaçãotral_rolloff(especificação, percentile=0.85):
+def espectral_rolloff(especificação, percentile=0.85):
     cum = 0
     total = sum(especificação)
     if total == 0:
@@ -88,8 +88,8 @@ def especificaçãotral_rolloff(especificação, percentile=0.85):
     return len(especificação) - 1
 
 def is_suspicious(audio):
-    especificação = magnitude_especificaçãotrum(audio)
-    rolloff = especificaçãotral_rolloff(especificação)
+    especificação = magnitude_espectrum(audio)
+    rolloff = espectral_rolloff(especificação)
     return rolloff / len(especificação) > 0.92
 ```
 
@@ -187,4 +187,4 @@ Salve como `outputs/skill-spoof-defender.md`. Escolha modelo de detector, marca 
 - [Chen et al. (2025). WaveVerify](https://arxiv.org/abs/2507.21150) — detector MoE para ataques temporais.
 - [Jung et al. (2022). AASIST](https://arxiv.org/abs/2110.01200) — backbone de detecção SOTA.
 - [AudioMarkBench (2024)](https://proceedings.neurips.cc/paper_files/paper/2024/file/5d9b7775296a641a1913ab6b4425d5e8-Paper-Datasets_and_Benchmarks_Track.pdf) — avaliação de robustez.
-- [Eespecificaçãoificação C2PA](https://c2pa.org/especificaçãoifications/especificaçãoifications/) — formato de manifesto de proveniência.
+- [Especificação C2PA](https://c2pa.org/specifications/specifications/) — formato de manifesto de proveniência.

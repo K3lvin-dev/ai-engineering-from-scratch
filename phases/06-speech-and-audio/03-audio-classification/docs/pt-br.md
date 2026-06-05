@@ -3,8 +3,8 @@
 > Tudo de "cachorro late vs sirene" até "que idioma é isso" é classificação de áudio. As características são mels. A arquitetura muda a cada década. A avaliação continua sendo AUC, F1 e recall por classe.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas e Mel), Fase 3 · 06 (CNNs), Fase 5 · 08 (CNNs e RNNs para Texto)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas e Mel), Fase 3 · 06 (CNNs), Fase 5 · 08 (CNNs e RNNs para Texto)
 **Tempo:** ~75 minutos
 
 ## O Problema
@@ -167,7 +167,7 @@ Salve como `outputs/skill-classifier-designer.md`. Escolha arquitetura, augmenta
 | AST | Audio Spectrogram Transformer | ViT em patches de log-mel; SOTA de 2021. |
 | BEATs | Áudio auto-supervisionado | Modelo da Microsoft, iter3 lidera AudioSet em 2026. |
 | Mixup | Augmentação de pares | `x = λ·x1 + (1-λ)·x2; y = λ·y1 + (1-λ)·y2`. |
-| SpecAugment | Augmentação baseada em máscara | Zerar bandas aleatórias de tempo e frequência do eespecificaçãotrograma. |
+| SpecAugment | Augmentação baseada em máscara | Zerar bandas aleatórias de tempo e frequência do espectrograma. |
 | mAP | Métrica principal multi-rótulo | Precisão média across classes e limiares. |
 
 ## Leitura Adicional

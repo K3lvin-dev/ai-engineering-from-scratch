@@ -3,7 +3,7 @@
 > Todo agente de voz vive ou morre em duas decisões: o usuário está falando agora, e ele já terminou? VAD responde à primeira. Detecção de turno (VAD + hang-over de silêncio + modelo de endpointing semântico) responde à segunda. Erra qualquer uma e seu assistente ou corta o usuário ou nunca cala a boca.
 
 **Tipo:** Construir
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 11 (Áudio em Tempo Real), Fase 6 · 12 (Assistente de Voz)
 **Tempo:** ~45 minutos
 

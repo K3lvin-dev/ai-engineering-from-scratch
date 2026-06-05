@@ -3,7 +3,7 @@
 > Tudo das lições 01-11, costurado junto. Construa um assistente de voz que ouve, raciocina e fala de volta. Em 2026 isso é um problema de engenharia resolvido, não de pesquisa — mas os detalhes de integração decidem se faz deploy.
 
 **Tipo:** Construir
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 04, 05, 06, 07, 11; Fase 11 · 09 (Chamada de Função); Fase 14 · 01 (Agent Loop)
 **Tempo:** ~120 minutos
 
@@ -148,7 +148,7 @@ Veja `code/main.py` para uma simulação funcional que conecta os sete component
 
 ## Entregue
 
-Salve como `outputs/skill-voice-assistant-architect.md`. Dado orçamento + escala + idioma + restrições de conformidade, produza uma eespecificaçãoificação completa de pilha.
+Salve como `outputs/skill-voice-assistant-architect.md`. Dado orçamento + escala + idioma + restrições de conformidade, produza uma especificação completa de pilha.
 
 ## Exercícios
 

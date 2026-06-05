@@ -3,8 +3,8 @@
 > ASR pergunta "o que eles disseram?" Reconhecimento de falante pergunta "quem disse?" A matemática parece a mesma — embeddings + cosseno — mas toda decisão de produção gira em torno de um único número EER.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas e Mel), Fase 5 · 22 (Modelos de Embedding)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas e Mel), Fase 5 · 22 (Modelos de Embedding)
 **Tempo:** ~45 minutos
 
 ## O Problema
@@ -47,7 +47,7 @@ A métrica é **EER** — Equal Error Rate. Ajuste seu limiar de decisão para q
 
 ### Diarização
 
-"Quem falou quando" em um clipe multi-falante. Pipeline: VAD → segmentar → embutir cada segmento → agrupar (aglomerativo ou eespecificaçãotral) → suavizar bordas. Pilha moderna: `pyannote.audio` 3.1, que embute segmentação de falante + embedding + clustering atrás de uma chamada. SOTA DER em AMI em 2026 é ~15% (contra 23% em 2022).
+"Quem falou quando" em um clipe multi-falante. Pipeline: VAD → segmentar → embutir cada segmento → agrupar (aglomerativo ou espectral) → suavizar bordas. Pilha moderna: `pyannote.audio` 3.1, que embute segmentação de falante + embedding + clustering atrás de uma chamada. SOTA DER em AMI em 2026 é ~15% (contra 23% em 2022).
 
 ## Construa
 

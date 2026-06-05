@@ -3,8 +3,8 @@
 > Pipelines batch processam um arquivo. Pipelines em tempo real processam os próximos 20 milissegundos antes que os 20 seguintes cheguem. Toda IA conversacional, estúdio de broadcast e bot de telefonia vive ou morre por esse orçamento de latência.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas), Fase 6 · 04 (ASR), Fase 6 · 07 (TTS)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas), Fase 6 · 04 (ASR), Fase 6 · 07 (TTS)
 **Tempo:** ~75 minutos
 
 ## O Problema

@@ -3,7 +3,7 @@
 > 2024-2026 redefiniu IA de voz. Moshi lança um modelo único que ouve e fala simultaneamente a 200 ms de latência. Hibiki faz tradução fala-para-fala chunk por chunk. Ambos abandonam a pipeline ASR → LLM → TTS por uma arquitetura full-duplex unificada sobre tokens de codec Mimi. Esse é o novo design de referência.
 
 **Tipo:** Aprender
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Fase 6 · 13 (Codecs Neurais de Áudio), Fase 6 · 11 (Áudio em Tempo Real), Fase 7 · 05 (Transformer Completo)
 **Tempo:** ~75 minutos
 
@@ -145,7 +145,7 @@ Moshi não ganha:
 ## Armadilhas
 
 - **Chamada de ferramenta limitada.** Moshi é um modelo de diálogo, não framework de agentes. Combine com pipeline para ferramentas.
-- **Condição de voz eespecificaçãoífica.** Moshi usa uma persona treinada; clonagem é uma corrida de treino separada.
+- **Condição de voz específica.** Moshi usa uma persona treinada; clonagem é uma corrida de treino separada.
 - **Cobertura de idiomas.** Francês + inglês é excelente; outros limitados. Hibiki-Zero ajuda, mas ainda precisa de dados de treino.
 - **Custo de recursos.** Uma sessão completa de Moshi ocupa uma slot de GPU; não é um padrão de implantação de inquilino compartilhado barato.
 
@@ -174,7 +174,7 @@ Salve como `outputs/skill-duplex-pipeline.md`. Escolha pipeline vs arquitetura f
 
 - [Défossez et al. (2024). Moshi — speech-text foundation model](https://arxiv.org/html/2410.00037v2) — o paper.
 - [Kyutai Labs (2026). Hibiki-Zero](https://arxiv.org/abs/2602.12345) — tradução streaming sem dados alinhados.
-- [Sesame (2025). Crossing the uncanny valley of voice](https://www.sesame.com/research/crossing_the_uncanny_valley_of_voice) — eespecificaçãoificação CSM.
+- [Sesame (2025). Crossing the uncanny valley of voice](https://www.sesame.com/research/crossing_the_uncanny_valley_of_voice) — especificação CSM.
 - [Kyutai — Moshi repo](https://github.com/kyutai-labs/moshi) — instalação + servidor.
 - [OpenAI — Realtime API](https://platform.openai.com/docs/guides/realtime) — concorrente comercial fechado.
 - [Kyutai — Delayed Streams Modeling](https://github.com/kyutai-labs/delayed-streams-modeling) — o framework STT/TTS por baixo.

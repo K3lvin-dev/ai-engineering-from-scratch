@@ -3,8 +3,8 @@
 > Reconhecimento de fala é classificação de áudio em cada timestep, colado junto por um modelo de sequência que conhece inglês e silêncio. CTC, RNN-T e attention são as três formas de fazer isso. Escolha uma e entenda por quê.
 
 **Tipo:** Construir
-**Idiomas:** Python
-**Pré-requisitos:** Fase 6 · 02 (Eespecificaçãotrogramas e Mel), Fase 5 · 08 (CNNs e RNNs para Texto), Fase 5 · 10 (Attention)
+**Linguagens:** Python
+**Pré-requisitos:** Fase 6 · 02 (Espectrogramas e Mel), Fase 5 · 08 (CNNs e RNNs para Texto), Fase 5 · 10 (Attention)
 **Tempo:** ~45 minutos
 
 ## O Problema
@@ -13,7 +13,7 @@ Você tem um clipe de 10 segundos a 16 kHz. Quer uma string: "acenda as luzes da
 
 Três formulações resolvem isso:
 
-1. **CTC (Connectionist Temporal Classification).** Emitir probabilidades de token por frame incluindo um *blank* eespecificaçãoial. Colapsar repetições e blanks no momento do decode. Não autoregressivo, rápido. Usado por wav2vec 2.0, MMS.
+1. **CTC (Connectionist Temporal Classification).** Emitir probabilidades de token por frame incluindo um *blank* especial. Colapsar repetições e blanks no momento do decode. Não autoregressivo, rápido. Usado por wav2vec 2.0, MMS.
 2. **RNN-T (Recurrent Neural Network Transducer).** Rede conjunta que prevê o próximo token dado o frame do encoder e tokens anteriores. Transmissível. Usado pelo ASR on-device do Google, NVIDIA Parakeet.
 3. **Attention encoder-decoder.** Encoder comprime áudio em estados ocultos, decoder cross-attends para gerar tokens autoregressivamente. Usado por Whisper, SeamlessM4T.
 
@@ -140,7 +140,7 @@ A pilha de 2026:
 | Streaming, baixa latência | Parakeet-TDT-1.1B ou Riva |
 | Edge, mobile, latência <500 ms | Whisper-Tiny quantizado ou Moonshine (2024) |
 | Formato longo | Whisper com chunking por VAD (WhisperX) |
-| Domínio eespecificaçãoífico (médico, jurídico) | Ajuste fino wav2vec 2.0 + fusão de LM de domínio |
+| Domínio específico (médico, jurídico) | Ajuste fino wav2vec 2.0 + fusão de LM de domínio |
 
 ## Armadilhas que ainda aparecem em 2026
 
@@ -167,7 +167,7 @@ Salve como `outputs/skill-asr-picker.md`. Escolha modelo, estratégia de decodif
 | RNN-T | A perda streaming | CTC + predictor de próximo-token; lida com ordem de palavras. |
 | Attention enc-dec | Estilo Whisper | Encoder + decoder cross-attend; melhor qualidade offline. |
 | WER | O número que você reporta | `(S+D+I)/N` no nível de palavra. |
-| Blank | O vazio | Token eespecificaçãoial no CTC sinalizando "sem emissão neste frame". |
+| Blank | O vazio | Token especial no CTC sinalizando "sem emissão neste frame". |
 | LM fusion | Modelo de linguagem externo | Adicionar log-probs ponderados do LM durante beam search. |
 | VAD | O gate de silêncio | Detector de atividade vocal; corta não-fala. |
 
