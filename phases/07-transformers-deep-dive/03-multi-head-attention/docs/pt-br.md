@@ -25,7 +25,7 @@ Multi-head attention é o padrão que todo transformer em 2026 usa. A única dis
 
 **Concatenar e projetar.** Reempilhe as heads para `(N, d_model)` e multiplique por uma matriz de saída aprendida `W_o` de shape `(d_model, d_model)`. `W_o` é onde as heads se misturam.
 
-**Por que funciona.** Cada head pode se eespecificaçãoializar sem competir com as outras pelo orçamento representacional. Estudos de probing de 2019–2024 mostram papéis distintos de heads: heads posicionais, heads que atendem ao token anterior, heads de cópia, heads de entidade nomeada, induction heads (que fundamentam aprendizado em contexto).
+**Por que funciona.** Cada head pode se especializar sem competir com as outras pelo orçamento representacional. Estudos de probing de 2019–2024 mostram papéis distintos de heads: heads posicionais, heads que atendem ao token anterior, heads de cópia, heads de entidade nomeada, induction heads (que fundamentam aprendizado em contexto).
 
 **A linhagem de variações de 2026:**
 
@@ -125,7 +125,7 @@ out = scaled_dot_product_attention(q, k, v, is_causal=True, enable_gqa=True)
 | Grande (~1B) | 2048 | 16 | 128 |
 | Fronteira (~70B) | 8192 | 64 | 128 |
 
-`d_head` quase sempre cai em 64 ou 128. É a unidade de quanto uma head pode "ver". Cai abaixo de 32 e as heads começam a brigar com o fator de escala `sqrt(d_head)`; sobe acima de 256 e você perde o benefício de "muitos pequenos eespecificaçãoialistas".
+`d_head` quase sempre cai em 64 ou 128. É a unidade de quanto uma head pode "ver". Cai abaixo de 32 e as heads começam a brigar com o fator de escala `sqrt(d_head)`; sobe acima de 256 e você perde o benefício de "muitos pequenos especialistas".
 
 ## Entregando
 
@@ -152,7 +152,7 @@ Veja `outputs/skill-mha-configurator.md`. A skill recomenda número de heads, n�
 
 ## Leituras Complementares
 
-- [Vaswani et al. (2017). Attention Is All You Need §3.2.2](https://arxiv.org/abs/1706.03762) — a eespecificaçãoificação original de multi-head.
+- [Vaswani et al. (2017). Attention Is All You Need §3.2.2](https://arxiv.org/abs/1706.03762) — a especificação original de multi-head.
 - [Shazeer (2019). Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/abs/1911.02150) — o paper de MQA.
 - [Ainslie et al. (2023). GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245) — como converter MHA para GQA após treinamento.
 - [DeepSeek-AI (2024). DeepSeek-V2 Technical Report](https://arxiv.org/abs/2405.04434) — MLA e por que vence MHA/GQA em memória de cache.

@@ -128,7 +128,7 @@ out = model(**inputs).last_hidden_state   # (1, N, 768)
 
 ## Entregando
 
-Veja `outputs/skill-bert-finetuner.md`. A skill define um fine-tuning de BERT (escolha de backbone, eespecificaçãoificação da head, dados, avaliação, parada) pra uma nova tarefa de classificação ou extração.
+Veja `outputs/skill-bert-finetuner.md`. A skill define um fine-tuning de BERT (escolha de backbone, especificação da head, dados, avaliação, parada) pra uma nova tarefa de classificação ou extração.
 
 ## Exercícios
 
@@ -142,7 +142,7 @@ Veja `outputs/skill-bert-finetuner.md`. A skill define um fine-tuning de BERT (e
 |-------|------------------------|--------------------------|
 | MLM | "Modelagem de linguagem mascarada" | Sinal de treinamento: substitui aleatoriamente 15% dos tokens por `[MASK]`, prevê os originais. |
 | Bidirecional | "Olha pros dois lados" | Attention do encoder sem máscara causal — cada posição vê todas as outras. |
-| `[CLS]` | "O token pooler" | Token eespecificaçãoial anteposto a cada sequência; seu embedding final é a representação nível frase. |
+| `[CLS]` | "O token pooler" | Token especial anteposto a cada sequência; seu embedding final é a representação nível frase. |
 | `[SEP]` | "Separador de segmento" | Separa sequências pareadas (ex: consulta/doc, frase A/B). |
 | NSP | "Previsão da próxima frase" | Segunda tarefa de pré-treinamento do BERT; mostrada como inútil no RoBERTa, abandonada depois de 2019. |
 | Fine-tuning | "Adaptar a uma tarefa" | Manter o encoder maiormente congelado; treinar uma head pequena em cima pra tarefa downstream. |

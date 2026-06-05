@@ -58,7 +58,7 @@ Mudamos o tempo de execução em sequências de até 100.000 elementos. A versã
 
 ### Passo 2: contar operações teóricas
 
-Ambos os algoritmos fazem N adições. A diferença é a *profundidade de dependências*: quantas operações precisam acontecer serialmente antes que a próxima possa começar. Profundidade da RNN = N. Profundidade da attention = log(N) com uma redução em árvore, ou 1 com uma varredura paralela. Profundidade, não contagem de operações,决定 o tempo de GPU.
+Ambos os algoritmos fazem N adições. A diferença é a *profundidade de dependências*: quantas operações precisam acontecer serialmente antes que a próxima possa começar. Profundidade da RNN = N. Profundidade da attention = log(N) com uma redução em árvore, ou 1 com uma varredura paralela. Profundidade, não contagem de operações,decide o tempo de GPU.
 
 ### Passo 3: escala empírica em sequências longas
 

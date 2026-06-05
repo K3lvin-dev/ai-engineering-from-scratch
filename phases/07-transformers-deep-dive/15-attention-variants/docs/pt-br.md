@@ -169,7 +169,7 @@ Isso compila pra um kernel Triton customizado. Dentro de 10% da velocidade do Fl
 
 - **Full attention pura** — toda camada até contexto de ~16K, ou quando qualidade de recuperação é primordial.
 - **Mistura SWA + global** — contexto longo (>32K), treinamento e inferência com limite de memória. O padrão de 2026 acima de 32K.
-- **Sparse block attention** — kernel customizado, padrão customizado. Reservado pra workloads eespecificaçãoializados (recuperação, áudio).
+- **Sparse block attention** — kernel customizado, padrão customizado. Reservado pra workloads especializados (recuperação, áudio).
 - **Differential attention** — qualquer workload onde contaminação por attention-sink prejudica (RAG de longo contexto, needle-in-haystack).
 
 ## Entregando
