@@ -1,6 +1,6 @@
 # Padrão Supervisor / Orquestrador-Trabalhador
 
-> Um agente líder planeja e delega; trabalhadores eespecificaçãoializados executam em contextos paralelos e reportam de volta. Esse é o padrão por trás do sistema de Pesquisa da Anthropic (Claude Opus 4 como líder, Sonnet 4 como subagents), medido em +90.2% sobre Opus 4 single-agent em evals internas de pesquisa. O post de engenharia da Anthropic relata que 80% da variância no BrowseComp é explicada por uso de tokens — multi-agent ganha em grande parte porque cada subagent recebe uma janela de contexto fresca. Esta lição constrói o padrão supervisor a partir das primitivas e cobre as lições de engenharia de 2026 de deployments em produção.
+> Um agente líder planeja e delega; trabalhadores especializados executam em contextos paralelos e reportam de volta. Esse é o padrão por trás do sistema de Pesquisa da Anthropic (Claude Opus 4 como líder, Sonnet 4 como subagents), medido em +90.2% sobre Opus 4 single-agent em evals internas de pesquisa. O post de engenharia da Anthropic relata que 80% da variância no BrowseComp é explicada por uso de tokens — multi-agent ganha em grande parte porque cada subagent recebe uma janela de contexto fresca. Esta lição constrói o padrão supervisor a partir das primitivas e cobre as lições de engenharia de 2026 de deployments em produção.
 
 **Tipo:** Aprender + Construir
 **Linguagens:** Python (stdlib, `threading`)
@@ -42,7 +42,7 @@ O líder nunca lê os materiais brutos. Os trabalhadores nunca veem o trabalho u
 Três mecanismos:
 
 1. **Contexto fresco por subagent.** Um trabalhador explorando "herança FIPA-ACL" não carrega os 40k tokens que o líder gastou planejando. Ele recebe uma janela de 200k pra uma pergunta.
-2. **Eespecificaçãoialização via prompt.** O prompt do líder é "decompor e sintetizar," não "pesquisar." O prompt de cada trabalhador é estreito: "ache o que mudou em X." Prompts focados produzem saídas focadas.
+2. **Especificaçãoialização via prompt.** O prompt do líder é "decompor e sintetizar," não "pesquisar." O prompt de cada trabalhador é estreito: "ache o que mudou em X." Prompts focados produzem saídas focadas.
 3. **Paralelismo.** Trabalhadores rodam concorrentemente. Tempo de relógio é aproximadamente `max(tempo_trabalhadores) + plano + síntese`, não `soma(tempo_trabalhadores)`.
 
 ### Lições de engenharia (Anthropic 2025)

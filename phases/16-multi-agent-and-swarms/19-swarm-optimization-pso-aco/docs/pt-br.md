@@ -3,7 +3,7 @@
 > Otimização bio-inspirada está voltando para LLMs. **LMPSO** (arXiv:2504.09247) usa PSO onde a velocidade de cada partícula é um prompt e o LLM gera o próximo candidato; funciona bem em saídas de sequência estruturada (expressões matemáticas, programas). **Model Swarms** (arXiv:2410.11163) trata cada expert LLM como uma partícula PSO em um manifold de pesos do modelo e reporta **ganho médio de 13.3%** sobre 12 baselines em 9 datasets com apenas 200 instâncias. **SwarmPrompt** (ICAART 2025) hibridiza PSO + Grey Wolf para otimização de prompts. **AMRO-S** (arXiv:2603.12933) é ACO inspirado em feromônio para routing multi-agente — **speedup de 4.7x**, evidência de routing interpretável, atualização assíncrona com gate de qualidade que desacopla inferência de aprendizado. Esta aula implementa PSO no espaço de parâmetros do prompt e ACO no routing de agents, mede por que esses algoritmos clássicos se encaixam na era dos LLMs, e quando não se encaixam.
 
 **Tipo:** Aprender + Construir
-**Idiomas:** Python (stdlib)
+**Linguagens:** Python (stdlib)
 **Pré-requisitos:** Fase 16 · 09 (Redes Swarm Paralelas), Fase 16 · 14 (Consenso e BFT)
 **Tempo:** ~75 minutos
 
@@ -117,7 +117,7 @@ Saída esperada:
 
 - **Comece pequeno.** 10-20 partículas, 20-50 iterações. Escale só se a curva de convergência mostrar ganho claro.
 - **Logue feromônios ou g_best por iteração.** Debugar otimizadores swarm sem trilha é doloroso.
-- **Atualizações com gate de qualidade.** Eespecificaçãoialmente pra routing ACO: agentes rápidos-mas-errados não podem acumular feromônio.
+- **Atualizações com gate de qualidade.** Especificaçãoialmente pra routing ACO: agentes rápidos-mas-errados não podem acumular feromônio.
 - **Resete decaimento na mudança de distribuição.** Quando sua distribuição de avaliação muda, feromônios antigos estão desatualizados; resete ou dobre a taxa temporariamente.
 - **Limite o custo por iteração.** Emita uma métrica de custo por iteração. PSO que custa $500/iteração e ganha 0.5% não é viável.
 

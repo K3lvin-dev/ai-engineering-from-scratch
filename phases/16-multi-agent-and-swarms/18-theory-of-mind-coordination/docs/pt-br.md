@@ -13,7 +13,7 @@ Coordenação multi-agent frequentemente parece mágica: agentes dividem trabalh
 
 O achado de Riedl em 2025 é mais rigoroso: em condições controladas, coordenação só emerge quando agentes são provocados pra raciocinar sobre **mentes de outros agents** (ToM). Sem o prompt ToM, mesmo modelos fortes mostram padrões de coordenação que não sobrevivem a controles estatísticos. Isso importa pra produção: times lançam features de "coordenação multi-agent" que são dependentes de prompt e frágeis.
 
-Esta lição trata ToM como uma capacidade eespecificaçãoífica (raciocinar sobre crenças sobre crenças), constrói um agente mínimo consciente de ToM, e mede o que coordenação real parece vs o que enfeite de prompt parece.
+Esta lição trata ToM como uma capacidade específica (raciocinar sobre crenças sobre crenças), constrói um agente mínimo consciente de ToM, e mede o que coordenação real parece vs o que enfeite de prompt parece.
 
 ## Conceito
 

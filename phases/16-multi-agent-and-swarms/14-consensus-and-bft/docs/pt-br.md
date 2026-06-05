@@ -1,6 +1,6 @@
 # Consenso e Tolerância a Falhas Bizantinas para Agents
 
-> BFT clássico de sistemas distribuídos encontra LLMs estocásticos. Em 2025-2026 três direções de pesquisa surgiram: **CP-WBFT** (arXiv:2511.10400) pondera cada voto com uma sonda de confiança; **DecentLLMs** (arXiv:2507.14928) opera sem líder com propostas paralelas de workers e agregação por mediana geométrica; **WBFT** (arXiv:2505.05103) combina voto ponderado com Hierarchical Structure Clustering pra separar nós Core e Edge. O resultado empírico honesto de "Can AI Agents Agree?" (arXiv:2603.01213) é que mesmo consenso escalar é frágil hoje — um único agente enganoso pode comprometer um Mixture-of-Agents. BFT é necessário mas não suficiente. Esta lição constrói um protocolo BFT mínimo, injeta três ataques eespecificaçãoíficos de agente (mentira bizantina, conformidade sycophantic, monocultura de erro correlacionado), e mede como cada variante de consenso se comporta.
+> BFT clássico de sistemas distribuídos encontra LLMs estocásticos. Em 2025-2026 três direções de pesquisa surgiram: **CP-WBFT** (arXiv:2511.10400) pondera cada voto com uma sonda de confiança; **DecentLLMs** (arXiv:2507.14928) opera sem líder com propostas paralelas de workers e agregação por mediana geométrica; **WBFT** (arXiv:2505.05103) combina voto ponderado com Hierarchical Structure Clustering pra separar nós Core e Edge. O resultado empírico honesto de "Can AI Agents Agree?" (arXiv:2603.01213) é que mesmo consenso escalar é frágil hoje — um único agente enganoso pode comprometer um Mixture-of-Agents. BFT é necessário mas não suficiente. Esta lição constrói um protocolo BFT mínimo, injeta três ataques específicos de agente (mentira bizantina, conformidade sycophantic, monocultura de erro correlacionado), e mede como cada variante de consenso se comporta.
 
 **Tipo:** Aprender + Construir
 **Linguagens:** Python (stdlib)
@@ -29,7 +29,7 @@ As garantias são fortes mas assumem:
 
 Agents LLM violam os três. Dois agentes rodando o mesmo base model compartilham falhas. Um LLM "honesto" ainda alucina. E em perguntas ambíguas, a "verdade" é o que os agentes decidem — não existe um oráculo externo.
 
-### Os três ataques eespecificaçãoíficos de LLM
+### Os três ataques específicos de LLM
 
 **Mentira bizantina.** Um agente produz uma resposta deliberadamente errada. BFT clássica lida com isso se `f < n/3`.
 
@@ -53,7 +53,7 @@ O paper mede consenso escalar (agents LLM concordando em um valor numérico úni
 - Um único agente que adota uma persona enganosa pode puxar o consenso do Mixture-of-Agents 40+ pontos percentuais da linha de base honesta.
 - Taxas de discordância se correlacionam com diversidade de modelo — ensambles heterogêneos discordam mais que homogêneos (bom: erros não correlacionados) mas também convergem mais devagar (ruim: tempo até consenso maior).
 
-O takeaway: BFT te dá maquinário pra alinhar saídas, mas não te diz se a saída alinhada está certa. Combine com verificação (eespecificaçãoialização de papel da Fase 16 · 08), diversidade (variantes de debate da Fase 16 · 15), e evaluator agentes (benchmarks da Fase 16 · 24).
+O takeaway: BFT te dá maquinário pra alinhar saídas, mas não te diz se a saída alinhada está certa. Combine com verificação (especialização de papel da Fase 16 · 08), diversidade (variantes de debate da Fase 16 · 15), e evaluator agentes (benchmarks da Fase 16 · 24).
 
 ### O protocolo central, simplificado
 
@@ -71,7 +71,7 @@ Uma rodada BFT mínima pra agentes LLM:
 7. minority clusters logged with provenance for post-hoc audit
 ```
 
-O passo de clusterização semântica é a particularidade eespecificaçãoífica de LLM. Duas respostas "o estudo relata 4.2%" e "4.2% de melhoria" são o mesmo cluster. Uma verificação ingênua de igualdade de string perderia isso. Em produção, use um modelo de embedding barato ou canonicalização explícita.
+O passo de clusterização semântica é a particularidade específica de LLM. Duas respostas "o estudo relata 4.2%" e "4.2% de melhoria" são o mesmo cluster. Uma verificação ingênua de igualdade de string perderia isso. Em produção, use um modelo de embedding barato ou canonicalização explícita.
 
 ### Calibração de threshold
 

@@ -1,6 +1,6 @@
 # Negociação e Barganha
 
-> Agents negociam recursos, preços, alocação de tarefas e termos. O conjunto de benchmarks de 2026 é claro: NegotiationArena (arXiv:2402.05863) mostra que LLMs podem melhorar payoffs ~20% via manipulação de persona ("desespero"); "Measuring Bargaining Abilities" (arXiv:2402.15813) mostra que comprar é mais difícil que vender e escala não ajuda — o **OG-Narrator** deles (gerador de ofertas determinístico + narrador LLM) elevou a taxa de fechamento de 26.67% pra 88.88%; a Large-Scale Autonomous Negotiation Competition (arXiv:2503.06416) rodou ~180k negociações e descobriu que agentes que **escondem raciocínio** (chain-of-thought-concealing) vencem escondendo o raciocínio dos counterpartes; Bhattacharya et al. 2025 nos métricas do Harvard Negotiation Project classificou o Llama-3 como mais efetivo, Claude-3 agressivo, GPT-4 mais justo. Esta lição implementa o Contract Net Protocol (o ancestral FIPA, Lição 02), conecta um buyer/seller estilo LLM, roda uma decomição estilo OG-Narrator, e mede como a taxa de fechamento muda com cada escolha estrutural.
+> Agents negociam recursos, preços, alocação de tarefas e termos. O conjunto de benchmarks de 2026 é claro: NegotiationArena (arXiv:2402.05863) mostra que LLMs podem melhorar payoffs ~20% via manipulação de persona ("desespero"); "Measuring Bargaining Abilities" (arXiv:2402.15813) mostra que comprar é mais difícil que vender e escala não ajuda — o **OG-Narrator** deles (gerador de ofertas determinístico + narrador LLM) elevou a taxa de fechamento de 26.67% pra 88.88%; a Large-Scale Autônomous Negotiation Competition (arXiv:2503.06416) rodou ~180k negociações e descobriu que agentes que **escondem raciocínio** (chain-of-thought-concealing) vencem escondendo o raciocínio dos counterpartes; Bhattacharya et al. 2025 nos métricas do Harvard Negotiation Project classificou o Llama-3 como mais efetivo, Claude-3 agressivo, GPT-4 mais justo. Esta lição implementa o Contract Net Protocol (o ancestral FIPA, Lição 02), conecta um buyer/seller estilo LLM, roda uma decomição estilo OG-Narrator, e mede como a taxa de fechamento muda com cada escolha estrutural.
 
 **Tipo:** Aprender + Construir
 **Linguagens:** Python (stdlib)
@@ -59,7 +59,7 @@ Isso não é "LLMs são ruins negociando." É "LLMs negociam muito parecido com 
 
 ### Ocultação de chain-of-thought
 
-A Large-Scale Autonomous Negotiation Competition (arXiv:2503.06416) rodou ~180k negociações com muitas estratégias de LLM. Vencedores ocultaram seu raciocínio dos counterpartes:
+A Large-Scale Autônomous Negotiation Competition (arXiv:2503.06416) rodou ~180k negociações com muitas estratégias de LLM. Vencedores ocultaram seu raciocínio dos counterpartes:
 
 - Se um agente imprime "só vou até $75; meu preço de reserva é $70" num scratchpad visível publicamente, o oponente lê.
 - Vencedores computam a privatamente; o canal de saída contém apenas a oferta e a narração mínima necessária.
@@ -160,6 +160,6 @@ Checklist de barganha em produção:
 
 - [NegotiationArena](https://arxiv.org/abs/2402.05863) — o benchmark; achados de manipulação de persona e exploração
 - [Measuring Bargaining Abilities of Language Models](https://arxiv.org/abs/2402.15813) — OG-Narrator e o resultado de comprar-mais-difícil-que-vender
-- [Large-Scale Autonomous Negotiation Competition](https://arxiv.org/abs/2503.06416) — ~180k negociações; ocultação de chain-of-thought vence
+- [Large-Scale Autônomous Negotiation Competition](https://arxiv.org/abs/2503.06416) — ~180k negociações; ocultação de chain-of-thought vence
 - [LLM-Stakeholders Interactive Negotiation (NeurIPS 2024)](https://proceedings.neurips.cc/paper_files/paper/2024/file/984dd3db213db2d1454a163b65b84d08-Paper-Datasets_and_Benchmarks_Track.pdf) — jogos pontuáveis multi-party com utilidades secretas
 - [Smith 1980 — The Contract Net Protocol](https://ieeexplore.ieee.org/document/1675516) — o mecanismo clássico, IEEE Transactions on Computers

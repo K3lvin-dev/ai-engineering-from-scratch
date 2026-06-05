@@ -108,9 +108,9 @@ Cada agente tem:
 
 **ChatGPT Deep Research** — gera múltiplos agentes de busca em paralelo, cada um explorando um ângulo diferente, depois sintetiza os resultados.
 
-### O Eespecificaçãotro
+### O Eespectro
 
-Multi-agent não é binário. É um eespecificaçãotro:
+Multi-agent não é binário. É um espectro:
 
 ```
 SIMPLE ──────────────────────────────────────────── COMPLEX
@@ -278,7 +278,7 @@ Problemas dessa abordagem:
 - O system prompt é genérico. Não pode ser calibrado pra cada estágio.
 - Nada roda em paralelo.
 
-### Passo 2: Agents Eespecificaçãoialistas
+### Passo 2: Agents Especificaçãoialistas
 
 Agora divide. Cada agente recebe um trabalho:
 
@@ -320,11 +320,11 @@ const reviewer = createSpecialist(
 );
 ```
 
-Cada eespecificaçãoialista tem um prompt focado. Cada um recebe uma janela de contexto limpa com só a entrada que precisa.
+Cada especialista tem um prompt focado. Cada um recebe uma janela de contexto limpa com só a entrada que precisa.
 
 ### Passo 3: Coordenar por Mensagens
 
-Conecte os eespecificaçãoialistas com passagem explícita de mensagens:
+Conecte os especialistas com passagem explícita de mensagens:
 
 ```typescript
 type AgentMessage = {
@@ -407,7 +407,7 @@ async function compare() {
 }
 ```
 
-A versão multi-agent usa mais tokens no total (três agents, três chamadas LLM separadas), mas o contexto de cada agente fica limpo. A qualidade de cada estágio melhora porque o system prompt é eespecificaçãoializado.
+A versão multi-agent usa mais tokens no total (três agents, três chamadas LLM separadas), mas o contexto de cada agente fica limpo. A qualidade de cada estágio melhora porque o system prompt é especializado.
 
 ## Use
 
@@ -415,7 +415,7 @@ Esta lição produz um prompt reutilizável pra decidir quando ir com multi-agen
 
 ## Exercícios
 
-1. Adicione um quarto eespecificaçãoialista: um agente "tester" que recebe código do programador e feedback do reviewer, e escreve testes
+1. Adicione um quarto especialista: um agente "tester" que recebe código do programador e feedback do reviewer, e escreve testes
 2. Modifique o pipeline pra que o reviewer possa mandar feedback de volta pro programador pra um loop de revisão (máx 2 rodadas)
 3. Converta o pipeline sequencial em um fan-out: rode o pesquisador e um agente "analisador de requisitos" em paralelo, depois combine suas saídas antes de passar pro programador
 

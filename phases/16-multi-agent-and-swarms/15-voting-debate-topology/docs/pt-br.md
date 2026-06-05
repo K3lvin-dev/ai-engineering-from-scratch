@@ -84,7 +84,7 @@ No limite, heterogeneidade vence numerosidade. Três modelos diferentes vencem c
 
 ### Métodos de júri
 
-O framework Sibyl (citado na literatura Minsky-LLM) formaliza um "júri" — um conjunto pequeno de agentes eespecificaçãoializados que refinam respostas votando em cada etapa. Diferente de voto majoritário simples, um júri tem papéis: um agente faz perguntas cruzadas, outro fornece contexto, outro pontua plausibilidade. Métodos de júri são um ponto médio entre voto simples (barato, propenso a monocultura) e MAD completo (caro, propenso a conformidade).
+O framework Sibyl (citado na literatura Minsky-LLM) formaliza um "júri" — um conjunto pequeno de agentes especializados que refinam respostas votando em cada etapa. Diferente de voto majoritário simples, um júri tem papéis: um agente faz perguntas cruzadas, outro fornece contexto, outro pontua plausibilidade. Métodos de júri são um ponto médio entre voto simples (barato, propenso a monocultura) e MAD completo (caro, propenso a conformidade).
 
 ### Quando voto-com-debate domina
 
@@ -153,7 +153,7 @@ Para qualquer ensamble:
 | Imposto de coordenação | "Retornos decrescentes" | Acima de ~4 agentes em grafo, custo cresce mais rápido que qualidade. |
 | Comportamento voluntário | "Ajuda não-pedida" | Padrão emergente do AgentVerse: um agente oferece dar um passo. |
 | Comportamento de conformidade | "Concordância sob pressão" | Padrão emergente do AgentVerse: um agente se alinha com um crítico. |
-| Júri | "Pequeno painel eespecificaçãoializado" | Ensamble estilo Sibyl com papéis (examinador, contexto, pontuador). |
+| Júri | "Pequeno painel especializado" | Ensamble estilo Sibyl com papéis (examinador, contexto, pontuador). |
 
 ## Leitura Complementar
 

@@ -3,7 +3,7 @@
 > A herança do aprendizado por reforço em coordenação multi-agente, que ainda informa sistemas LLM-agent em 2026. **MADDPG** (Lowe et al., NeurIPS 2017, arXiv:1706.02275) introduziu Treinamento Centralizado, Execução Descentralizada (CTDE): cada critic vê estados e ações de todos agentes durante o treinamento; no teste só os atores locais rodam. Funciona pra cenários cooperativos, competitivos e mistos. **QMIX** (Rashid et al., ICML 2018, arXiv:1803.11485) é decomposição de valor com uma mixing network monotônica; Qs por agente se combinam em Q conjunto pra que `argmax` distribua limpo — dominante no StarCraft Multi-Agent Challenge (SMAC). **MAPPO** (Yu et al., NeurIPS 2022, arXiv:2103.01955) é PPO com função de valor centralizada; "surpreendentemente eficaz" em particle-world, SMAC, Google Research Football, Hanabi com mínimo tuning. Esses são a base pra treinar políticas de equipes de agentes que precisam agir descentralizadamente. MAPPO é o **baseline cooperativo-MARL padrão em 2026**. Esta aula constrói cada um a partir de um grid-world simples e fixa as três ideias na memória muscular antes de tocar no treinamento de LLM-agent.
 
 **Tipo:** Aprender
-**Idiomas:** Python (stdlib, implementações pequenas sem NumPy)
+**Linguagens:** Python (stdlib, implementações pequenas sem NumPy)
 **Pré-requisitos:** Fase 09 (Aprendizado por Reforço), Fase 16 · 09 (Redes Swarm Paralelas)
 **Tempo:** ~90 minutos
 
@@ -11,9 +11,9 @@
 
 Sistemas LLM-agent cada vez mais treinam políticas para coordenação entre agents: quando ceder, quando agir, qual peer chamar. A literatura que diz como treinar tais políticas é o Aprendizado por Reforço Multi-Agente (MARL), que antecede a onda de LLMs e tem um conjunto pequeno de algoritmos dominantes.
 
-Ler artigos de MARL sem o vocabulário de padrões é doloroso. Treinamento centralizado com execução descentralizada (CTDE), decomposição de valor e critics centralizados não são buzzwords — são respostas eespecificaçãoíficas pra problemas eespecificaçãoíficos:
+Ler artigos de MARL sem o vocabulário de padrões é doloroso. Treinamento centralizado com execução descentralizada (CTDE), decomposição de valor e critics centralizados não são buzzwords — são respostas específicas pra problemas específicos:
 
-- RL independente (cada agente aprende sozinho) é não-estacionário da perespecificaçãotiva de cada agent. Ruim.
+- RL independente (cada agente aprende sozinho) é não-estacionário da perspectiva de cada agent. Ruim.
 - RL centralizado (um agente controla tudo) não escala e viola restrições de execução.
 - CTDE pega o melhor dos dois: treina com informação global, despacha com políticas locais.
 

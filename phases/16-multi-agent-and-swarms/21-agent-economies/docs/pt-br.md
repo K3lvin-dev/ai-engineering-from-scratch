@@ -1,9 +1,9 @@
 # Economias de Agent, Incentivos Token, Reputação
 
-> Agents autônomos de horizonte longo (curva de trabalho de 1h a 8h do METR) precisam de agência econômica. A **pilha de 5 camadas** emergente é: **DePIN** (computação física) → **Identidade** (DIDs W3C + capital de reputação) → **Cognição** (RAG + MCP) → **Liquidation** (abstração de conta) → **Governança** (DAOs Agênticos). Redes de incentivo pra agente em produção incluem **Bittensor** (subnets TAO recompensam modelos de tarefa eespecificaçãoífica), **Fetch.ai / ASI Alliance** (LLM ASI-1 Mini + token FET) e **Gonka** (proof-of-work baseado em transformer que realoca computação pra tarefas de IA produtivas). Trabalho acadêmico: AAMAS 2025's LaMAS descentralizado usa **credit attribution por valor de Shapley** pra recompensar justamente agentes contribuintes; Google Research "Mechanism design for large language models" propõe **leilões de token** com pagamento de segundo preço sob agregação monótona. Esta aula constrói um marketplace mínimo de agents, aplica credit attribution por valor de Shapley a um pipeline multi-agente e roda um leilão de token de segundo preço pra que a maquinaria de teoria dos jogos se concretize.
+> Agents autônomos de horizonte longo (curva de trabalho de 1h a 8h do METR) precisam de agência econômica. A **pilha de 5 camadas** emergente é: **DePIN** (computação física) → **Identidade** (DIDs W3C + capital de reputação) → **Cognição** (RAG + MCP) → **Liquidation** (abstração de conta) → **Governança** (DAOs Agênticos). Redes de incentivo pra agente em produção incluem **Bittensor** (subnets TAO recompensam modelos de tarefa específica), **Fetch.ai / ASI Alliance** (LLM ASI-1 Mini + token FET) e **Gonka** (proof-of-work baseado em transformer que realoca computação pra tarefas de IA produtivas). Trabalho acadêmico: AAMAS 2025's LaMAS descentralizado usa **credit attribution por valor de Shapley** pra recompensar justamente agentes contribuintes; Google Research "Mechanism design for large language models" propõe **leilões de token** com pagamento de segundo preço sob agregação monótona. Esta aula constrói um marketplace mínimo de agents, aplica credit attribution por valor de Shapley a um pipeline multi-agente e roda um leilão de token de segundo preço pra que a maquinaria de teoria dos jogos se concretize.
 
 **Tipo:** Aprender
-**Idiomas:** Python (stdlib)
+**Linguagens:** Python (stdlib)
 **Pré-requisitos:** Fase 16 · 16 (Negociação e Barganha), Fase 16 · 09 (Redes Swarm Paralelas)
 **Tempo:** ~75 minutos
 
@@ -11,15 +11,15 @@
 
 Sistemas multi-agente ficam complicados quando agentes produzem valor conjuntamente mas precisam ser recompensados individualmente. Mecanismos clássicos — divisão igual, último-contribuinte-leva-tudo — são injustos ou exploráveis. Recompensas baseadas em coalizão via valores de Shapley são justas por construção mas caras de computar. A literatura de 2025-2026 empurra aproximações úteis: amostragem de Shapley, leilões de agregação monótona e reputação on-chain que acumula de contribuições confirmadas.
 
-Além de credit attribution, o campo virou pra agentes econômicos reais: Bittensor TAO recompensa mineração de computação pra fine-tuning de modelos de subnet eespecificaçãoífica, Fetch.ai/ASI recompensa uso do LLM ASI-1 Mini com tokens FET, Gonka realoca proof-of-work de transformer pra tarefas de IA produtivas. Agents que transacionam autônomos existem hoje; a questão é como alinhar incentivos.
+Além de credit attribution, o campo virou pra agentes econômicos reais: Bittensor TAO recompensa mineração de computação pra fine-tuning de modelos de subnet específica, Fetch.ai/ASI recompensa uso do LLM ASI-1 Mini com tokens FET, Gonka realoca proof-of-work de transformer pra tarefas de IA produtivas. Agents que transacionam autônomos existem hoje; a questão é como alinhar incentivos.
 
-Esta aula trata economias de agente como uma família eespecificaçãoífica de problemas — credit attribution, design de mecanismo e reputação — e constrói cada um com o mínimo de matemática pra que as ideias grudem.
+Esta aula trata economias de agente como uma família específica de problemas — credit attribution, design de mecanismo e reputação — e constrói cada um com o mínimo de matemática pra que as ideias grudem.
 
 ## Conceito
 
 ### A pilha de 5 camadas da economia de agent
 
-1. **DePIN (computação física).** Infraestrutura descentralizada que aluga GPU, armazenamento, banda. Subnets Bittensor, Render Network, Akash. Não eespecificaçãoífica de agent; agentes usam ela.
+1. **DePIN (computação física).** Infraestrutura descentralizada que aluga GPU, armazenamento, banda. Subnets Bittensor, Render Network, Akash. Não específica de agent; agentes usam ela.
 2. **Identidade.** Decentralized Identifiers (DIDs) W3C dão a cada agente um ID durável independente de qualquer plataforma. Reputação acumula no DID. O Agent Network Protocol (ANP) usa DID como camada de descoberta.
 3. **Cognição.** Loop de raciocínio do agent: LLM + RAG + MCP. Isso é o que as outras fases constroem.
 4. **Liquidation.** Abstração de conta (ERC-4337) permite agentes pagar gas do próprio saldo sem ter ETH. Agents podem pagar por serviços, por uns aos outros, ou por computação.
@@ -29,7 +29,7 @@ Nem todo sistema em produção usa todas cinco. Bittensor usa 1, 2, parcialmente
 
 ### Bittensor, Fetch.ai, Gonka — o que roda
 
-**Bittensor (TAO).** Subnets são tarefas eespecificaçãoializadas (modelagem de linguagem, geração de imagem, previsão). Mineradores submetem saídas de modelo. Validadores as ranqueiam; scoring ponderado por stake distribui as recompensas TAO. Cada subnet tem sua própria avaliação. A lição econômica: pague por qualidade de saída de tarefa eespecificaçãoífica, não por computação usada.
+**Bittensor (TAO).** Subnets são tarefas especializadas (modelagem de linguagem, geração de imagem, previsão). Mineradores submetem saídas de modelo. Validadores as ranqueiam; scoring ponderado por stake distribui as recompensas TAO. Cada subnet tem sua própria avaliação. A lição econômica: pague por qualidade de saída de tarefa específica, não por computação usada.
 
 **Fetch.ai / ASI Alliance.** LLM ASI-1 Mini roda na rede Fetch.ai; usuários pagam tokens FET por inferência. O narrativa agents-como-peers é mais forte aqui: um agente no Fetch pode chamar outro pra uma tarefa e pagar em FET.
 
@@ -137,7 +137,7 @@ Rodar uma economia de agente em 2026:
 | Termo | O que dizem | O que realmente significa |
 |------|----------------|------------------------|
 | DePIN | "Infraestrutura descentralizada física" | Computação/armazenamento/banda incentivada por token. Bittensor, Akash, Render. |
-| DID | "Identificador descentralizado" | Eespecificaçãoificação W3C pra IDs portáveis. Reputação de agente vincula a DID, não a plataforma. |
+| DID | "Identificador descentralizado" | Especificação W3C pra IDs portáveis. Reputação de agente vincula a DID, não a plataforma. |
 | ERC-4337 | "Abstração de conta" | Contratos de conta que podem patrocinar gas, permitindo pagamentos de agent. |
 | Valor de Shapley | "Credit attribution justo" | Alocação única que satisfaz eficiência, simetria, linearidade, nulo. |
 | Leilão de segundo preço | "Leilão Vickrey" | Mecanismo truthful: ganhador paga segunda maior oferta. Compatível com agregação monótona. |
@@ -152,4 +152,4 @@ Rodar uma economia de agente em 2026:
 - [AAMAS 2025 — LaMAS descentralizado](https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p2896.pdf) — credit attribution por valor de Shapley
 - [Documentação Bittensor TAO](https://docs.bittensor.com/) — estrutura de subnet e distribuição de recompensas
 - [Fetch.ai / ASI Alliance](https://fetch.ai/) — LLM ASI-1 Mini e token FET
-- [Eespecificaçãoificação W3C Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/) — base de identidade
+- [Especificação W3C Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/) — base de identidade

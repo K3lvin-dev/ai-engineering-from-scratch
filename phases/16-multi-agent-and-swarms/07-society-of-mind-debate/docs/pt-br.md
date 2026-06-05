@@ -1,6 +1,6 @@
 # Sociedade da Mente e Debate Multi-Agent
 
-> A premissa de 1986 de Minsky — inteligência é uma sociedade de eespecificaçãoialistas — é redescoberta a cada década. Em 2023 Du et al. a transformaram num algoritmo concreto: múltiplas instâncias de LLM propõem respostas, leem as respostas uma das outras, criticam e atualizam. Em N rodadas convergem num consenso que supera zero-shot CoT e reflexão em seis tarefas de raciocínio e factualidade. Dois achados importam: tanto **múltiplos agents** quanto **múltiplas rodadas** contribuem independentemente. A sociedade supera um monólogo de agente único; a troca multi-rodada supera votação de uma vez.
+> A premissa de 1986 de Minsky — inteligência é uma sociedade de especialistas — é redescoberta a cada década. Em 2023 Du et al. a transformaram num algoritmo concreto: múltiplas instâncias de LLM propõem respostas, leem as respostas uma das outras, criticam e atualizam. Em N rodadas convergem num consenso que supera zero-shot CoT e reflexão em seis tarefas de raciocínio e factualidade. Dois achados importam: tanto **múltiplos agents** quanto **múltiplas rodadas** contribuem independentemente. A sociedade supera um monólogo de agente único; a troca multi-rodada supera votação de uma vez.
 
 **Tipo:** Aprender + Construir
 **Linguagens:** Python (stdlib)
@@ -48,7 +48,7 @@ Desvantagem: um modelo fraco participando de um debate pode arrastar o consenso 
 
 ### NLSOM — a extensão de 129 agents
 
-Zhuge et al. ("Mindstorms in Natural Language-Based Societies of Mind," arXiv:2305.17066) escalaran essa ideia pra sociedades de 129 membros. O resultado: eespecificaçãoialização e auto-organização emergem com escala, e o sistema supera single-agent em tarefas como resposta a perguntas visuais.
+Zhuge et al. ("Mindstorms in Natural Language-Based Societies of Mind," arXiv:2305.17066) escalaran essa ideia pra sociedades de 129 membros. O resultado: especialização e auto-organização emergem com escala, e o sistema supera single-agent em tarefas como resposta a perguntas visuais.
 
 ### Modos de falha
 
@@ -97,7 +97,7 @@ Se você usar debate:
 
 | Termo | O que as pessoas dizem | O que realmente significa |
 |-------|----------------------|--------------------------|
-| Sociedade da Mente | "A ideia de Minsky" | Inteligência como eespecificaçãoialistas interagindo; enquadramento de 1986 agora operationalizado via debate LLM. |
+| Sociedade da Mente | "A ideia de Minsky" | Inteligência como especialistas interagindo; enquadramento de 1986 agora operationalizado via debate LLM. |
 | Debate multi-agent | "Agents discutem" | N agentes propõem, criticam uns aos outros, revisam em R rodadas, votação por maioria. |
 | Consenso | "Eles concordam" | Não verdade epistêmica — só fração-na-resposta-da-maioria. Pode ser confiantemente errado. |
 | Rodadas | "Passos de troca" | Uma rodada = cada agente lê os outros e atualiza uma vez. |

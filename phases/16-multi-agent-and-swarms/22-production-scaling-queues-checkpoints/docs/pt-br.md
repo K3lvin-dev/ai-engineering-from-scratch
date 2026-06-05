@@ -3,7 +3,7 @@
 > Escalar sistemas multi-agente pra milhares de execuções concorrentes requer **execução durável**. O runtime do LangGraph escreve um checkpoint após cada super-step chaveado por `thread_id` (Postgres por default); crashes de worker liberam um lease e outro worker retoma. Agents podem dormir indefinidamente esperando input humano. **MegaAgent** (arXiv:2408.09955) rodou uma fila produtor-consumidor por agente com três estados (Idle / Processing / Response) e coordenação em duas camadas (chat intra-grupo + chat admin inter-grupo). **Fiber/async** supera thread-por-job pra streaming de LLM: threads ficam ociosas 99% do tempo esperando tokens, fibers cedem cooperativamente em I/O. Contra-ponto: o "Scaling Agentic Software" de Ashpreet Bedi defende **FastAPI + Postgres + mais nada** até que a carga prove o contrário — arquiteturas simples vão mais longe do que esperado. Esta aula constrói um log de checkpoint durável, uma fila de trabalho por agente com transições de estado, uma demo async-vs-thread e fixa a regra pragmática "comece simples".
 
 **Tipo:** Aprender + Construir
-**Idiomas:** Python (stdlib, `asyncio`, `sqlite3`)
+**Linguagens:** Python (stdlib, `asyncio`, `sqlite3`)
 **Pré-requisitos:** Fase 16 · 09 (Redes Swarm Paralelas), Fase 16 · 13 (Memória Compartilhada)
 **Tempo:** ~75 minutos
 
@@ -99,7 +99,7 @@ Pra execuções de agente pagas, você precisa de "effective exactly-once" (entr
 - **Padrão outbox.** Efeitos colaterais escrevem numa tabela primeiro, depois um processo separado executa. Ambos passos idempotentes.
 - **Transações compensatórias.** Quando um efeito colateral succeede mas a escrita de tracking falha, agende uma compensação.
 
-São padrões de engenharia de banco de dados, não eespecificaçãoíficos de LLM. O imposto de LLM é só que chamadas de LLM são lentas; todo o resto é sistemas distribuídos padrão.
+São padrões de engenharia de banco de dados, não específicos de LLM. O imposto de LLM é só que chamadas de LLM são lentas; todo o resto é sistemas distribuídos padrão.
 
 ### Deploy rainbow
 
@@ -143,9 +143,9 @@ Endurecimento canônico em produção:
 
 - **Comece simples (regra do Bedi).** FastAPI + Postgres até medir falhando.
 - **Instrumente tudo antes de otimizar.** Histograma de latência por execução, tempo por step, contagem de retry, categorização de falhas.
-- **Padrão outbox pra efeitos colaterais.** Eespecificaçãoialmente pagamentos e chamadas de API externas.
+- **Padrão outbox pra efeitos colaterais.** Especificaçãoialmente pagamentos e chamadas de API externas.
 - **Deploys rainbow.** Nunca mate execuções de agente em andamento durante deploys.
-- **Adote engines de execução durável (Temporal / LangGraph / Restate) quando** atingir problemas eespecificaçãoíficos: waits de human-in-the-loop de horas, coordenação cross-region, políticas complexas de retry/compensação.
+- **Adote engines de execução durável (Temporal / LangGraph / Restate) quando** atingir problemas específicos: waits de human-in-the-loop de horas, coordenação cross-region, políticas complexas de retry/compensação.
 - **Async pra camada de I/O.** Threads só pra pós-processamento CPU-bound.
 
 ## Exercícios
