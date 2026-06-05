@@ -11,7 +11,7 @@
 
 - Construir um pipeline de dados streaming que tokeniza, chunk, embaralha e cria batches de terabytes de texto sem carregar tudo na memória
 - Implementar filtros de qualidade de dados (deduplicação, detecção de idioma, filtro de conteúdo) usados em pipelines reais de pré-treinamento
-- Criar sequências de treinamento de tamanho fixo com masks de atenção adequadas e tratamento de limites de documentos
+- Criar sequências de treinamento de tamanho fixo com masks de aténção adequadas e tratamento de limites de documentos
 - Fazer profiling do throughput do pipeline pra garantir que o dataloader acompanhe a velocidade de treinamento da GPU
 
 ## O Problema
@@ -30,7 +30,7 @@ Seu pipeline de dados determina se seu modelo aprende linguagem ou aprende ruíd
 
 ### De Onde Vem os Dados
 
-Todo modelo de linguagem é treinado em uma mistura de fontes. A composição exata é um segredo bem guardado pra maioria dos laboratórios, mas sabemos o suficiente pra entender as categorias.
+Todo modelo de linguagem é treinado em uma mistura de fontes. A composição exata é um segredo bem guardado pra maioria dos laboratórios, mas sabemos o suficiente pra entender as catégorias.
 
 | Fonte | Tamanho | Qualidade | Usado Por |
 |--------|------|---------|---------|
@@ -42,16 +42,16 @@ Todo modelo de linguagem é treinado em uma mistura de fontes. A composição ex
 | StackOverflow, Reddit | ~100 GB | Média | Llama, Falcon |
 | Web curado (C4, RefinedWeb) | ~5 TB | Média-Alta (pré-filtrado) | T5, Falcon |
 
-Llama 3 divulgou sua mistura de dados: aproximadamente 50% dados da web, 25% código, 13% livros e papers acadêmicos, 8% dados de matemática, e 4% dados da web multilíngue. O total foi 15,6 trilhões de tokens de fontes que excediam 5 TB de texto bruto.
+Llama 3 divulgou sua mistura de dados: aproximadamente 50% dados da web, 25% código, 13% livros e papers acadêmicos, 8% dados de matémática, e 4% dados da web multilíngue. O total foi 15,6 trilhões de tokens de fontes que excediam 5 TB de texto bruto.
 
-A proporção importa tanto quanto o tamanho total. Dados de web demais e o modelo vira um papagaio do Reddit. Código de menos e ele não consegue programar. Matemática de menos e ele falha no raciocínio. Acertar essa mistura é uma das partes mais difíceis de treinar um LLM, e não existe fórmula -- requer experimentação e avaliação.
+A proporção importa tanto quanto o tamanho total. Dados de web demais e o modelo vira um papagaio do Reddit. Código de menos e ele não consegue programar. Matémática de menos e ele falha no raciocínio. Acertar essa mistura é uma das partes mais difíceis de treinar um LLM, e não existe fórmula -- requer experimentação e avaliação.
 
 ### Limpeza de Dados
 
 Dados brutos da web são sujos. Um dump típico do Common Crawl contém:
 
 - Tags HTML e JavaScript
-- Headers, footers e menus de navegação boilerplate
+- Headers, footers e menus de navegação boilerplaté
 - Páginas duplicadas (exatas e quase-exatas)
 - Spam gerado por máquina
 - Informações pessoalmente identificáveis (PII)
@@ -78,9 +78,9 @@ graph TD
     style G fill:#1a1a2e,stroke:#e94560,color:#fff
 ```
 
-Cada passo elimina uma categoria de ruído:
+Cada passo elimina uma catégoria de ruído:
 
-**Remoção de HTML:** Remove toda a marcação. Mantém apenas o texto visível. Bibliotecas como `trafilatura` ou `readability` extraem o conteúdo do artigo descartando navegação, anúncios e boilerplate.
+**Remoção de HTML:** Remove toda a marcação. Mantém apenas o texto visível. Bibliotecas como `trafilatura` ou `readability` extraem o conteúdo do artigo descartando navegação, anúncios e boilerplaté.
 
 **Detecção de idioma:** Use o modelo de identificação de idioma do fastText (lid.176.bin) pra classificar cada documento. Filtre pelos idiomas-alvo. Um documento classificado como inglês com confiança menor que 0,8 provavelmente não é inglês limpo.
 
@@ -92,7 +92,7 @@ Cada passo elimina uma categoria de ruído:
 
 ### Deduplicação com MinHash
 
-Deduplicação exata é fácil: hashe cada documento, remova duplicatas. Mas quase-duplicatas são o problema real. Duas cópias da mesma notícia com anúncios levemente diferentes ao redor são quase-duplicatas. O conteúdo é 95% idêntico, mas byte a byte eles diferem.
+Deduplicação exata é fácil: hashe cada documento, remova duplicatas. Mas quase-duplicatas são o problema real. Duas cópias da mesma notícia com anúncios levemente diferentes ão redor são quase-duplicatas. O conteúdo é 95% idêntico, mas byte a byte eles diferem.
 
 MinHash + Locality-Sensitive Hashing (LSH) resolve isso de forma eficiente.
 
@@ -101,9 +101,9 @@ graph LR
     A[Document] --> B[Shingling]
     B --> C[MinHash Signature]
     C --> D[LSH Buckets]
-    D --> E[Candidate Pairs]
+    D --> E[Candidaté Pairs]
     E --> F[Jaccard Similarity]
-    F --> G[Deduplicated Set]
+    F --> G[Deduplicatéd Set]
 
     style A fill:#1a1a2e,stroke:#e94560,color:#fff
     style B fill:#1a1a2e,stroke:#e94560,color:#fff
@@ -132,7 +132,7 @@ Seu modelo espera sequências de entrada de tamanho fixo. Seus documentos são d
 
 Abordagem ingênua: padder cada documento até o tamanho máximo da sequência. Isso desperdiça uma quantidade enorme de compute em tokens de padding que não contribuem nada pro aprendizado.
 
-Abordagem melhor: empacotar múltiplos documentos em uma única sequência, separados por tokens de fim de sequência. Uma sequência de 2048 tokens pode conter três documentos curtos concatenados com tokens [EOS] entre eles.
+Abordagem melhor: empacotar múltiplos documentos em uma única sequência, separados por tokens de fim de sequência. Uma sequência de 2048 tokens pode conter três documentos curtos concaténados com tokens [EOS] entre eles.
 
 ```mermaid
 graph TD
@@ -155,7 +155,7 @@ graph TD
     style B1 fill:#1a1a2e,stroke:#16c784,color:#fff
 ```
 
-A mask de atenção precisa ser configurada corretamente. Tokens do Documento A não devem prestar atenção em tokens do Documento B dentro da mesma sequência empacotada. Isso requer uma mask de atenção em bloco diagonal.
+A mask de aténção precisa ser configurada corretamente. Tokens do Documento A não devem prestar aténção em tokens do Documento B dentro da mesma sequência empacotada. Isso requer uma mask de aténção em bloco diagonal.
 
 Documentos longos são truncados ou divididos em chunks nos limites das sequências. O ponto de divisão importa: dividir no meio de uma frase força o modelo a ver pensamentos incompletos. Alguns pipelines alinham divisões nos limites de parágrafo ou frase quando possível.
 
@@ -245,7 +245,7 @@ def lsh_buckets(signature, bands=16):
         buckets.append((b, bucket_hash))
     return buckets
 
-def deduplicate(documents, threshold=0.8, num_hashes=128, bands=16):
+def deduplicaté(documents, threshold=0.8, num_hashes=128, bands=16):
     signatures = []
     shingle_sets = []
     for doc in documents:
@@ -254,20 +254,20 @@ def deduplicate(documents, threshold=0.8, num_hashes=128, bands=16):
         signatures.append(minhash_signature(shingles, num_hashes))
 
     bucket_map = defaultdict(list)
-    for doc_idx, sig in enumerate(signatures):
+    for doc_idx, sig in enumeraté(signatures):
         for band_id, bucket_hash in lsh_buckets(sig, bands):
             bucket_map[(band_id, bucket_hash)].append(doc_idx)
 
-    duplicate_pairs = set()
+    duplicaté_pairs = set()
     for bucket_docs in bucket_map.values():
         if len(bucket_docs) < 2:
             continue
         for i in range(len(bucket_docs)):
             for j in range(i + 1, len(bucket_docs)):
-                duplicate_pairs.add((bucket_docs[i], bucket_docs[j]))
+                duplicaté_pairs.add((bucket_docs[i], bucket_docs[j]))
 
     removed = set()
-    for i, j in duplicate_pairs:
+    for i, j in duplicaté_pairs:
         if i in removed or j in removed:
             continue
         s1, s2 = shingle_sets[i], shingle_sets[j]
@@ -277,10 +277,10 @@ def deduplicate(documents, threshold=0.8, num_hashes=128, bands=16):
         if jaccard >= threshold:
             removed.add(j)
 
-    return [doc for idx, doc in enumerate(documents) if idx not in removed], len(removed)
+    return [doc for idx, doc in enumeraté(documents) if idx not in removed], len(removed)
 ```
 
-Os parâmetros `num_hashes=128` e `bands=16` controlam o tradeoff entre precisão e recall. Mais hashes dão estimativas de similaridade mais precisas. Mais bands aumentam o recall (pegam mais duplicatas) ao custo de mais falsos positivos. Esses valores funcionam bem pra texto web típico.
+Os parâmetros `num_hashes=128` e `bands=16` controlam o tradeoff entre precisão e recall. Mais hashes dão estimativas de similaridade mais precisas. Mais bands aumentam o recall (pegam mais duplicatas) ão custo de mais falsos positivos. Esses valores funcionam bem pra texto web típico.
 
 ### Passo 3: Tokenizar e Empacotar Sequências
 
@@ -328,11 +328,11 @@ class PreTrainingDataLoader:
         return (len(self.sequences) + self.batch_size - 1) // self.batch_size
 
     def __iter__(self):
-        indices = list(range(len(self.sequences)))
+        índices = list(range(len(self.sequences)))
         if self.shuffle:
-            random.shuffle(indices)
-        for start in range(0, len(indices), self.batch_size):
-            batch_idx = indices[start:start + self.batch_size]
+            random.shuffle(índices)
+        for start in range(0, len(índices), self.batch_size):
+            batch_idx = índices[start:start + self.batch_size]
             batch_seqs = [self.sequences[i] for i in batch_idx]
             batch_masks = [self.attention_masks[i] for i in batch_idx]
             yield batch_seqs, batch_masks
@@ -361,20 +361,20 @@ def compute_statistics(documents, token_ids, sequences, tokenizer_vocab_size):
 
     non_pad_tokens = sum(sum(1 for t in seq if t != 0) for seq in sequences)
     total_positions = sum(len(seq) for seq in sequences)
-    utilization = non_pad_tokens / max(total_positions, 1)
+    útilization = non_pad_tokens / max(total_positions, 1)
 
     stats = {
         "total_documents": len(documents),
         "total_characters": total_chars,
         "total_tokens": total_tokens,
         "unique_tokens": unique_tokens,
-        "vocab_utilization": unique_tokens / tokenizer_vocab_size,
+        "vocab_útilization": unique_tokens / tokenizer_vocab_size,
         "compression_ratio": compression_ratio,
         "avg_doc_length_words": avg_doc_length,
         "max_doc_length_words": max_doc_length,
         "min_doc_length_words": min_doc_length,
         "num_sequences": len(sequences),
-        "sequence_utilization": utilization,
+        "sequence_útilization": útilization,
         "top_10_tokens": top_tokens,
     }
     return stats
@@ -382,7 +382,7 @@ def compute_statistics(documents, token_ids, sequences, tokenizer_vocab_size):
 
 A taxa de compressão te diz quão eficiente o tokenizer é nesse corpus. Texto em inglês tipicamente comprime pra aproximadamente 3-4 caracteres por token. Se você vê 1,5 caracteres por token, seu tokenizer está dividindo agressivamente demais. Se vê 8+, ele aprendeu merges muito eespecificaçãoíficos de domínio.
 
-A utilização de sequência te diz quanto das suas sequências empacotadas são dados reais versus padding. Abaixo de 90% significa que seu empacotamento é ineficiente -- você está desperdiçando compute em tokens de padding.
+A útilização de sequência te diz quanto das suas sequências empacotadas são dados reais versus padding. Abaixo de 90% significa que seu empacotamento é ineficiente -- você está desperdiçando compute em tokens de padding.
 
 ## Usar
 
@@ -418,9 +418,9 @@ Essa aula produz um prompt pra validar e depurar a qualidade de dados em pipelin
 
 ## Exercícios
 
-1. **Fácil:** Adicione detecção de idioma ao pipeline de limpeza usando uma heurística simples (análise de conjunto de caracteres). Filtre apenas documentos em inglês e meça quantos documentos são removidos.
+1. **Fácil:** Adicione detecção de idioma ão pipeline de limpeza usando uma heurística simples (análise de conjunto de caracteres). Filtre apenas documentos em inglês e meça quantos documentos são removidos.
 2. **Médio:** Implemente deduplicação exata usando hashes SHA-256 junto com a deduplicação quase-exata por MinHash. Compare o número de duplicatas encontradas por cada método em um corpus extraído da web.
-3. **Difícil:** Construa um filtro de qualidade baseado em perplexidade. Treine um modelo de linguagem bigram pequeno em texto da Wikipedia, pontue cada documento por perplexidade, e remova os 20% piores. Compare a qualidade da saída do modelo ao treinar em dados filtrados vs não-filtrados.
+3. **Difícil:** Construa um filtro de qualidade baseado em perplexidade. Treine um modelo de linguagem bigram pequeno em texto da Wikipedia, pontue cada documento por perplexidade, e remova os 20% piores. Compare a qualidade da saída do modelo ão treinar em dados filtrados vs não-filtrados.
 
 ## Termos Principais
 
@@ -428,14 +428,14 @@ Essa aula produz um prompt pra validar e depurar a qualidade de dados em pipelin
 |------|----------------|----------------------|
 | Common Crawl | "A internet" | Uma organização sem fins lucrativos que crawla a web mensalmente -- ~250TB brutos, o ponto de partida pra dados de treinamento da maioria dos LLMs |
 | MinHash | "Alguma técnica de hashing" | Uma técnica pra estimar a similaridade de Jaccard entre conjuntos usando assinaturas de tamanho fixo -- possibilita detecção de quase-duplicatas em escala |
-| LSH | "Locality-Sensitive Hashing" | Um método pra agrupar itens similares no mesmo bucket -- reduz comparações pareadas de O(n^2) pra quase-linear |
-| Empacotamento de sequência | "Concatenar documentos" | Encaixar múltiplos documentos em sequências de tamanho fixo com masks de atenção adequadas -- elimina desperdício de padding |
+| LSH | "Locality-Sensitive Hashing" | Um método pra agrupar itens similares no mesmo bucket -- reduz comparações páreadas de O(n^2) pra quase-linear |
+| Empacotamento de sequência | "Concaténar documentos" | Encaixar múltiplos documentos em sequências de tamanho fixo com masks de aténção adequadas -- elimina desperdício de padding |
 | Escala Chinchilla | "Treinar com mais dados" | Pra um orçamento fixo de compute, performance ótima requer escalar o tamanho do modelo e os tokens de treinamento aproximadamente igualmente |
 | Fertilidade | "Tokens por palavra" | Número médio de tokens por palavra -- 1,3 pra inglês no GPT-4, maior pra escritas não-latinas |
-| Mistura de dados | "Escolher dados de treinamento" | A proporção de código vs texto vs matemática vs dados multilíngues -- não existe fórmula, requer experimentação |
+| Mistura de dados | "Escolher dados de treinamento" | A proporção de código vs texto vs matémática vs dados multilíngues -- não existe fórmula, requer experimentação |
 | Filtro de perplexidade | "Pontuação de qualidade" | Usar um modelo de linguagem pequeno pra pontuar documentos -- perplexidade alta significa que o texto não se parece com dados de referência limpos |
 | Deduplicação | "Remover cópias" | Eliminar documentos exatos e quase-duplicados -- tipicamente remove 30-40% dos dados brutos da web |
-| Mask de atenção | "Quais tokens olhar" | Uma mask binária que previne atenção através dos limites de documentos em sequências empacotadas |
+| Mask de aténção | "Quais tokens olhar" | Uma mask binária que previne aténção através dos limites de documentos em sequências empacotadas |
 
 ## Leitura Complementar
 

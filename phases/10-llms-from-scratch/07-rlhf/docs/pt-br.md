@@ -1,54 +1,54 @@
 # RLHF: Reward Model + PPO
 
-> SFT ensina o modelo a seguir instrucoes. Mas nao ensina qual resposta e MELHOR. Duas respostas gramaticalmente corretas e factualmente corretas podem ser enormemente diferentes em utilidade. RLHF e como voce codifica o julgamento humano no comportamento do modelo. E o que faz o Claude ser util e o GPT ser educado.
+> SFT ensina o modelo a seguir instruções. Mas não ensina qual resposta e MELHOR. Duas respostas gramaticalmente corretas e factualmente corretas podem ser enormemente diferentes em utilidade. RLHF e como você codifica o julgamento humano no comportamento do modelo. E o que faz o Claude ser útil e o GPT ser educado.
 
 **Tipo:** Construir
 **Linguagens:** Python (com numpy)
-**Pre-requisitos:** Fase 10, Aula 06 (Instruction Tuning / SFT)
+**Pré-requisitos:** Fase 10, Aula 06 (Instruction Tuning / SFT)
 **Tempo:** ~90 minutos
 
 ## Objetivos de Aprendizado
 
-- Construir um reward model que pontua qualidade de resposta a partir de pares de preferencia humana (escolhida vs rejeitada)
+- Construir um reward model que pontua qualidade de resposta a partir de pares de preferência humana (escolhida vs rejeitada)
 - Implementar o loop de treinamento PPO que otimiza a politica de um modelo de linguagem contra o reward model com penalidade KL
-- Explicar por que RLHF precisa de tres modelos (SFT, reward, politica) e como a restricao KL previne reward hacking
-- Avaliar o efeito do RLHF comparando qualidade de resposta antes e depois da otimizacao de preferencia
+- Explicar por que RLHF precisa de três modelos (SFT, reward, politica) e como a restrição KL previne reward hacking
+- Avaliar o efeito do RLHF comparando qualidade de resposta antes e depois da otimização de preferência
 
 ## O Problema
 
-Peca pra um modelo "Explique computacao quantica" e ele pode produzir:
+Peca pra um modelo "Explique computação quantica" e ele pode produzir:
 
-**Resposta A:** "A computacao quantica usa qubits que podem existir em superposicao, ou seja, podem ser 0, 1, ou ambos simultaneamente. Isso permite que computadores quanticos processem certos calculos exponencialmente mais rapido que computadores classicos. Algoritmos chave incluem o algoritmo de Shor para fatorar numeros grandes e o algoritmo de Grover para buscar databases nao ordenados."
+**Resposta A:** "A computação quantica usa qubits que podem existir em superposição, ou seja, podem ser 0, 1, ou ambos simultaneamente. Isso permite que computadores quanticos processem certos calculos exponencialmente mais rapido que computadores classicos. Algoritmos chave incluem o algoritmo de Shor para fatorar numeros grandes e o algoritmo de Grover para buscar databases não ordenados."
 
-**Resposta B:** "A computacao quantica e um tipo de computacao que usa fenomenos da mecanica quantica. Ela foi proposta pela primeira vez nos anos 1980. Richard Feynman sugeriu que sistemas quanticos poderiam ser simulados por computadores quanticos. O campo cresceu significativamente desde entao. Muitas empresas agora trabalham em computadores quanticos. IBM, Google e outras fizeram progresso. A supremacia quantica foi declarada pelo Google em 2019."
+**Resposta B:** "A computação quantica e um tipo de computação que usa fenomenos da mecanica quantica. Ela foi proposta pela primeira vez nos anos 1980. Richard Feynman sugeriu que sistemas quanticos poderiam ser simulados por computadores quanticos. O campo cresceu significativamente desde então. Muitas empresas agora trabalham em computadores quanticos. IBM, Google e outras fizeram progresso. A supremacia quantica foi declarada pelo Google em 2019."
 
-Ambas as respostas estao factualmente corretas. Ambas tem gramatica correta. Ambas seguem a instrucao. Mas a Resposta A claramente e melhor. E mais concisa, mais informativa e melhor estruturada. Um humano escolheria A toda vez.
+Ambas as respostas estão factualmente corretas. Ambas tem gramatica correta. Ambas seguem a instrução. Mas a Resposta A claramente e melhor. E mais concisa, mais informativa e melhor estruturada. Um humano escolheria A toda vez.
 
-SFT nao consegue capturar essa distincao. Ele treina o modelo em respostas "corretas", mas nao tem mecanismo pra dizer "essa resposta e melhor que aquela". Trata cada exemplo de treino como igualmente bom. Se A e B aparecessem no dataset de SFT, o modelo aprenderia de ambos igualmente.
+SFT não consegue capturar essa distinção. Ele treina o modelo em respostas "corretas", mas não tem mecanismo pra dizer "essa resposta e melhor que aquela". Trata cada exemplo de treino como igualmente bom. Se A e B aparecessem no dataset de SFT, o modelo aprenderia de ambos igualmente.
 
-RLHF resolve isso. Ele treina um reward model pra prever qual resposta um humano preferiria, e usa esse sinal de reward pra empurrar o modelo de linguagem pra saidas de maior qualidade. InstructGPT (o precursor do ChatGPT) usou RLHF pra melhorar dramaticamente a utilidade, veracidade e inocuidade do GPT-3. Avaliadores internos da OpenAI preferiram as saidas do InstructGPT sobre as do GPT-3 85% do tempo, apesar do InstructGPT ser 135x menor (1.3B vs 175B parametros).
+RLHF resolve isso. Ele treina um reward model pra prever qual resposta um humano preferiria, e usa esse sinal de reward pra empurrar o modelo de linguagem pra saidas de maior qualidade. InstructGPT (o precursor do ChatGPT) usou RLHF pra melhorar dramaticamente a utilidade, veracidade e inocuidade do GPT-3. Avaliadores internos da OpenAI preferiram as saidas do InstructGPT sobre as do GPT-3 85% do tempo, apesar do InstructGPT ser 135x menor (1.3B vs 175B parâmetros).
 
 ## O Conceito
 
-### As Tres Etapas
+### As Três Etapas
 
-RLHF nao e um unico treino. E um pipeline de tres etapas sequenciais, cada uma construindo sobre a anterior.
+RLHF não e um unico treino. E um pipeline de três etapas sequenciais, cada uma construindo sobre a anterior.
 
-**Etapa 1: SFT.** Treine um modelo base em pares de instrucao-resposta (Aula 06). Isso da um modelo que segue instrucoes mas nao sabe quais respostas sao melhores que outras.
+**Etapa 1: SFT.** Treine um modelo base em pares de instrução-resposta (Aula 06). Isso da um modelo que segue instruções mas não sabe quais respostas são melhores que outras.
 
-**Etapa 2: Reward Model.** Colete dados de preferencia humana: mostre anotadores duas respostas pro mesmo prompt e pergunte "qual e melhor?". Treine um modelo pra prever essas preferencias. O reward model recebe (prompt, resposta) como entrada e retorna um score escalar.
+**Etapa 2: Reward Model.** Colete dados de preferência humana: mostre anotadores duas respostas pro mesmo prompt e pergunte "qual e melhor?". Treine um modelo pra prever essas preferências. O reward model recebe (prompt, resposta) como entrada e retorna um score escalar.
 
-**Etapa 3: PPO.** Use o reward model pra gerar um sinal de treino pro modelo de linguagem. O modelo de linguagem gera respostas, o reward model pontua, e o PPO atualiza o modelo de linguagem pra gerar respostas com maior pontuacao. Uma penalidade de divergencia KL impede que o modelo de linguagem se desvie muito do checkpoint SFT.
+**Etapa 3: PPO.** Use o reward model pra gerar um sinal de treino pro modelo de linguagem. O modelo de linguagem gera respostas, o reward model pontua, e o PPO atualiza o modelo de linguagem pra gerar respostas com maior pontuação. Uma penalidade de divergencia KL impede que o modelo de linguagem se desvie muito do checkpoint SFT.
 
 ```mermaid
 graph TD
     subgraph Stage1["Etapa 1: SFT"]
         B["Modelo Base"] --> S["Modelo SFT"]
-        D["Dados de Instrucao\n(27K exemplos)"] --> S
+        D["Dados de Instrução\n(27K exemplos)"] --> S
     end
 
     subgraph Stage2["Etapa 2: Reward Model"]
-        S --> |"Gerar respostas"| P["Pares de Preferencia\n(prompt, vencedor, perdedor)"]
+        S --> |"Gerar respostas"| P["Pares de Preferência\n(prompt, vencedor, perdedor)"]
         H["Anotadores Humanos"] --> P
         P --> R["Reward Model\nR(prompt, resposta) → score"]
     end
@@ -58,7 +58,7 @@ graph TD
         S --> |"Congelar como referencia"| REF["Modelo de Referencia\n(SFT congelado)"]
         PI --> |"Gerar"| RESP["Resposta"]
         RESP --> R
-        R --> |"Sinal de reward"| PPO["Atualizacao PPO"]
+        R --> |"Sinal de reward"| PPO["Atualização PPO"]
         REF --> |"Penalidade KL"| PPO
         PPO --> |"Atualizar"| PI
     end
@@ -72,27 +72,27 @@ graph TD
 
 ### O Reward Model
 
-O reward model e um modelo de linguagem reaproveitado como pontuador. Pegue o modelo SFT, substitua a cabeca de modelagem de linguagem (que gera uma distribuicao sobre o vocabulario) por uma cabeca escalar (que gera um numero unico). A arquitetura e identica ate a ultima camada.
+O reward model e um modelo de linguagem reaproveitado como pontuador. Pegue o modelo SFT, substitua a cabeca de modelagem de linguagem (que gera uma distribuição sobre o vocabulario) por uma cabeca escalar (que gera um numero unico). A arquitetura e identica até a última camada.
 
-Entrada: um prompt concatenado com uma resposta. Saida: um unico score escalar de reward.
+Entrada: um prompt concaténado com uma resposta. Saida: um unico score escalar de reward.
 
-Os dados de treino sao pares de preferencia humana. Pra cada prompt, anotadores veem duas respostas e escolhem a melhor. Isso cria triples de treino: (prompt, resposta_preferida, resposta_rejeitada).
+Os dados de treino são pares de preferência humana. Pra cada prompt, anotadores veem duas respostas e escolhem a melhor. Isso cria triples de treino: (prompt, resposta_preferida, resposta_rejeitada).
 
-A funcao de perda usa o modelo Bradley-Terry de preferencias pareadas:
+A função de perda usa o modelo Bradley-Terry de preferências páreadas:
 
 ```
 loss = -log(sigmoid(reward(preferida) - reward(rejeitada)))
 ```
 
-Essa e a equacao chave. `sigmoid(reward(A) - reward(B))` da a probabilidade de que a resposta A e preferida sobre a resposta B. A perda empurra o reward model pra atribuir uma pontuacao maior a resposta preferida.
+Essa e a equação chave. `sigmoid(reward(A) - reward(B))` da a probabilidade de que a resposta A e preferida sobre a resposta B. A perda empurra o reward model pra atribuir uma pontuação maior a resposta preferida.
 
-Por que comparacoes pareadas ao inves de pontuacoes absolutas? Porque humanos sao pessimos em atribuir pontuacoes absolutas de qualidade ("Essa resposta e 7.3 ou 7.5 de 10?") mas sao muito bons em comparacoes relativas ("A e melhor que B?"). O modelo Bradley-Terry converte comparacoes relativas em um sistema de pontuacao absoluto consistente.
+Por que comparações páreadas ão inves de pontuações absolutas? Porque humanos são pessimos em atribuir pontuações absolutas de qualidade ("Essa resposta e 7.3 ou 7.5 de 10?") mas são muito bons em comparações relativas ("A e melhor que B?"). O modelo Bradley-Terry converte comparações relativas em um sistema de pontuação absoluto consistente.
 
-**Numeros do InstructGPT:** OpenAI coletou 33.000 pares de comparacao de 40 contratados. Cada comparacao levou cerca de 5 minutos. Sao 2.750 horas de trabalho humano pros dados de treino do reward model.
+**Numeros do InstructGPT:** OpenAI coletou 33.000 pares de comparação de 40 contratados. Cada comparação levou cerca de 5 minutos. São 2.750 horas de trabalho humano pros dados de treino do reward model.
 
 ### PPO: Proximal Policy Optimization
 
-PPO e um algoritmo de reinforcement learning. No RLHF, o "ambiente" e o reward model, o "agente" e o modelo de linguagem, e a "acao" e gerar um token.
+PPO e um algoritmo de reinforcement learning. No RLHF, o "ambiente" e o reward model, o "agente" e o modelo de linguagem, e a "ação" e gerar um token.
 
 O objetivo:
 
@@ -102,15 +102,15 @@ maximizar: E[R(prompt, resposta)] - beta * KL(politica || referencia)
 
 O primeiro termo empurra o modelo pra gerar respostas com alto reward. O segundo termo (penalidade de divergencia KL) impede que o modelo se desvie muito do checkpoint SFT.
 
-Por que a penalidade KL? Sem ela, o modelo encontra solucoes degeneradas. O reward model e treinado num dataset finito de preferencias humanas. Ele tem pontos cegos. O modelo de linguagem vai explorar esses pontos cegos -- encontrando saidas que pontuam alto no reward model mas sao na verdade sem sentido. Exemplos classicos:
+Por que a penalidade KL? Sem ela, o modelo encontra soluções degeneradas. O reward model e treinado num dataset finito de preferências humanas. Ele tem pontos cegos. O modelo de linguagem vai explorar esses pontos cegos -- encontrando saidas que pontuam alto no reward model mas são na verdade sem sentido. Exemplos classicos:
 
-- Repetir "Eu sou tao util e innocuo!" pontua alto em models de utilidade/innocuidade
+- Repetir "Eu sou tão útil e innocuo!" pontua alto em models de utilidade/innocuidade
 - Produzir respostas verbosas, formais mas vazias que parecem "alta qualidade"
 - Explorar frases eespecificaçãoificas que por acaso correlacionavam com alto reward nos dados de treino
 
-A penalidade KL diz: voce pode melhorar, mas nao pode virar um modelo completamente diferente. Fique proximo da versao SFT, que ja era razoavel. Se afastar muito, o custo KL domina o reward.
+A penalidade KL diz: você pode melhorar, mas não pode virar um modelo completamente diferente. Fique próximo da versão SFT, que ja era razoavel. Se afastar muito, o custo KL domina o reward.
 
-**Numeros do InstructGPT:** O treinamento PPO usou lr=1.5e-5, coeficiente KL beta=0.02, 256K episodios (pares prompt-resposta) e 4 epocas PPO por batch. O pipeline inteiro de RLHF levou varios dias num cluster de GPUs.
+**Numeros do InstructGPT:** O treinamento PPO usou lr=1.5e-5, coeficiente KL beta=0.02, 256K episodios (pares prompt-resposta) e 4 épocas PPO por batch. O pipeline inteiro de RLHF levou varios dias num cluster de GPUs.
 
 ```mermaid
 graph LR
@@ -121,7 +121,7 @@ graph LR
         GEN --> KL["Calcular divergencia KL\nvs modelo de referencia"]
         SCORE --> OBJ["Objetivo:\nreward - beta * KL"]
         KL --> OBJ
-        OBJ --> UPDATE["Atualizacao de gradiente PPO\n(perda substituta recortada)"]
+        OBJ --> UPDATE["Atualização de gradiente PPO\n(perda substituta recortada)"]
         UPDATE --> |"repetir"| PROMPT
     end
 
@@ -133,15 +133,15 @@ graph LR
 
 ### O Objetivo PPO em Detalhe
 
-PPO usa uma "funcao substituta recortada" pra prevenir atualizacoes excessivamente grandes. A razao entre as probabilidades da nova politica e da antiga politica e recortada pro intervalo [1 - epsilon, 1 + epsilon], onde epsilon geralmente e 0.2.
+PPO usa uma "função substituta recortada" pra prevenir atualizações excessivamente grandes. A razão entre as probabilidades da nova politica e da antiga politica e recortada pro intervalo [1 - epsilon, 1 + epsilon], onde epsilon geralmente e 0.2.
 
 ```
-ratio = pi_new(action | state) / pi_old(action | state)
+ratio = pi_new(action | staté) / pi_old(action | staté)
 clipped_ratio = clip(ratio, 1 - epsilon, 1 + epsilon)
 loss = -min(ratio * advantage, clipped_ratio * advantage)
 ```
 
-A funcao advantage estima o quanto a resposta atual e melhor que a qualidade esperada. No RLHF:
+A função advantage estima o quanto a resposta atual e melhor que a qualidade esperada. No RLHF:
 
 ```
 advantage = reward(prompt, resposta) - baseline
@@ -149,39 +149,39 @@ advantage = reward(prompt, resposta) - baseline
 
 O baseline geralmente e o reward medio das respostas recentes. Um advantage positivo significa que a resposta foi melhor que a media; um advantage negativo significa que foi pior. PPO aumenta a probabilidade de respostas acima da media e diminui a probabilidade das abaixo.
 
-O recorte previne catastrofes. Se uma unica resposta recebe um reward incomumente alto, a razao sem recorte poderia ser muito grande, fazendo o modelo mudar dramaticamente pra aquela resposta. O recorte limita a atualizacao, mantendo a estabilidade do treinamento.
+O recorte previne catastrofes. Se uma unica resposta recebe um reward incomumente alto, a razão sem recorte poderia ser muito grande, fazendo o modelo mudar dramaticamente pra aquela resposta. O recorte limita a atualização, mantendo a estabilidade do treinamento.
 
 ### Reward Hacking
 
-O lado sombrio do RLHF. O modelo de linguagem ta otimizando contra o reward model, que e um proxy imperfeito pra preferencias humanas. Conforme o modelo de linguagem melhora em maximizar reward, ele comeca a explorar as fraquezas do reward model.
+O lado sombrio do RLHF. O modelo de linguagem ta otimizando contra o reward model, que e um proxy imperfeito pra preferências humanas. Conforme o modelo de linguagem melhora em maximizar reward, ele comeca a explorar as fraquezas do reward model.
 
 Modos de falha comuns:
 
 | Falha | O que acontece | Por que |
 |---------|-------------|-----|
-| Verbosidade | Modelo gera respostas cada vez mais longas | Anotadores humanos frequentemente preferiram respostas mais longas e detalhadas, entao o reward model atribui pontuacoes maiores pro tamanho |
-| Simpatia | Modelo concorda com tudo que o usuario diz | Anotadores preferiram respostas que concordavam com a premissa da questao |
-| Meio-termo | Modelo se recusa a se comprometer com uma resposta | Respostas do tipo "Esse e um topico complexo com muitas perespecificaçãotivas..." raramente sao marcadas como erradas |
+| Verbosidade | Modelo gera respostas cada vez mais longas | Anotadores humanos frequentemente preferiram respostas mais longas e detalhadas, então o reward model atribui pontuações maiores pro tamanho |
+| Simpatia | Modelo concorda com tudo que o usuario diz | Anotadores preferiram respostas que concordavam com a premissa da questão |
+| Meio-termo | Modelo se recusa a se comprometer com uma resposta | Respostas do tipo "Esse e um topico complexo com muitas perespecificaçãotivas..." raramente são marcadas como erradas |
 | Jogo de formato | Modelo usa bullets e headers excessivamente | Respostas formatadas pareciam mais "polidas" pros anotadores |
 
-Estrategias de mitigacao: penalidade KL mais forte (impede que o modelo se afaste o suficiente pra explorar fraquezas), treinar o reward model com exemplos adversariais (corrigir modos de falha conhecidos), e usar multiplos reward models com arquiteturas diferentes (mais dificil de hackear todos ao mesmo tempo).
+Estratégias de mitigação: penalidade KL mais forte (impede que o modelo se afaste o suficiente pra explorar fraquezas), treinar o reward model com exemplos adversariais (corrigir modos de falha conhecidos), e usar multiplos reward models com arquiteturas diferentes (mais dificil de hackear todos ão mesmo tempo).
 
 ### Pipelines Reais de RLHF
 
-| Modelo | Pares de Comparacao | Anotadores | Tamanho RM | Passos PPO | Coef KL |
+| Modelo | Pares de Comparação | Anotadores | Tamanho RM | Passos PPO | Coef KL |
 |-------|-----------------|------------|---------|-----------|----------|
 | InstructGPT | 33K | 40 | 6B | 256K | 0.02 |
-| Llama 2 Chat | ~1M | nao divulgado | 70B | nao divulgado | 0.01 |
-| Claude | nao divulgado | nao divulgado | nao divulgado | nao divulgado | nao divulgado |
+| Llama 2 Chat | ~1M | não divulgado | 70B | não divulgado | 0.01 |
+| Claude | não divulgado | não divulgado | não divulgado | não divulgado | não divulgado |
 | Paper RLHF da Anthropic | 22K | 20 | 52B | 50K | 0.001 |
 
-O paper de 2022 da Anthropic treinou um reward model de 52B em 22.000 comparacoes. Reward models maiores produzem sinais mais confiaveis, o que torna o treinamento PPO mais estavel. Usar um reward model pequeno pra treinar um modelo de linguagem grande e arriscado -- o reward model nao tem capacidade suficiente pra capturar as nuances entre respostas boas e ruins.
+O paper de 2022 da Anthropic treinou um reward model de 52B em 22.000 comparações. Reward models maiores produzem sinais mais confiaveis, o que torna o treinamento PPO mais estavel. Usar um reward model pequeno pra treinar um modelo de linguagem grande e arriscado -- o reward model não tem capacidade suficiente pra capturar as nuances entre respostas boas e ruins.
 
 ## Construir
 
-### Etapa 1: Dados Sinteticos de Preferencia
+### Etapa 1: Dados Sinteticos de Preferência
 
-Em producao, anotadores humanos criam dados de preferencia. Vamos criar pares sinteticos onde a resposta "preferida" e objetivamente melhor (mais concisa, mais precisa, mais util).
+Em produção, anotadores humanos criam dados de preferência. Vamos criar pares sinteticos onde a resposta "preferida" e objetivamente melhor (mais concisa, mais precisa, mais útil).
 
 ```python
 import numpy as np
@@ -220,11 +220,11 @@ PREFERENCE_DATA = [
 ]
 ```
 
-As respostas preferidas sao concisas e diretas. As respostas rejeitadas apresentam modos de falha comuns: enchimento desnecessario, meio-termo, explicacao redundante e imprecisao. Essa e exatamente o tipo de distincao que SFT nao consegue capturar mas RLHF consegue.
+As respostas preferidas são concisas e diretas. As respostas rejeitadas apresentam modos de falha comuns: enchimento desnecessario, meio-termo, explicação redundante e imprecisão. Essa e exatamente o tipo de distinção que SFT não consegue capturar mas RLHF consegue.
 
 ### Etapa 2: Arquitetura do Reward Model
 
-O reward model reutiliza a arquitetura transformer do mini GPT, mas substitui a cabeca de saida do tamanho do vocabulario por uma projecao escalar unica.
+O reward model reútiliza a arquitetura transformer do mini GPT, mas substitui a cabeca de saida do tamanho do vocabulario por uma projeção escalar unica.
 
 ```python
 import sys
@@ -259,11 +259,11 @@ class RewardModel:
         return reward
 ```
 
-O reward model pega o estado oculto na ultima posicao do token e projeta pra um escalar. Por que o ultimo token? Porque a mascara de atencao causal significa que a ultima posicao atendeu todos os tokens anteriores. Ele tem a representacao mais completa de toda a sequencia (prompt, resposta).
+O reward model pega o estado oculto na última posição do token e projeta pra um escalar. Por que o último token? Porque a mascara de aténção causal significa que a última posição aténdeu todos os tokens anteriores. Ele tem a representação mais completa de toda a sequencia (prompt, resposta).
 
 ### Etapa 3: Perda Bradley-Terry
 
-Treine o reward model em pares de preferencia usando a perda pareada Bradley-Terry.
+Treine o reward model em pares de preferência usando a perda páreada Bradley-Terry.
 
 ```python
 def tokenize_for_reward(prompt, response, vocab_size=256):
@@ -298,9 +298,9 @@ def train_reward_model(rm, preference_data, num_epochs=10, lr=1e-4, max_seq_len=
         epoch_correct = 0
         num_pairs = 0
 
-        indices = np.random.permutation(len(preference_data))
+        índices = np.random.permutation(len(preference_data))
 
-        for idx in indices:
+        for idx in índices:
             pair = preference_data[idx]
 
             preferred_tokens = tokenize_for_reward(pair["prompt"], pair["preferred"])
@@ -341,11 +341,11 @@ def train_reward_model(rm, preference_data, num_epochs=10, lr=1e-4, max_seq_len=
     return rm, losses, accuracies
 ```
 
-A metrica de acuracia e simples: que fracao de pares de preferencia o reward model classifica corretamente? Um modelo aleatorio pontua 50%. Um reward model bem treinado em dados limpos deveria passar de 70%. O reward model do InstructGPT conseguiu cerca de 72% de acuracia nas comparacoes de validacao, o que parece baixo mas e na verdade bom -- muitos pares de preferencia sao ambigues ate pra humanos (acordo entre anotadores era cerca de 73%).
+A metrica de acuracia e simples: que fração de pares de preferência o reward model classifica corretamente? Um modelo aleatorio pontua 50%. Um reward model bem treinado em dados limpos deveria passar de 70%. O reward model do InstructGPT conseguiu cerca de 72% de acuracia nas comparações de validação, o que parece baixo mas e na verdade bom -- muitos pares de preferência são ambigues até pra humanos (acordo entre anotadores era cerca de 73%).
 
 ### Etapa 4: Loop PPO Simplificado
 
-PPO completo e complexo. Essa implementacao captura o mecanismo central: gerar respostas, pontua-las, calcular o advantage, e atualizar a politica com penalidade KL.
+PPO completo e complexo. Essa implementação captura o mecanismo central: gerar respostas, pontua-las, calcular o advantage, e atualizar a politica com penalidade KL.
 
 ```python
 def compute_kl_divergence(policy_logits, reference_logits):
@@ -361,7 +361,7 @@ def compute_kl_divergence(policy_logits, reference_logits):
     return kl.mean()
 
 
-def generate_response(model, prompt_tokens, max_new_tokens=30, temperature=0.8, max_seq_len=128):
+def generaté_response(model, prompt_tokens, max_new_tokens=30, temperature=0.8, max_seq_len=128):
     tokens = list(prompt_tokens)
 
     for _ in range(max_new_tokens):
@@ -413,7 +413,7 @@ def ppo_training(policy_model, reference_model, reward_model, prompts,
         prompt_text = prompts[episode % len(prompts)]
         prompt_tokens = [min(t, 252) for t in list(prompt_text.encode("utf-8"))]
 
-        response_tokens = generate_response(
+        response_tokens = generaté_response(
             policy_model, prompt_tokens,
             max_new_tokens=20, temperature=0.8, max_seq_len=max_seq_len
         )
@@ -431,9 +431,9 @@ def ppo_training(policy_model, reference_model, reward_model, prompts,
         kl_history.append(float(kl))
 
         for block in policy_model.blocks:
-            update_scale = lr * total_reward
-            block.ffn.W1 += update_scale * np.random.randn(*block.ffn.W1.shape) * 0.01
-            block.ffn.W2 += update_scale * np.random.randn(*block.ffn.W2.shape) * 0.01
+            updaté_scale = lr * total_reward
+            block.ffn.W1 += updaté_scale * np.random.randn(*block.ffn.W1.shape) * 0.01
+            block.ffn.W2 += updaté_scale * np.random.randn(*block.ffn.W2.shape) * 0.01
 
         if episode % 5 == 0:
             avg_reward = np.mean(rewards_history[-5:]) if rewards_history else 0
@@ -444,11 +444,11 @@ def ppo_training(policy_model, reference_model, reward_model, prompts,
     return policy_model, rewards_history, kl_history
 ```
 
-O loop central: (1) amostrar um prompt, (2) gerar uma resposta, (3) pontuar com o reward model, (4) calcular a divergencia KL contra a referencia congelada, (5) calcular o reward ajustado (reward menos penalidade KL), (6) atualizar a politica. A penalidade KL cresce conforme a politica se desvia da referencia, prevenindo automaticamente o reward hacking.
+O loop central: (1) amostrar um prompt, (2) gerar uma resposta, (3) pontuar com o reward model, (4) calcular a divergencia KL contra a referencia congelada, (5) calcular o reward ajustado (reward menos penalidade KL), (6) atualizar a politica. A penalidade KL cresce conforme a politica se desvia da referencia, prevenindo automáticamente o reward hacking.
 
-### Etapa 5: Comparacao de Pontuacoes de Reward
+### Etapa 5: Comparação de Pontuações de Reward
 
-Apos o RLHF, as respostas do modelo de politica deveriam pontuar mais alto no reward model que as respostas do modelo SFT original.
+Após o RLHF, as respostas do modelo de politica deveriam pontuar mais alto no reward model que as respostas do modelo SFT original.
 
 ```python
 def compare_models(sft_model, rlhf_model, reward_model, prompts, max_seq_len=128):
@@ -463,11 +463,11 @@ def compare_models(sft_model, rlhf_model, reward_model, prompts, max_seq_len=128
     for prompt in prompts:
         prompt_tokens = [min(t, 252) for t in list(prompt.encode("utf-8"))]
 
-        sft_response = generate_response(
+        sft_response = generaté_response(
             sft_model, prompt_tokens,
             max_new_tokens=20, temperature=0.6, max_seq_len=max_seq_len
         )
-        rlhf_response = generate_response(
+        rlhf_response = generaté_response(
             rlhf_model, prompt_tokens,
             max_new_tokens=20, temperature=0.6, max_seq_len=max_seq_len
         )
@@ -481,8 +481,8 @@ def compare_models(sft_model, rlhf_model, reward_model, prompts, max_seq_len=128
         sft_total += sft_reward
         rlhf_total += rlhf_reward
 
-        truncated_prompt = prompt[:33] + ".." if len(prompt) > 35 else prompt
-        print(f"  {truncated_prompt:<35} {sft_reward:>10.4f} {rlhf_reward:>10.4f}")
+        truncatéd_prompt = prompt[:33] + ".." if len(prompt) > 35 else prompt
+        print(f"  {truncatéd_prompt:<35} {sft_reward:>10.4f} {rlhf_reward:>10.4f}")
 
     n = len(prompts)
     print("  " + "-" * 55)
@@ -592,38 +592,38 @@ if __name__ == "__main__":
 
 ## Publicar
 
-Essa aula produz `outputs/prompt-reward-model-designer.md` -- um prompt pra projetar pipelines de treino de reward model. Dado um comportamento alvo (utilidade, capacidade de programacao, seguranca), ele gera um protocolo de coleta de dados, diretrizes de anotadores e criterios de avaliacao do reward model.
+Essa aula produz `outputs/prompt-reward-model-designer.md` -- um prompt pra projetar pipelines de treino de reward model. Dado um comportamento alvo (utilidade, capacidade de programação, segurança), ele gera um protocolo de coleta de dados, diretrizes de anotadores e criterios de avaliação do reward model.
 
 ## Exercicios
 
-1. Modifique o reward model pra usar a media de todos os estados ocultos ao inves de so da ultima posicao. Compare a acuracia. A abordagem de pooling media da peso igual pra cada token, enquanto a abordagem da ultima posicao depende da atencao causal pra agregar informacoes. Teste nos 6 pares de preferencia e reporte qual abordagem pontua mais alto.
+1. Modifique o reward model pra usar a media de todos os estados ocultos ão inves de so da última posição. Compare a acuracia. A abordagem de pooling media da peso igual pra cada token, enquanto a abordagem da última posição depende da aténção causal pra agregar informações. Teste nos 6 pares de preferência e reporte qual abordagem pontua mais alto.
 
-2. Implemente calibracao do reward model. Apos o treino, rode todos os pares de preferencia pelo reward model e calcule: (a) o reward medio pra respostas preferidas, (b) o reward medio pra respostas rejeitadas, (c) a margem (preferida menos rejeitada). Um modelo bem calibrado deveria ter uma margem clara. Depois adicione 4 novos pares de preferencia e verifique se a margem se mantem em dados nao vistos.
+2. Implemente calibração do reward model. Após o treino, rode todos os pares de preferência pelo reward model e calcule: (a) o reward medio pra respostas preferidas, (b) o reward medio pra respostas rejeitadas, (c) a margem (preferida menos rejeitada). Um modelo bem calibrado deveria ter uma margem clara. Depois adicione 4 novos pares de preferência e verifique se a margem se mantem em dados não vistos.
 
-3. Simule reward hacking. Crie um reward model que da pontuacoes altas pra respostas longas (reward = len(resposta) / 100). Rode PPO com esse reward model defeituoso e observe o modelo de politica gerando saidas cada vez mais longas e repetitivas. Depois adicione uma penalidade KL de 0.1 e mostre que ela previne o comportamento degenerado.
+3. Simule reward hacking. Crie um reward model que da pontuações altas pra respostas longas (reward = len(resposta) / 100). Rode PPO com esse reward model defeituoso e observe o modelo de politica gerando saidas cada vez mais longas e repetitivas. Depois adicione uma penalidade KL de 0.1 e mostre que ela previne o comportamento degenerado.
 
-4. Implemente um reward multi-objetivo. Treine dois reward models -- um pra utilidade e outro pra concistencia. Combine-os como R = 0.7 * R_util + 0.3 * R_concis. Mostre que o objetivo combinado produz respostas que sao uteis e concisas ao mesmo tempo, evitando a armadilha de verbosidade de um unico reward de utilidade.
+4. Implemente um reward multi-objetivo. Treine dois reward models -- um pra utilidade e outro pra concistencia. Combine-os como R = 0.7 * R_útil + 0.3 * R_concis. Mostre que o objetivo combinado produz respostas que são uteis e concisas ão mesmo tempo, evitando a armadilha de verbosidade de um unico reward de utilidade.
 
-5. Compare diferentes coeficientes KL. Rode PPO com beta=0.001 (baixo demais, reward hacking), beta=0.02 (padrao) e beta=0.5 (alto demais, sem aprendizado). Trace a curva de reward e KL pra cada um. A execucao com beta=0.02 deveria mostrar melhoria constante de reward com KL limitado.
+5. Compare diferentes coeficientes KL. Rode PPO com beta=0.001 (baixo demais, reward hacking), beta=0.02 (padrao) e beta=0.5 (alto demais, sem aprendizado). Trace a curva de reward e KL pra cada um. A execução com beta=0.02 deveria mostrar melhoria constante de reward com KL limitado.
 
 ## Termos Chave
 
 | Termo | O que a gente diz | O que realmente significa |
 |------|----------------|----------------------|
-| RLHF | "Treinamento com feedback humano" | Reinforcement Learning from Human Feedback: um pipeline de tres etapas (SFT, reward model, PPO) que otimiza as saidas do modelo de linguagem usando sinais de preferencia humana |
-| Reward model | "Um modelo que pontua respostas" | Um transformer com cabeca de saida escalar, treinado em preferencias humanas pareadas usando a perda Bradley-Terry |
-| Bradley-Terry | "O modelo de comparacao" | Um modelo probabilistico onde P(A > B) = sigmoid(score(A) - score(B)), convertendo preferencias pareadas em uma funcao de pontuacao consistente |
-| PPO | "O algoritmo de RL" | Proximal Policy Optimization: atualiza a politica pra maximizar reward enquanto recorta a magnitude da atualizacao pra prevenir instabilidade |
-| Divergencia KL | "O quanto duas distribuicoes sao diferentes" | Uma medida da diferenca entre a distribuicao de tokens do modelo de politica e do modelo de referencia -- usada como penalidade pra prevenir reward hacking |
+| RLHF | "Treinamento com feedback humano" | Reinforcement Learning from Human Feedback: um pipeline de três etapas (SFT, reward model, PPO) que otimiza as saidas do modelo de linguagem usando sinais de preferência humana |
+| Reward model | "Um modelo que pontua respostas" | Um transformer com cabeca de saida escalar, treinado em preferências humanas páreadas usando a perda Bradley-Terry |
+| Bradley-Terry | "O modelo de comparação" | Um modelo probabilistico onde P(A > B) = sigmoid(score(A) - score(B)), convertendo preferências páreadas em uma função de pontuação consistente |
+| PPO | "O algoritmo de RL" | Proximal Policy Optimization: atualiza a politica pra maximizar reward enquanto recorta a magnitude da atualização pra prevenir instabilidade |
+| Divergencia KL | "O quanto duas distribuições são diferentes" | Uma medida da diferença entre a distribuição de tokens do modelo de politica e do modelo de referencia -- usada como penalidade pra prevenir reward hacking |
 | Penalidade KL | "A trela no modelo" | Beta * KL(politica || referencia) subtraido do sinal de reward -- impede que a politica se desvie muito do checkpoint SFT |
-| Reward hacking | "Pregar no reward" | Quando a politica encontra saidas de alto reward degeneradas explorando fraquezas no reward model ao inves de melhorar de verdade |
-| Par de preferencia | "Qual e melhor, A ou B?" | Um exemplo de treino consistindo de (prompt, resposta_preferida, resposta_rejeitada) -- a unidade basica dos dados de treino RLHF |
-| Modelo de referencia | "O checkpoint SFT congelado" | Uma copia do modelo SFT cujos pesos nunca mudam -- usado como ancora pra computacao da divergencia KL |
+| Reward hacking | "Pregar no reward" | Quando a politica encontra saidas de alto reward degeneradas explorando fraquezas no reward model ão inves de melhorar de verdade |
+| Par de preferência | "Qual e melhor, A ou B?" | Um exemplo de treino consistindo de (prompt, resposta_preferida, resposta_rejeitada) -- a unidade basica dos dados de treino RLHF |
+| Modelo de referencia | "O checkpoint SFT congelado" | Uma copia do modelo SFT cujos pesos nunca mudam -- usado como ancora pra computação da divergencia KL |
 
 ## Leitura Complementar
 
 - [Ouyang et al., 2022 -- "Training language models to follow instructions with human feedback" (InstructGPT)](https://arxiv.org/abs/2203.02155) -- o paper que tornou o RLHF pratico pra modelos de linguagem grandes
 - [Schulman et al., 2017 -- "Proximal Policy Optimization Algorithms"](https://arxiv.org/abs/1707.06347) -- o paper original do PPO da OpenAI
-- [Bai et al., 2022 -- "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback"](https://arxiv.org/abs/2204.05862) -- o paper RLHF da Anthropic com analise detalhada de reward hacking e penalidade KL
-- [Stiennon et al., 2020 -- "Learning to summarize with human feedback"](https://arxiv.org/abs/2009.01325) -- RLHF aplicado a sumarizacao, mostrando que reward models podem capturar julgamentos de qualidade nuançados
-- [Christiano et al., 2017 -- "Deep reinforcement learning from human preferences"](https://arxiv.org/abs/1706.03741) -- o trabalho fundamental sobre aprender funcoes de reward a partir de comparacoes humanas
+- [Bai et al., 2022 -- "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback"](https://arxiv.org/abs/2204.05862) -- o paper RLHF da Anthropic com análise detalhada de reward hacking e penalidade KL
+- [Stiennon et al., 2020 -- "Learning to summarize with human feedback"](https://arxiv.org/abs/2009.01325) -- RLHF aplicado a sumarização, mostrando que reward models podem capturar julgamentos de qualidade nuançados
+- [Christiano et al., 2017 -- "Deep reinforcement learning from human preferences"](https://arxiv.org/abs/1706.03741) -- o trabalho fundamental sobre aprender funções de reward a partir de comparações humanas
