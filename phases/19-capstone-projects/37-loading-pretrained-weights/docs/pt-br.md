@@ -3,13 +3,13 @@
 > Treinar um modelo de 124 milhões de parâmetros do zero é uma decisão de orçamento; carregar um checkpoint publicado é uma terça-feira. Esta lição carrega pesos pré-treinados estilo GPT-2 de um arquivo safetensors na exata arquitetura da lição 35, caminha o mapeamento de nomes de parâmetros pedaço por pedaço, e faz uma geração de sanidade para provar que o carregamento funcionou. Sem rede, sem loaders de terceiros, sem magia opaca.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições 30 a 36 da Fase 19
 **Tempo:** ~90 minutos
 
 ## Objetivos de Aprendizado
 
-- Ler um arquivo safetensors com a biblioteca Python `safetensors` e inespecificaçãoionar nomes e formatos dos tensores.
+- Ler um arquivo safetensors com a biblioteca Python `safetensors` e especificar nomes e formatos dos tensores.
 - Mapear cada nome de parâmetro pré-treinado para um parâmetro dentro do modelo GPT da lição 35.
 - Lidar com as duas convenções de nomes que diferem entre os pesos GPT-2 publicados e o modelo desta trilha: `wte/wpe/h.N.attn.c_attn/c_proj` e `mlp.c_fc/c_proj` versus os nomes locais `tok_embed/pos_embed/blocks.N.attn.qkv/out_proj` e `mlp.fc1/fc2`.
 - Detectar e recusar um incompatibilidade de formato com um erro claro antes que qualquer atribuição de peso aconteça.

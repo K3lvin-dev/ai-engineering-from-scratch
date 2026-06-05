@@ -36,7 +36,7 @@ O schema é o único campo que o validador toca. O handler é opaco para ele. Se
 
 ## O subconjunto do JSON Schema 2020-12
 
-A eespecificaçãoificação completa de 2020-12 é um paper. Nós precisamos de oito palavras-chave.
+A especificação completa de 2020-12 é um paper. Nós precisamos de oito palavras-chave.
 
 ```text
 type           string / number / integer / boolean / object / array / null

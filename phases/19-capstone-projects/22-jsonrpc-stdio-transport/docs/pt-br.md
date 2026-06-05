@@ -16,7 +16,7 @@
 
 ## Por que JSON-RPC continua sendo a língua franca
 
-Um coding agente em 2026 conversa com talvez doze ferramenta servers em uma única sessão. Cada server é um processo separado ou um endpoint remoto. O formato de rede tem sido o mesmo desde 2013. JSON-RPC 2.0 é uma eespecificaçãoificação de duas páginas. Ela sobrevive porque as alternativas (gRPC, HTTP por chamada, binário customizado) todas impõem uma troca que JSON-RPC não: escolhem ou streaming ou batching ou acoplamento ao transport. JSON-RPC é simétrico entre stdio, sockets, websockets e HTTP, e um client pode dirigir um server que nunca viu se ambos honrarem a especificação.
+Um coding agente em 2026 conversa com talvez doze ferramenta servers em uma única sessão. Cada server é um processo separado ou um endpoint remoto. O formato de rede tem sido o mesmo desde 2013. JSON-RPC 2.0 é uma especificação de duas páginas. Ela sobrevive porque as alternativas (gRPC, HTTP por chamada, binário customizado) todas impõem uma troca que JSON-RPC não: escolhem ou streaming ou batching ou acoplamento ao transport. JSON-RPC é simétrico entre stdio, sockets, websockets e HTTP, e um client pode dirigir um server que nunca viu se ambos honrarem a especificação.
 
 Esta aula constrói a variante stdio. JSON newline-delimited. Cada request é uma linha. Cada response é uma linha. O limite de transport é `\n`.
 
@@ -52,7 +52,7 @@ Um batch é um array JSON de requests ou notifications. O server responde com um
 
 Os códigos entre -32000 e -32099 são reservados para erros definidos pelo server. Todo o resto é definido pela aplicação. A aula se mantém nos cinco. Se seu handler levanta exceção, o transport envolve como -32603 com o nome da classe da exceção em `data.exception`.
 
-Um erro de parse tem uma regra eespecificaçãoial. O `id` na response é `null`, porque o request nunca foi parseado o suficiente para extrair um id.
+Um erro de parse tem uma regra especial. O `id` na response é `null`, porque o request nunca foi parseado o suficiente para extrair um id.
 
 ## Newline framing e a demo BytesIO
 
@@ -62,7 +62,7 @@ Para a aula, envolvemos um par `io.BytesIO` como stdin e stdout. O server lê re
 
 ## Despacho de métodos
 
-O transport não sabe quais métodos existem. Ele repassa para um callable `handler(method, params)` que o harness fornece. O handler retorna um resultado ou levanta exceção. Três classes de exceção expõem códigos eespecificaçãoíficos.
+O transport não sabe quais métodos existem. Ele repassa para um callable `handler(method, params)` que o harness fornece. O handler retorna um resultado ou levanta exceção. Três classes de exceção expõem códigos específicos.
 
 ```text
 MethodNotFound -> -32601

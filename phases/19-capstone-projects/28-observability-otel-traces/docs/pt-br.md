@@ -7,7 +7,7 @@
 **Pré-requisitos:** Fase 19 · 25 (verification gates), Fase 19 · 26 (sandbox), Fase 19 · 27 (eval harness), Fase 13 · 20 (OpenTelemetry GenAI), Fase 14 · 23 (convenções OTel GenAI)
 **Tempo:** ~90 minutos
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 - Construir uma classe de dados de span formatada conforme as convenções semânticas OpenTelemetry GenAI.
 - Implementar um exportador JSONL que escreve um span autocontido por linha.
@@ -39,9 +39,9 @@ flowchart TD
   Metrics --> Prom[/metrics text/]
 ```
 
-Toda operação no harness produz um span. Um span tem um trace id (a invocação inteira do agent), um span id (esta operação eespecificaçãoífica), um nome (ex: `gen_ai.chat`, `gen_ai.tool.execution`), atributos que seguem as convenções GenAI, um tempo de início e fim, e um status.
+Toda operação no harness produz um span. Um span tem um trace id (a invocação inteira do agent), um span id (esta operação específica), um nome (ex: `gen_ai.chat`, `gen_ai.tool.execution`), atributos que seguem as convenções GenAI, um tempo de início e fim, e um status.
 
-As convenções GenAI padronizam essas chaves de atributo: `gen_ai.system` (qual provedor, ex: `anthropic`, `openai`), `gen_ai.request.model` (o id do modelo), `gen_ai.request.max_tokens`, `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`, `gen_ai.response.model`, `gen_ai.response.id`, `gen_ai.operation.name`, mais chaves eespecificaçãoíficas de ferramenta `gen_ai.tool.name` e `gen_ai.tool.call.id`.
+As convenções GenAI padronizam essas chaves de atributo: `gen_ai.system` (qual provedor, ex: `anthropic`, `openai`), `gen_ai.request.model` (o id do modelo), `gen_ai.request.max_tokens`, `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`, `gen_ai.response.model`, `gen_ai.response.id`, `gen_ai.operation.name`, mais chaves específicas de ferramenta `gen_ai.tool.name` e `gen_ai.tool.call.id`.
 
 O exportador escreve JSONL. Um objeto JSON por linha. É o formato mais simples possível que tooling downstream pode streamar, grep e importar. Um exportador OTel real falaria OTLP gRPC; o exportador JSONL da aula é o equivalente offline e sai zero em qualquer workstation.
 

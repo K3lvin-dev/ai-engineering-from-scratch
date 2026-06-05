@@ -16,7 +16,7 @@ Você aprende o loop implementando um contra uma ideia semente em um domínio re
 
 ## Conceito
 
-O agente é uma busca best-first em árvore. Nós são eespecificaçãoificações de experimento: (hipótese, config, código, resultado esperado). Um passo de expansão propõe filhos com edições pequenas (trocar otimizador, alterar batch size, ablar um componente). Cada filho roda em um sandbox novo com um limite rígido de recursos. Resultados são alimentados de volta em uma função de pontuação que ranqueia nós por (novidade × qualidade × orçamento restante). A árvore cresce até o orçamento se esgotar, depois a melhor ramificação é escrita.
+O agente é uma busca best-first em árvore. Nós são especificaçãoificações de experimento: (hipótese, config, código, resultado esperado). Um passo de expansão propõe filhos com edições pequenas (trocar otimizador, alterar batch size, ablar um componente). Cada filho roda em um sandbox novo com um limite rígido de recursos. Resultados são alimentados de volta em uma função de pontuação que ranqueia nós por (novidade × qualidade × orçamento restante). A árvore cresce até o orçamento se esgotar, depois a melhor ramificação é escrita.
 
 O escritor é multimodal. Gera um rascunho LaTeX, compila, renderiza figuras e alimenta o PDF renderizado de volta para o modo visão do Claude Opus 4.7 para crítica sobre layout, legibilidade de figuras e alinhamento afirmação-evidência. Um conjunto de cinco revisores LLMs emite pontuações estilo NeurIPS (novidade, rigor, clareza, reprodutibilidade, impacto); se a média cair abaixo do limite, o paper volta para o escritor com crítica.
 

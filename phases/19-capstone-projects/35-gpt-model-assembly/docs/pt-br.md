@@ -3,7 +3,7 @@
 > Doze blocos empilhados, um embedding de token, um embedding de posição aprendido, uma LayerNorm final e uma cabeça de modelo de linguagem vinculada. Esse é o modelo GPT completo de 124 milhões de parâmetros. Esta lição monta essas peças em uma classe funcional, conta os parâmetros para confirmar que o modelo corresponde à referência de 124M, e gera texto com amostragem multinomial, temperatura e top-k.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições 30 a 34 da Fase 19
 **Tempo:** ~90 minutos
 

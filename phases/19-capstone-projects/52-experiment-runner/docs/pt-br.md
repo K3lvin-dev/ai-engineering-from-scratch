@@ -1,6 +1,6 @@
 # Aula 52: Executor de Experimentos
 
-> O loop e tao honesto quanto suas medicoes. Construa o executor que pega uma eespecificaçãoificacao, a executa em um subprocesso isolado, e emite um blob de metricas JSON que o avaliador pode confiar.
+> O loop e tao honesto quanto suas medicoes. Construa o executor que pega uma especificacao, a executa em um subprocesso isolado, e emite um blob de metricas JSON que o avaliador pode confiar.
 
 **Tipo:** Build
 **Linguagens:** Python
@@ -8,10 +8,10 @@
 **Tempo:** ~90 minutos
 
 ## Objetivos de Aprendizado
-- Codificar um experimento como uma eespecificaçãoificacao tipada que o executor possa serializar para um subprocesso.
+- Codificar um experimento como uma especificacao tipada que o executor possa serializar para um subprocesso.
 - Lancar um subprocesso com um timeout duro de relogio de parede e um limite de memoria suave, e mostrar ambos como condicoes de terminacao.
 - Capturar stdout, stderr, e o blob estruturado de metricas em um unico registro de resultado.
-- Construir uma tabela de ablativa que varre um botao de configuracao por vez sobre uma eespecificaçãoificacao base fixa.
+- Construir uma tabela de ablativa que varre um botao de configuracao por vez sobre uma especificacao base fixa.
 - Manter todo resultado deterministico dada uma seed para que o avaliador veja os mesmos numeros entre execucoes.
 
 ## Por que um subprocesso
@@ -59,7 +59,7 @@ O executor e uma classe com um metodo principal. O polledor e uma thread pequena
 
 Limites de memoria duros precisam de `resource.setrlimit` e so funcionam em POSIX. A abordagem portavel da aula: fazer polling do resident set size da plataforma e matar o subprocesso se exceder o limite. O limite e suave porque o polling tem um intervalo nao-zero; um processo pode disparar acima do limite entre polls e depois cair de volta. O executor registra o RSS maximo observado para que o avaliador veja quao proximo a execucao chegou do limite.
 
-Em sistemas sem suporte a inespecificaçãoao de processos, o polledor loga um aviso uma vez e se desabilita. O timeout de relogio de parede continua valendo. Os testes da aula cobrem ambos os caminhos.
+Em sistemas sem suporte a inspeção de processos, o polledor loga um aviso uma vez e se desabilita. O timeout de relogio de parede continua valendo. Os testes da aula cobrem ambos os caminhos.
 
 ## Capturando stdout e stderr
 
@@ -74,13 +74,13 @@ def ablate(base: ExperimentSpec, knob: str, values: list[Any]) -> list[Experimen
     ...
 ```
 
-Dada uma eespecificaçãoificacao base e um nome de botao, o auxiliar retorna uma eespecificaçãoificacao por valor com `config[knob]` sobrescrito. Cada eespecificaçãoificacao recebe um `especificação_id` derivado (`f"{base.especificação_id}_{knob}_{value}"`). O executor entrega um `AblationRunner` que os roda em ordem e retorna uma `AblationTable` indexada por valor do botao.
+Dada uma especificacao base e um nome de botao, o auxiliar retorna uma especificacao por valor com `config[knob]` sobrescrito. Cada especificacao recebe um `especificação_id` derivado (`f"{base.especificação_id}_{knob}_{value}"`). O executor entrega um `AblationRunner` que os roda em ordem e retorna uma `AblationTable` indexada por valor do botao.
 
 Por que um botao por vez. Varreduras fatoriais completas explodem exponencialmente e produzem resultados que o avaliador nao consegue interpretar. Um botao por vez produz um eixo limpo que o avaliador pode plotar. A aula suporta varreduras multi-botao apenas como ablativas de botao unico repetidas, compostas pelo chamador.
 
 ## Determinismo
 
-Cada eespecificaçãoificacao carrega uma seed. O executor encaminha a seed para o script via o dict de config (`config["__seed"] = especificação.seed`). Os scripts de experimento mock em `code/experiments/` honram a seed e produzem metricas identicas entre execucoes. O avaliador na aula 53 depende disso; sem determinismo uma "regressao" pode ser uma inicializacao aleatoria diferente.
+Cada especificacao carrega uma seed. O executor encaminha a seed para o script via o dict de config (`config["__seed"] = especificação.seed`). Os scripts de experimento mock em `code/experiments/` honram a seed e produzem metricas identicas entre execucoes. O avaliador na aula 53 depende disso; sem determinismo uma "regressao" pode ser uma inicializacao aleatoria diferente.
 
 ## O script de experimento mock
 

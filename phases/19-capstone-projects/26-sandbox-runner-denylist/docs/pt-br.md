@@ -35,7 +35,7 @@ O sandbox não é uma fronteira de segurança no sentido de sistema operacional.
 flowchart TD
   Call[ToolCall<br/>já passou pela cadeia de gates] --> Run["Sandbox.run()"]
   Run --> S1[1. resolve executável contra denylist<br/>rm, sudo, mkfs, ...]
-  S1 --> S2[2. inespecificaçãoiona argv<br/>interpretador -c, metacaracteres de shell quando shell=False]
+  S1 --> S2[2. especifica argv<br/>interpretador -c, metacaracteres de shell quando shell=False]
   S2 --> S3[3. resolve argumentos tipo caminho<br/>contra project_root via realpath]
   S3 --> S4[4. spawn subprocess<br/>captura, timeout wall-clock, limpeza de env]
   S4 --> S5[5. trunca stdout/stderr para max_output_bytes]
@@ -50,7 +50,7 @@ Os códigos de exit do `SandboxResult` são os convencionais: 0 sucesso, não-ze
 
 ```mermaid
 flowchart LR
-  Harness[AgentHarness<br/>aulas 20-25] -->|call| Sandbox[Sandbox<br/>denylist<br/>path jail<br/>argv inespecificaçãot<br/>timeout<br/>truncamento]
+  Harness[AgentHarness<br/>aulas 20-25] -->|call| Sandbox[Sandbox<br/>denylist<br/>path jail<br/>argv inspect<br/>timeout<br/>truncamento]
   Sandbox -->|exec| Popen[subprocess.Popen]
   Sandbox --> Result[SandboxResult]
 ```

@@ -3,7 +3,7 @@
 > Um loop que não mede é um loop que mente. Esta lição constrói o loop de treinamento que direciona o modelo GPT: AdamW com divisão de weight decay, um schedule de taxa de aprendizado com warmup linear e decaimento cosseno, um helper `calc_loss_batch`, uma passagem `evaluate_model` em dados reservados, uma sonda qualitativa `generate_and_print_sample` a cada K passos, e um log JSONL de losses que você pode plotar depois. O mesmo esqueleto treina todo decoder LLM que você construir.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições 30 a 35 da Fase 19
 **Tempo:** ~90 minutos
 

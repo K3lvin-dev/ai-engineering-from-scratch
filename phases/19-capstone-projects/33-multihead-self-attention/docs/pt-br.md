@@ -3,7 +3,7 @@
 > Uma projeção linear, três visões, H cabeças paralelas, uma máscara. O bloco de attention como o modelo realmente usa.
 
 **Tipo:** Construção
-**Idiomas:** Python
+**Linguagens:** Python
 **Pré-requisitos:** Lições da Fase 04, lições de transformer da Fase 07, Lições 30 a 32 desta fase
 **Tempo:** ~90 minutos
 
@@ -11,8 +11,8 @@
 - Implementar uma projeção batched Query/Key/Value como uma única camada linear dividida em H cabeças.
 - Computar attention de produto escalar escalonado com a normalização e tratamento de dtype corretos.
 - Aplicar uma máscara causal que impede uma posição de attending a posições futuras.
-- Inespecificaçãoionar pesos de attention por cabeça para uma entrada fixa e raciocinar sobre o que cada cabeça observa.
-- Treinar um pequeno bloco de attention em uma tarefa simples e ver a loss cair enquanto as cabeças se eespecificaçãoializam.
+- Inspecionar pesos de attention por cabeça para uma entrada fixa e raciocinar sobre o que cada cabeça observa.
+- Treinar um pequeno bloco de attention em uma tarefa simples e ver a loss cair enquanto as cabeças se especializam.
 
 ## O enquadramento
 
