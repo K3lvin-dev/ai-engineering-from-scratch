@@ -10,7 +10,7 @@
 ## Objetivos de Aprendizado
 
 - Distinguir shadow mode (comparação de zero impacto), canary (tráfego progressivo ao vivo) e A/B (comparação confirmada por estabilidade).
-- Listar cinco métricas canary eespecificaçãoíficas de LLM (latência, custo/requisição, erro/recusa, distribuição de tamanho do output, feedback do usuário).
+- Listar cinco métricas canary específicas de LLM (latência, custo/requisição, erro/recusa, distribuição de tamanho do output, feedback do usuário).
 - Explicar por que o não-determinismo de LLM (até 15%) muda o que "estável" significa num rollout.
 - Projetar um caminho de rollback que leva segundos (virar política) e não horas (redeploy).
 

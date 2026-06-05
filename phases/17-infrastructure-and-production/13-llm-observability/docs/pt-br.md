@@ -48,7 +48,7 @@ Escolher envolve quatro eixos: stack (LangChain? SDK raw? multi-vendor?), toler�
 
 - Comercial. Integração zero-copy com data lake via Iceberg/Parquet.
 - Alega ~100x mais barato que observabilidade monolítica (nível Datadog) em escala. A matemática: você armazena traces no seu próprio Parquet no S3; Arize lê diretamente.
-- Sweet spot: >10M traces/dia, data lake existente, quer dashboards eespecificaçãoíficos para LLM sem o preço do Datadog.
+- Sweet spot: >10M traces/dia, data lake existente, quer dashboards específicos para LLM sem o preço do Datadog.
 
 ### LangSmith — LangChain/LangGraph primeiro
 
@@ -136,6 +136,6 @@ Esta aula produz `outputs/skill-observability-stack.md`. Dados stack, escala, or
 - [SigNoz — Top LLM Observability Tools 2026](https://signoz.io/comparisons/llm-observability-tools/)
 - [Langfuse — Análise de Alternativas ao Arize AX](https://langfuse.com/faq/all/best-phoenix-arize-alternatives)
 - [PremAI — Configurando Langfuse, LangSmith, Helicone, Phoenix](https://blog.premai.io/llm-observability-setting-up-langfuse-langsmith-helicone-phoenix/)
-- [Convenções Semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/especificaçãos/semconv/gen-ai/)
+- [Convenções Semânticas GenAI do OpenTelemetry](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
 - [Documentação do Arize Phoenix](https://docs.arize.com/phoenix)
 - [Documentação do Helicone](https://docs.helicone.ai/)

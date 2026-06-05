@@ -58,7 +58,7 @@ Você não precisa conhecer cada flag. Você precisa saber o que o agendador oti
 
 ### O bug do v0.18.0 de 2026
 
-No vLLM v0.18.0 você não pode combinar `--enable-chunked-prefill` com especificaçãoulative decoding por draft model (`--especificaçãoulative-model`). A exceção documentada é o N-gram GPU especificaçãoulative decoding no V1 scheduler. Equipes que ligam cada flag sem ler os release notes pegam um erro em tempo de startup, não uma regressão suave. Se seu ganho de especificaçãoulative valia habilitar chunked prefill, repense a escolha — a resposta certa em 2026 costuma ser EAGLE-3 sem chunked prefill, não um draft model mais chunked prefill que não compila.
+No vLLM v0.18.0 você não pode combinar `--enable-chunked-prefill` com especulativa decoding por draft model (`--especulativa-model`). A exceção documentada é o N-gram GPU especulativa decoding no V1 scheduler. Equipes que ligam cada flag sem ler os release notes pegam um erro em tempo de startup, não uma regressão suave. Se seu ganho de especulativa valia habilitar chunked prefill, repense a escolha — a resposta certa em 2026 costuma ser EAGLE-3 sem chunked prefill, não um draft model mais chunked prefill que não compila.
 
 ### Números que você deve memorizar
 
@@ -106,7 +106,7 @@ A saída mostra throughput total (tokens por segundo virtual), TTFT médio e P99
 
 ## Entregue
 
-Esta aula produz `outputs/skill-vllm-scheduler-reader.md`. Dada uma config de serving (tamanho de batch, utilização de memória KV, tamanho de chunked prefill, config de especificaçãoulative), produz um diagnóstico do agendador que nomeia qual dos três configurações-padrão está criando gargalo e o que ajustar.
+Esta aula produz `outputs/skill-vllm-scheduler-reader.md`. Dada uma config de serving (tamanho de batch, utilização de memória KV, tamanho de chunked prefill, config de especulativa), produz um diagnóstico do agendador que nomeia qual dos três configurações-padrão está criando gargalo e o que ajustar.
 
 ## Exercícios
 
@@ -132,8 +132,8 @@ Esta aula produz `outputs/skill-vllm-scheduler-reader.md`. Dada uma config de se
 
 ## Leitura Complementar
 
-- [vLLM documentation — Speculative Decoding](https://docs.vllm.ai/en/latest/features/especificação_decode/) — fonte oficial sobre compatibilidade de chunked-prefill e especificaçãoulative-decoding.
-- [vLLM Release Notes (NVIDIA)](https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/index.html) — cadência de releases de 2026 e comportamento eespecificaçãoífico por versão.
+- [vLLM documentation — Speculative Decoding](https://docs.vllm.ai/en/latest/features/especificação_decode/) — fonte oficial sobre compatibilidade de chunked-prefill e especulativa-decoding.
+- [vLLM Release Notes (NVIDIA)](https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/index.html) — cadência de releases de 2026 e comportamento específico por versão.
 - [vLLM Blog — PagedAttention](https://blog.vllm.ai/2023/06/20/vllm.html) — o artigo original que ainda define como pensar sobre o alocador.
 - [PagedAttention paper (arXiv:2309.06180)](https://arxiv.org/abs/2309.06180) — análise de fragmentação e design do scheduler.
 - [Aleksa Gordic — Inside vLLM](https://www.aleksagordic.com/blog/vllm) — walkthrough detalhado do V1 agendador com flame graphs.

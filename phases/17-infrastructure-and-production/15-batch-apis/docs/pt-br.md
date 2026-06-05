@@ -54,7 +54,7 @@ O empilho: batch + cache = ~10% da conta síncrona uncached. Qualquer workload q
 
 **Batch** — usuário espera resultados "de manhã" ou "próxima hora." Pipelines de conteúdo, classificação em escala, análise offline. Sempre batch, sempre empilhar cache.
 
-Erro comum: classificar tudo como interativo porque o pipeline é produção. Produção não é uma eespecificaçãoificação de latência — SLA é.
+Erro comum: classificar tudo como interativo porque o pipeline é produção. Produção não é uma especificação de latência — SLA é.
 
 ### A armadilha da parcial-interatividade
 

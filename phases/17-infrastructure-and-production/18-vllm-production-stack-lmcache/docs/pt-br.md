@@ -40,7 +40,7 @@ Entregue como Helm chart + operator.
 
 vLLM 0.9.0 introduziu uma Connector API para backends de KV cache plugáveis. Sua engine descarrega blocos no connector; connector armazena (RAM, disco, object storage, LMCache). Request precisa de um bloco, connector carrega de volta.
 
-vLLM 0.11.0 (Janeiro 2026) adiciona um caminho assíncrono de offload — offload pode acontecer em background para que a engine não bloqueie nele no caso comum. Latência e throughput de ponta a ponta ainda dependem da forma do workload, taxa de hit do KV cache e pressão do sistema; as notas do próprio vLLM destacam que offloading com kernel customizado pode degradar throughput em baixas taxas de hit e que agendamento assíncrono tem issues de interação conhecidas com especificaçãoulative decoding.
+vLLM 0.11.0 (Janeiro 2026) adiciona um caminho assíncrono de offload — offload pode acontecer em background para que a engine não bloqueie nele no caso comum. Latência e throughput de ponta a ponta ainda dependem da forma do workload, taxa de hit do KV cache e pressão do sistema; as notas do próprio vLLM destacam que offloading com kernel customizado pode degradar throughput em baixas taxas de hit e que agendamento assíncrono tem issues de interação conhecidas com especulativa decoding.
 
 ### Offloading CPU nativo vs LMCache
 

@@ -58,7 +58,7 @@ HBM3 de datacenter a 3 TB/s lê os mesmos 3.5 GB em 1.2 ms — teto de 830 tok/s
 - Orin Nano Super (8GB): comporta Llama 3.2 3B, Phi-3 com bom tok/s.
 - AGX Orin: roda gpt-oss-20b via vLLM a ~40 tok/s.
 - Thor / T4000 (JetPack 7.1): performance 2x o AGX Orin, suporte a EAGLE-3 e NVFP4.
-- TensorRT Edge-LLM (2026) suporta especificaçãoulative decoding EAGLE-3, pesos NVFP4, chunked prefill — otimizações de datacenter portadas para edge.
+- TensorRT Edge-LLM (2026) suporta especulativa decoding EAGLE-3, pesos NVFP4, chunked prefill — otimizações de datacenter portadas para edge.
 
 ### Escolha de quantização por alvo
 
